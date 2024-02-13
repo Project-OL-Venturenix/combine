@@ -1,0 +1,5 @@
+{
+  "filename": "Question1",
+  "extension": ".java",
+  "code": "package com.vtxlab.projectol.server_test_cases.temp;\npublic class Question1 {\n\n    public double computeTax(int[][] brackets, int income) {\n        double tax = 0;\n        int prev = 0;\n        for (int[] bracket : brackets) {\n            if (income > bracket[0]) {\n                tax = tax + (double) (bracket[0] - prev) * bracket[1] / 100;\n            } else {\n                tax = tax + (double) (income - prev) * bracket[1] / 100;\n                break;\n            }\n            prev = bracket[0];\n        }\n        return tax;\n    }\n}\n"
+}

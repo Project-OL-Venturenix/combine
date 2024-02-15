@@ -124,21 +124,21 @@ class Editor extends React.Component {
               <Button bsStyle="primary" type="button" onClick={this.handleRun}>
                 Run
               </Button>
-              <StatusImage
+              {/* <StatusImage
                 hasError={this.state.response.status !== '0'}
                 message={this.state.response.message}
-              />
+              /> */}
             </Col>
             <Col sm={10} />
           </FormGroup>
-          <FormGroup>
+          {/* <FormGroup>
             <Col sm={12}>
               <AlertDismissable
                 show={this.state.response.status !== '0'}
                 message={this.state.response.message}
               />
             </Col>
-          </FormGroup>
+          </FormGroup> */}
           <FormGroup>
             <Col sm={12}>
               {/* <OutputBox

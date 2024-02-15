@@ -25,23 +25,23 @@ public class Question1Test {
     private static int q1Score = 0;
     private static int q1TCPassed = 0;
 
-    private static int q2Score = 0;
-    private static int q2TCPassed = 0;
+    // private static int q2Score = 0;
+    // private static int q2TCPassed = 0;
 
-    private static int q3Score = 0;
-    private static int q3TCPassed = 0;
+    // private static int q3Score = 0;
+    // private static int q3TCPassed = 0;
 
     private static int q1Bonus = 0;
     private static boolean q1Runtimelevel1 = false;
 
-    private static int q2Bonus = 0;
-    private static boolean q2Runtimelevel1 = false;
+    // private static int q2Bonus = 0;
+    // private static boolean q2Runtimelevel1 = false;
 
-    private static int q3Bonus = 0;
-    private static boolean q3Runtimelevel1 = false;
-    private static boolean q3Runtimelevel2 = false;
-    private static boolean q3Runtimelevel3 = false;
-    private static boolean q3Runtimelevel4 = false;
+    // private static int q3Bonus = 0;
+    // private static boolean q3Runtimelevel1 = false;
+    // private static boolean q3Runtimelevel2 = false;
+    // private static boolean q3Runtimelevel3 = false;
+    // private static boolean q3Runtimelevel4 = false;
 
     private Question1 question1;
     // private Question2 question2;
@@ -58,27 +58,27 @@ public class Question1Test {
     void score() {
         System.out.println(
                 "ID: " + artifactId + ", Question 1 Test Cases Passed=" + q1TCPassed);
-        System.out.println(
-                "ID: " + artifactId + ", Question 2 Test Cases Passed=" + q2TCPassed);
-        System.out.println(
-                "ID: " + artifactId + ", Question 3 Test Cases Passed=" + q3TCPassed);
-        if (q3TCPassed == 15) {
-            q3Score = 5;
-            if (q3Runtimelevel4) {
-                q3Bonus = 4;
-            } else if (q3Runtimelevel3) {
-                q3Bonus = 3;
-            } else if (q3Runtimelevel2) {
-                q3Bonus = 2;
-            } else if (q3Runtimelevel1) {
-                q3Bonus = 1;
-            }
-        }
-        if (q2TCPassed == 5) {
-            q2Score = 4;
-            if (q2Runtimelevel1)
-                q2Bonus = 2;
-        }
+        // System.out.println(
+        //         "ID: " + artifactId + ", Question 2 Test Cases Passed=" + q2TCPassed);
+        // System.out.println(
+        //         "ID: " + artifactId + ", Question 3 Test Cases Passed=" + q3TCPassed);
+        // if (q3TCPassed == 15) {
+        //     q3Score = 5;
+        //     if (q3Runtimelevel4) {
+        //         q3Bonus = 4;
+        //     } else if (q3Runtimelevel3) {
+        //         q3Bonus = 3;
+        //     } else if (q3Runtimelevel2) {
+        //         q3Bonus = 2;
+        //     } else if (q3Runtimelevel1) {
+        //         q3Bonus = 1;
+        //     }
+        // }
+        // if (q2TCPassed == 5) {
+        //     q2Score = 4;
+        //     if (q2Runtimelevel1)
+        //         q2Bonus = 2;
+        // }
         if (q1TCPassed == 9) {
             q1Score = 3;
             if (q1Runtimelevel1)
@@ -88,20 +88,20 @@ public class Question1Test {
         // Question 1: 3 + 1
         // Question 2: 4 + 2
         // Question 3: 5 + max. 4
-        totalScore = q1Score + q1Bonus + q2Score + q2Bonus + q3Score + q3Bonus;
+        totalScore = q1Score + q1Bonus ;//+ q2Score + q2Bonus + q3Score + q3Bonus;
 
         System.out.println(
                 "ID: " + artifactId + ", Q1 Basic Score=" + q1Score);
         System.out.println(
                 "ID: " + artifactId + ", Q1 Performance Bonus=" + q1Bonus);
-        System.out.println(
-                "ID: " + artifactId + ", Q2 Basic Score=" + q2Score);
-        System.out.println(
-                "ID: " + artifactId + ", Q2 Performance Bonus=" + q2Bonus);
-        System.out.println(
-                "ID: " + artifactId + ", Q3 Basic Score=" + q3Score);
-        System.out.println(
-                "ID: " + artifactId + ", Q3 Performance Bonus=" + q3Bonus);
+        // System.out.println(
+        //         "ID: " + artifactId + ", Q2 Basic Score=" + q2Score);
+        // System.out.println(
+        //         "ID: " + artifactId + ", Q2 Performance Bonus=" + q2Bonus);
+        // System.out.println(
+        //         "ID: " + artifactId + ", Q3 Basic Score=" + q3Score);
+        // System.out.println(
+        //         "ID: " + artifactId + ", Q3 Performance Bonus=" + q3Bonus);
         System.out.println("ID: " + System.getProperty("projectArtifactId") + ", Total Score=" + totalScore);
     }
 

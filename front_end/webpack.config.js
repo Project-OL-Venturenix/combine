@@ -29,6 +29,9 @@ const commonConfig = merge([
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
+            options: {
+              babelrc: true, // Load options from .babelrc file
+            },
           },
         },
       ],
@@ -89,13 +92,14 @@ module.exports = (env) => {
   console.log(env)
   if (env.production === true) {
     console.log("production")
-    return merge(commonConfig, productionConfig );
+    return merge(commonConfig, productionConfig);
   }
 
   console.log("development")
   const dev = merge(commonConfig, developmentConfig);
   console.log(dev);
   return dev;
+
 };
 
 /*

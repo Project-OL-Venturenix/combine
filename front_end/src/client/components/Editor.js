@@ -29,6 +29,7 @@ class Editor extends React.Component {
         status: '0',
         message: '',
       },
+      output: '',
     };
 
     this.handleRun = this.handleRun.bind(this);
@@ -59,8 +60,21 @@ class Editor extends React.Component {
     console.log(task);
     CompilerApi.run(task)
       .then((res) => {
-        this.setState({ response: res });
+        this.setState({ response: res, output: res.message });
+        // Fetch the file contents after the compiler API response
+        return fetch('http://localhost:8085/api/test/readTxtFile');
       })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text(); // Parse response as text
+      })
+      .then((responseData) => {
+        // Set the fetched file contents to state
+        this.setState({ output: responseData });
+      })
+      // After Fetch the file contents after the compiler API response
       .catch((error) => {
         console.log(error);
         // this.handleError(error);
@@ -127,10 +141,11 @@ class Editor extends React.Component {
           </FormGroup>
           <FormGroup>
             <Col sm={12}>
-              <OutputBox
+              {/* <OutputBox
                 show={this.state.response.status === '0'}
                 message={this.state.response.message}
-              />
+              /> */}
+              <OutputBox show={true} message={this.state.output} />
             </Col>
           </FormGroup>
         </Form>

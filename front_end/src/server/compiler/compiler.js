@@ -14,7 +14,7 @@ module.exports = {
       argsCompile[1] = '-o';
       argsCompile[2] = `${__dirname}/${filename}.out`;
       const cmdRun = `${__dirname}/${filename}.out`;
-      this.execute(__dirname, 'gcc', argsCompile, cmdRun, [], callback);
+      // this.execute(__dirname, 'gcc', argsCompile, cmdRun, [], callback);
     } else {
       console.log(`${file} is not a c file.`);
     }
@@ -36,7 +36,7 @@ module.exports = {
       const argsRun = [];
       argsRun[0] = filename;
       console.log(argsRun);
-      this.execute(__dirname, 'javac', argsCompile, 'java', argsRun, callback);
+      // this.execute(__dirname, 'javac', argsCompile, 'java', argsRun, callback);
     } else {
       console.log(`${file} is not a java file.`);
     }

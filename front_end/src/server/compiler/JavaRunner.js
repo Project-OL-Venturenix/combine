@@ -57,6 +57,8 @@ class JavaRunner extends Runner {
     });
     executor.on('close', (output) => {
       this.log(`stdout: ${output}`);
+
+   
     });
   }
 

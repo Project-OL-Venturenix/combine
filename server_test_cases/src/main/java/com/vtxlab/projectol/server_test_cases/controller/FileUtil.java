@@ -18,11 +18,16 @@ public class FileUtil {
     }
     Path path = Paths.get(filename);
     try {
-      log.info("content : " + content.toString());
+      log.info("Writing content to file: {}", filename);
       Files.write(path, content.getBytes());
-      log.info("content : " + Arrays.toString(content.getBytes()));
+      log.info("Content written to file: {}", filename);
     } catch (IOException e) {
       e.printStackTrace(); // Handle or log the exception as needed
+      log.error("Error writing to file: {}", filename, e);
     }
+  }
+
+  public static String readTxtFile(String filePath) throws IOException {
+    return new String(Files.readAllBytes(Paths.get(filePath)));
   }
 }

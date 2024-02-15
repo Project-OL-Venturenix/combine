@@ -36,7 +36,7 @@ class OutputBox extends React.Component {
 }
 
 OutputBox.propTypes = {
-  show: PropTypes.bool.isRequired,
+  // show: PropTypes.bool.isRequired,
   message: PropTypes.string.isRequired,
 };
 

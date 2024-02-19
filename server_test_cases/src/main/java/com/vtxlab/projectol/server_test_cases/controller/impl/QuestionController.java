@@ -27,9 +27,6 @@ public class QuestionController implements QuestionOperation {
   public ResponseEntity<String> receiveCode(@RequestBody CodeData codeData)
       throws IOException {
     log.info("controller : " + codeData);
-    String code = codeData.getCode();
-    String filename = "example"; // Replace with your desired filename
-
     // Generate the .java file dynamically
     generateJavaFile(codeData.getCode(),
         "src/main/java/com/vtxlab/projectol/server_test_cases/temp/Question1.java");
@@ -42,6 +39,10 @@ public class QuestionController implements QuestionOperation {
     // Trigger the test
     runTest();
     return ResponseEntity.ok("Code received and processed successfully");
+  }
+
+  private void cerateJsonFile(String code, String fileName) {
+    FileUtil.writeFile(fileName, code);
   }
 
   @Override
@@ -58,6 +59,8 @@ public class QuestionController implements QuestionOperation {
       return e.getMessage();
     }
   }
+
+
 
   private String runTest() {
     try {
@@ -84,7 +87,5 @@ public class QuestionController implements QuestionOperation {
     FileUtil.writeFile(filePath, codeWithPackage);
   }
 
-  private void cerateJsonFile(String code, String fileName) {
-    FileUtil.writeFile(fileName, code);
-  }
+
 }

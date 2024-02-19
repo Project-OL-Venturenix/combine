@@ -71,41 +71,36 @@ public class TestCaseController {
   TestCaseRepository testcaseRepository;
 
 
-@PostMapping("/testcase/add")
-  public ResponseEntity<?> addTestCase(@Valid @RequestBody TestCaseRequest testcaseRequest) {
-    TestCase testcase = new TestCase(
-               testcaseRequest.getQuestionid(), 
-               testcaseRequest.getTestcasescoreid(), 
-               testcaseRequest.getTestcaseresult(), 
-               testcaseRequest.getTestcasetext(), 
-               testcaseRequest.getStatus(),
-               java.time.LocalDateTime.now(),
-               testcaseRequest.getCreatedby(),
-               java.time.LocalDateTime.now(),
-               testcaseRequest.getUpdatedby()
-               );
+  @PostMapping("/testcase/add")
+  public ResponseEntity<?> addTestCase(
+      @Valid @RequestBody TestCaseRequest testcaseRequest) {
+    TestCase testcase = new TestCase(testcaseRequest.getQuestionid(),
+        testcaseRequest.getTestcasescoreid(),
+        testcaseRequest.getTestcaseresult(), testcaseRequest.getTestcasetext(),
+        testcaseRequest.getStatus(), java.time.LocalDateTime.now(),
+        testcaseRequest.getCreatedby(), java.time.LocalDateTime.now(),
+        testcaseRequest.getUpdatedby());
     testcaseRepository.save(testcase);
     return ResponseEntity.ok(new MessageResponse("Add TestCase successfully!"));
-    
+
   }
 
   @GetMapping("/testcases")
   public ResponseEntity<List<TestCase>> getAllTestCases() {
     try {
-        List<TestCase> testcases = new ArrayList<TestCase>();
-        testcaseRepository.findAll().forEach(testcases::add);        
-        if (testcases.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(testcases, HttpStatus.OK );
+      List<TestCase> testcases = testcaseRepository.findAll();
+      if (testcases.isEmpty()) {
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+      }
+      return new ResponseEntity<>(testcases, HttpStatus.OK);
     } catch (Exception e) {
-        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        
+      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+
     }
-    
+
   }
 
- @GetMapping("/testcase/{id}")
+  @GetMapping("/testcase/{id}")
   public ResponseEntity<TestCase> getTestCaseById(@PathVariable("id") long id) {
     Optional<TestCase> testcaseData = testcaseRepository.findById(id);
     if (testcaseData.isPresent()) {
@@ -116,7 +111,8 @@ public class TestCaseController {
   }
 
   @PutMapping("/testcase/{id}")
-  public ResponseEntity<TestCase> updateTestCase(@PathVariable("id") long id, @RequestBody TestCase testcase) {
+  public ResponseEntity<TestCase> updateTestCase(@PathVariable("id") long id,
+      @RequestBody TestCase testcase) {
     Optional<TestCase> testcaseData = testcaseRepository.findById(id);
 
     if (testcaseData.isPresent()) {
@@ -128,7 +124,8 @@ public class TestCaseController {
       _testcase.setStatus(testcase.getStatus());
       _testcase.setUpdateddate(java.time.LocalDateTime.now());
       _testcase.setUpdatedby(testcase.getUpdatedby());
-      return new ResponseEntity<>(testcaseRepository.save(_testcase), HttpStatus.OK);
+      return new ResponseEntity<>(testcaseRepository.save(_testcase),
+          HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -138,9 +135,11 @@ public class TestCaseController {
   public ResponseEntity<?> deleteTestCase(@PathVariable("id") long id) {
     try {
       testcaseRepository.deleteById(id);
-      return ResponseEntity.ok(new MessageResponse("Delete TestCase " + id + " successfully!"));
+      return ResponseEntity
+          .ok(new MessageResponse("Delete TestCase " + id + " successfully!"));
     } catch (Exception e) {
-      return ResponseEntity.ok(new MessageResponse("HttpStatus.INTERNAL_SERVER_ERROR"));
+      return ResponseEntity
+          .ok(new MessageResponse("HttpStatus.INTERNAL_SERVER_ERROR"));
     }
   }
 }

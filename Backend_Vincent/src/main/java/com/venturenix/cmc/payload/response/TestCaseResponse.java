@@ -10,10 +10,10 @@ public class TestCaseResponse {
   private String type = "Bearer";
   private Long id; 
   
-  private Integer questionid;
+  private Long questionid;
 
   
-  private Integer testcasescoreid;
+  private Long testcasescoreid;
 
   
   private String testcaseresult;
@@ -25,16 +25,16 @@ public class TestCaseResponse {
   private LocalDateTime createddate;
 
   
-  private Integer createdby;
+  private Long createdby;
 
   
   private LocalDateTime updateddate;
 
   
-  private Integer updatedby;
+  private Long updatedby;
   
   
-  public TestCaseResponse(String accessToken, Long id, Integer questionid, Integer testcasescoreid, String testcasetext, String testcaseresult,  String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public TestCaseResponse(String accessToken, Long id, Long questionid, Long testcasescoreid, String testcasetext, String testcaseresult,  String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
     this.token = accessToken;
     this.id = id;
     this.questionid = questionid;
@@ -73,19 +73,19 @@ public class TestCaseResponse {
     this.id = id;
   }
 
-  public Integer getQuestionid() {
+  public Long getQuestionid() {
     return questionid;
   }
 
-  public void setGroupid(Integer questionid) {
+  public void setGroupid(Long questionid) {
     this.questionid = questionid;
   }
 
-  public Integer getTestcasescoreid() {
+  public Long getTestcasescoreid() {
     return testcasescoreid;
   }
 
-  public void setTestcasescoreid(Integer testcasescoreid) {
+  public void setTestcasescoreid(Long testcasescoreid) {
     this.testcasescoreid = testcasescoreid;
   }
 
@@ -113,11 +113,11 @@ public class TestCaseResponse {
     this.status = status;
   }
 
-public Integer getCreatedby() {
+public Long getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Integer createdby) {
+  public void setCreatedby(Long createdby) {
     this.createdby = createdby;
   }
 
@@ -129,11 +129,11 @@ public Integer getCreatedby() {
     this.createddate = createddate;
   }
 
-   public Integer getUpdatedby() {
+   public Long getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Integer updatedby) {
+  public void setUpdatedby(Long updatedby) {
     this.updatedby = updatedby;
   }
 

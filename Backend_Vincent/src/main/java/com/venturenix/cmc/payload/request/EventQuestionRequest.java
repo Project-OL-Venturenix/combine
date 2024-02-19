@@ -12,10 +12,10 @@ public class EventQuestionRequest {
 
 
   @NotBlank
-  private Integer questionid;
+  private Long questionid;
 
   @NotBlank
-  private Integer eventid;
+  private Long eventid;
 
   @NotBlank
   private String status;
@@ -24,27 +24,27 @@ public class EventQuestionRequest {
   private LocalDateTime createddate;
 
   
-  private Integer createdby;
+  private Long createdby;
 
   
   private LocalDateTime updateddate;
 
   
-  private Integer updatedby;
+  private Long updatedby;
 
-  public Integer getQuestionid() {
+  public Long getQuestionid() {
     return questionid;
   }
 
-  public void setQuestionid(Integer questionid) {
+  public void setQuestionid(Long questionid) {
     this.questionid = questionid;
   }
 
-  public Integer getEventid() {
+  public Long getEventid() {
     return eventid;
   }
 
-  public void setEventid(Integer eventid) {
+  public void setEventid(Long eventid) {
     this.eventid = eventid;
   }
 
@@ -55,11 +55,11 @@ public class EventQuestionRequest {
   public void setStatus(String status) {
     this.status = status;
   }
- public Integer getCreatedby() {
+ public Long getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Integer createdby) {
+  public void setCreatedby(Long createdby) {
     this.createdby = createdby;
   }
 
@@ -71,11 +71,11 @@ public class EventQuestionRequest {
     this.createddate = createddate;
   }
 
-   public Integer getUpdatedby() {
+   public Long getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Integer updatedby) {
+  public void setUpdatedby(Long updatedby) {
     this.updatedby = updatedby;
   }
 

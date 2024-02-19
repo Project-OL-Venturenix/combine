@@ -5,14 +5,20 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
+@Data
+// @Builder
 @Entity
 @Table(name = "events")
 public class Event {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
 
   @Size(min = 1, max = 20)
   private String name;
@@ -24,19 +30,19 @@ public class Event {
   private LocalDateTime createddate;
 
   @Size(min = 1, max = 20)
-  private Integer createdby;
+  private Long createdby;
 
   
   private LocalDateTime updateddate;
 
   @Size(min = 1, max = 20)
-  private Integer updatedby;
+  private Long updatedby;
 
   public Event() {
 
   }
 
-  public Event(String name, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public Event(String name, String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
     this.name = name;
     this.status = status;
     this.createddate = createddate;
@@ -45,11 +51,11 @@ public class Event {
     this.updatedby = updatedby;
     
   }
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -71,11 +77,11 @@ public class Event {
     this.status = status;
   }
 
-  public Integer getCreatedby() {
+  public Long getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Integer createdby) {
+  public void setCreatedby(Long createdby) {
     this.createdby = createdby;
   }
 
@@ -87,11 +93,11 @@ public class Event {
     this.createddate = createddate;
   }
 
-   public Integer getUpdatedby() {
+   public Long getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Integer updatedby) {
+  public void setUpdatedby(Long updatedby) {
     this.updatedby = updatedby;
   }
 

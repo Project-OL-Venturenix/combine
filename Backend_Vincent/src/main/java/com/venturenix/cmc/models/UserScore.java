@@ -9,21 +9,21 @@ import java.util.Date;
 public class UserScore {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
-  private Integer event_id;
-  private Integer user_id;
-  private Integer question_id;
-  private Integer testcase_total;
-  private Integer testcase_pass_total;
+  private Long id;
+  private Long event_id;
+  private Long user_id;
+  private Long question_id;
+  private Long testcase_total;
+  private Long testcase_pass_total;
   private Double testcase_score_total;
   private String status;
   private LocalDateTime createddate;
-  private Integer createdby;
+  private Long createdby;
   private LocalDateTime updateddate;
-  private Integer updatedby;
+  private Long updatedby;
 
 
-  public UserScore(Integer event_id, Integer user_id, Integer question_id, Integer testcase_total, Integer testcase_pass_total, Double testcase_score_total, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public UserScore(Long event_id, Long user_id, Long question_id, Long testcase_total, Long testcase_pass_total, Double testcase_score_total, String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
     this.event_id = event_id;
     this.user_id = user_id;
     this.question_id = question_id;
@@ -38,51 +38,51 @@ public class UserScore {
     
   }
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public Integer getEventid() {
+  public Long getEventid() {
     return event_id;
   }
 
-  public void setEventid(Integer event_id) {
+  public void setEventid(Long event_id) {
     this.event_id = event_id;
   }  
 
-  public Integer getUserid() {
+  public Long getUserid() {
     return user_id;
   }
 
-  public void setUserid(Integer user_id) {
+  public void setUserid(Long user_id) {
     this.user_id = user_id;
   }
 
-  public Integer getQuestionid() {
+  public Long getQuestionid() {
     return question_id;
   }
 
-  public void setQuestionid(Integer question_id) {
+  public void setQuestionid(Long question_id) {
     this.question_id = question_id;
   }  
 
-  public Integer getTestcasetotal() {
+  public Long getTestcasetotal() {
     return testcase_total;
   }
 
-  public void setTestcasetotal(Integer testcase_total) {
+  public void setTestcasetotal(Long testcase_total) {
     this.testcase_total = testcase_total;
   }  
 
-  public Integer getTestcasepasstotal() {
+  public Long getTestcasepasstotal() {
     return testcase_pass_total;
   }
 
-  public void setTestcasepasstotal(Integer testcase_pass_total) {
+  public void setTestcasepasstotal(Long testcase_pass_total) {
     this.testcase_pass_total = testcase_pass_total;
   } 
 
@@ -103,11 +103,11 @@ public class UserScore {
     this.status = status;
   }
 
-  public Integer getCreatedby() {
+  public Long getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Integer createdby) {
+  public void setCreatedby(Long createdby) {
     this.createdby = createdby;
   }  
 
@@ -119,11 +119,11 @@ public class UserScore {
     this.createddate = createddate;
   }  
 
-  public Integer getUpdatedby() {
+  public Long getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Integer updatedby) {
+  public void setUpdatedby(Long updatedby) {
     this.updatedby = updatedby;
   }   
 

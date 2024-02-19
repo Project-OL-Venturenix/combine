@@ -21,7 +21,7 @@ import jakarta.validation.constraints.Size;
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
 
   @NotBlank
   @Size(max = 20)
@@ -57,28 +57,28 @@ public class User {
   private String title;
 
   
-  private Integer py_experience;
+  private Long py_experience;
 
   
-  private Integer jv_experience;
+  private Long jv_experience;
 
   
-  private Integer js_experience;
+  private Long js_experience;
 
   
-  private Integer cs_experience;
+  private Long cs_experience;
 
   
-  private Integer sa_experience;
+  private Long sa_experience;
 
   @NotBlank
   @Size(max = 20)
   private String status;
 
   private LocalDateTime createddate;
-  private Integer createdby;
+  private Long createdby;
   private LocalDateTime updateddate;
-  private Integer updatedby; 
+  private Long updatedby; 
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(  name = "user_roles", 
@@ -90,9 +90,9 @@ public class User {
   }
 
   public User(String firstname, String lastname, String mobile, String email, String username, 
-  String password, String company, String title, Integer py_experience, Integer jv_experience, 
-  Integer js_experience, Integer cs_experience, Integer sa_experience, String status, LocalDateTime createddate, 
-  Integer createdby, LocalDateTime updateddate, Integer updatedby ) {
+  String password, String company, String title, Long py_experience, Long jv_experience, 
+  Long js_experience, Long cs_experience, Long sa_experience, String status, LocalDateTime createddate, 
+  Long createdby, LocalDateTime updateddate, Long updatedby ) {
     this.firstname = firstname;
     this.lastname = lastname;
     this.mobile = mobile;        
@@ -114,11 +114,11 @@ public class User {
 
   }
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -186,43 +186,43 @@ public class User {
     this.title = title;
   }
 
-  public Integer getPy_experience() {
+  public Long getPy_experience() {
     return py_experience;
   }
 
-  public void setPy_experience(Integer py_experience) {
+  public void setPy_experience(Long py_experience) {
     this.py_experience = py_experience;
   }
 
-  public Integer getJv_experience() {
+  public Long getJv_experience() {
     return jv_experience;
   }
 
-  public void setJv_experience(Integer jv_experience) {
+  public void setJv_experience(Long jv_experience) {
     this.jv_experience = jv_experience;
   }
   
-  public Integer getJs_experience() {
+  public Long getJs_experience() {
     return js_experience;
   }
 
-  public void setJs_experience(Integer js_experience) {
+  public void setJs_experience(Long js_experience) {
     this.js_experience = js_experience;
   }
   
-  public Integer getCs_experience() {
+  public Long getCs_experience() {
     return cs_experience;
   }
 
-  public void setCs_experience(Integer cs_experience) {
+  public void setCs_experience(Long cs_experience) {
     this.cs_experience = cs_experience;
   }
   
-  public Integer getSa_experience() {
+  public Long getSa_experience() {
     return sa_experience;
   }
 
-  public void setSa_experience(Integer sa_experience) {
+  public void setSa_experience(Long sa_experience) {
     this.sa_experience = sa_experience;
   }  
 
@@ -234,11 +234,11 @@ public class User {
     this.status = status;
   }
 
-public Integer getCreatedby() {
+public Long getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Integer createdby) {
+  public void setCreatedby(Long createdby) {
     this.createdby = createdby;
   }
 
@@ -250,11 +250,11 @@ public Integer getCreatedby() {
     this.createddate = createddate;
   }
 
-   public Integer getUpdatedby() {
+   public Long getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Integer updatedby) {
+  public void setUpdatedby(Long updatedby) {
     this.updatedby = updatedby;
   }
 

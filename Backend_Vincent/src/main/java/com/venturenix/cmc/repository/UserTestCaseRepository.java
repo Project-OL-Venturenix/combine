@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface UserTestCaseRepository extends JpaRepository<UserTestCase, Long> {
 
-    Optional<UserTestCase> findById(int id);
+    Optional<UserTestCase> findById(long id);
 
     
 

@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class UserDetailsImpl implements UserDetails {
   private static final long serialVersionUID = 1L;
 
-  private Integer id;
+  private Long id;
 
   private String firstname;
 
@@ -40,38 +40,38 @@ public class UserDetailsImpl implements UserDetails {
   private String title;
 
   @JsonIgnore
-  private Integer py_experience;
+  private Long py_experience;
 
   @JsonIgnore
-  private Integer jv_experience;
+  private Long jv_experience;
 
   @JsonIgnore
-  private Integer js_experience;
+  private Long js_experience;
 
   @JsonIgnore
-  private Integer cs_experience;
+  private Long cs_experience;
 
   @JsonIgnore
-  private Integer sa_experience;
+  private Long sa_experience;
 
   @JsonIgnore
   private LocalDateTime createddate;
 
   @JsonIgnore
-  private Integer createdby;
+  private Long createdby;
 
   @JsonIgnore
   private LocalDateTime updateddate;
 
   @JsonIgnore
-  private Integer updatedby; 
+  private Long updatedby; 
 
   @JsonIgnore
   private String status;
 
   private Collection<? extends GrantedAuthority> authorities;
 
-  public UserDetailsImpl(Integer id, String firstname, String lastname, String mobile, String email, String username, String password, String company, String title, Integer py_experience, Integer jv_experience, Integer js_experience, Integer cs_experience, Integer sa_experience, String status, LocalDateTime createdate, Integer createby, LocalDateTime updatedate, Integer updateby, Collection<? extends GrantedAuthority> authorities) {
+  public UserDetailsImpl(Long id, String firstname, String lastname, String mobile, String email, String username, String password, String company, String title, Long py_experience, Long jv_experience, Long js_experience, Long cs_experience, Long sa_experience, String status, LocalDateTime createdate, Long createby, LocalDateTime updatedate, Long updateby, Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
@@ -127,7 +127,7 @@ public class UserDetailsImpl implements UserDetails {
     return authorities;
   }
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
@@ -172,33 +172,33 @@ public class UserDetailsImpl implements UserDetails {
   }
 
   
-  public Integer getPy_experience() {
+  public Long getPy_experience() {
     return py_experience;
   }
 
   
   
-  public Integer getJv_experience() {
+  public Long getJv_experience() {
     return jv_experience;
   }
 
   
-  public Integer getJs_experience() {
+  public Long getJs_experience() {
     return js_experience;
   }
 
   
   
-  public Integer getCs_experience() {
+  public Long getCs_experience() {
     return cs_experience;
   }
 
   
-  public Integer getSa_experience() {
+  public Long getSa_experience() {
     return sa_experience;
   }
 
-public Integer getCreatedby() {
+public Long getCreatedby() {
     return createdby;
   }
 
@@ -209,7 +209,7 @@ public Integer getCreatedby() {
   }
 
 
-   public Integer getUpdatedby() {
+   public Long getUpdatedby() {
     return updatedby;
   }
 

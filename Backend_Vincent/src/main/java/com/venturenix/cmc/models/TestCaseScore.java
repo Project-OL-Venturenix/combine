@@ -10,16 +10,16 @@ import java.util.Date;
 public class TestCaseScore {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
   private String testcase_score_desc;
   private Double testcase_score;
   private String status;
   private LocalDateTime createddate;
-  private Integer createdby;
+  private Long createdby;
   private LocalDateTime updateddate;
-  private Integer updatedby;  
+  private Long updatedby;  
 
-  public TestCaseScore(String testcase_score_desc, Double testcase_score, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public TestCaseScore(String testcase_score_desc, Double testcase_score, String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
     this.testcase_score_desc = testcase_score_desc;
     this.testcase_score = testcase_score;
     this.status = status;
@@ -31,11 +31,11 @@ public class TestCaseScore {
   }
 
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -63,11 +63,11 @@ public class TestCaseScore {
     this.status = status;
   }
 
-  public Integer getCreatedby() {
+  public Long getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Integer createdby) {
+  public void setCreatedby(Long createdby) {
     this.createdby = createdby;
   }  
 
@@ -79,11 +79,11 @@ public class TestCaseScore {
     this.createddate = createddate;
   }  
 
-  public Integer getUpdatedby() {
+  public Long getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Integer updatedby) {
+  public void setUpdatedby(Long updatedby) {
     this.updatedby = updatedby;
   }   
 

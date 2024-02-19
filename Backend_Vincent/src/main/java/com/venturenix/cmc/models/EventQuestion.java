@@ -9,16 +9,16 @@ import java.util.Date;
 public class EventQuestion {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
-  private Integer event_id;
-  private Integer question_id;
+  private Long id;
+  private Long event_id;
+  private Long question_id;
   private String status;
   private LocalDateTime createddate;
-  private Integer createdby;
+  private Long createdby;
   private LocalDateTime updateddate;
-  private Integer updatedby;  
+  private Long updatedby;  
 
-  public EventQuestion(Integer event_id, Integer question_id, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public EventQuestion(Long event_id, Long question_id, String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
     this.event_id = event_id;
     this.question_id = question_id;
     this.status = status;
@@ -31,27 +31,27 @@ public class EventQuestion {
 
 
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public Integer getEventid() {
+  public Long getEventid() {
     return event_id;
   }
 
-  public void setEventid(Integer event_id) {
+  public void setEventid(Long event_id) {
     this.event_id = event_id;
   }
 
-  public Integer getQuestionid() {
+  public Long getQuestionid() {
     return question_id;
   }
 
-  public void setQuestionid(Integer question_id) {
+  public void setQuestionid(Long question_id) {
     this.question_id = question_id;
   }  
 
@@ -63,11 +63,11 @@ public class EventQuestion {
     this.status = status;
   }
 
-  public Integer getCreatedby() {
+  public Long getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Integer createdby) {
+  public void setCreatedby(Long createdby) {
     this.createdby = createdby;
   }  
 
@@ -79,11 +79,11 @@ public class EventQuestion {
     this.createddate = createddate;
   }  
 
-  public Integer getUpdatedby() {
+  public Long getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Integer updatedby) {
+  public void setUpdatedby(Long updatedby) {
     this.updatedby = updatedby;
   }   
 

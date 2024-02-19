@@ -10,9 +10,9 @@ import com.venturenix.cmc.models.Question;
 import java.util.List;
 
 @Repository
-public interface QuestionRepository extends JpaRepository<Question, Integer> {
+public interface QuestionRepository extends JpaRepository<Question, Long> {
 
-    Optional<Question> findById(int id);
+    Optional<Question> findById(long id);
 
     List<Question> findAll();
     

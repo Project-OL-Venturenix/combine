@@ -9,15 +9,15 @@ import java.util.Date;
 public class Group {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
   private String name;
   private String status;
   private LocalDateTime createddate;
-  private Integer createdby;
+  private Long createdby;
   private LocalDateTime updateddate;
-  private Integer updatedby;
+  private Long updatedby;
 
-  public Group(String name, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public Group(String name, String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
     this.name = name;
     this.status = status;
     this.createddate = createddate;
@@ -31,11 +31,11 @@ public class Group {
     this.name = name;
   }
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -55,11 +55,11 @@ public class Group {
     this.status = status;
   }
 
-  public Integer getCreatedBy() {
+  public Long getCreatedBy() {
     return createdby;
   }
 
-  public void setCreatedBy(Integer createdby) {
+  public void setCreatedBy(Long createdby) {
     this.createdby = createdby;
   }  
 
@@ -71,11 +71,11 @@ public class Group {
     this.createddate = createddate;
   }  
 
-  public Integer getUpdatedby() {
+  public Long getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Integer updatedby) {
+  public void setUpdatedby(Long updatedby) {
     this.updatedby = updatedby;
   }   
 

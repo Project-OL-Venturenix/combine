@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface GroupScoreRepository extends JpaRepository<GroupScore, Long> {
 
-    Optional<GroupScore> findById(int id);
+    Optional<GroupScore> findById(long id);
 
     List<GroupScore> findAll();
     

@@ -9,23 +9,23 @@ public class EventGroupResponse {
   private String token;
   private String type = "Bearer";
   private Long id; 
-  private Integer groupid;
-  private Integer eventid;
+  private Long groupid;
+  private Long eventid;
   private String status;
   
   private LocalDateTime createddate;
 
   
-  private Integer createdby;
+  private Long createdby;
 
   
   private LocalDateTime updateddate;
 
   
-  private Integer updatedby;
+  private Long updatedby;
   
   
-  public EventGroupResponse(String accessToken, Long id, Integer groupid, Integer eventid, String name, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public EventGroupResponse(String accessToken, Long id, Long groupid, Long eventid, String name, String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
     this.token = accessToken;
     this.id = id;
     this.groupid = groupid;
@@ -62,19 +62,19 @@ public class EventGroupResponse {
     this.id = id;
   }
 
-  public Integer getGroupid() {
+  public Long getGroupid() {
     return groupid;
   }
 
-  public void setGroupid(Integer groupid) {
+  public void setGroupid(Long groupid) {
     this.groupid = groupid;
   }  
 
-  public Integer getEventid() {
+  public Long getEventid() {
     return eventid;
   }
 
-  public void setEventid(Integer eventid) {
+  public void setEventid(Long eventid) {
     this.eventid = eventid;
   }
 
@@ -86,11 +86,11 @@ public class EventGroupResponse {
     this.status = status;
   }
 
-public Integer getCreatedby() {
+public Long getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Integer createdby) {
+  public void setCreatedby(Long createdby) {
     this.createdby = createdby;
   }
 
@@ -102,11 +102,11 @@ public Integer getCreatedby() {
     this.createddate = createddate;
   }
 
-   public Integer getUpdatedby() {
+   public Long getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Integer updatedby) {
+  public void setUpdatedby(Long updatedby) {
     this.updatedby = updatedby;
   }
 

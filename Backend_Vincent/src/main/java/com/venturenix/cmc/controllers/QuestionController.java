@@ -88,7 +88,7 @@ public class QuestionController {
   }
 
   @GetMapping("/question/{id}")
-  public ResponseEntity<Question> getQuestionById(@PathVariable("id") int id) {
+  public ResponseEntity<Question> getQuestionById(@PathVariable("id") long id) {
     Optional<Question> questionData = questionRepository.findById(id);
     if (questionData.isPresent()) {
       return new ResponseEntity<>(questionData.get(), HttpStatus.OK);
@@ -98,7 +98,7 @@ public class QuestionController {
   }
 
   @PutMapping("/question/{id}")
-  public ResponseEntity<Question> updateQuestion(@PathVariable("id") int id,
+  public ResponseEntity<Question> updateQuestion(@PathVariable("id") long id,
       @RequestBody Question question) {
     Optional<Question> questionData = questionRepository.findById(id);
 
@@ -117,7 +117,7 @@ public class QuestionController {
   }
 
   @DeleteMapping("/question/{id}")
-  public ResponseEntity<?> deleteQuestion(@PathVariable("id") int id) {
+  public ResponseEntity<?> deleteQuestion(@PathVariable("id") long id) {
     try {
       questionRepository.deleteById(id);
       return ResponseEntity

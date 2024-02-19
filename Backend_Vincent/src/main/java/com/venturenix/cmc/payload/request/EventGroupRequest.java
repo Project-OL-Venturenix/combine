@@ -14,10 +14,10 @@ public class EventGroupRequest {
   private String name;
 
   @NotBlank
-  private Integer groupid;
+  private Long groupid;
 
   @NotBlank
-  private Integer eventid;
+  private Long eventid;
 
   @NotBlank
   private String status;
@@ -26,27 +26,27 @@ public class EventGroupRequest {
   private LocalDateTime createddate;
 
   
-  private Integer createdby;
+  private Long createdby;
 
   
   private LocalDateTime updateddate;
 
   
-  private Integer updatedby;
+  private Long updatedby;
 
-  public Integer getGroupid() {
+  public Long getGroupid() {
     return groupid;
   }
 
-  public void setGroupid(Integer groupid) {
+  public void setGroupid(Long groupid) {
     this.groupid = groupid;
   }
 
-  public Integer getEventid() {
+  public Long getEventid() {
     return eventid;
   }
 
-  public void setEventid(Integer eventid) {
+  public void setEventid(Long eventid) {
     this.eventid = eventid;
   }
 
@@ -57,11 +57,11 @@ public class EventGroupRequest {
   public void setStatus(String status) {
     this.status = status;
   }
- public Integer getCreatedby() {
+ public Long getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Integer createdby) {
+  public void setCreatedby(Long createdby) {
     this.createdby = createdby;
   }
 
@@ -73,11 +73,11 @@ public class EventGroupRequest {
     this.createddate = createddate;
   }
 
-   public Integer getUpdatedby() {
+   public Long getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Integer updatedby) {
+  public void setUpdatedby(Long updatedby) {
     this.updatedby = updatedby;
   }
 

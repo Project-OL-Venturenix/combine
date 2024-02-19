@@ -14,18 +14,18 @@ import java.util.Date;
 public class Question {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
   private String questiontext;
   private String answertext;
   private String status;
   private LocalDateTime createddate;
-  private Integer createdby;
+  private Long createdby;
   private LocalDateTime updateddate;
-  private Integer updatedby;
+  private Long updatedby;
 
   public Question(String questiontext, String answertext, String status,
-      LocalDateTime createddate, Integer createdby, LocalDateTime updateddate,
-      Integer updatedby) {
+      LocalDateTime createddate, Long createdby, LocalDateTime updateddate,
+      Long updatedby) {
     this.questiontext = questiontext;
     this.answertext = answertext;
     this.status = status;
@@ -40,11 +40,11 @@ public class Question {
     this.questiontext = questiontext;
   }
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -72,11 +72,11 @@ public class Question {
     this.status = status;
   }
 
-  public Integer getCreatedby() {
+  public Long getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedBy(Integer createdby) {
+  public void setCreatedBy(Long createdby) {
     this.createdby = createdby;
   }
 
@@ -88,11 +88,11 @@ public class Question {
     this.createddate = createddate;
   }
 
-  public Integer getUpdatedby() {
+  public Long getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Integer updatedby) {
+  public void setUpdatedby(Long updatedby) {
     this.updatedby = updatedby;
   }
 

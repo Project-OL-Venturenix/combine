@@ -11,22 +11,22 @@ import jakarta.validation.constraints.Size;
 public class UserScoreRequest {
 
   @NotBlank
-  private Integer eventid;
+  private Long eventid;
 
   @NotBlank
-  private Integer userid;
+  private Long userid;
 
   @NotBlank
-  private Integer questionid;
+  private Long questionid;
 
   @NotBlank
-  private Integer testcase_pass_total;
+  private Long testcase_pass_total;
 
   @NotBlank
   private Double testcase_score_total;
 
   @NotBlank
-  private Integer testcase_total;          
+  private Long testcase_total;          
 
   @NotBlank
   private String status;
@@ -35,51 +35,51 @@ public class UserScoreRequest {
   private LocalDateTime createddate;
 
   
-  private Integer createdby;
+  private Long createdby;
 
   
   private LocalDateTime updateddate;
 
   
-  private Integer updatedby;
+  private Long updatedby;
 
-  public Integer getEventid() {
+  public Long getEventid() {
     return eventid;
   }
 
-  public void setEventid(Integer eventid) {
+  public void setEventid(Long eventid) {
     this.eventid = eventid;
   }  
 
-  public Integer getUserid() {
+  public Long getUserid() {
     return userid;
   }
 
-  public void setUserid(Integer userid) {
+  public void setUserid(Long userid) {
     this.userid = userid;
   }
 
-  public Integer getQuestionid() {
+  public Long getQuestionid() {
     return questionid;
   }
 
-  public void setQuestionid(Integer questionid) {
+  public void setQuestionid(Long questionid) {
     this.questionid = questionid;
   }  
 
-  public Integer getTestcasetotal() {
+  public Long getTestcasetotal() {
     return testcase_total;
   }
 
-  public void setTestcasetotal(Integer testcase_total) {
+  public void setTestcasetotal(Long testcase_total) {
     this.testcase_total = testcase_total;
   }  
 
-  public Integer getTestcasepasstotal() {
+  public Long getTestcasepasstotal() {
     return testcase_pass_total;
   }
 
-  public void setTestcasepasstotal(Integer testcase_pass_total) {
+  public void setTestcasepasstotal(Long testcase_pass_total) {
     this.testcase_pass_total = testcase_pass_total;
   } 
 
@@ -100,11 +100,11 @@ public class UserScoreRequest {
   public void setStatus(String status) {
     this.status = status;
   }
- public Integer getCreatedby() {
+ public Long getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Integer createdby) {
+  public void setCreatedby(Long createdby) {
     this.createdby = createdby;
   }
 
@@ -116,11 +116,11 @@ public class UserScoreRequest {
     this.createddate = createddate;
   }
 
-   public Integer getUpdatedby() {
+   public Long getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Integer updatedby) {
+  public void setUpdatedby(Long updatedby) {
     this.updatedby = updatedby;
   }
 

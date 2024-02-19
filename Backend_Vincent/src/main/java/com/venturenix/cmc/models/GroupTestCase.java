@@ -9,21 +9,21 @@ import java.util.Date;
 public class GroupTestCase {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
-  private Integer event_id;
-  private Integer group_id;
-  private Integer user_id;
-  private Integer question_id;
-  private Integer testcase_id;
+  private Long id;
+  private Long event_id;
+  private Long group_id;
+  private Long user_id;
+  private Long question_id;
+  private Long testcase_id;
   private Double run_time_by_sec;
   private String testcase_pass_status;
   private String status;
   private LocalDateTime createddate;
-  private Integer createdby;
+  private Long createdby;
   private LocalDateTime updateddate;
-  private Integer updatedby;
+  private Long updatedby;
 
-  public GroupTestCase(Integer event_id, Integer group_id, Integer question_id, Integer testcase_id, Integer user_id, Double run_time_by_sec, String testcase_pass_status, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public GroupTestCase(Long event_id, Long group_id, Long question_id, Long testcase_id, Long user_id, Double run_time_by_sec, String testcase_pass_status, String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
     this.event_id = event_id;
     this.group_id = group_id;
     this.question_id = question_id;
@@ -39,51 +39,51 @@ public class GroupTestCase {
     
   }
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public Integer getEventid() {
+  public Long getEventid() {
     return event_id;
   }
 
-  public void setEventid(Integer event_id) {
+  public void setEventid(Long event_id) {
     this.event_id = event_id;
   }
 
-  public Integer getGroupid() {
+  public Long getGroupid() {
     return group_id;
   }
 
-  public void setGroupid(Integer group_id) {
+  public void setGroupid(Long group_id) {
     this.group_id = group_id;
   }
 
-  public Integer getUserid() {
+  public Long getUserid() {
     return user_id;
   }
 
-  public void setUserid(Integer user_id) {
+  public void setUserid(Long user_id) {
     this.user_id = user_id;
   }
 
-  public Integer getQuestionid() {
+  public Long getQuestionid() {
     return question_id;
   }
 
-  public void setQuestionid(Integer question_id) {
+  public void setQuestionid(Long question_id) {
     this.question_id = question_id;
   }
 
-  public Integer getTestcaseid() {
+  public Long getTestcaseid() {
     return testcase_id;
   }
 
-  public void setTestcaseid(Integer testcase_id) {
+  public void setTestcaseid(Long testcase_id) {
     this.testcase_id = testcase_id;
   }  
 
@@ -112,11 +112,11 @@ public class GroupTestCase {
     this.status = status;
   }
 
-  public Integer getCreatedby() {
+  public Long getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Integer createdby) {
+  public void setCreatedby(Long createdby) {
     this.createdby = createdby;
   }  
 
@@ -128,11 +128,11 @@ public class GroupTestCase {
     this.createddate = createddate;
   }  
 
-  public Integer getUpdatedby() {
+  public Long getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Integer updatedby) {
+  public void setUpdatedby(Long updatedby) {
     this.updatedby = updatedby;
   }   
 

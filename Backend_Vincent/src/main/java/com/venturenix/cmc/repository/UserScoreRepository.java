@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface UserScoreRepository extends JpaRepository<UserScore, Long> {
 
-    Optional<UserScore> findById(int id);
+    Optional<UserScore> findById(long id);
 
     List<UserScore> findAll();
     

@@ -10,46 +10,46 @@ import jakarta.validation.constraints.Size;
 
 public class TestCaseRequest {
 
-  @NotBlank
-  private Integer questionid;
+  // @NotBlank
+  private Long questionid;
 
-  @NotBlank
-  private Integer testcasescoreid;
+  // @NotBlank
+  private Long testcasescoreid;
 
-  @NotBlank
+  // @NotBlank
   private String testcaseresult;
 
-  @NotBlank
+  // @NotBlank
   private String testcasetext;
 
-  @NotBlank
+  // @NotBlank
   private String status;
 
   
   private LocalDateTime createddate;
 
   
-  private Integer createdby;
+  private Long createdby;
 
   
   private LocalDateTime updateddate;
 
   
-  private Integer updatedby;
+  private Long updatedby;
 
-  public Integer getQuestionid() {
+  public Long getQuestionid() {
     return questionid;
   }
 
-  public void setGroupid(Integer questionid) {
+  public void setGroupid(Long questionid) {
     this.questionid = questionid;
   }
 
-  public Integer getTestcasescoreid() {
+  public Long getTestcasescoreid() {
     return testcasescoreid;
   }
 
-  public void setTestcasescoreid(Integer testcasescoreid) {
+  public void setTestcasescoreid(Long testcasescoreid) {
     this.testcasescoreid = testcasescoreid;
   }
 
@@ -76,11 +76,11 @@ public class TestCaseRequest {
   public void setStatus(String status) {
     this.status = status;
   }
- public Integer getCreatedby() {
+ public Long getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Integer createdby) {
+  public void setCreatedby(Long createdby) {
     this.createdby = createdby;
   }
 
@@ -92,11 +92,11 @@ public class TestCaseRequest {
     this.createddate = createddate;
   }
 
-   public Integer getUpdatedby() {
+   public Long getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Integer updatedby) {
+  public void setUpdatedby(Long updatedby) {
     this.updatedby = updatedby;
   }
 

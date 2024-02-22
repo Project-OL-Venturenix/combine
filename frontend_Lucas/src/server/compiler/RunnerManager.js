@@ -46,7 +46,7 @@ module.exports = {
           status,
           message,
         };
-       // console.log('before res.end(JSON.stringify(result))')
+        // console.log('before res.end(JSON.stringify(result))')
         res.end(JSON.stringify(result));
       });
     });

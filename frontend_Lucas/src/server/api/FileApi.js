@@ -1,30 +1,46 @@
 const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
-const getDirName = require('path').dirname;
 
 module.exports = {
-  saveFile(file, code, callback) {
-    // create parent directories if they doesn't exist.
-    mkdirp(getDirName(file), (err) => {
+  saveFile(file, data, callback) {
+    mkdirp(path.dirname(file), (err) => {
       if (err) return callback(err);
 
-      return fs.writeFile(file, code, (err2) => {
-        if (err2) {
-          throw err2;
+      const jsonData = data;
+      const jsonDataWithoutClosingBrace = jsonData.replace(/\}\s*$/, '');
+
+      const jsonFile = path.join(__dirname, '../templates', 'Question1.json');
+      fs.readFile(jsonFile, 'utf8', (err, data) => {
+        if (err) throw err;
+        let mainMethodData;
+        try {
+          mainMethodData = JSON.parse(data);
+        } catch (parseError) {
+          throw new Error('Error parsing JSON data');
+        }
+        if (!mainMethodData || typeof mainMethodData !== 'object') {
+          throw new Error('Invalid JSON data format: Not an object');
+        }
+        const { mainMethod ,endOfCode} = mainMethodData;
+        if (typeof mainMethod !== 'string'|| typeof endOfCode !== 'string') {
+          throw new Error('Invalid JSON data format: Missing or invalid string properties');
         }
 
-        callback();
+        const javaClass = `${jsonDataWithoutClosingBrace}\n\n${mainMethod}\n\n${endOfCode}`;
+
+        fs.writeFile(file, javaClass, 'utf8', (err2) => {
+          if (err2) throw err2;
+          callback();
+        });
       });
     });
   },
 
-   startConvertJsonToJava(callback) {
+  startConvertJsonToJava(callback) {
     const jsonFile = path.join(__dirname, '../templates', 'Question1.json');
     fs.readFile(jsonFile, 'utf8', (err, data) => {
-      if (err) {
-        throw err;
-      }
+      if (err) throw err;
       let jsonData;
       try {
         jsonData = JSON.parse(data);
@@ -48,11 +64,9 @@ module.exports = {
     const language = lang.toLowerCase();
     if (language === 'java') {
       file = path.join(__dirname, '../templates', 'Question1.java');
-      // Create the file if it doesn't exist
       if (!fs.existsSync(file)) {
-        fs.writeFileSync(file, ''); // Create an empty file
+        fs.writeFileSync(file, '');
       }
-      // Convert JSON to Java code and write to Question1.java
       this.startConvertJsonToJava((javaCode) => {
         fs.writeFile(file, javaCode, (err) => {
           if (err) throw err;
@@ -77,46 +91,4 @@ module.exports = {
       return;
     }
   },
-  readJSONFile: function (filePath, callback) {
-    fs.readFile(filePath, 'utf8', (err, data) => {
-      if (err) {
-        throw err;
-      }
-      let jsonData;
-      try {
-        jsonData = JSON.parse(data);
-      } catch (parseError) {
-        throw new Error('Error parsing JSON data');
-      }
-      callback(jsonData);
-    });
-  },
-  writeJSONFile: function (filePath, data, callback) {
-    // Convert data to JSON string
-    const jsonData = JSON.stringify(data, null, 2); // Add indentation for readability
-
-    // Create parent directories if they don't exist
-    mkdirp(path.dirname(filePath), (err) => {
-      if (err) throw err;
-
-      // Write the JSON string to the file
-      fs.writeFile(filePath, jsonData, 'utf8', (err2) => {
-        if (err2) throw err2;
-        callback();
-      });
-    });
-  },
-
-  writeJavaFile: function (filePath, javaCode, callback) {
-    // Create parent directories if they don't exist
-    mkdirp(path.dirname(filePath), (err) => {
-      if (err) throw err;
-
-      // Write the Java code to the file
-      fs.writeFile(filePath, javaCode, 'utf8', (err2) => {
-        if (err2) throw err2;
-        callback();
-      });
-    });
-  }
 };

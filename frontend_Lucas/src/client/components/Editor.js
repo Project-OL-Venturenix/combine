@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FormGroup, Col, Button } from 'react-bootstrap';
+import { Form, FormGroup, Col, Button, Grid } from 'react-bootstrap';
 import LangSelector from './controls/LangSelector';
 import CodeEditor from './controls/CodeEditor';
 import AlertDismissable from './controls/AlertDismissable';
@@ -40,7 +40,7 @@ class Editor extends React.Component {
 
   componentDidMount() {
     CompilerApi.getTask('java') //default load java file
-    //  .then(res => res.json())
+      //  .then(res => res.json())
       .then((task) => {
         console.log(task);
         this.setState({ task });
@@ -57,7 +57,10 @@ class Editor extends React.Component {
   handleRun(event) {
     event.preventDefault();
     const { task } = this.state;
-    //console.log(task);
+    console.log('handleRun : ' + task.code);
+    console.log('handleRun : ' + task.lang);
+    console.log('handleRun : ' + this.state.output);
+
     CompilerApi.run(task)
       .then((res) => {
         // Append the new test case result to the existing message
@@ -130,25 +133,34 @@ class Editor extends React.Component {
             </Col>
           </FormGroup>
           <FormGroup>
-            <Col sm={2}>
-              <Button bsStyle="primary" type="button" onClick={this.handleRun}>
-                Run
-              </Button>
-              {/* <StatusImage
-                hasError={this.state.response.status !== '0'}
-                message={this.state.response.message}
-              /> */}
+            <Col sm={5}>
+              <Grid className="col-md-6">
+                <Button bsStyle="primary" type="button" style={{ fontSize: '15px' }} onClick={this.handleRun}>
+                  Run Code
+                </Button>
+              </Grid>
+              <Grid className="col-md-6">
+                <Button bsStyle="success" type="button" style={{ fontSize: '15px' }} onClick={this.handleRun}>
+                  Submit Code
+                </Button>
+              </Grid>
+              <Grid className="col-md-6">
+                <StatusImage
+                  hasError={this.state.response.status !== '0'}
+                  message={this.state.response.message}
+                />
+              </Grid>
             </Col>
             <Col sm={10} />
           </FormGroup>
-          {/* <FormGroup>
+          <FormGroup>
             <Col sm={12}>
               <AlertDismissable
                 show={this.state.response.status !== '0'}
                 message={this.state.response.message}
               />
             </Col>
-          </FormGroup> */}
+          </FormGroup>
           <FormGroup>
             <Col sm={12}>
               <OutputBox

@@ -1,8 +1,24 @@
 const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
+const getDirName = require('path').dirname;
 
 module.exports = {
+  saveFile(file, code, callback) {
+    // create parent directories if they doesn't exist.
+    mkdirp(getDirName(file), (err) => {
+      if (err) return callback(err);
+
+      return fs.writeFile(file, code, (err2) => {
+        if (err2) {
+          throw err2;
+        }
+
+        callback();
+      });
+    });
+  },
+
    startConvertJsonToJava(callback) {
     const jsonFile = path.join(__dirname, '../templates', 'Question1.json');
     fs.readFile(jsonFile, 'utf8', (err, data) => {

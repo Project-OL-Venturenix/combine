@@ -1,5 +1,0 @@
-{
-  "filename": "Question1",
-  "extension": ".java",
-  "code": "public class Question1 {\n    public double computeTax(int[][] brackets, int income) {\n    return 3.15000;\n    }\n}"
-}

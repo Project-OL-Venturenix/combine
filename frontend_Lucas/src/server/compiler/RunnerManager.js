@@ -27,28 +27,33 @@ function Factory() {
 }
 
 module.exports = {
-  run(lang, code, res) {
+  runAndSaveJava(lang, code, res) {
     const factory = new Factory();
     const runner = factory.createRunner(lang.toLowerCase());
 
     const directory = path.join(__dirname, 'temp');
-    const file = path.join(directory, runner.defaultFile());//question file
-    const testFile = path.join(directory, runner.defaultTestFile());//test file
-    // console.log(`frontend_Lucas_file: ${file}`);
+    const file = path.join(directory, runner.defaultFile());
     const filename = path.parse(file).name; // main
     const extension = path.parse(file).ext; // .java
     console.log(`frontend_Lucas_filename: ${filename}`);
     console.log(`frontend_Lucas_extension: ${extension}`);
 
-    FileApi.saveFile(file, code, () => {
+    FileApi.writeJavaFile(file, code, () => {
       runner.run(file, directory, filename, extension, (status, message) => {
         const result = {
           status,
           message,
         };
-       // console.log('before res.end(JSON.stringify(result))')
         res.end(JSON.stringify(result));
       });
     });
   },
+
+  saveJSONFileStep4(file, data, callback) {
+    FileApi.writeJSONFile(file, data, callback);
+  },
+
+  readJSONFileStep1(file, callback) {
+    FileApi.readJSONFile(file, callback);
+  }
 };

@@ -1,10 +1,9 @@
-const mkdirp = require('mkdirp');
 const fs = require('fs');
-const getDirName = require('path').dirname;
 const path = require('path');
+const mkdirp = require('mkdirp');
 
 module.exports = {
-  convertJsonToJava(callback) {
+   startConvertJsonToJava(callback) {
     const jsonFile = path.join(__dirname, '../templates', 'Question1.json');
     fs.readFile(jsonFile, 'utf8', (err, data) => {
       if (err) {
@@ -27,8 +26,6 @@ module.exports = {
       callback(javaCode);
     });
   },
-  
-    
 
   getFile(lang, callback) {
     let file = '';
@@ -40,7 +37,7 @@ module.exports = {
         fs.writeFileSync(file, ''); // Create an empty file
       }
       // Convert JSON to Java code and write to Question1.java
-      this.convertJsonToJava((javaCode) => {
+      this.startConvertJsonToJava((javaCode) => {
         fs.writeFile(file, javaCode, (err) => {
           if (err) throw err;
           console.log('Question1.java file created with Java code.');
@@ -64,41 +61,45 @@ module.exports = {
       return;
     }
   },
+  readJSONFile: function (filePath, callback) {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        throw err;
+      }
+      let jsonData;
+      try {
+        jsonData = JSON.parse(data);
+      } catch (parseError) {
+        throw new Error('Error parsing JSON data');
+      }
+      callback(jsonData);
+    });
+  },
+  writeJSONFile: function (filePath, data, callback) {
+    // Convert data to JSON string
+    const jsonData = JSON.stringify(data, null, 2); // Add indentation for readability
 
-  saveFile(file, code, callback) {
-    // create parent directories if they doesn't exist.
-    mkdirp(getDirName(file), (err) => {
-      if (err) return callback(err);
+    // Create parent directories if they don't exist
+    mkdirp(path.dirname(filePath), (err) => {
+      if (err) throw err;
 
-      return fs.writeFile(file, code, (err2) => {
-        if (err2) {
-          throw err2;
-        }
-
+      // Write the JSON string to the file
+      fs.writeFile(filePath, jsonData, 'utf8', (err2) => {
+        if (err2) throw err2;
         callback();
       });
     });
   },
 
-  saveFileToJSON(file, code, callback) {
-    // Ensure data is an object before serialization
-    if (typeof code !== 'object') {
-      throw new Error('Data must be an object to save as JSON');
-    }
-
-    // Convert data to JSON string
-    const jsonData = JSON.stringify(code, null, 2); // Add indentation for readability
-
+  writeJavaFile: function (filePath, javaCode, callback) {
     // Create parent directories if they don't exist
-    mkdirp(getDirName(file), (err) => {
-      if (err) return callback(err);
+    mkdirp(path.dirname(filePath), (err) => {
+      if (err) throw err;
 
-      // Write the JSON string to the file
-      fs.writeFile(file, jsonData, 'utf8', (err2) => {
-        if (err2) {
-          throw err2;
-        }
-        callback(); // Indicate successful save
+      // Write the Java code to the file
+      fs.writeFile(filePath, javaCode, 'utf8', (err2) => {
+        if (err2) throw err2;
+        callback();
       });
     });
   }

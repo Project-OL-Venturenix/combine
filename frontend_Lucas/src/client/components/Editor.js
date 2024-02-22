@@ -61,10 +61,7 @@ class Editor extends React.Component {
     CompilerApi.run(task)
       .then((res) => {
         // Append the new test case result to the existing message
-        const newMessage = this.state.response.message + res.message + '\n';
-        const newResponse = Object.assign({}, this.state.response, { message: newMessage });
-        this.setState({ response: newResponse });
-        // this.setState({ response: res });
+        this.setState({ response: res });
       })
       .catch((error) => {
         console.log(error);

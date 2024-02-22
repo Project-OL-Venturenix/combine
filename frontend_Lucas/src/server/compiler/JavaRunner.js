@@ -5,15 +5,10 @@ class JavaRunner extends Runner {
   constructor() {
     super();
     this.defaultfile = 'Question1.java';
-    this.testCasefile = 'Question1Test.java'; // Corrected typo
   }
 
   defaultFile() {
     return this.defaultfile;
-  }
-
-  testCaseFile() {
-    return this.testCasefile;
   }
 
   run(file, directory, filename, extension, callback) {

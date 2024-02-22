@@ -16,16 +16,16 @@ public class EventUserResponse {
   private LocalDateTime createddate;
 
   
-  private Long createdby;
+  private Integer createdby;
 
   
   private LocalDateTime updateddate;
 
   
-  private Long updatedby;
+  private Integer updatedby;
   
   
-  public EventUserResponse(String accessToken, Long id, Long userid, Long eventid, String name, String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
+  public EventUserResponse(String accessToken, Long id, Long userid, Long eventid, String name, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
     this.token = accessToken;
     this.id = id;
     this.userid = userid;
@@ -86,11 +86,11 @@ public class EventUserResponse {
     this.status = status;
   }
 
-public Long getCreatedby() {
+public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }
 
@@ -102,11 +102,11 @@ public Long getCreatedby() {
     this.createddate = createddate;
   }
 
-   public Long getUpdatedby() {
+   public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }
 

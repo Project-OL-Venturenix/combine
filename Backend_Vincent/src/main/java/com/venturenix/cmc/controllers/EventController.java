@@ -73,7 +73,8 @@ public class EventController {
 
 @PostMapping("/event/add")
   public ResponseEntity<?> addEvent(@Valid @RequestBody EventRequest eventRequest) {
-    Event event = new Event(eventRequest.getName(), 
+    Event event = new Event(
+               eventRequest.getName(), 
                eventRequest.getStatus(),
                java.time.LocalDateTime.now(),
                eventRequest.getCreatedby(),

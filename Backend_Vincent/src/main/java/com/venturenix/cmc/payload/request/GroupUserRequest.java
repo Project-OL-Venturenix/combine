@@ -10,26 +10,26 @@ import jakarta.validation.constraints.Size;
 
 public class GroupUserRequest {
 
-  @NotBlank
+  //@NotBlank
   private Long groupid;
 
-  @NotBlank
+  //@NotBlank
   private Long userid;
 
-  @NotBlank
+  //@NotBlank
   private String status;
 
   
   private LocalDateTime createddate;
 
   
-  private Long createdby;
+  private Integer createdby;
 
   
   private LocalDateTime updateddate;
 
   
-  private Long updatedby;
+  private Integer updatedby;
 
   public Long getGroupid() {
     return groupid;
@@ -54,11 +54,11 @@ public class GroupUserRequest {
   public void setStatus(String status) {
     this.status = status;
   }
- public Long getCreatedby() {
+ public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }
 
@@ -70,11 +70,11 @@ public class GroupUserRequest {
     this.createddate = createddate;
   }
 
-   public Long getUpdatedby() {
+   public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }
 

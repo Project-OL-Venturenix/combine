@@ -1,5 +1,5 @@
 {
   "filename": "Question1",
   "extension": ".java",
-  "code": "package com.vtxlab.projectol.server_test_cases.temp;\npublic class Question1 {\n    public double computeTax(int[][] brackets, int income) {\n    return 3.15000;\n    }\n}"
+  "code": "public class Question1 {\n    public double computeTax(int[][] brackets, int income) {\n    return 3.15000;\n    }\n}"
 }

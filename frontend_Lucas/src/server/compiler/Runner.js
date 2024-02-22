@@ -11,7 +11,7 @@ class Runner {
   } */
 
   run(file, directory, filename, extension, callback) {
-    console.log(this.file);
+    console.log('Runner : ' + this.file);
   }
 }
 

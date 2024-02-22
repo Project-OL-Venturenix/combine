@@ -55,8 +55,10 @@ public class AuthController {
 
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
+    
     Authentication authentication = authenticationManager.authenticate(
+        //UserDetailsImpl userDetails1 = (UserDetailsImpl) authentication.getPrincipal();  
+        //new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
     SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -91,10 +93,10 @@ public class AuthController {
 
   @PostMapping("/signup")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-    if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+    if (userRepository.existsByUsername(signUpRequest.getEmail())) {
       return ResponseEntity
           .badRequest()
-          .body(new MessageResponse("Error: Username is already taken!"));
+          .body(new MessageResponse("Error: Email is already taken!"));
     }
 
     if (userRepository.existsByEmail(signUpRequest.getEmail())) {

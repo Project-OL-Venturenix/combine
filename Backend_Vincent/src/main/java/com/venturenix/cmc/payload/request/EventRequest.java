@@ -13,6 +13,7 @@ public class EventRequest {
   @NotBlank
   private String name;
 
+
   @NotBlank
   private String status;
 
@@ -20,13 +21,13 @@ public class EventRequest {
   private LocalDateTime createddate;
 
   
-  private Long createdby;
+  private Integer createdby;
 
   
   private LocalDateTime updateddate;
 
   
-  private Long updatedby;
+  private Integer updatedby;
 
   public String getName() {
     return name;
@@ -43,11 +44,11 @@ public class EventRequest {
   public void setStatus(String status) {
     this.status = status;
   }
- public Long getCreatedby() {
+ public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }
 
@@ -59,11 +60,11 @@ public class EventRequest {
     this.createddate = createddate;
   }
 
-   public Long getUpdatedby() {
+   public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }
 

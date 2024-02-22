@@ -6,37 +6,52 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.time.OffsetDateTime;
 import jakarta.validation.constraints.Size;
 
 public class UserTestCaseRequest {
 
-  @NotBlank
+  //@NotBlank
   private Long eventid;
-  @NotBlank
+  //@NotBlank
   private Long userid;
-  @NotBlank
+  //@NotBlank
   private Long questionid;
-  @NotBlank
+  //@NotBlank
   private Long testcaseid;
-  @NotBlank
-  private Double run_time_by_sec;
-  @NotBlank
+  //@NotBlank
+  private OffsetDateTime run_start_time_utc;
+  //@NotBlank  
+  private OffsetDateTime  run_end_time_utc;
+
+  //@NotBlank  
+  private OffsetDateTime  run_time_utc;
+
+  //@NotBlank  
+  private LocalDateTime  run_start_time;    
+  //@NotBlank  
+  private LocalDateTime run_end_time;
+  //@NotBlank  
+  private String testcasefilepath;
+  //@NotBlank  
+  private String filename;    
+  //@NotBlank
   private String testcase_pass_status;      
 
-  @NotBlank
+  //@NotBlank
   private String status;
 
   
   private LocalDateTime createddate;
 
   
-  private Long createdby;
+  private Integer createdby;
 
   
   private LocalDateTime updateddate;
 
   
-  private Long updatedby;
+  private Integer updatedby;
 
    public Long getEventid() {
     return eventid;
@@ -70,6 +85,64 @@ public class UserTestCaseRequest {
     this.testcaseid = testcaseid;
   }  
 
+  public OffsetDateTime getRunstarttimeutc() {
+    return run_start_time_utc;
+  }  
+
+  public void setRunstarttimeutc(OffsetDateTime run_start_time_utc) {
+    this.run_start_time_utc = run_start_time_utc;
+  }  
+
+  public OffsetDateTime getRunendtimeutc() {
+    return run_end_time_utc;
+  }  
+
+  public void setRunendtimeutc(OffsetDateTime run_end_time_utc) {
+    this.run_end_time_utc = run_end_time_utc;
+  }    
+
+  
+  public OffsetDateTime getRuntimeutc() {
+    return run_time_utc;
+  }  
+
+  public void setRuntimeutc(OffsetDateTime run_time_utc) {
+    this.run_time_utc = run_time_utc;
+  } 
+
+  public LocalDateTime getRunstarttime() {
+    return run_start_time;
+  }  
+
+  public void setRunstarttime(LocalDateTime run_start_time) {
+    this.run_start_time = run_start_time;
+  } 
+
+  public LocalDateTime getRunendtime() {
+    return run_end_time;
+  }  
+
+  public void setRunendtime(LocalDateTime run_end_time) {
+    this.run_end_time = run_end_time;
+  }   
+
+  public String getTestcasefilepath() {
+    return testcasefilepath;
+  }  
+
+  public void setTestcasefilepath(String testcasefilepath) {
+    this.testcasefilepath = testcasefilepath;
+  }   
+
+  public String getFilename() {
+    return filename;
+  }  
+
+  public void setFilename(String filename) {
+    this.filename = filename;
+  }     
+
+
   public String getTestcasepassstatus() {
     return testcase_pass_status;
   }
@@ -77,15 +150,6 @@ public class UserTestCaseRequest {
   public void setTestcasepassstatus(String testcase_pass_status) {
     this.testcase_pass_status = testcase_pass_status;
   }    
-
-  public Double getRuntimebysec() {
-    return run_time_by_sec;
-  }  
-
-  public void setRuntimebysec(Double run_time_by_sec) {
-    this.run_time_by_sec = run_time_by_sec;
-  }  
-
 
 
   public String getStatus() {
@@ -95,11 +159,11 @@ public class UserTestCaseRequest {
   public void setStatus(String status) {
     this.status = status;
   }
- public Long getCreatedby() {
+ public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }
 
@@ -111,11 +175,11 @@ public class UserTestCaseRequest {
     this.createddate = createddate;
   }
 
-   public Long getUpdatedby() {
+   public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }
 

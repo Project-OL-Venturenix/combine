@@ -15,11 +15,15 @@ public class TestCaseScore {
   private Double testcase_score;
   private String status;
   private LocalDateTime createddate;
-  private Long createdby;
+  private Integer createdby;
   private LocalDateTime updateddate;
-  private Long updatedby;  
+  private Integer updatedby;  
 
-  public TestCaseScore(String testcase_score_desc, Double testcase_score, String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
+  public TestCaseScore() {
+    
+  }
+
+  public TestCaseScore(String testcase_score_desc, Double testcase_score, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
     this.testcase_score_desc = testcase_score_desc;
     this.testcase_score = testcase_score;
     this.status = status;
@@ -63,11 +67,11 @@ public class TestCaseScore {
     this.status = status;
   }
 
-  public Long getCreatedby() {
+  public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }  
 
@@ -79,11 +83,11 @@ public class TestCaseScore {
     this.createddate = createddate;
   }  
 
-  public Long getUpdatedby() {
+  public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }   
 

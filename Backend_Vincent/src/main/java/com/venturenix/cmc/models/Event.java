@@ -5,14 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
-@Data
-// @Builder
 @Entity
 @Table(name = "events")
 public class Event {
@@ -29,20 +23,20 @@ public class Event {
   
   private LocalDateTime createddate;
 
-  @Size(min = 1, max = 20)
-  private Long createdby;
+  //@Size(min = 1, max = 20)
+  private Integer createdby;
 
   
   private LocalDateTime updateddate;
 
-  @Size(min = 1, max = 20)
-  private Long updatedby;
+  //@Size(min = 1, max = 20)
+  private Integer updatedby;
 
   public Event() {
 
   }
 
-  public Event(String name, String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
+  public Event(String name, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
     this.name = name;
     this.status = status;
     this.createddate = createddate;
@@ -77,11 +71,11 @@ public class Event {
     this.status = status;
   }
 
-  public Long getCreatedby() {
+  public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }
 
@@ -93,11 +87,11 @@ public class Event {
     this.createddate = createddate;
   }
 
-   public Long getUpdatedby() {
+   public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }
 

@@ -13,35 +13,35 @@ public class UserQuestionSubmitRequest {
 
 
 
-  @NotBlank
+  //@NotBlank
   private Long eventid;
 
-  @NotBlank
+  //@NotBlank
   private Long questionid;  
 
-  @NotBlank
+  //@NotBlank
   private Long userid;  
 
-  @NotBlank
-  private Double run_time_by_sec;  
+  //@NotBlank
+  private Double run_time_by_msec;  
 
-  @NotBlank
+  //@NotBlank
   private LocalDateTime submit_time;  
 
-  @NotBlank
+  //@NotBlank
   private String status;
 
   
   private LocalDateTime createddate;
 
   
-  private Long createdby;
+  private Integer createdby;
 
   
   private LocalDateTime updateddate;
 
   
-  private Long updatedby;
+  private Integer updatedby;
 
 
   public Long getEventid() {
@@ -69,12 +69,12 @@ public class UserQuestionSubmitRequest {
     this.userid = userid;
   }  
 
-  public Double getRuntimebysec() {
-    return run_time_by_sec;
+  public Double getRuntimebymsec() {
+    return run_time_by_msec;
   }
 
-  public void setRuntimebysec(Double run_time_by_sec) {
-    this.run_time_by_sec = run_time_by_sec;
+  public void setRuntimebymsec(Double run_time_by_msec) {
+    this.run_time_by_msec = run_time_by_msec;
   }  
 
   public LocalDateTime getSubmittime() {
@@ -92,11 +92,11 @@ public class UserQuestionSubmitRequest {
   public void setStatus(String status) {
     this.status = status;
   }
- public Long getCreatedby() {
+ public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }
 
@@ -108,11 +108,11 @@ public class UserQuestionSubmitRequest {
     this.createddate = createddate;
   }
 
-   public Long getUpdatedby() {
+   public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }
 

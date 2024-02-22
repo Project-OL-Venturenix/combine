@@ -10,26 +10,30 @@ public class GroupQuestionSubmit {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private Long event_id;
-  private Long group_id;
-  private Long user_id;
-  private Long question_id;
+  private Long eventid;
+  private Long groupid;
+  private Long userid;
+  private Long questionid;
   private LocalDateTime submit_time;
-  private Double run_time_by_sec;
+  private Double run_time_by_msec;
   private String status;
   private LocalDateTime createddate;
-  private Long createdby;
+  private Integer createdby;
   private LocalDateTime updateddate;
-  private Long updatedby;
+  private Integer updatedby;
 
 
-  public GroupQuestionSubmit(Long event_id, Long group_id,Long user_id, Long question_id,LocalDateTime submit_time, Double run_time_by_sec,String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
-    this.event_id = event_id;
-    this.group_id = group_id;
-    this.user_id = user_id;
-    this.question_id = question_id;
+  public GroupQuestionSubmit() {
+    
+  }
+
+  public GroupQuestionSubmit(Long eventid, Long groupid,Long userid, Long questionid,LocalDateTime submit_time, Double run_time_by_msec,String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+    this.eventid = eventid;
+    this.groupid = groupid;
+    this.userid = userid;
+    this.questionid = questionid;
     this.submit_time = submit_time;
-    this.run_time_by_sec = run_time_by_sec;
+    this.run_time_by_msec = run_time_by_msec;
     this.status = status;
     this.createddate = createddate;
     this.createdby = createdby;
@@ -47,35 +51,35 @@ public class GroupQuestionSubmit {
   }
 
   public Long getEventid() {
-    return event_id;
+    return eventid;
   }
 
-  public void setEventid(Long event_id) {
-    this.event_id = event_id;
+  public void setEventid(Long eventid) {
+    this.eventid = eventid;
   }
 
   public Long getGroupid() {
-    return group_id;
+    return groupid;
   }
 
-  public void setGroupid(Long group_id) {
-    this.group_id = group_id;
+  public void setGroupid(Long groupid) {
+    this.groupid = groupid;
   }
 
   public Long getUserid() {
-    return user_id;
+    return userid;
   }
 
-  public void setUserid(Long user_id) {
-    this.user_id = user_id;
+  public void setUserid(Long userid) {
+    this.userid = userid;
   }  
 
   public Long getQuestionid() {
-    return question_id;
+    return questionid;
   }
 
-  public void setQuestionid(Long question_id) {
-    this.question_id = question_id;
+  public void setQuestionid(Long questionid) {
+    this.questionid = questionid;
   }
 
   public LocalDateTime getSubmittime() {
@@ -86,12 +90,12 @@ public class GroupQuestionSubmit {
     this.submit_time = submit_time;
   }  
 
-  public Double getRuntimebysec() {
-    return run_time_by_sec;
+  public Double getRuntimebymsec() {
+    return run_time_by_msec;
   }  
 
-  public void setRuntimebysec(Double run_time_by_sec) {
-    this.run_time_by_sec = run_time_by_sec;
+  public void setRuntimebymsec(Double run_time_by_msec) {
+    this.run_time_by_msec = run_time_by_msec;
   }  
 
 
@@ -103,11 +107,11 @@ public class GroupQuestionSubmit {
     this.status = status;
   }
 
-  public Long getCreatedby() {
+  public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }  
 
@@ -119,11 +123,11 @@ public class GroupQuestionSubmit {
     this.createddate = createddate;
   }  
 
-  public Long getUpdatedby() {
+  public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }   
 

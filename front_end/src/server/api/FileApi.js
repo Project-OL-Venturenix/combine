@@ -24,8 +24,22 @@ module.exports = {
       callback(data.toString());
     });
   },
+  saveFile(file, callback) {
+    // create parent directories if they doesn't exist.
+    mkdirp(getDirName(file), (err) => {
+      if (err) return callback(err);
 
-  saveFile(file, code, callback) {
+      return fs.writeFile(file, (err2) => {
+        if (err2) {
+          throw err2;
+        }
+        callback;
+      });
+    });
+  },
+
+
+  saveFileWithPackage(file, code, callback) {
     // create parent directories if they doesn't exist.
     mkdirp(getDirName(file), (err) => {
       if (err) return callback(err);

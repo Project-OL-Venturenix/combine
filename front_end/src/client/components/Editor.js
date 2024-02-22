@@ -6,6 +6,7 @@ import AlertDismissable from './controls/AlertDismissable';
 import OutputBox from './controls/OutputBox';
 import StatusImage from './controls/StatusImage';
 import CompilerApi from '../api/CompilerApi';
+import Runner from '../../server/compiler/Runner';
 
 let languages = ['Java', 'Python', 'JavaScript', 'C', 'C++'];
 const languagesProd = ['JavaScript', 'Python'];
@@ -60,25 +61,34 @@ class Editor extends React.Component {
     console.log(task);
     CompilerApi.run(task)
       .then((res) => {
-        this.setState({ response: res, output: res.message });
-        // Fetch the file contents after the compiler API response
-        return fetch('http://localhost:8085/api/test/readTxtFile');
+        this.setState({ response: res });
       })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.text(); // Parse response as text
-      })
-      .then((responseData) => {
-        // Set the fetched file contents to state
-        this.setState({ output: responseData });
-      })
-      // After Fetch the file contents after the compiler API response
       .catch((error) => {
         console.log(error);
         // this.handleError(error);
       });
+    // when click run call API 
+    // CompilerApi.run(task)
+    //   .then((res) => {
+    //     this.setState({ response: res, output: res.message });
+    //     // Fetch the file contents after the compiler API response
+    //     return fetch('http://localhost:8085/api/test/readTxtFile');
+    //   })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error('Network response was not ok');
+    //     }
+    //     return response.text(); // Parse response as text
+    //   })
+    //   .then((responseData) => {
+    //     // Set the fetched file contents to state
+    //     this.setState({ output: responseData });
+    //   })
+    //   // After Fetch the file contents after the compiler API response
+    //   .catch((error) => {
+    //     console.log(error);
+    //     // this.handleError(error);
+    //   });
   }
 
   updateSolution(event) {

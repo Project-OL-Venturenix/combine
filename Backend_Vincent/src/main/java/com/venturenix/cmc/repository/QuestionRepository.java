@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
 
-    Optional<Question> findById(long id);
+    Optional<Question> findById(Long id);
 
     List<Question> findAll();
     

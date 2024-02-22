@@ -79,7 +79,7 @@ public class GroupQuestionSubmitController {
                groupquestionsubmitRequest.getQuestionid(), 
                groupquestionsubmitRequest.getUserid(), 
                groupquestionsubmitRequest.getSubmittime(), 
-               groupquestionsubmitRequest.getRuntimebysec(), 
+               groupquestionsubmitRequest.getRuntimebymsec(), 
                groupquestionsubmitRequest.getStatus(),
                java.time.LocalDateTime.now(),
                groupquestionsubmitRequest.getCreatedby(),
@@ -129,7 +129,7 @@ public class GroupQuestionSubmitController {
       _groupquestionsubmit.setUserid(groupquestionsubmit.getUserid());
       _groupquestionsubmit.setStatus(groupquestionsubmit.getStatus());
       _groupquestionsubmit.setSubmittime(groupquestionsubmit.getSubmittime());
-      _groupquestionsubmit.setRuntimebysec(groupquestionsubmit.getRuntimebysec());
+      _groupquestionsubmit.setRuntimebymsec(groupquestionsubmit.getRuntimebymsec());
       _groupquestionsubmit.setUpdateddate(java.time.LocalDateTime.now());
       _groupquestionsubmit.setUpdatedby(groupquestionsubmit.getUpdatedby());
       return new ResponseEntity<>(groupquestionsubmitRepository.save(_groupquestionsubmit), HttpStatus.OK);

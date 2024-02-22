@@ -4,32 +4,51 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.time.OffsetDateTime;
 @Entity
 @Table(name = "grouptestcases")
 public class GroupTestCase {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private Long event_id;
-  private Long group_id;
-  private Long user_id;
-  private Long question_id;
-  private Long testcase_id;
-  private Double run_time_by_sec;
+  private Long eventid;
+  private Long groupid;
+  private Long userid;
+  private Long questionid;
+  private Long testcaseid;
+  
+  private OffsetDateTime run_start_time_utc;
+  private OffsetDateTime  run_end_time_utc;
+  private OffsetDateTime  run_time_utc;
+  private LocalDateTime  run_start_time;    
+  private LocalDateTime run_end_time;
+  private String testcasefilepath;
+  private String filename;    
   private String testcase_pass_status;
   private String status;
   private LocalDateTime createddate;
-  private Long createdby;
+  private Integer createdby;
   private LocalDateTime updateddate;
-  private Long updatedby;
+  private Integer updatedby;
 
-  public GroupTestCase(Long event_id, Long group_id, Long question_id, Long testcase_id, Long user_id, Double run_time_by_sec, String testcase_pass_status, String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
-    this.event_id = event_id;
-    this.group_id = group_id;
-    this.question_id = question_id;
-    this.testcase_id = testcase_id;
-    this.user_id = user_id;
-    this.run_time_by_sec = run_time_by_sec;
+
+  public GroupTestCase() {
+    
+  }
+
+  public GroupTestCase(Long eventd, Long groupid, Long questionid, Long testcaseid, Long userid, OffsetDateTime run_start_time_utc, OffsetDateTime run_end_time_utc, OffsetDateTime run_time_utc, LocalDateTime run_start_time, LocalDateTime run_end_time, String testcasefilepath, String filename, String testcase_pass_status, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+    this.eventid = eventid;
+    this.groupid = groupid;
+    this.questionid = questionid;
+    this.testcaseid = testcaseid;
+    this.userid = userid;
+    this.run_start_time_utc = run_start_time_utc;
+    this.run_end_time_utc = run_end_time_utc;
+    this.run_time_utc = run_time_utc;
+    this.run_start_time = run_start_time;
+    this.run_end_time = run_end_time;
+    this.testcasefilepath = testcasefilepath;    
+    this.filename = filename;
     this.testcase_pass_status = testcase_pass_status;
     this.status = status;
     this.createddate = createddate;
@@ -48,43 +67,43 @@ public class GroupTestCase {
   }
 
   public Long getEventid() {
-    return event_id;
+    return eventid;
   }
 
-  public void setEventid(Long event_id) {
-    this.event_id = event_id;
+  public void setEventid(Long eventid) {
+    this.eventid = eventid;
   }
 
   public Long getGroupid() {
-    return group_id;
+    return groupid;
   }
 
-  public void setGroupid(Long group_id) {
-    this.group_id = group_id;
+  public void setGroupid(Long groupid) {
+    this.groupid = groupid;
   }
 
   public Long getUserid() {
-    return user_id;
+    return userid;
   }
 
-  public void setUserid(Long user_id) {
-    this.user_id = user_id;
+  public void setUserid(Long userid) {
+    this.userid = userid;
   }
 
   public Long getQuestionid() {
-    return question_id;
+    return questionid;
   }
 
-  public void setQuestionid(Long question_id) {
-    this.question_id = question_id;
+  public void setQuestionid(Long questionid) {
+    this.questionid = questionid;
   }
 
   public Long getTestcaseid() {
-    return testcase_id;
+    return testcaseid;
   }
 
-  public void setTestcaseid(Long testcase_id) {
-    this.testcase_id = testcase_id;
+  public void setTestcaseid(Long testcaseid) {
+    this.testcaseid = testcaseid;
   }  
 
   public String getTestcasepassstatus() {
@@ -95,13 +114,61 @@ public class GroupTestCase {
     this.testcase_pass_status = testcase_pass_status;
   }    
 
-  public Double getRuntimebysec() {
-    return run_time_by_sec;
+public OffsetDateTime getRunstarttimeutc() {
+    return run_start_time_utc;
   }  
 
-  public void setRuntimebysec(Double run_time_by_sec) {
-    this.run_time_by_sec = run_time_by_sec;
+  public void setRunstarttimeutc(OffsetDateTime run_start_time_utc) {
+    this.run_start_time_utc = run_start_time_utc;
   }  
+
+  public OffsetDateTime getRunendtimeutc() {
+    return run_end_time_utc;
+  }  
+
+  public void setRunendtimeutc(OffsetDateTime run_end_time_utc) {
+    this.run_end_time_utc = run_end_time_utc;
+  }  
+
+  public OffsetDateTime getRuntimeutc() {
+    return run_time_utc;
+  }  
+
+  public void setRuntimeutc(OffsetDateTime run_time_utc) {
+    this.run_time_utc = run_time_utc;
+  }       
+
+  public LocalDateTime getRunstarttime() {
+    return run_start_time;
+  }  
+
+  public void setRunstarttime(LocalDateTime run_start_time) {
+    this.run_start_time = run_start_time;
+  } 
+
+  public LocalDateTime getRunendtime() {
+    return run_end_time;
+  }  
+
+  public void setRunendtime(LocalDateTime run_end_time) {
+    this.run_end_time = run_end_time;
+  }   
+
+  public String getTestcasefilepath() {
+    return testcasefilepath;
+  }  
+
+  public void setTestcasefilepath(String testcasefilepath) {
+    this.testcasefilepath = testcasefilepath;
+  }   
+
+  public String getFilename() {
+    return filename;
+  }  
+
+  public void setFilename(String filename) {
+    this.filename = filename;
+  }      
 
 
   public String getStatus() {
@@ -112,11 +179,11 @@ public class GroupTestCase {
     this.status = status;
   }
 
-  public Long getCreatedby() {
+  public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }  
 
@@ -128,11 +195,11 @@ public class GroupTestCase {
     this.createddate = createddate;
   }  
 
-  public Long getUpdatedby() {
+  public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }   
 

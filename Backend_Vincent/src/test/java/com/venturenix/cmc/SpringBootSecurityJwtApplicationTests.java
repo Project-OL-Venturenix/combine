@@ -1,4 +1,4 @@
-package com.venturenix.springjwt;
+package com.venturenix.cmc;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

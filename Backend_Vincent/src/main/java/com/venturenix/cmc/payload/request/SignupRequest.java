@@ -44,28 +44,28 @@ public class SignupRequest {
   private String title;
 
   
-  private Long py_experience;
+  private Integer py_experience;
 
   
-  private Long jv_experience;
+  private Integer jv_experience;
 
   
-  private Long js_experience;
+  private Integer js_experience;
 
   
-  private Long cs_experience;
+  private Integer cs_experience;
 
   
-  private Long sa_experience;
+  private Integer sa_experience;
 
   @NotBlank
   @Size(min = 1, max = 20)
   private String status;
 
   private LocalDateTime createddate;
-  private Long createdby;
+  private Integer createdby;
   private LocalDateTime updateddate;
-  private Long updatedby; 
+  private Integer updatedby; 
 
 
   public String getFirstname() {
@@ -132,43 +132,43 @@ public class SignupRequest {
     this.title = title;
   }
 
-  public Long getPy_experience() {
+  public Integer getPy_experience() {
     return py_experience;
   }
 
-  public void setPy_experience(Long py_experience) {
+  public void setPy_experience(Integer py_experience) {
     this.py_experience = py_experience;
   }
 
-  public Long getJv_experience() {
+  public Integer getJv_experience() {
     return jv_experience;
   }
 
-  public void setJv_experience(Long jv_experience) {
+  public void setJv_experience(Integer jv_experience) {
     this.jv_experience = jv_experience;
   }
   
-  public Long getJs_experience() {
+  public Integer getJs_experience() {
     return js_experience;
   }
 
-  public void setJs_experience(Long js_experience) {
+  public void setJs_experience(Integer js_experience) {
     this.js_experience = js_experience;
   }
   
-  public Long getCs_experience() {
+  public Integer getCs_experience() {
     return cs_experience;
   }
 
-  public void setCs_experience(Long cs_experience) {
+  public void setCs_experience(Integer cs_experience) {
     this.cs_experience = cs_experience;
   }
   
-  public Long getSa_experience() {
+  public Integer getSa_experience() {
     return sa_experience;
   }
 
-  public void setSa_experience(Long sa_experience) {
+  public void setSa_experience(Integer sa_experience) {
     this.sa_experience = sa_experience;
   }
 
@@ -180,11 +180,11 @@ public class SignupRequest {
     this.status = status;
   }  
 
-public Long getCreatedby() {
+public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }
 
@@ -196,11 +196,11 @@ public Long getCreatedby() {
     this.createddate = createddate;
   }
 
-   public Long getUpdatedby() {
+   public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }
 

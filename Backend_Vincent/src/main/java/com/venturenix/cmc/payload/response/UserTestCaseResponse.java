@@ -3,6 +3,7 @@ package com.venturenix.cmc.payload.response;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Date;
 
 public class UserTestCaseResponse {
@@ -18,7 +19,17 @@ public class UserTestCaseResponse {
 
   private Long userid;
 
-  private Double run_time_by_sec;
+  private OffsetDateTime run_start_time_utc;
+
+  private OffsetDateTime  run_end_time_utc;
+
+  private LocalDateTime  run_start_time;    
+
+  private LocalDateTime run_end_time;
+
+  private String testcasefilepath;
+
+  private String filename;    
 
   private String testcase_pass_status;
 
@@ -27,23 +38,28 @@ public class UserTestCaseResponse {
   private LocalDateTime createddate;
 
   
-  private Long createdby;
+  private Integer createdby;
 
   
   private LocalDateTime updateddate;
 
   
-  private Long updatedby;
+  private Integer updatedby;
   
   
-  public UserTestCaseResponse(String accessToken, Long id, Long eventid, Long questionid, Long testcaseid, Long userid, Double run_time_by_sec, String testcase_pass_status, String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
+  public UserTestCaseResponse(String accessToken, Long id, Long eventid, Long questionid, Long testcaseid, Long userid, OffsetDateTime run_start_time_utc, OffsetDateTime run_end_time_utc, LocalDateTime run_start_time, LocalDateTime run_end_time, String testcasefilepath, String filename, String testcase_pass_status, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
     this.token = accessToken;
     this.id = id;
     this.eventid = eventid;
     this.questionid = questionid;
     this.testcaseid = testcaseid;
     this.userid = userid;
-    this.run_time_by_sec = run_time_by_sec;
+    this.run_start_time_utc = run_start_time_utc;
+    this.run_end_time_utc = run_end_time_utc;
+    this.run_start_time = run_start_time;
+    this.run_end_time = run_end_time;
+    this.testcasefilepath = testcasefilepath;    
+    this.filename = filename;
     this.testcase_pass_status = testcase_pass_status;  
     this.status = status;
     this.createddate = createddate;
@@ -110,6 +126,55 @@ public class UserTestCaseResponse {
     this.testcaseid = testcaseid;
   }  
 
+  public OffsetDateTime getRunstarttimeutc() {
+    return run_start_time_utc;
+  }  
+
+  public void setRunstarttimeutc(OffsetDateTime run_start_time_utc) {
+    this.run_start_time_utc = run_start_time_utc;
+  }  
+
+  public OffsetDateTime getRunendtimeutc() {
+    return run_end_time_utc;
+  }  
+
+  public void setRunendtimeutc(OffsetDateTime run_end_time_utc) {
+    this.run_end_time_utc = run_end_time_utc;
+  }    
+
+  public LocalDateTime getRunstarttime() {
+    return run_start_time;
+  }  
+
+  public void setRunstarttime(LocalDateTime run_start_time) {
+    this.run_start_time = run_start_time;
+  } 
+
+  public LocalDateTime getRunendtime() {
+    return run_end_time;
+  }  
+
+  public void setRunendtime(LocalDateTime run_end_time) {
+    this.run_end_time = run_end_time;
+  }   
+
+  public String getTestcasefilepath() {
+    return testcasefilepath;
+  }  
+
+  public void setTestcasefilepath(String testcasefilepath) {
+    this.testcasefilepath = testcasefilepath;
+  }   
+
+  public String getFilename() {
+    return filename;
+  }  
+
+  public void setFilename(String filename) {
+    this.filename = filename;
+  }     
+
+
   public String getTestcasepassstatus() {
     return testcase_pass_status;
   }
@@ -118,13 +183,6 @@ public class UserTestCaseResponse {
     this.testcase_pass_status = testcase_pass_status;
   }    
 
-  public Double getRuntimebysec() {
-    return run_time_by_sec;
-  }  
-
-  public void setRuntimebysec(Double run_time_by_sec) {
-    this.run_time_by_sec = run_time_by_sec;
-  }  
 
   public String getStatus() {
     return status;
@@ -134,11 +192,11 @@ public class UserTestCaseResponse {
     this.status = status;
   }
 
-public Long getCreatedby() {
+public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }
 
@@ -150,11 +208,11 @@ public Long getCreatedby() {
     this.createddate = createddate;
   }
 
-   public Long getUpdatedby() {
+   public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }
 

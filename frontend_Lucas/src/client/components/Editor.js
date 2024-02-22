@@ -40,7 +40,7 @@ class Editor extends React.Component {
 
   componentDidMount() {
     CompilerApi.getTask('java') //default load java file
-      // .then(res => res.json())
+    //  .then(res => res.json())
       .then((task) => {
         console.log(task);
         this.setState({ task });
@@ -57,28 +57,41 @@ class Editor extends React.Component {
   handleRun(event) {
     event.preventDefault();
     const { task } = this.state;
-    console.log(task);
+    //console.log(task);
     CompilerApi.run(task)
       .then((res) => {
-        this.setState({ response: res, output: res.message });
-        // Fetch the file contents after the compiler API response
-        return fetch('http://localhost:8085/api/test/readTxtFile');
+        // Append the new test case result to the existing message
+        const newMessage = this.state.response.message + res.message + '\n';
+        const newResponse = Object.assign({}, this.state.response, { message: newMessage });
+        this.setState({ response: newResponse });
+        // this.setState({ response: res });
       })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.text(); // Parse response as text
-      })
-      .then((responseData) => {
-        // Set the fetched file contents to state
-        this.setState({ output: responseData });
-      })
-      // After Fetch the file contents after the compiler API response
       .catch((error) => {
         console.log(error);
         // this.handleError(error);
       });
+
+    // CompilerApi.run(task)
+    //   .then((res) => {
+    //     this.setState({ response: res, output: res.message });
+    //     // Fetch the file contents after the compiler API response
+    //     return fetch('http://localhost:8085/api/test/readTxtFile');
+    //   })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error('Network response was not ok');
+    //     }
+    //     return response.text(); // Parse response as text
+    //   })
+    //   .then((responseData) => {
+    //     // Set the fetched file contents to state
+    //     this.setState({ output: responseData });
+    //   })
+    //   // After Fetch the file contents after the compiler API response
+    //   .catch((error) => {
+    //     console.log(error);
+    //     // this.handleError(error);
+    //   });
   }
 
   updateSolution(event) {
@@ -141,11 +154,11 @@ class Editor extends React.Component {
           </FormGroup> */}
           <FormGroup>
             <Col sm={12}>
-              {/* <OutputBox
+              <OutputBox
                 show={this.state.response.status === '0'}
                 message={this.state.response.message}
-              /> */}
-              <OutputBox show={true} message={this.state.output} />
+              />
+              {/* <OutputBox show={true} message={this.state.output} /> */}
             </Col>
           </FormGroup>
         </Form>

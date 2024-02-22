@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -77,8 +78,14 @@ public class UserTestCaseController {
     System.out.println("getEventid = " +  usertestcaseRequest.getEventid());
     System.out.println("getQuestionid = " +  usertestcaseRequest.getQuestionid());
     System.out.println("getTestcaseid = " +  usertestcaseRequest.getTestcaseid());
-    System.out.println("getUserid = " +  usertestcaseRequest.getUserid());
-    System.out.println("getRuntimebysec = " +  usertestcaseRequest.getRuntimebysec());
+    //System.out.println("getUserid = " +  usertestcaseRequest.getUserid());
+    System.out.println("getRunstarttimeutc = " +  usertestcaseRequest.getRunstarttimeutc());
+    System.out.println("getRunendtimeutc = " +  usertestcaseRequest.getRunendtimeutc());
+    System.out.println("getRuntimeutc = " +  usertestcaseRequest.getRuntimeutc());
+    System.out.println("getRunstarttime = " +  usertestcaseRequest.getRunstarttime());
+    System.out.println("getRunendtime = " +  usertestcaseRequest.getRunendtime());
+    System.out.println("getTestcasefilepath = " +  usertestcaseRequest.getTestcasefilepath());
+    System.out.println("getFilename = " +  usertestcaseRequest.getFilename());
     System.out.println("getTestcasepassstatus = " +  usertestcaseRequest.getTestcasepassstatus());
     System.out.println("getStatus = " +  usertestcaseRequest.getStatus());
     System.out.println("getCreatedby = " +  usertestcaseRequest.getCreatedby());
@@ -90,7 +97,13 @@ public class UserTestCaseController {
                usertestcaseRequest.getQuestionid(), 
                usertestcaseRequest.getTestcaseid(), 
                usertestcaseRequest.getUserid(), 
-               usertestcaseRequest.getRuntimebysec(), 
+               usertestcaseRequest.getRunstarttimeutc(), 
+               usertestcaseRequest.getRunendtimeutc(), 
+               usertestcaseRequest.getRuntimeutc(), 
+               usertestcaseRequest.getRunstarttime(), 
+               usertestcaseRequest.getRunendtime(), 
+               usertestcaseRequest.getTestcasefilepath(), 
+               usertestcaseRequest.getFilename(), 
                usertestcaseRequest.getTestcasepassstatus(), 
                usertestcaseRequest.getStatus(),
                java.time.LocalDateTime.now(),
@@ -139,7 +152,13 @@ public class UserTestCaseController {
       _usertestcase.setQuestionid(usertestcase.getQuestionid());
       _usertestcase.setTestcaseid(usertestcase.getTestcaseid());
       _usertestcase.setUserid(usertestcase.getUserid());
-      _usertestcase.setRuntimebysec(usertestcase.getRuntimebysec());
+      _usertestcase.setRunstarttimeutc(usertestcase.getRunstarttimeutc());
+      _usertestcase.setRunendtimeutc(usertestcase.getRunendtimeutc());
+      _usertestcase.setRuntimeutc(usertestcase.getRuntimeutc());
+      _usertestcase.setRunstarttime(usertestcase.getRunstarttime());
+      _usertestcase.setRunendtime(usertestcase.getRunendtime());
+      _usertestcase.setTestcasefilepath(usertestcase.getTestcasefilepath());
+      _usertestcase.setFilename(usertestcase.getFilename());
       _usertestcase.setTestcasepassstatus(usertestcase.getTestcasepassstatus());
       _usertestcase.setStatus(usertestcase.getStatus());
       _usertestcase.setUpdateddate(java.time.LocalDateTime.now());

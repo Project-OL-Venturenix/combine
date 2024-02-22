@@ -16,11 +16,15 @@ public class TestCase {
   private String testcaseresult;
   private String status;
   private LocalDateTime createddate;
-  private Long createdby;
+  private Integer createdby;
   private LocalDateTime updateddate;
-  private Long updatedby;  
+  private Integer updatedby;  
 
-  public TestCase(Long questionid, Long testcasescoreid, String testcasetext, String testcaseresult, String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
+  public TestCase() {
+    
+  }
+
+  public TestCase(Long questionid, Long testcasescoreid, String testcasetext, String testcaseresult, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
     this.questionid = questionid;
     this.testcasescoreid = testcasescoreid;
     this.testcasetext = testcasetext;
@@ -86,11 +90,11 @@ public class TestCase {
     this.status = status;
   }
 
-  public Long getCreatedby() {
+  public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }  
 
@@ -102,11 +106,11 @@ public class TestCase {
     this.createddate = createddate;
   }  
 
-  public Long getUpdatedby() {
+  public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }   
 

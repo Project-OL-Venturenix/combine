@@ -40,38 +40,38 @@ public class UserDetailsImpl implements UserDetails {
   private String title;
 
   @JsonIgnore
-  private Long py_experience;
+  private Integer py_experience;
 
   @JsonIgnore
-  private Long jv_experience;
+  private Integer jv_experience;
 
   @JsonIgnore
-  private Long js_experience;
+  private Integer js_experience;
 
   @JsonIgnore
-  private Long cs_experience;
+  private Integer cs_experience;
 
   @JsonIgnore
-  private Long sa_experience;
+  private Integer sa_experience;
 
   @JsonIgnore
   private LocalDateTime createddate;
 
   @JsonIgnore
-  private Long createdby;
+  private Integer createdby;
 
   @JsonIgnore
   private LocalDateTime updateddate;
 
   @JsonIgnore
-  private Long updatedby; 
+  private Integer updatedby; 
 
   @JsonIgnore
   private String status;
 
   private Collection<? extends GrantedAuthority> authorities;
 
-  public UserDetailsImpl(Long id, String firstname, String lastname, String mobile, String email, String username, String password, String company, String title, Long py_experience, Long jv_experience, Long js_experience, Long cs_experience, Long sa_experience, String status, LocalDateTime createdate, Long createby, LocalDateTime updatedate, Long updateby, Collection<? extends GrantedAuthority> authorities) {
+  public UserDetailsImpl(Long id, String firstname, String lastname, String mobile, String email, String username, String password, String company, String title, Integer py_experience, Integer jv_experience, Integer js_experience, Integer cs_experience, Integer sa_experience, String status, LocalDateTime createdate, Integer createby, LocalDateTime updatedate, Integer updateby, Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
@@ -172,33 +172,33 @@ public class UserDetailsImpl implements UserDetails {
   }
 
   
-  public Long getPy_experience() {
+  public Integer getPy_experience() {
     return py_experience;
   }
 
   
   
-  public Long getJv_experience() {
+  public Integer getJv_experience() {
     return jv_experience;
   }
 
   
-  public Long getJs_experience() {
+  public Integer getJs_experience() {
     return js_experience;
   }
 
   
   
-  public Long getCs_experience() {
+  public Integer getCs_experience() {
     return cs_experience;
   }
 
   
-  public Long getSa_experience() {
+  public Integer getSa_experience() {
     return sa_experience;
   }
 
-public Long getCreatedby() {
+public Integer getCreatedby() {
     return createdby;
   }
 
@@ -209,7 +209,7 @@ public Long getCreatedby() {
   }
 
 
-   public Long getUpdatedby() {
+   public Integer getUpdatedby() {
     return updatedby;
   }
 

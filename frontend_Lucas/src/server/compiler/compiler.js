@@ -7,15 +7,13 @@ const { spawn } = require('child_process');
 module.exports = {
   getFile(lang, callback) {
     let questionFile = '';
-    let testFile = '';
     const language = lang.toLowerCase();
     if (language === 'java') {
-      questionFile = path.join(__dirname, '../templates', 'Question1.java');
-      testFile = path.join(__dirname, '../templates', 'Question1Test.java');
+      questionFile = path.join(__dirname, '../templates', 'Question1.json');
     } else {
       callback('');
       return;
-    }
+    } 
     fs.readFile(questionFile, (err, data) => {
       if (err) {
         throw err;

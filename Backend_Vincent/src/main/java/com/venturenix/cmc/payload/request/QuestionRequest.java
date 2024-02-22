@@ -10,26 +10,26 @@ import jakarta.validation.constraints.Size;
 
 public class QuestionRequest {
 
-  @NotBlank
+  //@NotBlank
   private String questiontext;
 
-  @NotBlank
+  //@NotBlank
   private String answertext;
 
-  @NotBlank
+  //@NotBlank
   private String status;
 
   
   private LocalDateTime createddate;
 
   
-  private Long createdby;
+  private Integer createdby;
 
   
   private LocalDateTime updateddate;
 
   
-  private Long updatedby;
+  private Integer updatedby;
 
   public String getQuestiontext() {
     return questiontext;
@@ -54,11 +54,11 @@ public class QuestionRequest {
   public void setStatus(String status) {
     this.status = status;
   }
- public Long getCreatedby() {
+ public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }
 
@@ -70,11 +70,11 @@ public class QuestionRequest {
     this.createddate = createddate;
   }
 
-   public Long getUpdatedby() {
+   public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }
 

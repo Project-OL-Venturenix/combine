@@ -10,21 +10,25 @@ public class GroupUserQuestionHandle {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private Long event_id;
-  private Long group_id;
-  private String user_list;
-  private Long question_id;
+  private Long eventid;
+  private Long groupid;
+  private String userlist;
+  private Long questionid;
   private String status;
   private LocalDateTime createddate;
-  private Long createdby;
+  private Integer createdby;
   private LocalDateTime updateddate;
-  private Long updatedby;
+  private Integer updatedby;
 
-  public GroupUserQuestionHandle(Long event_id, Long group_id, String user_list, Long question_id, String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
-    this.event_id = event_id;
-    this.group_id = group_id;
-    this.user_list = user_list;
-    this.question_id = question_id;
+  public GroupUserQuestionHandle() {
+    
+  }
+
+  public GroupUserQuestionHandle(Long eventid, Long groupid, String userlist, Long questionid, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+    this.eventid = eventid;
+    this.groupid = groupid;
+    this.userlist = userlist;
+    this.questionid = questionid;
     this.status = status;
     this.createddate = createddate;
     this.createdby = createdby;
@@ -42,35 +46,35 @@ public class GroupUserQuestionHandle {
   }
 
   public Long getEventid() {
-    return event_id;
+    return eventid;
   }
 
-  public void setEventid(Long event_id) {
-    this.event_id = event_id;
+  public void setEventid(Long eventid) {
+    this.eventid = eventid;
   }
 
-  public Long getGroupId() {
-    return group_id;
+  public Long getGroupid() {
+    return groupid;
   }
 
-  public void setGroupid(Long group_id) {
-    this.group_id = group_id;
+  public void setGroupid(Long groupid) {
+    this.groupid = groupid;
   }
 
   public String getUserlist() {
-    return user_list;
+    return userlist;
   }
 
-  public void setUserList(String user_list) {
-    this.user_list = user_list;
+  public void setUserlist(String userlist) {
+    this.userlist = userlist;
   }  
 
   public Long getQuestionid() {
-    return question_id;
+    return questionid;
   }
 
-  public void setQuestionid(Long question_id) {
-    this.question_id = question_id;
+  public void setQuestionid(Long questionid) {
+    this.questionid = questionid;
   }
 
   
@@ -82,11 +86,11 @@ public class GroupUserQuestionHandle {
     this.status = status;
   }
 
-  public Long getCreatedby() {
+  public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }  
 
@@ -98,11 +102,11 @@ public class GroupUserQuestionHandle {
     this.createddate = createddate;
   }  
 
-  public Long getUpdatedby() {
+  public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }   
 

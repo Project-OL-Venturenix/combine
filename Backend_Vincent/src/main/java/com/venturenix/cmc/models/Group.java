@@ -7,17 +7,20 @@ import java.util.Date;
 @Entity
 @Table(name = "groups_")
 public class Group {
+  /*
+   * username and email must be unique 
+   */
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
   private String status;
   private LocalDateTime createddate;
-  private Long createdby;
+  private Integer createdby;
   private LocalDateTime updateddate;
-  private Long updatedby;
+  private Integer updatedby;
 
-  public Group(String name, String status, LocalDateTime createddate, Long createdby, LocalDateTime updateddate, Long updatedby) {
+  public Group(String name, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
     this.name = name;
     this.status = status;
     this.createddate = createddate;
@@ -27,8 +30,8 @@ public class Group {
     
   }
 
-  public Group(String name) {
-    this.name = name;
+  public Group() {
+    
   }
 
   public Long getId() {
@@ -55,11 +58,11 @@ public class Group {
     this.status = status;
   }
 
-  public Long getCreatedBy() {
+  public Integer getCreatedBy() {
     return createdby;
   }
 
-  public void setCreatedBy(Long createdby) {
+  public void setCreatedBy(Integer createdby) {
     this.createdby = createdby;
   }  
 
@@ -71,11 +74,11 @@ public class Group {
     this.createddate = createddate;
   }  
 
-  public Long getUpdatedby() {
+  public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }   
 

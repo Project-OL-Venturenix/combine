@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -79,7 +80,13 @@ public class GroupTestCaseController {
                grouptestcaseRequest.getQuestionid(), 
                grouptestcaseRequest.getTestcaseid(), 
                grouptestcaseRequest.getUserid(), 
-               grouptestcaseRequest.getRuntimebysec(), 
+               grouptestcaseRequest.getRunstarttimeutc(), 
+               grouptestcaseRequest.getRunendtimeutc(), 
+               grouptestcaseRequest.getRuntimeutc(), 
+               grouptestcaseRequest.getRunstarttime(), 
+               grouptestcaseRequest.getRunendtime(), 
+               grouptestcaseRequest.getTestcasefilepath(), 
+               grouptestcaseRequest.getFilename(), 
                grouptestcaseRequest.getTestcasepassstatus(), 
                grouptestcaseRequest.getStatus(),
                java.time.LocalDateTime.now(),
@@ -129,7 +136,13 @@ public class GroupTestCaseController {
       _grouptestcase.setQuestionid(grouptestcase.getQuestionid());
       _grouptestcase.setTestcaseid(grouptestcase.getTestcaseid());
       _grouptestcase.setUserid(grouptestcase.getUserid());
-      _grouptestcase.setRuntimebysec(grouptestcase.getRuntimebysec());
+      _grouptestcase.setRunstarttimeutc(grouptestcase.getRunstarttimeutc());
+      _grouptestcase.setRunendtimeutc(grouptestcase.getRunendtimeutc());
+      _grouptestcase.setRuntimeutc(grouptestcase.getRuntimeutc());
+      _grouptestcase.setRunstarttime(grouptestcase.getRunstarttime());
+      _grouptestcase.setRunendtime(grouptestcase.getRunendtime());
+      _grouptestcase.setTestcasefilepath(grouptestcase.getTestcasefilepath());
+      _grouptestcase.setFilename(grouptestcase.getFilename());
       _grouptestcase.setTestcasepassstatus(grouptestcase.getTestcasepassstatus());
       _grouptestcase.setStatus(grouptestcase.getStatus());
       _grouptestcase.setUpdateddate(java.time.LocalDateTime.now());

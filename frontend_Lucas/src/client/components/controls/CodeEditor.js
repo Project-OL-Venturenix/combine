@@ -15,6 +15,7 @@ class CodeEditor extends React.Component {
 
         this.onChange = this.onChange.bind(this);
         this.onFocus = this.onFocus.bind(this); //
+        this.preventCopyPaste = this.preventCopyPaste.bind(this);
     }
 
     onChange(newValue) {
@@ -27,15 +28,23 @@ class CodeEditor extends React.Component {
         }
     }
 
+    preventCopyPaste(editor, event) {
+        console.log('Copying and pasting is not allowed!');
+        event.preventDefault();
+    }
+
     render() {
         return (
             <AceEditor
                 style={editorStyle}
                 readOnly={false}
                 onChange={this.onChange}
+                onCopy={this.preventCopyPaste} // Attach preventCopyPaste to onCopy
+                onPaste={this.preventCopyPaste} // Attach preventCopyPaste to onPaste
+                onCut={this.preventCopyPaste} // Attach preventCopyPaste to onCut
                 onFocus={this.onFocus} //
-                width="45vw"
-                height="200px"
+                width= "100%"
+                height="400px"
                 mode="java"
                 theme="github"
                 name="aceCodeEditor"

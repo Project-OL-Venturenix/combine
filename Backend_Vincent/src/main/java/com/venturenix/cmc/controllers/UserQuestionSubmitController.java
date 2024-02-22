@@ -78,7 +78,7 @@ public class UserQuestionSubmitController {
                userquestionsubmitRequest.getQuestionid(), 
                userquestionsubmitRequest.getUserid(), 
                userquestionsubmitRequest.getSubmittime(), 
-               userquestionsubmitRequest.getRuntimebysec(), 
+               userquestionsubmitRequest.getRuntimebymsec(), 
                userquestionsubmitRequest.getStatus(),
                java.time.LocalDateTime.now(),
                userquestionsubmitRequest.getCreatedby(),
@@ -127,7 +127,7 @@ public class UserQuestionSubmitController {
       _userquestionsubmit.setUserid(userquestionsubmit.getUserid());
       _userquestionsubmit.setStatus(userquestionsubmit.getStatus());
       _userquestionsubmit.setSubmittime(userquestionsubmit.getSubmittime());
-      _userquestionsubmit.setRuntimebysec(userquestionsubmit.getRuntimebysec());
+      _userquestionsubmit.setRuntimebymsec(userquestionsubmit.getRuntimebymsec());
       _userquestionsubmit.setUpdateddate(java.time.LocalDateTime.now());
       _userquestionsubmit.setUpdatedby(userquestionsubmit.getUpdatedby());
       return new ResponseEntity<>(userquestionsubmitRepository.save(_userquestionsubmit), HttpStatus.OK);

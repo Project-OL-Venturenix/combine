@@ -6,36 +6,37 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.time.OffsetDateTime;
 import jakarta.validation.constraints.Size;
 
 public class TestCaseRequest {
 
-  // @NotBlank
+  //@NotBlank
   private Long questionid;
 
-  // @NotBlank
+  //@NotBlank
   private Long testcasescoreid;
 
-  // @NotBlank
+  //@NotBlank
   private String testcaseresult;
 
-  // @NotBlank
+  //@NotBlank
   private String testcasetext;
 
-  // @NotBlank
+  //@NotBlank
   private String status;
 
   
   private LocalDateTime createddate;
 
   
-  private Long createdby;
+  private Integer createdby;
 
   
   private LocalDateTime updateddate;
 
   
-  private Long updatedby;
+  private Integer updatedby;
 
   public Long getQuestionid() {
     return questionid;
@@ -76,11 +77,11 @@ public class TestCaseRequest {
   public void setStatus(String status) {
     this.status = status;
   }
- public Long getCreatedby() {
+ public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }
 
@@ -92,11 +93,11 @@ public class TestCaseRequest {
     this.createddate = createddate;
   }
 
-   public Long getUpdatedby() {
+   public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }
 

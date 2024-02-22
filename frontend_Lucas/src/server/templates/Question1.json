@@ -1,0 +1,6 @@
+{
+  "classDeclaration": "public class Question1 {",
+  "code": "public double computeTax(int[][] brackets, int income) {\n \n//Enter the code Here.Your class should be named Question1. \n }",
+  "mainMethod": "public static void main(String[] args) {\n    int counter = 0;\n    Question1 question1 = new Question1();\n\n    // Your main method code here\n\n    System.out.println(\"Test Case Result: \" + counter + \" / \" + 10);\n    long duration = (endTime - startTime) / 1000000; // Milliseconds\n    System.out.println(\"Time taken for Test Case 10: \" + duration + \" milliseconds\");\n}",
+  "endOfCode": "}"
+}

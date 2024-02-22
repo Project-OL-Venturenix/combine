@@ -11,26 +11,26 @@ import jakarta.validation.constraints.Size;
 public class EventUserRequest {
 
 
-  @NotBlank
+  //@NotBlank
   private Long userid;
 
-  @NotBlank
+  //@NotBlank
   private Long eventid;
 
-  @NotBlank
+  //@NotBlank
   private String status;
 
   
   private LocalDateTime createddate;
 
   
-  private Long createdby;
+  private Integer createdby;
 
   
   private LocalDateTime updateddate;
 
   
-  private Long updatedby;
+  private Integer updatedby;
 
   public Long getUserid() {
     return userid;
@@ -55,11 +55,11 @@ public class EventUserRequest {
   public void setStatus(String status) {
     this.status = status;
   }
- public Long getCreatedby() {
+ public Integer getCreatedby() {
     return createdby;
   }
 
-  public void setCreatedby(Long createdby) {
+  public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
   }
 
@@ -71,11 +71,11 @@ public class EventUserRequest {
     this.createddate = createddate;
   }
 
-   public Long getUpdatedby() {
+   public Integer getUpdatedby() {
     return updatedby;
   }
 
-  public void setUpdatedby(Long updatedby) {
+  public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
   }
 

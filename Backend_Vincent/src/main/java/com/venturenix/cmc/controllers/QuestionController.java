@@ -106,14 +106,14 @@ public class QuestionController {
           .quesetionId(questionData.get().getQuestionId())//
           .classDeclaration(
               "import java.util.*;\nimport java.math.*;\n public class Question"
-                  + id + " {\n\n")//
-          .code("public " + testcaseData.get().getMethodSignatures()
+                  + id + " {\n")//
+          .code(testcaseData.get().getMethodSignatures()
               + "\n//Enter the code Here.Your class should be named Question"
               + id + ".\n \n }")//
-          .mainMethod("public static void main(String[] args) {\\n" + //
-              "    int counter = 0;\\n" + //
-              "    Question" + id + " question" + id + " = Question" + id
-              + "();\n\n")//
+          .mainMethod("public static void main(String[] args) {\n" + //
+              "    int counter = 0;\n" + //
+              "    Question" + id + " question" + id + " = new Question" + id
+              + "();\n\n  " + testcaseData.get().getMainMethod())//
           .endOfCode("}")//
           .createdby(questionData.get().getCreatedby())//
           .updateddate(questionData.get().getUpdateddate())//

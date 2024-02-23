@@ -3,6 +3,7 @@ package com.venturenix.cmc.models;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,6 +35,8 @@ public class TestCase implements Serializable {
   private QuestionBank questionBank;
 
   private String methodSignatures;
+  
+  @Column(columnDefinition = "TEXT")
   private String mainMethod;
   private LocalDateTime createdDate;
   private Integer createdBy;

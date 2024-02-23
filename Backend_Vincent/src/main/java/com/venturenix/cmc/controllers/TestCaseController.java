@@ -80,7 +80,7 @@ public class TestCaseController {
   public ResponseEntity<?> addTestCase(
       @Valid @RequestBody TestCaseRequest testcaseRequest) {
     QuestionBank targetQuestionBankData = questionRepository
-        .findById(testcaseRequest.getQuestionBankId()).orElseThrow(
+        .findById(testcaseRequest.getQuestionId()).orElseThrow(
             () -> new RuntimeException("Error: Question is not found."));
     TestCase testcase = TestCase.builder()//
         .questionBank(targetQuestionBankData)//

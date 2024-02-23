@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class TestCaseRequest {
 
-  private Long questionBankId;
+  private Long questionId;
   private String methodSignatures;
   private String mainMethod;
   private LocalDateTime createdDate;

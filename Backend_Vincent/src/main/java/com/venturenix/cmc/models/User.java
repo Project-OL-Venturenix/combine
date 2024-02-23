@@ -13,11 +13,9 @@ import jakarta.validation.constraints.Size;
 
 
 @Entity
-@Table(name = "users", 
-    uniqueConstraints = { 
-      @UniqueConstraint(columnNames = "username"),
-      @UniqueConstraint(columnNames = "email") 
-    })
+@Table(name = "users",
+    uniqueConstraints = {@UniqueConstraint(columnNames = "username"),
+        @UniqueConstraint(columnNames = "email")})
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,19 +54,19 @@ public class User {
   @Size(max = 120)
   private String title;
 
-  
+
   private Integer py_experience;
 
-  
+
   private Integer jv_experience;
 
-  
+
   private Integer js_experience;
 
-  
+
   private Integer cs_experience;
 
-  
+
   private Integer sa_experience;
 
   @NotBlank
@@ -78,24 +76,26 @@ public class User {
   private LocalDateTime createddate;
   private Integer createdby;
   private LocalDateTime updateddate;
-  private Integer updatedby; 
+  private Integer updatedby;
 
   @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(  name = "user_roles", 
-        joinColumns = @JoinColumn(name = "user_id"), 
-        inverseJoinColumns = @JoinColumn(name = "role_id"))
+  @JoinTable(//name = "user_roles",
+      // joinColumns = @JoinColumn(name = "user_id"),
+      // inverseJoinColumns = @JoinColumn(name = "role_id"))
+      joinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
 
-  public User() {
-  }
+  public User() {}
 
-  public User(String firstname, String lastname, String mobile, String email, String username, 
-  String password, String company, String title, Integer py_experience, Integer jv_experience, 
-  Integer js_experience, Integer cs_experience, Integer sa_experience, String status, LocalDateTime createddate, 
-  Integer createdby, LocalDateTime updateddate, Integer updatedby ) {
+  public User(String firstname, String lastname, String mobile, String email,
+      String username, String password, String company, String title,
+      Integer py_experience, Integer jv_experience, Integer js_experience,
+      Integer cs_experience, Integer sa_experience, String status,
+      LocalDateTime createddate, Integer createdby, LocalDateTime updateddate,
+      Integer updatedby) {
     this.firstname = firstname;
     this.lastname = lastname;
-    this.mobile = mobile;        
+    this.mobile = mobile;
     this.email = email;
     this.username = username;
     this.password = password;
@@ -144,7 +144,7 @@ public class User {
 
   public void setUsername(String username) {
     this.username = username;
-  }  
+  }
 
   public String getEmail() {
     return email;
@@ -201,7 +201,7 @@ public class User {
   public void setJv_experience(Integer jv_experience) {
     this.jv_experience = jv_experience;
   }
-  
+
   public Integer getJs_experience() {
     return js_experience;
   }
@@ -209,7 +209,7 @@ public class User {
   public void setJs_experience(Integer js_experience) {
     this.js_experience = js_experience;
   }
-  
+
   public Integer getCs_experience() {
     return cs_experience;
   }
@@ -217,14 +217,14 @@ public class User {
   public void setCs_experience(Integer cs_experience) {
     this.cs_experience = cs_experience;
   }
-  
+
   public Integer getSa_experience() {
     return sa_experience;
   }
 
   public void setSa_experience(Integer sa_experience) {
     this.sa_experience = sa_experience;
-  }  
+  }
 
   public String getStatus() {
     return status;
@@ -234,7 +234,7 @@ public class User {
     this.status = status;
   }
 
-public Integer getCreatedby() {
+  public Integer getCreatedby() {
     return createdby;
   }
 
@@ -250,7 +250,7 @@ public Integer getCreatedby() {
     this.createddate = createddate;
   }
 
-   public Integer getUpdatedby() {
+  public Integer getUpdatedby() {
     return updatedby;
   }
 

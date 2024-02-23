@@ -12,6 +12,7 @@
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/repository/TestCaseScoreRepository.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/payload/request/EventUserRequest.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/repository/UserRepository.java
+/Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/models/QuestionBank.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/controllers/UserQuestionSubmitController.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/models/UserTestCase.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/payload/response/UserScoreResponse.java
@@ -54,7 +55,6 @@
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/models/Group.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/security/jwt/JwtUtils.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/payload/response/GroupUserQuestionHandleResponse.java
-/Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/models/Question.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/repository/GroupUserQuestionHandleRepository.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/payload/response/UserTestCaseResponse.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/controllers/EventController.java

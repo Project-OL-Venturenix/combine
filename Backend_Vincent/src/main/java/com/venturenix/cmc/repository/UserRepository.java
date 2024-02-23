@@ -1,4 +1,5 @@
 package com.venturenix.cmc.repository;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,7 +12,7 @@ import com.venturenix.cmc.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-  Optional <User> findByUsername(String email);
+  Optional<User> findByUsername(String email);
 
   Boolean existsByUsername(String email);
 

@@ -10,9 +10,8 @@ import java.util.Date;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.venturenix.cmc.models.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.venturenix.cmc.entity.User;
 
 public class UserDetailsImpl implements UserDetails {
   private static final long serialVersionUID = 1L;

@@ -2,6 +2,8 @@ package com.venturenix.cmc.payload.request;
 
 import java.util.HashSet;
 import java.util.Set;
+import com.venturenix.cmc.entity.ERole;
+import com.venturenix.cmc.entity.Role;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -12,8 +14,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import jakarta.validation.constraints.Size;
-import com.venturenix.cmc.models.ERole;
-import com.venturenix.cmc.models.Role;
 import jakarta.validation.constraints.Email;
 
 public class UserRequest {

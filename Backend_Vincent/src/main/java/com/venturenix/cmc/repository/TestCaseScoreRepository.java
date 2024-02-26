@@ -4,9 +4,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-
-import com.venturenix.cmc.models.TestCaseScore;
+import com.venturenix.cmc.entity.TestCaseScore;
 import java.util.List;
 
 @Repository

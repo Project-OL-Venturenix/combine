@@ -18,7 +18,7 @@ public class QuestionResponse {
   private final String TYE = "Bearer";
 
   private String token;
-  private Long quesetionId;
+  private Long questionId;
   private String classDeclaration;
   private String code;
   private String mainMethod;

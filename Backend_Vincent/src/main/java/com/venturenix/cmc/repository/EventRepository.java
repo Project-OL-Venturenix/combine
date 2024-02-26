@@ -1,22 +1,13 @@
 package com.venturenix.cmc.repository;
 
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-
-import com.venturenix.cmc.models.Event;
-import java.util.List;
+import com.venturenix.cmc.entity.Event;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
 
-    Optional<Event> findById(Long id);
 
-    List<Event> findAll();
-    
-    
 
-  
 }

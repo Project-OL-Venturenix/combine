@@ -18,6 +18,7 @@ class OutputBox extends React.Component {
           rows="8"
           readOnly
           value={this.props.message}
+          style={{ fontSize: '20px' }}
         />
       );
     }

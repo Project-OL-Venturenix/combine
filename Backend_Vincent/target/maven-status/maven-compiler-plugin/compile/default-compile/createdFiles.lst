@@ -77,7 +77,7 @@ com/venturenix/cmc/models/QuestionBank$QuestionBankBuilder.class
 com/venturenix/cmc/payload/request/EventQuestionRequest.class
 com/venturenix/cmc/payload/request/GroupUserRequest.class
 com/venturenix/cmc/controllers/UserScoreController.class
-com/venturenix/cmc/repository/groupUserRepository.class
+com/venturenix/cmc/repository/GroupUserRepository.class
 com/venturenix/cmc/controllers/EventQuestionController.class
 com/venturenix/cmc/payload/request/TestCaseScoreRequest.class
 com/venturenix/cmc/payload/response/TestCaseScoreResponse.class

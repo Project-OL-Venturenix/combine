@@ -73,7 +73,7 @@
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/payload/response/GroupTestCaseResponse.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/models/TestCase.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/payload/response/UserResponse.java
-/Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/repository/GroupUserRepository.java
+/Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/repository/groupUserRepository.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/repository/EventUserRepository.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/repository/EventRepository.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/security/WebSecurityConfig.java

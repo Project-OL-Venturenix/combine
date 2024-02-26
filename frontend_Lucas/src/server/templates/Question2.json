@@ -1,0 +1,7 @@
+{
+  "questionId": 2,
+  "classDeclaration": "import java.util.*;\nimport java.math.*;\n public class Question2 {",
+  "code": " public List<Integer> duplicateCounts(int[] nums1, int[] nums2, int[] nums3) {\n//Enter the code Here.Your class should be named Question2.\n \n }",
+  "mainMethod": "public static void main(String[] args) {\n    int counter = 0;\n    Question2 question2 = new Question2();\n\n    List<Integer> result1 = question2.duplicateCounts(new int[]{1, 2, 3, 4}, new int[]{3, 4, 5, 6}, new int[]{5, 6, 7, 8});\n    if (result1.equals(List.of(0, 0, 2))) {\n        counter++;\n    }\n\n    List<Integer> result2 = question2.duplicateCounts(new int[]{1, 2, 3, 4}, new int[]{5, 6, 7, 8}, new int[]{9, 10, 11, 12});\n    if (result2.equals(List.of(0, 0, 0))) {\n        counter++;\n    }\n\n    List<Integer> result3 = question2.duplicateCounts(new int[]{1, 2, 3, 4}, new int[]{1, 2, 3, 4}, new int[]{1, 2, 3, 4});\n    if (result3.equals(List.of(4, 4, 4))) {\n        counter++;\n    }\n\n    System.out.println(\"Test Case Result: \" + counter + \" / 3\");\n}",
+  "endOfCode": "}"
+}

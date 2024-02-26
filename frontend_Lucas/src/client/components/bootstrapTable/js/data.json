@@ -1,0 +1,157 @@
+{
+    "currentIndex": 0,
+    "pageSize": 20,
+    "total": 7,
+    "totalPage": 1,
+    "nextIndex": 1,
+    "preIndex": 0,
+    "rows": [
+        {
+            "sourceSQL": null,
+            "countSQL": null,
+            "start": 0,
+            "limit": 20,
+            "page": 0,
+            "rows": 0,
+            "paging": true,
+            "userid": 1044,
+            "loginname": "adminA1",
+           
+            "empid": 859,
+            "createdt": 1479433283000,
+            "createdtStart": null,
+            "createdtEnd": null,
+            "status": 1,
+            "roleIds": "1047",
+            "roleNames": "A1",
+           
+            "userPhone": "111111112233"
+        },
+        {
+            "sourceSQL": null,
+            "countSQL": null,
+            "start": 0,
+            "limit": 20,
+            "page": 0,
+            "rows": 0,
+            "paging": true,
+            "userid": 1043,
+            "loginname": "adminT4",
+          
+            "empid": 859,
+            "createdt": 1479433264000,
+            "createdtStart": null,
+            "createdtEnd": null,
+            "status": 1,
+            "roleIds": "1046",
+            "roleNames": "T4",
+            
+            "userPhone": "444444444444"
+        },
+        {
+            "sourceSQL": null,
+            "countSQL": null,
+            "start": 0,
+            "limit": 20,
+            "page": 0,
+            "rows": 0,
+            "paging": true,
+            "userid": 1042,
+            "loginname": "adminT3",
+           
+            "empid": 857,
+            "createdt": 1479433239000,
+            "createdtStart": null,
+            "createdtEnd": null,
+            "status": 1,
+            "roleIds": "1045",
+            "roleNames": "T3",
+            
+            "userPhone": "33333333333"
+        },
+        {
+            "sourceSQL": null,
+            "countSQL": null,
+            "start": 0,
+            "limit": 20,
+            "page": 0,
+            "rows": 0,
+            "paging": true,
+            "userid": 1041,
+            "loginname": "adminT2",
+          
+            "createdt": 1479433216000,
+            "createdtStart": null,
+            "createdtEnd": null,
+            "status": 1,
+            "roleIds": "1044",
+            "roleNames": "T2",
+           
+            "userPhone": "22222222222"
+        },
+        {
+            "sourceSQL": null,
+            "countSQL": null,
+            "start": 0,
+            "limit": 20,
+            "page": 0,
+            "rows": 0,
+            "paging": true,
+            "userid": 1040,
+            "loginname": "adminT1",
+           
+            "empid": 859,
+            "createdt": 1479433175000,
+            "createdtStart": null,
+            "createdtEnd": null,
+            "status": 1,
+            "roleIds": "1043",
+            "roleNames": "T1",
+           
+            "userPhone": "111111111"
+        },
+        {
+            "sourceSQL": null,
+            "countSQL": null,
+            "start": 0,
+            "limit": 20,
+            "page": 0,
+            "rows": 0,
+            "paging": true,
+            "userid": 1006,
+            "loginname": "test",
+           
+            "empid": null,
+            "createdt": 1464921163000,
+            "createdtStart": null,
+            "createdtEnd": null,
+            "status": 1,
+            "roleIds": "6",
+            "roleNames": "管理员",
+            "depName": null,
+            "userPhone": null
+        },
+        {
+            "sourceSQL": null,
+            "countSQL": null,
+            "start": 0,
+            "limit": 20,
+            "page": 0,
+            "rows": 0,
+            "paging": true,
+            "userid": 2,
+            "loginname": "admin",
+            
+            "empid": 858,
+            "createdt": 1357812249000,
+            "createdtStart": null,
+            "createdtEnd": null,
+            "status": 1,
+            "roleIds": "1,1043,1044,1045,1046,1047",
+            "roleNames": "管理员, T1, T2, T3, T4, A1",
+            "depName": "斯蒂芬是否对",
+            "userPhone": "18888888888"
+        }
+    ],
+    "msg": null
+}

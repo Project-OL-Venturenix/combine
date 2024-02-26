@@ -63,14 +63,14 @@ module.exports = {
     let file = '';
     const language = lang.toLowerCase();
     if (language === 'java') {
-      file = path.join(__dirname, '../templates', 'Question1.java');
+      file = path.join(__dirname, '../templates', 'Question3.java');
       if (!fs.existsSync(file)) {
         fs.writeFileSync(file, '');
       }
       this.startConvertJsonToJava((javaCode) => {
         fs.writeFile(file, javaCode, (err) => {
           if (err) throw err;
-          console.log('Question1.java file created with Java code.');
+          console.log('Question3.java file created with Java code.');
           fs.readFile(file, (err, data) => {
             if (err) throw err;
             console.log(data.toString());

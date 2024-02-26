@@ -68,30 +68,7 @@ class Editor extends React.Component {
       })
       .catch((error) => {
         console.log(error);
-        // this.handleError(error);
       });
-
-    // CompilerApi.run(task)
-    //   .then((res) => {
-    //     this.setState({ response: res, output: res.message });
-    //     // Fetch the file contents after the compiler API response
-    //     return fetch('http://localhost:8085/api/test/readTxtFile');
-    //   })
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error('Network response was not ok');
-    //     }
-    //     return response.text(); // Parse response as text
-    //   })
-    //   .then((responseData) => {
-    //     // Set the fetched file contents to state
-    //     this.setState({ output: responseData });
-    //   })
-    //   // After Fetch the file contents after the compiler API response
-    //   .catch((error) => {
-    //     console.log(error);
-    //     // this.handleError(error);
-    //   });
   }
 
   updateSolution(event) {
@@ -116,62 +93,62 @@ class Editor extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <Form horizontal>
-          <FormGroup controlId="code">
-            <Col sm={12}>
-              <LangSelector
-                langs={languages}
-                selectedIndex={this.state.selectedLang}
-                onChange={this.handleLangChange}
-              />
-            </Col>
-          </FormGroup>
-          <FormGroup controlId="code">
-            <Col sm={12} >
-              <CodeEditor onChange={this.handleCodeChange} code={this.state.task.code} />
-            </Col>
-          </FormGroup>
-          <FormGroup>
-            <Col sm={5}>
-              <Grid className="col-md-6">
-                <Button bsStyle="primary" type="button" style={{ fontSize: '15px' }} onClick={this.handleRun}>
-                  Run Code
-                </Button>
-              </Grid>
-              <Grid className="col-md-6">
-                <Button bsStyle="success" type="button" style={{ fontSize: '15px' }} onClick={this.handleRun}>
-                  Submit Code
-                </Button>
-              </Grid>
-              <Grid className="col-md-6">
-                <StatusImage
-                  hasError={this.state.response.status !== '0'}
+        <div className="container">
+          <Form horizontal>
+            <FormGroup controlId="code">
+              <Col sm={12}>
+                <LangSelector
+                  langs={languages}
+                  selectedIndex={this.state.selectedLang}
+                  onChange={this.handleLangChange}
+                />
+              </Col>
+            </FormGroup>
+            <FormGroup controlId="code">
+              <Col sm={12} >
+                <CodeEditor onChange={this.handleCodeChange} code={this.state.task.code} />
+              </Col>
+            </FormGroup>
+            <FormGroup>
+              <Col sm={5}>
+                <Grid className="col-md-6">
+                  <Button bsStyle="primary" type="button" style={{ fontSize: '15px' }} onClick={this.handleRun}>
+                    Run Code
+                  </Button>
+                </Grid>
+                <Grid className="col-md-6">
+                  <Button bsStyle="success" type="button" style={{ fontSize: '15px' }} onClick={this.handleRun}>
+                    Submit Code
+                  </Button>
+                </Grid>
+                <Grid className="col-md-6">
+                  <StatusImage
+                    hasError={this.state.response.status !== '0'}
+                    message={this.state.response.message}
+                  />
+                </Grid>
+              </Col>
+              <Col sm={10} />
+            </FormGroup>
+            <FormGroup>
+              <Col sm={12}>
+                <AlertDismissable
+                  show={this.state.response.status !== '0'}
                   message={this.state.response.message}
                 />
-              </Grid>
-            </Col>
-            <Col sm={10} />
-          </FormGroup>
-          <FormGroup>
-            <Col sm={12}>
-              <AlertDismissable
-                show={this.state.response.status !== '0'}
-                message={this.state.response.message}
-              />
-            </Col>
-          </FormGroup>
-          <FormGroup>
-            <Col sm={12}>
-              <OutputBox
-                show={this.state.response.status === '0'}
-                message={this.state.response.message}
-              />
-              {/* <OutputBox show={true} message={this.state.output} /> */}
-            </Col>
-          </FormGroup>
-        </Form>
-      </div>
+              </Col>
+            </FormGroup>
+            <FormGroup>
+              <Col sm={12}>
+                <OutputBox
+                  show={this.state.response.status === '0'}
+                  message={this.state.response.message}
+                />
+                {/* <OutputBox show={true} message={this.state.output} /> */}
+              </Col>
+            </FormGroup>
+          </Form>
+        </div>
     );
   }
 }

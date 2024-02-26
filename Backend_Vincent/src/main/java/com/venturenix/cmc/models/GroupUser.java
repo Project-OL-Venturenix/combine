@@ -4,14 +4,15 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+
 @Entity
 @Table(name = "groupusers")
 public class GroupUser {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private Long groupid;
-  private Long userid;
+  private Long groupId;
+  private Long userId;
   private String status;
   private LocalDateTime createddate;
   private Integer createdby;
@@ -19,18 +20,20 @@ public class GroupUser {
   private Integer updatedby;
 
   public GroupUser() {
-    
+
   }
 
-  public GroupUser(Long groupid, Long userid, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
-    this.groupid = groupid;
-    this.userid = userid;
+  public GroupUser(Long groupid, Long userId, String status,
+      LocalDateTime createddate, Integer createdby, LocalDateTime updateddate,
+      Integer updatedby) {
+    this.groupId = groupid;
+    this.userId = userId;
     this.status = status;
     this.createddate = createddate;
     this.createdby = createdby;
     this.updateddate = updateddate;
     this.updatedby = updatedby;
-    
+
   }
 
   public Long getId() {
@@ -42,20 +45,20 @@ public class GroupUser {
   }
 
   public Long getGroupid() {
-    return groupid;
+    return groupId;
   }
 
   public void setGroupid(Long groupid) {
-    this.groupid = groupid;
+    this.groupId = groupid;
   }
 
-  public Long getUserid() {
-    return userid;
+  public Long getUserId() {
+    return userId;
   }
 
-  public void setUserid(Long userid) {
-    this.userid = userid;
-  }  
+  public void setUserId(Long userId) {
+    this.userId = userId;
+  }
 
   public String getStatus() {
     return status;
@@ -71,7 +74,7 @@ public class GroupUser {
 
   public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
-  }  
+  }
 
   public LocalDateTime getCreateddate() {
     return createddate;
@@ -79,7 +82,7 @@ public class GroupUser {
 
   public void setCreateddate(LocalDateTime createddate) {
     this.createddate = createddate;
-  }  
+  }
 
   public Integer getUpdatedby() {
     return updatedby;
@@ -87,7 +90,7 @@ public class GroupUser {
 
   public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
-  }   
+  }
 
   public LocalDateTime getUpdateddate() {
     return updateddate;
@@ -95,7 +98,7 @@ public class GroupUser {
 
   public void setUpdateddate(LocalDateTime updateddate) {
     this.updateddate = updateddate;
-  }  
+  }
 
 
 }

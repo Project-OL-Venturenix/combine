@@ -35,6 +35,7 @@ import com.venturenix.cmc.models.ERole;
 import com.venturenix.cmc.models.Role;
 import com.venturenix.cmc.models.User;
 import com.venturenix.cmc.models.GroupUser;
+import com.venturenix.cmc.models.GroupUserDTO;
 import com.venturenix.cmc.payload.request.LoginRequest;
 import com.venturenix.cmc.payload.request.SignupRequest;
 import com.venturenix.cmc.payload.request.GroupUserRequest;
@@ -68,44 +69,47 @@ public class GroupUserController {
   JwtUtils jwtUtils;
 
   @Autowired
-  GroupUserRepository groupuserRepository;
+  GroupUserRepository groupUserRepository;
 
 
-@PostMapping("/groupuser/add")
-  public ResponseEntity<?> addGroupUser(@Valid @RequestBody GroupUserRequest groupuserRequest) {
-    GroupUser groupuser = new GroupUser(
-               groupuserRequest.getGroupid(), 
-               groupuserRequest.getUserid(), 
-               groupuserRequest.getStatus(),
-               java.time.LocalDateTime.now(),
-               groupuserRequest.getCreatedby(),
-               java.time.LocalDateTime.now(),
-               groupuserRequest.getUpdatedby()
-               );
-    groupuserRepository.save(groupuser);
-    return ResponseEntity.ok(new MessageResponse("Add GroupUser successfully!"));
-    
+  @PostMapping("/groupuser/add")
+  public ResponseEntity<?> addGroupUser(
+      @Valid @RequestBody GroupUserRequest groupuserRequest) {
+    GroupUser groupuser = new GroupUser(groupuserRequest.getGroupid(),
+        groupuserRequest.getUserid(), groupuserRequest.getStatus(),
+        java.time.LocalDateTime.now(), groupuserRequest.getCreatedby(),
+        java.time.LocalDateTime.now(), groupuserRequest.getUpdatedby());
+    groupUserRepository.save(groupuser);
+    return ResponseEntity
+        .ok(new MessageResponse("Add GroupUser successfully!"));
+
   }
 
   @GetMapping("/groupusers")
-  public ResponseEntity<List<GroupUser>> getAllGroupUsers() {
+  public ResponseEntity<List<GroupUserDTO>> getAllGroupUsers() {
     try {
-        List<GroupUser> groupusers = new ArrayList<GroupUser>();
-        groupuserRepository.findAll().forEach(groupusers::add);        
-        if (groupusers.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(groupusers, HttpStatus.OK );
+      List<Long> distinctGroupIds = groupUserRepository.findDistinctGroupIds();
+
+      List<GroupUserDTO> result = distinctGroupIds.stream()//
+          .map(groupId -> {
+            List<Long> userIds =
+                groupUserRepository.findUserIdsByGroupId(groupId);
+            return new GroupUserDTO(//
+                groupId, //
+                userIds);
+          })//
+          .collect(Collectors.toList());
+      return new ResponseEntity<>(result, HttpStatus.OK);
     } catch (Exception e) {
-        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        
+      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    
+
   }
 
- @GetMapping("/groupuser/{id}")
-  public ResponseEntity<GroupUser> getGroupUserById(@PathVariable("id") long id) {
-    Optional<GroupUser> groupuserData = groupuserRepository.findById(id);
+  @GetMapping("/groupuser/{id}")
+  public ResponseEntity<GroupUser> getGroupUserById(
+      @PathVariable("id") long id) {
+    Optional<GroupUser> groupuserData = groupUserRepository.findById(id);
     if (groupuserData.isPresent()) {
       return new ResponseEntity<>(groupuserData.get(), HttpStatus.OK);
     } else {
@@ -114,17 +118,19 @@ public class GroupUserController {
   }
 
   @PutMapping("/groupuser/{id}")
-  public ResponseEntity<GroupUser> updateGroupUser(@PathVariable("id") long id, @RequestBody GroupUser groupuser) {
-    Optional<GroupUser> groupuserData = groupuserRepository.findById(id);
+  public ResponseEntity<GroupUser> updateGroupUser(@PathVariable("id") long id,
+      @RequestBody GroupUser groupuser) {
+    Optional<GroupUser> groupuserData = groupUserRepository.findById(id);
 
     if (groupuserData.isPresent()) {
       GroupUser _groupuser = groupuserData.get();
       _groupuser.setGroupid(groupuser.getGroupid());
-      _groupuser.setUserid(groupuser.getUserid());
+      _groupuser.setUserId(groupuser.getUserId());
       _groupuser.setStatus(groupuser.getStatus());
       _groupuser.setUpdateddate(java.time.LocalDateTime.now());
       _groupuser.setUpdatedby(groupuser.getUpdatedby());
-      return new ResponseEntity<>(groupuserRepository.save(_groupuser), HttpStatus.OK);
+      return new ResponseEntity<>(groupUserRepository.save(_groupuser),
+          HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -133,10 +139,12 @@ public class GroupUserController {
   @DeleteMapping("/groupuser/{id}")
   public ResponseEntity<?> deleteGroupUser(@PathVariable("id") long id) {
     try {
-      groupuserRepository.deleteById(id);
-      return ResponseEntity.ok(new MessageResponse("Delete GroupUser " + id + " successfully!"));
+      groupUserRepository.deleteById(id);
+      return ResponseEntity
+          .ok(new MessageResponse("Delete GroupUser " + id + " successfully!"));
     } catch (Exception e) {
-      return ResponseEntity.ok(new MessageResponse("HttpStatus.INTERNAL_SERVER_ERROR"));
+      return ResponseEntity
+          .ok(new MessageResponse("HttpStatus.INTERNAL_SERVER_ERROR"));
     }
   }
 }

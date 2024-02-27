@@ -6,6 +6,8 @@ import AceEditor from 'react-ace';
 
 const editorStyle = {
     border: '1px solid lightgray',
+    borderRadius: '5px', // Add border radius
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Add box shadow
 };
 
 class CodeEditor extends React.Component {
@@ -35,21 +37,22 @@ class CodeEditor extends React.Component {
 
     render() {
         return (
+            //https://ace.c9.io/build/kitchen-sink.html
             <AceEditor
                 style={editorStyle}
-                readOnly={false}
+                //readOnly={false}
                 onChange={this.onChange}
                 onCopy={this.preventCopyPaste} // Attach preventCopyPaste to onCopy
                 onPaste={this.preventCopyPaste} // Attach preventCopyPaste to onPaste
                 onCut={this.preventCopyPaste} // Attach preventCopyPaste to onCut
                 onFocus={this.onFocus} //
-                width= "100%"
+                width="100%"
                 height="400px"
-                mode="java"
-                theme="github"
+                mode="Java"
+                theme="dreamweaver"
                 name="aceCodeEditor"
                 // onLoad={this.onLoad}
-                fontSize={14}
+                fontSize={16}
                 showPrintMargin
                 showGutter
                 highlightActiveLine

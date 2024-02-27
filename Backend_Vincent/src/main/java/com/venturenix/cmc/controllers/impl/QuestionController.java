@@ -88,29 +88,57 @@ public class QuestionController implements QuestionOperation {
 
   }
 
+  // public ResponseEntity<QuestionResponse> getQuestionById(String id) {
+  // Long questionId = Long.parseLong(id);
+  // Optional<QuestionBank> questionData =
+  // questionRepository.findById(questionId);
+  // log.info("questionData : ");
+  // Optional<TestCase> testcaseData = testCaseRepository.findAll().stream()//
+  // .filter(e -> e.getQuestionBank().getQuestionId().equals(questionId))//
+  // .findFirst();
+  // log.info("testcaseData : " + testcaseData.get());
+  // if (questionData.isPresent() && testcaseData.isPresent()) {
+  // QuestionResponse questionResponse = QuestionResponse.builder()//
+  // .questionId(questionData.get().getQuestionId())//
+  // .classDeclaration(
+  // "import java.util.*;\nimport java.math.*;\n public class Question"
+  // + id + " {\n")//
+  // .code(testcaseData.get().getMethodSignatures()
+  // + "\n//Enter the code Here.Your class should be named Question"
+  // + id + ".\n \n }")//
+  // .mainMethod("public static void main(String[] args) {\n" + //
+  // " int counter = 0;\n" + //
+  // " Question" + id + " question" + id + " = new Question" + id
+  // + "();\n\n " + testcaseData.get().getMainMethod())//
+  // .endCodeBlock("}")//
+  // .createdby(questionData.get().getCreatedby())//
+  // .updateddate(questionData.get().getUpdateddate())//
+  // .updatedby(questionData.get().getUpdatedby())//
+  // .build();
+  // return new ResponseEntity<>(questionResponse, HttpStatus.OK);
+  // } else {
+  // return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  // }
+  // }
   public ResponseEntity<QuestionResponse> getQuestionById(String id) {
     Long questionId = Long.parseLong(id);
     Optional<QuestionBank> questionData =
         questionRepository.findById(questionId);
     log.info("questionData : ");
+
     Optional<TestCase> testcaseData = testCaseRepository.findAll().stream()//
         .filter(e -> e.getQuestionBank().getQuestionId().equals(questionId))//
         .findFirst();
-    log.info("testcaseData : " + testcaseData.get());
+    log.info("testcaseData : " + testcaseData.orElse(null));
+
     if (questionData.isPresent() && testcaseData.isPresent()) {
-      QuestionResponse questionResponse = QuestionResponse.builder()//
+      QuestionResponse questionResponse = QuestionResponse.builder()
           .questionId(questionData.get().getQuestionId())//
-          .classDeclaration(
-              "import java.util.*;\nimport java.math.*;\n public class Question"
-                  + id + " {\n")//
-          .code(testcaseData.get().getMethodSignatures()
-              + "\n//Enter the code Here.Your class should be named Question"
-              + id + ".\n \n }")//
-          .mainMethod("public static void main(String[] args) {\n" + //
-              "    int counter = 0;\n" + //
-              "    Question" + id + " question" + id + " = new Question" + id
-              + "();\n\n  " + testcaseData.get().getMainMethod())//
-          .endOfCode("}")//
+          .classDeclaration(testcaseData.get().generateClassDeclaration())//
+          .code(testcaseData.get().generateFullCode())//
+          .mainMethod(testcaseData.get().generateMainMethod()
+              + testcaseData.get().getMainMethod() + "\n"
+              + testcaseData.get().generateEndCodeBlock())//
           .createdby(questionData.get().getCreatedby())//
           .updateddate(questionData.get().getUpdateddate())//
           .updatedby(questionData.get().getUpdatedby())//

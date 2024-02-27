@@ -22,9 +22,7 @@ public class QuestionResponse {
   private String classDeclaration;
   private String code;
   private String mainMethod;
-  private String endOfCode;
-
-
+  
   private Integer createdby;
 
 

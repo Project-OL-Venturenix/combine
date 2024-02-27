@@ -9,7 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,23 +25,68 @@ import lombok.Setter;
 @Builder
 @Table(name = "testcases")
 public class TestCase implements Serializable {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @JsonProperty("testcase_id")
-  private Long testcaseId;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @JsonProperty("testcase_id")
+        private Long testcaseId;
 
-  @OneToOne
-  @JoinColumn(name = "question_id", referencedColumnName = "question_id")
-  private QuestionBank questionBank;
+        @ManyToOne
+        @JoinColumn(name = "question_id", referencedColumnName = "question_id")
+        private QuestionBank questionBank;
 
-  private String methodSignatures;
-  
-  @Column(columnDefinition = "TEXT")
-  private String mainMethod;
-  private LocalDateTime createdDate;
-  private Integer createdBy;
-  private LocalDateTime updatedDate;
-  private Integer updatedBy;
+        private String methodSignatures;
+
+        @Column(columnDefinition = "TEXT")
+        private String mainMethod;
+
+        @Column(columnDefinition = "TEXT")
+        private String inputParameters;
+
+        @Column(columnDefinition = "TEXT")
+        private String expectedOutput;
+
+        private LocalDateTime createdDate;
+        private Integer createdBy;
+        private LocalDateTime updatedDate;
+        private Integer updatedBy;
+
+        public static final String CLASS_DECLARATION_TEMPLATE =
+                        "import java.util.*;\nimport java.math.*;\n public class Question%s";
+        public static final String CODE_TEMPLATE =
+                        " \n //Enter the code Here.Your class should be named Question%s.\n \n ";
+        public static final String MAIN_METHOD_TEMPLATE =
+                        "public static void main(String[] args) {\n" + //
+                                        "    int counter = 0;\n" + //
+                                        "    Question%s question%s = new Question%s();\n\n ";
 
 
+        public String generateClassDeclaration() {
+                return String.format(CLASS_DECLARATION_TEMPLATE + //
+                                this.generateOpenCodeBlock(),
+                                this.getQuestionBank().getQuestionId());
+        }
+
+        public String generateFullCode() {
+                return String.format(this.getMethodSignatures() + //
+                                this.generateOpenCodeBlock() + //
+                                CODE_TEMPLATE + //
+                                this.generateEndCodeBlock() + //
+                                "\n" + this.generateEndCodeBlock(),
+                                this.getQuestionBank().getQuestionId());
+        }
+
+        public String generateMainMethod() {
+                return String.format(MAIN_METHOD_TEMPLATE ,
+                                this.getQuestionBank().getQuestionId(), //
+                                this.getQuestionBank().getQuestionId(), //
+                                this.getQuestionBank().getQuestionId());
+        }
+
+        public String generateOpenCodeBlock() {
+                return "{";
+        }
+
+        public String generateEndCodeBlock() {
+                return "}";
+        }
 }

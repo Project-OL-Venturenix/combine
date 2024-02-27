@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class TestCaseRequest {
 
   private Long questionId;
+  //no need add "{" and "}" in the methodSignatures
   private String methodSignatures;
   private String mainMethod;
   private LocalDateTime createdDate;

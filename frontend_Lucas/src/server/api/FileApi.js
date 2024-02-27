@@ -9,7 +9,7 @@ module.exports = {
 
       const jsonData = data;
       const jsonDataWithoutClosingBrace = jsonData.replace(/\}\s*$/, '');
-
+      //add mainmethod
       const jsonFile = path.join(__dirname, '../templates', 'Question1.json');
       fs.readFile(jsonFile, 'utf8', (err, data) => {
         if (err) throw err;
@@ -22,12 +22,12 @@ module.exports = {
         if (!mainMethodData || typeof mainMethodData !== 'object') {
           throw new Error('Invalid JSON data format: Not an object');
         }
-        const { mainMethod ,endOfCode} = mainMethodData;
-        if (typeof mainMethod !== 'string'|| typeof endOfCode !== 'string') {
+        const { mainMethod } = mainMethodData;
+        if (typeof mainMethod !== 'string') {
           throw new Error('Invalid JSON data format: Missing or invalid string properties');
         }
 
-        const javaClass = `${jsonDataWithoutClosingBrace}\n\n${mainMethod}\n\n${endOfCode}`;
+        const javaClass = `${jsonDataWithoutClosingBrace}\n\n${mainMethod}\n\n`;
 
         fs.writeFile(file, javaClass, 'utf8', (err2) => {
           if (err2) throw err2;
@@ -36,7 +36,7 @@ module.exports = {
       });
     });
   },
-
+  //question part 
   startConvertJsonToJava(callback) {
     const jsonFile = path.join(__dirname, '../templates', 'Question1.json');
     fs.readFile(jsonFile, 'utf8', (err, data) => {
@@ -50,11 +50,11 @@ module.exports = {
       if (!jsonData || typeof jsonData !== 'object') {
         throw new Error('Invalid JSON data format: Not an object');
       }
-      const { classDeclaration, code, endOfCode } = jsonData;
-      if (typeof classDeclaration !== 'string' || typeof code !== 'string' || typeof endOfCode !== 'string') {
+      const { classDeclaration, code } = jsonData;
+      if (typeof classDeclaration !== 'string' || typeof code !== 'string') {
         throw new Error('Invalid JSON data format: Missing or invalid string properties');
       }
-      const javaCode = `${classDeclaration}\n${code}\n${endOfCode}`;
+      const javaCode = `${classDeclaration}\n${code}\n`;
       callback(javaCode);
     });
   },
@@ -63,7 +63,7 @@ module.exports = {
     let file = '';
     const language = lang.toLowerCase();
     if (language === 'java') {
-      file = path.join(__dirname, '../templates', 'Question3.java');
+      file = path.join(__dirname, '../templates', 'Question1.java');
       if (!fs.existsSync(file)) {
         fs.writeFileSync(file, '');
       }

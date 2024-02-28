@@ -15,8 +15,7 @@ public class TestCaseRequest {
 
   private Long questionId;
   // no need add "{" and "}" in the methodSignatures
-  private String methodSignatures;
-  private String mainMethod;
+  private String expectedOutput;
   private String input1;
   private String input2;
   private String input3;

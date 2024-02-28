@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,6 +20,12 @@ public class QuestionRequest {
 
   @NotBlank
   private String question;
+
+  @Nonnull
+  private String testComputeCase;
+
+  @Nonnull
+  private String methodSignatures;
 
   private LocalDateTime createddate;
   private Integer createdby;

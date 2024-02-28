@@ -1,5 +1,6 @@
 package com.venturenix.cmc.entity;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List; // Add missing import statement for List
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -17,7 +19,7 @@ import java.util.List; // Add missing import statement for List
 @Builder
 @Entity
 @Table(name = "Question_Bank")
-public class QuestionBank implements Serializable{
+public class QuestionBank implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @JsonProperty("question_id")
@@ -29,6 +31,13 @@ public class QuestionBank implements Serializable{
 
   @Column(columnDefinition = "TEXT")
   private String question;
+
+  @Nonnull
+  @Column(columnDefinition = "TEXT")
+  private String testComputeCase;
+
+  @Nonnull
+  private String methodSignatures;
 
   private LocalDateTime createddate;
   private Integer createdby;

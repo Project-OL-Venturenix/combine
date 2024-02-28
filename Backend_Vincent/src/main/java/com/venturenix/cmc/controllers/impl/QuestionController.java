@@ -33,6 +33,8 @@ import com.venturenix.cmc.repository.RoleRepository;
 import com.venturenix.cmc.repository.TestCaseRepository;
 import com.venturenix.cmc.repository.UserRepository;
 import com.venturenix.cmc.security.jwt.JwtUtils;
+import com.venturenix.cmc.service.QuestionBankService;
+import com.venturenix.cmc.service.TestCaseService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
@@ -58,6 +60,12 @@ public class QuestionController implements QuestionOperation {
   JwtUtils jwtUtils;
 
   @Autowired
+  private QuestionBankService questionBankService;
+
+  @Autowired
+  private TestCaseService testCaseService;
+
+  @Autowired
   QuestionRepository questionRepository;
 
   @Autowired
@@ -72,7 +80,7 @@ public class QuestionController implements QuestionOperation {
         .updatedby(questionRequest.getUpdatedby())//
         .build();
 
-    questionRepository.save(question);
+    questionBankService.save(question);
     return ResponseEntity.ok(new MessageResponse("Add Question successfully!"));
 
   }
@@ -98,9 +106,11 @@ public class QuestionController implements QuestionOperation {
         questionRepository.findById(questionId);
     log.info("questionData : ");
 
-    Optional<TestCase> testcaseData = testCaseRepository.findAll().stream()//
-        .filter(e -> e.getQuestionBank().getQuestionId().equals(questionId))//
-        .findFirst();
+    // Optional<TestCase> testcaseData = testCaseRepository.findAll().stream()//
+    // .filter(e -> e.getQuestionBank().getQuestionId().equals(questionId))//
+    // .findFirst();
+    Optional<List<TestCase>> testcaseData =
+        Optional.of(testCaseRepository.getTestCaseByQuestionId(questionId));
     log.info("testcaseData : " + testcaseData.orElse(null));
 
     List<TestCaseDTO> testCases = testCaseRepository.findAll().stream()//
@@ -113,13 +123,14 @@ public class QuestionController implements QuestionOperation {
     if (questionData.isPresent() && testcaseData.isPresent()) {
       QuestionResponse questionResponse = QuestionResponse.builder()
           .questionId(questionData.get().getQuestionId())//
-          .classDeclaration(testcaseData.get().generateClassDeclaration())//
-          .code(testcaseData.get().generateFullCode())//
+          .classDeclaration(
+              testCaseService.generateClassDeclaration(questionId))//
+          .code(testCaseService.generateFullCode(questionId))//
           // .mainMethod(testcaseData.get().generateMainMethod()
           // + testcaseData.get().getMainMethod() + "\n"
           // + testcaseData.get().generateEndCodeBlock())//
-          .mainMethod(testcaseData.get().generateMainMethod() + //
-              testcaseData.get().generateTestCase(testCases))//
+          .mainMethod(testCaseService.generateMainMethod(questionId) + //
+              testCaseService.generateTestCase(testCases, questionId))//
           .createdby(questionData.get().getCreatedby())//
           .updateddate(questionData.get().getUpdateddate())//
           .updatedby(questionData.get().getUpdatedby())//

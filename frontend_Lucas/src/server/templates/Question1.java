@@ -1,8 +1,8 @@
 import java.util.*;
 import java.math.*;
- public class Question2{
-public List<Integer> duplicateCounts(int[] nums1, int[] nums2, int[] nums3) { 
- //Enter the code Here.Your class should be named Question2.
+ public class Question1{
+public double computeTax(int[][] brackets, int income){ 
+ //Enter the code Here.Your class should be named Question1.
  
  }
 }

@@ -14,9 +14,13 @@ import lombok.NoArgsConstructor;
 public class TestCaseRequest {
 
   private Long questionId;
-  //no need add "{" and "}" in the methodSignatures
+  // no need add "{" and "}" in the methodSignatures
   private String methodSignatures;
   private String mainMethod;
+  private String input1;
+  private String input2;
+  private String input3;
+
   private LocalDateTime createdDate;
   private Integer createdBy;
   private LocalDateTime updatedDate;

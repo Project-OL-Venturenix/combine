@@ -84,11 +84,15 @@ public class TestCaseController implements TestCaseOperation {
         .questionBank(targetQuestionBankData)//
         .methodSignatures(testcaseRequest.getMethodSignatures())//
         .mainMethod(testcaseRequest.getMainMethod())//
+        .input1(testcaseRequest.getInput1())//
+        .input2(testcaseRequest.getInput2())//
+        .input3(testcaseRequest.getInput3())//
         .createdDate(LocalDateTime.now())//
         .createdBy(testcaseRequest.getCreatedBy())//
         .updatedDate(LocalDateTime.now())//
         .updatedBy(testcaseRequest.getUpdatedBy())//
         .build();
+    log.info("testcaseRequest " + testcaseRequest.toString());
     testcaseRepository.save(testcase);
     return ResponseEntity.ok(new MessageResponse("Add TestCase successfully!"));
 

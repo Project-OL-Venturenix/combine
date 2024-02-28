@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +23,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.venturenix.cmc.controllers.QuestionOperation;
 import com.venturenix.cmc.entity.QuestionBank;
 import com.venturenix.cmc.entity.TestCase;
+import com.venturenix.cmc.payload.Mapper;
 import com.venturenix.cmc.payload.request.QuestionRequest;
 import com.venturenix.cmc.payload.response.MessageResponse;
 import com.venturenix.cmc.payload.response.QuestionResponse;
+import com.venturenix.cmc.payload.response.TestCaseDTO;
 import com.venturenix.cmc.repository.QuestionRepository;
 import com.venturenix.cmc.repository.RoleRepository;
 import com.venturenix.cmc.repository.TestCaseRepository;
@@ -88,38 +92,6 @@ public class QuestionController implements QuestionOperation {
 
   }
 
-  // public ResponseEntity<QuestionResponse> getQuestionById(String id) {
-  // Long questionId = Long.parseLong(id);
-  // Optional<QuestionBank> questionData =
-  // questionRepository.findById(questionId);
-  // log.info("questionData : ");
-  // Optional<TestCase> testcaseData = testCaseRepository.findAll().stream()//
-  // .filter(e -> e.getQuestionBank().getQuestionId().equals(questionId))//
-  // .findFirst();
-  // log.info("testcaseData : " + testcaseData.get());
-  // if (questionData.isPresent() && testcaseData.isPresent()) {
-  // QuestionResponse questionResponse = QuestionResponse.builder()//
-  // .questionId(questionData.get().getQuestionId())//
-  // .classDeclaration(
-  // "import java.util.*;\nimport java.math.*;\n public class Question"
-  // + id + " {\n")//
-  // .code(testcaseData.get().getMethodSignatures()
-  // + "\n//Enter the code Here.Your class should be named Question"
-  // + id + ".\n \n }")//
-  // .mainMethod("public static void main(String[] args) {\n" + //
-  // " int counter = 0;\n" + //
-  // " Question" + id + " question" + id + " = new Question" + id
-  // + "();\n\n " + testcaseData.get().getMainMethod())//
-  // .endCodeBlock("}")//
-  // .createdby(questionData.get().getCreatedby())//
-  // .updateddate(questionData.get().getUpdateddate())//
-  // .updatedby(questionData.get().getUpdatedby())//
-  // .build();
-  // return new ResponseEntity<>(questionResponse, HttpStatus.OK);
-  // } else {
-  // return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-  // }
-  // }
   public ResponseEntity<QuestionResponse> getQuestionById(String id) {
     Long questionId = Long.parseLong(id);
     Optional<QuestionBank> questionData =
@@ -131,14 +103,23 @@ public class QuestionController implements QuestionOperation {
         .findFirst();
     log.info("testcaseData : " + testcaseData.orElse(null));
 
+    List<TestCaseDTO> testCases = testCaseRepository.findAll().stream()//
+        .filter(e -> e.getQuestionBank().getQuestionId().equals(questionId))//
+        .map(e -> Mapper.map(e))//
+        .collect(Collectors.toList());
+    log.info("testCases : " + testCases.get(0));
+
+
     if (questionData.isPresent() && testcaseData.isPresent()) {
       QuestionResponse questionResponse = QuestionResponse.builder()
           .questionId(questionData.get().getQuestionId())//
           .classDeclaration(testcaseData.get().generateClassDeclaration())//
           .code(testcaseData.get().generateFullCode())//
-          .mainMethod(testcaseData.get().generateMainMethod()
-              + testcaseData.get().getMainMethod() + "\n"
-              + testcaseData.get().generateEndCodeBlock())//
+          // .mainMethod(testcaseData.get().generateMainMethod()
+          // + testcaseData.get().getMainMethod() + "\n"
+          // + testcaseData.get().generateEndCodeBlock())//
+          .mainMethod(testcaseData.get().generateMainMethod() + //
+              testcaseData.get().generateTestCase(testCases))//
           .createdby(questionData.get().getCreatedby())//
           .updateddate(questionData.get().getUpdateddate())//
           .updatedby(questionData.get().getUpdatedby())//

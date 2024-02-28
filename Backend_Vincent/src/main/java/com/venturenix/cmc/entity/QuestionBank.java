@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import java.util.List; // Add missing import statement for List
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -24,9 +24,8 @@ public class QuestionBank implements Serializable{
   @Column(name = "question_id")
   private Long questionId;
 
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "question_id", referencedColumnName = "testcase_id")
-  private TestCase testCase;
+  @OneToMany(cascade = CascadeType.ALL)
+  private List<TestCase> testCase; // Change field type to List<TestCase>
 
   @Column(columnDefinition = "TEXT")
   private String question;

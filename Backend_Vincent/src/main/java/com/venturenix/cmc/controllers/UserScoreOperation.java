@@ -8,13 +8,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.venturenix.cmc.entity.UserScore;
 import com.venturenix.cmc.payload.request.UserScoreRequest;
 import jakarta.validation.Valid;
 
 public interface UserScoreOperation {
+
+  @PostMapping("/userscore/addScore")
+  boolean addScore(@RequestParam String eventid, //
+      @RequestParam String userid, //
+      @RequestParam String questionid, //
+      @RequestParam String testcasePassTotal);
+
   @PostMapping("/userscore/add")
-  ResponseEntity<?> addUserScore(@Valid @RequestBody UserScoreRequest userscoreRequest);
+  ResponseEntity<?> addUserScore(
+      @Valid @RequestBody UserScoreRequest userscoreRequest);
 
   @GetMapping("/userscores")
   ResponseEntity<List<UserScore>> getAllUserScores();
@@ -23,7 +32,8 @@ public interface UserScoreOperation {
   ResponseEntity<UserScore> getUserScoreById(@PathVariable long id);
 
   @PutMapping("/userscore/{id}")
-  ResponseEntity<UserScore> updateUserScore(@PathVariable long id,@RequestBody UserScore userscore);
+  ResponseEntity<UserScore> updateUserScore(@PathVariable long id,
+      @RequestBody UserScore userscore);
 
   @DeleteMapping("/userscore/{id}")
   ResponseEntity<?> deleteUserScore(@PathVariable long id);

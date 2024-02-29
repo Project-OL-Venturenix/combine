@@ -1,5 +1,6 @@
 package com.venturenix.cmc.controllers.impl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -9,23 +10,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.venturenix.cmc.controllers.UserScoreOperation;
 import com.venturenix.cmc.entity.UserScore;
 import com.venturenix.cmc.payload.request.UserScoreRequest;
 import com.venturenix.cmc.payload.response.MessageResponse;
+import com.venturenix.cmc.repository.EventRepository;
+import com.venturenix.cmc.repository.QuestionRepository;
 import com.venturenix.cmc.repository.RoleRepository;
 import com.venturenix.cmc.repository.UserRepository;
 import com.venturenix.cmc.repository.UserScoreRepository;
 import com.venturenix.cmc.security.jwt.JwtUtils;
-import jakarta.validation.Valid;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -50,15 +46,25 @@ public class UserScoreController implements UserScoreOperation {
   @Autowired
   UserScoreRepository userscoreRepository;
 
+  @Autowired
+  private EventRepository eventRepository;
+
+  @Autowired
+  private QuestionRepository questionRepository;
 
   public ResponseEntity<?> addUserScore(UserScoreRequest userscoreRequest) {
-    UserScore userscore = new UserScore(userscoreRequest.getEventid(),
-        userscoreRequest.getUserid(), userscoreRequest.getQuestionid(),
-        userscoreRequest.getTestcasetotal(),
-        userscoreRequest.getTestcasepasstotal(),
-        userscoreRequest.getTestcasescoretotal(), userscoreRequest.getStatus(),
-        java.time.LocalDateTime.now(), userscoreRequest.getCreatedby(),
-        java.time.LocalDateTime.now(), userscoreRequest.getUpdatedby());
+    UserScore userscore = UserScore.builder()
+        .eventid(userscoreRequest.getEventid())
+        .userid(userscoreRequest.getUserid())
+        .questionid(userscoreRequest.getQuestionid())
+        .testcasePassTotal(userscoreRequest.getTestcasepasstotal())
+        .testcaseScoreTotal(userscoreRequest.getTestcasescoretotal())
+        .status(userscoreRequest.getTestcasepasstotal() == 10 ? "Pass" : "Fail")//
+        .createddate(java.time.LocalDateTime.now())
+        .createdby(userscoreRequest.getCreatedby())
+        .updateddate(java.time.LocalDateTime.now())
+        .updatedby(userscoreRequest.getUpdatedby()).build();
+
     userscoreRepository.save(userscore);
     return ResponseEntity
         .ok(new MessageResponse("Add UserScore successfully!"));
@@ -98,8 +104,6 @@ public class UserScoreController implements UserScoreOperation {
       _userscore.setEventid(userscore.getEventid());
       _userscore.setUserid(userscore.getUserid());
       _userscore.setQuestionid(userscore.getQuestionid());
-      _userscore.setTestcasetotal(userscore.getTestcasetotal());
-      _userscore.setTestcasepasstotal(userscore.getTestcasepasstotal());
       _userscore.setTestcasescoretotal(userscore.getTestcasescoretotal());
       _userscore.setStatus(userscore.getStatus());
       _userscore.setUpdateddate(java.time.LocalDateTime.now());
@@ -119,6 +123,32 @@ public class UserScoreController implements UserScoreOperation {
     } catch (Exception e) {
       return ResponseEntity
           .ok(new MessageResponse("HttpStatus.INTERNAL_SERVER_ERROR"));
+    }
+  }
+
+  @Override
+  public boolean addScore(String eventid, String userid, String questionid,
+      String testcasePassTotal) {
+    Long eventID = Long.valueOf(eventid);
+    Long userID = Long.valueOf(userid);
+    Long questionID = Long.valueOf(questionid);
+    Integer testcasePass = Integer.valueOf(testcasePassTotal);
+    if (eventRepository.findById(eventID).isPresent()
+        && userRepository.findById(userID).isPresent()
+        && questionRepository.findById(questionID).isPresent()) {
+      userscoreRepository.saveAndFlush(UserScore.builder()//
+          .eventid(eventID)//
+          .userid(userID)//
+          .questionid(questionID)//
+          .testcasePassTotal(testcasePass)//
+          .testcaseScoreTotal(0.0)//
+          .status(testcasePass == 10 ? "Pass" : "Fail")//
+          .createddate(LocalDateTime.now())//
+          .updateddate(LocalDateTime.now())//
+          .build());
+      return true;
+    } else {
+      return false;
     }
   }
 }

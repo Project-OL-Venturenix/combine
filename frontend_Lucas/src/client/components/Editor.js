@@ -71,6 +71,7 @@ class Editor extends React.Component {
       });
   }
 
+  
   updateSolution(event) {
     // event.preventDefault();
     console.log(this.state.task);

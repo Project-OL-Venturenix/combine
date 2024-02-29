@@ -14,21 +14,25 @@ import com.venturenix.cmc.payload.response.QuestionResponse;
 import jakarta.validation.Valid;
 
 public interface QuestionOperation {
-  
+
   @PostMapping("/question/add")
   public ResponseEntity<?> addQuestion(
-  @Valid  @RequestBody QuestionRequest questionRequest);
+      @Valid @RequestBody QuestionRequest questionRequest);
 
   @GetMapping("/questions")
   public ResponseEntity<List<QuestionBank>> getAllQuestions();
 
-  @GetMapping("/question/{id}")
+  @GetMapping("/questionRun/{id}")
   public ResponseEntity<QuestionResponse> getQuestionById(
-    @PathVariable("id") String id);
+      @PathVariable("id") String id);
+
+  @GetMapping("/questionSubmit/{id}")
+  public ResponseEntity<QuestionResponse> getQuestionSubmitById(
+      @PathVariable("id") String id);
 
   @PutMapping("/question/{id}")
   public ResponseEntity<QuestionBank> updateQuestion(
-    @PathVariable("id") long id, @RequestBody QuestionBank question);
+      @PathVariable("id") long id, @RequestBody QuestionBank question);
 
   @DeleteMapping("/question/{id}")
   public ResponseEntity<?> deleteQuestion(@PathVariable("id") long id);

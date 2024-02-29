@@ -100,7 +100,45 @@ public class QuestionController implements QuestionOperation {
 
   }
 
+  @Override
   public ResponseEntity<QuestionResponse> getQuestionById(String id) {
+    Long questionId = Long.parseLong(id);
+    Optional<QuestionBank> questionData =
+        questionRepository.findById(questionId);
+    log.info("questionData : ");
+
+    Optional<List<TestCase>> testcaseData =
+        Optional.of(testCaseRepository.getTestCaseByQuestionId(questionId));
+    log.info("testcaseData : " + testcaseData.orElse(null));
+
+    List<TestCaseDTO> testCases = testCaseRepository.findAll().stream()//
+        .filter(e -> e.getQuestionBank().getQuestionId().equals(questionId))//
+        .limit(3)//
+        .map(e -> Mapper.map(e))//
+        .collect(Collectors.toList());
+    log.info("testCases : " + testCases.get(0));
+
+
+    if (questionData.isPresent() && testcaseData.isPresent()) {
+      QuestionResponse questionResponse = QuestionResponse.builder()
+          .questionId(questionData.get().getQuestionId())//
+          .classDeclaration(
+              testCaseService.generateClassDeclaration(questionId))//
+          .code(testCaseService.generateFullCode(questionId))//
+          .mainMethod(testCaseService.generateMainMethod(questionId) + //
+              testCaseService.generateTestCase(testCases, questionId))//
+          .createdby(questionData.get().getCreatedby())//
+          .updateddate(questionData.get().getUpdateddate())//
+          .updatedby(questionData.get().getUpdatedby())//
+          .build();
+      return new ResponseEntity<>(questionResponse, HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+  }
+
+  @Override
+  public ResponseEntity<QuestionResponse> getQuestionSubmitById(String id) {
     Long questionId = Long.parseLong(id);
     Optional<QuestionBank> questionData =
         questionRepository.findById(questionId);
@@ -169,4 +207,6 @@ public class QuestionController implements QuestionOperation {
           .ok(new MessageResponse("HttpStatus.INTERNAL_SERVER_ERROR"));
     }
   }
+
+
 }

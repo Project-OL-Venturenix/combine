@@ -8,40 +8,48 @@ import java.util.Date;
 public class UserScoreResponse {
   private String token;
   private String type = "Bearer";
-  private Long id; 
- 
+  private Long id;
+
   private Long eventid;
 
- 
+
   private Long userid;
 
- 
+
   private Long questionid;
 
- 
+
   private Integer testcase_pass_total;
 
- 
+
   private Double testcase_score_total;
 
- 
-  private Integer testcase_total;          
+
+  private Integer testcase_total;
 
   private String status;
-  
+
+  private boolean isPass() {
+    return this.testcase_pass_total == 10;
+  };
+
   private LocalDateTime createddate;
 
-  
+
   private Integer createdby;
 
-  
+
   private LocalDateTime updateddate;
 
-  
+
   private Integer updatedby;
-  
-  
-  public UserScoreResponse(String accessToken, Long id, Long eventid, Long userid, Long questionid, Integer testcase_total, Integer testcase_pass_total, Double testcase_score_total, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+
+
+  public UserScoreResponse(String accessToken, Long id, Long eventid,
+      Long userid, Long questionid, Integer testcase_total,
+      Integer testcase_pass_total, Double testcase_score_total,
+      LocalDateTime createddate, Integer createdby, LocalDateTime updateddate,
+      Integer updatedby) {
     this.token = accessToken;
     this.id = id;
     this.eventid = eventid;
@@ -50,12 +58,12 @@ public class UserScoreResponse {
     this.testcase_pass_total = testcase_pass_total;
     this.testcase_score_total = testcase_score_total;
     this.testcase_total = testcase_total;
-    this.status = status;
+    this.status = this.isPass() == true ? "Pass" : "Fail";
     this.createddate = createddate;
     this.createdby = createdby;
     this.updateddate = updateddate;
     this.updatedby = updatedby;
-  
+
   }
 
   public String getAccessToken() {
@@ -82,13 +90,13 @@ public class UserScoreResponse {
     this.id = id;
   }
 
-   public Long getEventid() {
+  public Long getEventid() {
     return eventid;
   }
 
   public void setEventid(Long eventid) {
     this.eventid = eventid;
-  }  
+  }
 
   public Long getUserid() {
     return userid;
@@ -104,7 +112,7 @@ public class UserScoreResponse {
 
   public void setQuestionid(Long questionid) {
     this.questionid = questionid;
-  }  
+  }
 
   public Integer getTestcasetotal() {
     return testcase_total;
@@ -112,7 +120,7 @@ public class UserScoreResponse {
 
   public void setTestcasetotal(Integer testcase_total) {
     this.testcase_total = testcase_total;
-  }  
+  }
 
   public Integer getTestcasepasstotal() {
     return testcase_pass_total;
@@ -120,7 +128,7 @@ public class UserScoreResponse {
 
   public void setTestcasepasstotal(Integer testcase_pass_total) {
     this.testcase_pass_total = testcase_pass_total;
-  } 
+  }
 
   public Double getTestcasescoretotal() {
     return testcase_score_total;
@@ -128,16 +136,17 @@ public class UserScoreResponse {
 
   public void setTestcasescoretotal(Double testcase_score_total) {
     this.testcase_score_total = testcase_score_total;
-  } 
+  }
+
   public String getStatus() {
-    return status;
+    return this.isPass() == true ? "Pass" : "Fail";
   }
 
   public void setStatus(String status) {
-    this.status = status;
+    this.status = this.isPass() == true ? "Pass" : "Fail";
   }
 
-public Integer getCreatedby() {
+  public Integer getCreatedby() {
     return createdby;
   }
 
@@ -153,7 +162,7 @@ public Integer getCreatedby() {
     this.createddate = createddate;
   }
 
-   public Integer getUpdatedby() {
+  public Integer getUpdatedby() {
     return updatedby;
   }
 

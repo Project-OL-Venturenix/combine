@@ -1,11 +1,21 @@
 package com.venturenix.cmc.entity;
 
-import jakarta.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "userscores")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserScore {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,9 +23,10 @@ public class UserScore {
   private Long eventid;
   private Long userid;
   private Long questionid;
-  private Integer testcase_total;
-  private Integer testcase_pass_total;
-  private Double testcase_score_total;
+  @JsonProperty("testcase_pass_total")
+  private Integer testcasePassTotal;
+  @JsonProperty("testcase_score_total")
+  private Double testcaseScoreTotal;
   private String status;
   private LocalDateTime createddate;
   private Integer createdby;
@@ -23,24 +34,22 @@ public class UserScore {
   private Integer updatedby;
 
 
-  public UserScore() {
-    
-  }
 
-
-  public UserScore(Long eventid, Long userid, Long questionid, Integer testcase_total, Integer testcase_pass_total, Double testcase_score_total, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public UserScore(Long eventid, Long userid, Long questionid,
+      Integer testcase_total, Integer testcasePassTotal,
+      Double testcaseScoreTotal, String status, LocalDateTime createddate,
+      Integer createdby, LocalDateTime updateddate, Integer updatedby) {
     this.eventid = eventid;
     this.userid = userid;
     this.questionid = questionid;
-    this.testcase_total = testcase_total;
-    this.testcase_pass_total = testcase_pass_total;
-    this.testcase_score_total = testcase_score_total;
+    this.testcasePassTotal = testcasePassTotal;
+    this.testcaseScoreTotal = testcaseScoreTotal;
     this.status = status;
     this.createddate = createddate;
     this.createdby = createdby;
     this.updateddate = updateddate;
     this.updatedby = updatedby;
-    
+
   }
 
   public Long getId() {
@@ -57,7 +66,7 @@ public class UserScore {
 
   public void setEventid(Long eventid) {
     this.eventid = eventid;
-  }  
+  }
 
   public Long getUserid() {
     return userid;
@@ -73,31 +82,23 @@ public class UserScore {
 
   public void setQuestionid(Long questionid) {
     this.questionid = questionid;
-  }  
-
-  public Integer getTestcasetotal() {
-    return testcase_total;
   }
 
-  public void setTestcasetotal(Integer testcase_total) {
-    this.testcase_total = testcase_total;
-  }  
-
-  public Integer getTestcasepasstotal() {
-    return testcase_pass_total;
+  public Integer getTestCasePasstotal() {
+    return testcasePassTotal;
   }
 
-  public void setTestcasepasstotal(Integer testcase_pass_total) {
-    this.testcase_pass_total = testcase_pass_total;
-  } 
+  public void setTestcasepasstotal(Integer testcasePassTotal) {
+    this.testcasePassTotal = testcasePassTotal;
+  }
 
   public Double getTestcasescoretotal() {
-    return testcase_score_total;
+    return testcaseScoreTotal;
   }
 
-  public void setTestcasescoretotal(Double testcase_score_total) {
-    this.testcase_score_total = testcase_score_total;
-  } 
+  public void setTestcasescoretotal(Double testcaseScoreTotal) {
+    this.testcaseScoreTotal = testcaseScoreTotal;
+  }
 
 
   public String getStatus() {
@@ -114,7 +115,7 @@ public class UserScore {
 
   public void setCreatedby(Integer createdby) {
     this.createdby = createdby;
-  }  
+  }
 
   public LocalDateTime getCreateddate() {
     return createddate;
@@ -122,7 +123,7 @@ public class UserScore {
 
   public void setCreateddate(LocalDateTime createddate) {
     this.createddate = createddate;
-  }  
+  }
 
   public Integer getUpdatedby() {
     return updatedby;
@@ -130,7 +131,7 @@ public class UserScore {
 
   public void setUpdatedby(Integer updatedby) {
     this.updatedby = updatedby;
-  }   
+  }
 
   public LocalDateTime getUpdateddate() {
     return updateddate;
@@ -138,7 +139,7 @@ public class UserScore {
 
   public void setUpdateddate(LocalDateTime updateddate) {
     this.updateddate = updateddate;
-  }  
+  }
 
 
 }

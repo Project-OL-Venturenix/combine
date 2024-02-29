@@ -18,13 +18,13 @@ import java.time.LocalDateTime;
 @Builder
 public class QuestionRequest {
 
-  @NotBlank
+  // @NotBlank
   private String question;
 
-  @Nonnull
+  // @Nonnull
   private String testComputeCase;
 
-  @Nonnull
+  // @Nonnull
   private String methodSignatures;
 
   private LocalDateTime createddate;

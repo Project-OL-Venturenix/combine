@@ -57,9 +57,9 @@ class Editor extends React.Component {
   handleRun(event) {
     event.preventDefault();
     const { task } = this.state;
-    console.log('handleRun : ' + task.code);
-    console.log('handleRun : ' + task.lang);
-    console.log('handleRun : ' + this.state.output);
+    console.log('handleRun code: ' + task.code);
+    console.log('handleRun lang: ' + task.lang);
+    console.log('handleRun this.state.output: ' + this.state.output);
 
     CompilerApi.run(task)
       .then((res) => {

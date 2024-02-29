@@ -74,6 +74,8 @@ public class QuestionController implements QuestionOperation {
   public ResponseEntity<?> addQuestion(QuestionRequest questionRequest) {
     QuestionBank question = QuestionBank.builder()//
         .question(questionRequest.getQuestion())//
+        .testComputeCase(questionRequest.getTestComputeCase())//
+        .methodSignatures(questionRequest.getMethodSignatures())//
         .createddate(java.time.LocalDateTime.now())//
         .createdby(questionRequest.getCreatedby())//
         .updateddate(java.time.LocalDateTime.now())//

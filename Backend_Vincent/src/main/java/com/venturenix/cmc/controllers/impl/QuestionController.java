@@ -46,7 +46,6 @@ public class QuestionController implements QuestionOperation {
   @Autowired
   AuthenticationManager authenticationManager;
 
-
   @Autowired
   UserRepository userRepository;
 

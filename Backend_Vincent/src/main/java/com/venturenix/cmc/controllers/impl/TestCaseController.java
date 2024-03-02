@@ -34,7 +34,6 @@ public class TestCaseController implements TestCaseOperation {
   @Autowired
   AuthenticationManager authenticationManager;
 
-
   @Autowired
   UserRepository userRepository;
 
@@ -62,6 +61,7 @@ public class TestCaseController implements TestCaseOperation {
         .input1(testcaseRequest.getInput1())//
         .input2(testcaseRequest.getInput2())//
         .input3(testcaseRequest.getInput3())//
+        .expectedOutput(testcaseRequest.getExpectedOutput())//
         .createdDate(LocalDateTime.now())//
         .createdBy(testcaseRequest.getCreatedBy())//
         .updatedDate(LocalDateTime.now())//

@@ -26,6 +26,7 @@
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/security/jwt/AuthEntryPointJwt.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/repository/RoleRepository.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/controllers/impl/GroupScoreController.java
+/Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/payload/response/GroupUserDTO.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/payload/request/UserQuestionSubmitRequest.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/repository/UserScoreRepository.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/controllers/GroupUserQuestionHandleOperation.java
@@ -49,7 +50,6 @@
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/payload/request/TestCaseScoreRequest.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/entity/GroupTestCase.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/payload/response/GroupQuestionSubmitResponse.java
-/Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/entity/GroupUserDTO.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/payload/request/QuestionRequest.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/payload/request/TestCaseRequest.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/entity/ERole.java
@@ -92,6 +92,7 @@
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/repository/EventUserRepository.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/repository/EventRepository.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/security/WebSecurityConfig.java
+/Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/payload/response/GroupuserQuestionDTO.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/controllers/impl/QuestionController.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/controllers/UserScoreOperation.java
 /Users/oscarlo/github/code_json_verson/Backend_Vincent/src/main/java/com/venturenix/cmc/payload/request/UserRequest.java

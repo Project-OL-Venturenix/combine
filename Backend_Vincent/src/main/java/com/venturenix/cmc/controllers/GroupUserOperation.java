@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.venturenix.cmc.entity.GroupUser;
-import com.venturenix.cmc.entity.GroupUserDTO;
 import com.venturenix.cmc.payload.request.GroupUserRequest;
+import com.venturenix.cmc.payload.response.GroupUserDTO;
 import jakarta.validation.Valid;
 
 public interface GroupUserOperation {

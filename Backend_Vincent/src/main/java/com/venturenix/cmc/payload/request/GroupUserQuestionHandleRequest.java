@@ -20,7 +20,7 @@ public class GroupUserQuestionHandleRequest {
   private Long groupid;
 
   //@NotBlank
-  private String userlist;  
+  private Long userlist;  
 
   //@NotBlank
   private Long questionid;  
@@ -57,11 +57,11 @@ public class GroupUserQuestionHandleRequest {
     this.groupid = groupid;
   }  
 
-  public String getUserlist() {
+  public Long getUserlist() {
     return userlist;
   }
 
-  public void setUserlist(String userlist) {
+  public void setUserlist(Long userlist) {
     this.userlist = userlist;
   }  
 

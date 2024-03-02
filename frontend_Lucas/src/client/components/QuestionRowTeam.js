@@ -2,8 +2,8 @@ import React, {useContext, useState} from 'react';
 import Editor from './Editor';
 import {Checkbox} from 'react-bootstrap';
 import TopNavBarTeam from './TopNavBarTeam';
-import {LoginUserContext, TeamContext} from "./App";
-import QuestionAreaTeam from "./QuestionAreaTeam";
+import {LoginUserContext, TeamContext} from './App';
+import QuestionAreaTeam from './QuestionAreaTeam';
 
 function QuestionRowTeam() {
     const loginUser = useContext(LoginUserContext);

@@ -17,6 +17,8 @@ class OutputBox extends React.Component {
     const match = message.match(regex);
     const counter = match ? match[1] : 'N/A'; // Default to 'N/A' if counter not found
     console.log('counter:', typeof (counter));
+    console.log('counter:', counter);
+    console.log('message : ', message);
     localStorage.setItem('counter', counter);
     if (show) {
       return (
@@ -27,7 +29,7 @@ class OutputBox extends React.Component {
           rows="8"
           readOnly
           // value={this.props.message}
-        
+
           value={counter}
           style={{ fontSize: '20px' }}
         />

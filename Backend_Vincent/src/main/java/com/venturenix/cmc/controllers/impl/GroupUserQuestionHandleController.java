@@ -1,28 +1,31 @@
 package com.venturenix.cmc.controllers.impl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.DuplicateFormatFlagsException;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.venturenix.cmc.controllers.GroupUserQuestionHandleOperation;
 import com.venturenix.cmc.entity.GroupUserQuestionHandle;
 import com.venturenix.cmc.payload.request.GroupUserQuestionHandleRequest;
+import com.venturenix.cmc.payload.response.GroupuserQuestionDTO;
 import com.venturenix.cmc.payload.response.MessageResponse;
 import com.venturenix.cmc.repository.GroupUserQuestionHandleRepository;
 import com.venturenix.cmc.repository.RoleRepository;
 import com.venturenix.cmc.repository.UserRepository;
 import com.venturenix.cmc.security.jwt.JwtUtils;
-import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
@@ -47,24 +50,45 @@ public class GroupUserQuestionHandleController
   @Autowired
   GroupUserQuestionHandleRepository groupuserquestionhandleRepository;
 
-
   public ResponseEntity<?> addGroupUserQuestionHandle(
       GroupUserQuestionHandleRequest groupuserquestionhandleRequest) {
-    GroupUserQuestionHandle groupuserquestionhandle =
-        new GroupUserQuestionHandle(groupuserquestionhandleRequest.getEventid(),
-            groupuserquestionhandleRequest.getGroupid(),
-            groupuserquestionhandleRequest.getUserlist(),
-            groupuserquestionhandleRequest.getQuestionid(),
-            groupuserquestionhandleRequest.getStatus(),
-            java.time.LocalDateTime.now(),
-            groupuserquestionhandleRequest.getCreatedby(),
-            java.time.LocalDateTime.now(),
-            groupuserquestionhandleRequest.getUpdatedby());
-    groupuserquestionhandleRepository.save(groupuserquestionhandle);
+    Long eventid = groupuserquestionhandleRequest.getEventid();
+    Long groupid = groupuserquestionhandleRequest.getGroupid();
+    Long questionid = groupuserquestionhandleRequest.getQuestionid();
+    Long userID = groupuserquestionhandleRequest.getUserlist();
+    Optional<GroupUserQuestionHandle> checkData =
+        groupuserquestionhandleRepository
+            .findDistinctByEventidAndGroupidAndQuestionid(eventid, groupid,
+                questionid);
+    // keep userList Distinct
+    Optional<List<GroupUserQuestionHandle>> checkUserList =
+        groupuserquestionhandleRepository.findByUserid(userID);
+    if (checkUserList.isPresent()) {
+      groupuserquestionhandleRepository.deleteAll(checkUserList.get());
+    }
+    if (checkData.isPresent()) {
+      checkData.get().setUserlist(groupuserquestionhandleRequest.getUserlist());
+      groupuserquestionhandleRepository.save(checkData.get());
+    } else {
+      GroupUserQuestionHandle groupuserquestionhandle =
+          new GroupUserQuestionHandle(
+              groupuserquestionhandleRequest.getEventid(),
+              groupuserquestionhandleRequest.getGroupid(),
+              groupuserquestionhandleRequest.getUserlist(),
+              groupuserquestionhandleRequest.getQuestionid(),
+              groupuserquestionhandleRequest.getStatus(),
+              java.time.LocalDateTime.now(),
+              groupuserquestionhandleRequest.getCreatedby(),
+              java.time.LocalDateTime.now(),
+              groupuserquestionhandleRequest.getUpdatedby());
+      groupuserquestionhandleRepository.save(groupuserquestionhandle);
+    }
+
     return ResponseEntity
         .ok(new MessageResponse("Add GroupUserQuestionHandle successfully!"));
 
   }
+
 
   public ResponseEntity<List<GroupUserQuestionHandle>> getAllGroupUserQuestionHandles() {
     try {
@@ -105,8 +129,7 @@ public class GroupUserQuestionHandleController
           groupuserquestionhandleData.get();
       _groupuserquestionhandle.setEventid(groupuserquestionhandle.getEventid());
       _groupuserquestionhandle.setGroupid(groupuserquestionhandle.getGroupid());
-      _groupuserquestionhandle
-          .setUserlist(groupuserquestionhandle.getUserlist());
+      _groupuserquestionhandle.setUserlist(groupuserquestionhandle.getUserid());
       _groupuserquestionhandle
           .setQuestionid(groupuserquestionhandle.getQuestionid());
       _groupuserquestionhandle.setUpdateddate(java.time.LocalDateTime.now());
@@ -130,5 +153,6 @@ public class GroupUserQuestionHandleController
           .ok(new MessageResponse("HttpStatus.INTERNAL_SERVER_ERROR"));
     }
   }
-}
 
+
+}

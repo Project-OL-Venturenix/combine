@@ -33,20 +33,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import com.venturenix.cmc.payload.request.LoginRequest;
 import com.venturenix.cmc.payload.request.SignupRequest;
 import com.venturenix.cmc.controllers.GroupUserOperation;
-import com.venturenix.cmc.entity.ERole;
 import com.venturenix.cmc.entity.GroupUser;
-import com.venturenix.cmc.entity.GroupUserDTO;
-import com.venturenix.cmc.entity.Role;
-import com.venturenix.cmc.entity.User;
 import com.venturenix.cmc.payload.request.GroupUserRequest;
-import com.venturenix.cmc.payload.response.JwtResponse;
-import com.venturenix.cmc.payload.response.GroupUserResponse;
+import com.venturenix.cmc.payload.response.GroupUserDTO;
 import com.venturenix.cmc.payload.response.MessageResponse;
 import com.venturenix.cmc.repository.RoleRepository;
 import com.venturenix.cmc.repository.UserRepository;
 import com.venturenix.cmc.repository.GroupUserRepository;
 import com.venturenix.cmc.security.jwt.JwtUtils;
-import com.venturenix.cmc.security.services.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -85,22 +79,18 @@ public class GroupUserController implements GroupUserOperation {
 
   public ResponseEntity<List<GroupUserDTO>> getAllGroupUsers() {
     try {
-      List<Long> distinctGroupIds = groupUserRepository.findDistinctGroupIds();
-
-      List<GroupUserDTO> result = distinctGroupIds.stream()//
-          .map(groupId -> {
-            List<Long> userIds =
-                groupUserRepository.findUserIdsByGroupId(groupId);
-            return new GroupUserDTO(//
-                groupId, //
-                userIds);
-          })//
-          .collect(Collectors.toList());
+      List<GroupUserDTO> result = new ArrayList<>();
+      groupUserRepository.findAll()//
+          .forEach(groupuser -> {
+            result.add(new GroupUserDTO(//
+                groupuser.getId(), //
+                groupuser.getGroupid(), //
+                groupuser.getUserId()));
+          });
       return new ResponseEntity<>(result, HttpStatus.OK);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
   }
 
   public ResponseEntity<GroupUser> getGroupUserById(long id) {

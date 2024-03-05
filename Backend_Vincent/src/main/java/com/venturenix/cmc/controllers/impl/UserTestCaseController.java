@@ -101,20 +101,24 @@ public class UserTestCaseController implements UserTestCaseOperation {
     System.out.println("getUpdatedby = " + usertestcaseRequest.getUpdatedby());
 
 
-    UserTestCase usertestcase = new UserTestCase(
-        usertestcaseRequest.getEventid(), usertestcaseRequest.getQuestionid(),
-        usertestcaseRequest.getTestcaseid(), usertestcaseRequest.getUserid(),
-        usertestcaseRequest.getRunstarttimeutc(),
-        usertestcaseRequest.getRunendtimeutc(),
-        usertestcaseRequest.getRuntimeutc(),
-        usertestcaseRequest.getRunstarttime(),
-        usertestcaseRequest.getRunendtime(),
-        usertestcaseRequest.getTestcasefilepath(),
-        usertestcaseRequest.getFilename(),
-        usertestcaseRequest.getTestcasepassstatus(),
-        usertestcaseRequest.getStatus(), java.time.LocalDateTime.now(),
-        usertestcaseRequest.getCreatedby(), java.time.LocalDateTime.now(),
-        usertestcaseRequest.getUpdatedby());
+    UserTestCase usertestcase =
+        new UserTestCase(usertestcaseRequest.getEventid(), //
+            usertestcaseRequest.getQuestionid(), //
+            usertestcaseRequest.getTestcaseid(), //
+            usertestcaseRequest.getUserid(), //
+            usertestcaseRequest.getRunstarttimeutc(), //
+            usertestcaseRequest.getRunendtimeutc(), //
+            usertestcaseRequest.getRuntimeutc(), //
+            usertestcaseRequest.getRunstarttime(), //
+            usertestcaseRequest.getRunendtime(), //
+            usertestcaseRequest.getTestcasefilepath(), //
+            usertestcaseRequest.getFilename(), //
+            usertestcaseRequest.getTestcasepassstatus(), //
+            usertestcaseRequest.getStatus(), //
+            java.time.LocalDateTime.now(), //
+            usertestcaseRequest.getCreatedby(), //
+            java.time.LocalDateTime.now(), //
+            usertestcaseRequest.getUpdatedby());
     usertestcaseRepository.save(usertestcase);
     return ResponseEntity
         .ok(new MessageResponse("Add UserTestCase successfully!"));

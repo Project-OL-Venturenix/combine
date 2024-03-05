@@ -13,20 +13,20 @@ import com.venturenix.cmc.payload.request.EventUserRequest;
 import jakarta.validation.Valid;
 
 public interface EventUserOperation {
-  @PostMapping("/eventuser/add")
+  @PostMapping("/eventusers/add")
   ResponseEntity<?> addEventUser(
       @Valid @RequestBody EventUserRequest eventUserRequest);
 
   @GetMapping("/eventusers")
   ResponseEntity<List<EventUser>> getAllEventUsers();
 
-  @GetMapping("/eventuser/{id}")
+  @GetMapping("/eventusers/{id}")
   ResponseEntity<EventUser> getEventUserById(@PathVariable("id") long id);
 
-  @PutMapping("/eventuser/{id}")
+  @PutMapping("/eventusers/{id}")
   ResponseEntity<EventUser> updateEventUser(@PathVariable("id") long id,
       @RequestBody EventUser eventUser);
 
-  @DeleteMapping("/eventuser/{id}")
+  @DeleteMapping("/eventusers/{id}")
   ResponseEntity<?> deleteEventUser(@PathVariable("id") long id);
 }

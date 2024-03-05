@@ -18,7 +18,7 @@ public class TestCaseResponse {
   private String type = "Bearer";
   private Long id;
 
-  private Long questionid;
+  private Long questionId;
 
   private String methodSignatures;
   private String mainMethod;

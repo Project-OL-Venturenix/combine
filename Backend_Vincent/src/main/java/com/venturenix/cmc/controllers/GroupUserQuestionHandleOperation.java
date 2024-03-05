@@ -17,22 +17,22 @@ import jakarta.validation.Valid;
 public interface GroupUserQuestionHandleOperation {
 
 
-        @PostMapping("/groupuserquestionhandle/add")
+        @PostMapping("/groupuserquestionhandles/add")
         ResponseEntity<?> addGroupUserQuestionHandle(
                         @Valid @RequestBody GroupUserQuestionHandleRequest groupuserquestionhandleRequest);
 
         @GetMapping("/groupuserquestionhandles")
         ResponseEntity<List<GroupUserQuestionHandle>> getAllGroupUserQuestionHandles();
 
-        @GetMapping("/groupuserquestionhandle/{id}")
+        @GetMapping("/groupuserquestionhandles/{id}")
         ResponseEntity<GroupUserQuestionHandle> getGroupUserQuestionHandleById(
                         @PathVariable long id);
 
-        @PutMapping("/groupuserquestionhandle/{id}")
+        @PutMapping("/groupuserquestionhandles/{id}")
         ResponseEntity<GroupUserQuestionHandle> updateGroupUserQuestionHandle(
                         @PathVariable long id,
                         @RequestBody GroupUserQuestionHandle groupuserquestionhandle);
 
-        @DeleteMapping("/groupuserquestionhandle/{id}")
+        @DeleteMapping("/groupuserquestionhandles/{id}")
         ResponseEntity<?> deleteGroupUserQuestionHandle(@PathVariable long id);
 }

@@ -13,21 +13,21 @@ import com.venturenix.cmc.payload.request.EventGroupRequest;
 import jakarta.validation.Valid;
 
 public interface EventGroupOperation {
-  @PostMapping("/eventgroup/add")
+  @PostMapping("/eventgroups/add")
   ResponseEntity<?> addEventGroup(
       @Valid @RequestBody EventGroupRequest eventGroupRequest);
 
   @GetMapping("/eventgroups")
   ResponseEntity<List<EventGroup>> getAllEventGroups();
 
-  @GetMapping("/eventgroup/{id}")
+  @GetMapping("/eventgroups/{id}")
   ResponseEntity<EventGroup> getEventGroupById(@PathVariable("id") long id);
 
-  @PutMapping("/eventgroup/{id}")
+  @PutMapping("/eventgroups/{id}")
   ResponseEntity<EventGroup> updateEventGroup(@PathVariable("id") long id,
       @RequestBody EventGroup eventGroup);
 
-  @DeleteMapping("/eventgroup/{id}")
+  @DeleteMapping("/eventgroups/{id}")
   ResponseEntity<?> deleteEventGroup(@PathVariable("id") long id);
 
 }

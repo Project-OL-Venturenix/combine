@@ -57,7 +57,8 @@ public class TestCaseController implements TestCaseOperation {
         .findById(testcaseRequest.getQuestionId()).orElseThrow(
             () -> new RuntimeException("Error: Question is not found."));
     TestCase testcase = TestCase.builder()//
-        .questionBank(targetQuestionBankData)//
+        // .questionBank(targetQuestionBankData)//
+        .questionId(testcaseRequest.getQuestionId())//
         .input1(testcaseRequest.getInput1())//
         .input2(testcaseRequest.getInput2())//
         .input3(testcaseRequest.getInput3())//
@@ -96,7 +97,8 @@ public class TestCaseController implements TestCaseOperation {
     if (testcaseData.isPresent()) {
       TestCaseResponse result = TestCaseResponse.builder()//
           .id(testcaseData.get().getTestcaseId())//
-          .questionid(testcaseData.get().getQuestionBank().getQuestionId())//
+          // .questionId(testcaseData.get().getQuestionBank().getQuestionId())//
+          .questionId(testcaseData.get().getQuestionId())//
           .createdDate(testcaseData.get().getCreatedDate())//
           .createdBy(testcaseData.get().getCreatedBy())//
           .updatedDate(testcaseData.get().getUpdatedDate())//
@@ -115,7 +117,8 @@ public class TestCaseController implements TestCaseOperation {
     if (testcaseData.isPresent()) {
       TestCase result = TestCase.builder()//
           .testcaseId(testcaseData.get().getTestcaseId())//
-          .questionBank(testcaseData.get().getQuestionBank())//
+          // .questionBank(testcaseData.get().getQuestionBank())//
+          .questionId(testcaseData.get().getQuestionId())//
           .createdDate(testcaseData.get().getCreatedDate())//
           .createdBy(testcaseData.get().getCreatedBy())//
           .updatedDate(LocalDateTime.now())//

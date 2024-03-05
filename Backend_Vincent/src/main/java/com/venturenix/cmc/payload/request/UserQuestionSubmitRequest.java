@@ -23,10 +23,10 @@ public class UserQuestionSubmitRequest {
   private Long userid;  
 
   //@NotBlank
-  private Double run_time_by_msec;  
+  private Double runtimebymsec;  
 
   //@NotBlank
-  private LocalDateTime submit_time;  
+  private LocalDateTime submittime;  
 
   //@NotBlank
   private String status;
@@ -70,19 +70,19 @@ public class UserQuestionSubmitRequest {
   }  
 
   public Double getRuntimebymsec() {
-    return run_time_by_msec;
+    return runtimebymsec;
   }
 
-  public void setRuntimebymsec(Double run_time_by_msec) {
-    this.run_time_by_msec = run_time_by_msec;
+  public void setRuntimebymsec(Double runtimebymsec) {
+    this.runtimebymsec = runtimebymsec;
   }  
 
   public LocalDateTime getSubmittime() {
-    return submit_time;
+    return submittime;
   }
 
-  public void settSubmittime(LocalDateTime submit_time) {
-    this.submit_time = submit_time;
+  public void settSubmittime(LocalDateTime submittime) {
+    this.submittime = submittime;
   }  
 
   public String getStatus() {

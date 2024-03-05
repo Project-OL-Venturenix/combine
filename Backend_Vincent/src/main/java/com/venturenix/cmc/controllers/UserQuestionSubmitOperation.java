@@ -15,22 +15,22 @@ import com.venturenix.cmc.entity.UserQuestionSubmit;
 
 public interface UserQuestionSubmitOperation {
 
-  @PostMapping("/userquestionsubmit/add")
+  @PostMapping("/userquestionsubmits/add")
   ResponseEntity<?> addUserQuestionSubmit(
     @Valid @RequestBody  UserQuestionSubmitRequest userquestionsubmitRequest);
 
   @GetMapping("/userquestionsubmits")
   ResponseEntity<List<UserQuestionSubmit>> getAllUserQuestionSubmits();
 
-  @GetMapping("/userquestionsubmit/{id}")
+  @GetMapping("/userquestionsubmits/{id}")
   ResponseEntity<UserQuestionSubmit> getUserQuestionSubmitById(
       @PathVariable long id);
 
-  @PutMapping("/userquestionsubmit/{id}")
+  @PutMapping("/userquestionsubmits/{id}")
   ResponseEntity<UserQuestionSubmit> updateUserQuestionSubmit(
       @PathVariable long id,
       @RequestBody UserQuestionSubmit userquestionsubmit);
 
-  @DeleteMapping("/userquestionsubmit/{id}")
+  @DeleteMapping("/userquestionsubmits/{id}")
   ResponseEntity<?> deleteUserQuestionSubmit(@PathVariable long id);
 }

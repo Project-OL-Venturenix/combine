@@ -14,8 +14,8 @@ public class GroupQuestionSubmit {
   private Long groupid;
   private Long userid;
   private Long questionid;
-  private LocalDateTime submit_time;
-  private Double run_time_by_msec;
+  private LocalDateTime submittime;
+  private Double runtimebymsec;
   private String status;
   private LocalDateTime createddate;
   private Integer createdby;
@@ -27,13 +27,13 @@ public class GroupQuestionSubmit {
     
   }
 
-  public GroupQuestionSubmit(Long eventid, Long groupid,Long userid, Long questionid,LocalDateTime submit_time, Double run_time_by_msec,String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public GroupQuestionSubmit(Long eventid, Long groupid,Long userid, Long questionid,LocalDateTime submittime, Double runtimebymsec,String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
     this.eventid = eventid;
     this.groupid = groupid;
     this.userid = userid;
     this.questionid = questionid;
-    this.submit_time = submit_time;
-    this.run_time_by_msec = run_time_by_msec;
+    this.submittime = submittime;
+    this.runtimebymsec = runtimebymsec;
     this.status = status;
     this.createddate = createddate;
     this.createdby = createdby;
@@ -83,19 +83,19 @@ public class GroupQuestionSubmit {
   }
 
   public LocalDateTime getSubmittime() {
-    return submit_time;
+    return submittime;
   }  
 
-  public void setSubmittime(LocalDateTime submit_time) {
-    this.submit_time = submit_time;
+  public void setSubmittime(LocalDateTime submittime) {
+    this.submittime = submittime;
   }  
 
   public Double getRuntimebymsec() {
-    return run_time_by_msec;
+    return runtimebymsec;
   }  
 
-  public void setRuntimebymsec(Double run_time_by_msec) {
-    this.run_time_by_msec = run_time_by_msec;
+  public void setRuntimebymsec(Double runtimebymsec) {
+    this.runtimebymsec = runtimebymsec;
   }  
 
 

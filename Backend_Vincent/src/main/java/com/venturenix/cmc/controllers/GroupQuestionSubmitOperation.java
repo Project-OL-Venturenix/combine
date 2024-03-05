@@ -13,23 +13,23 @@ import com.venturenix.cmc.payload.request.GroupQuestionSubmitRequest;
 import jakarta.validation.Valid;
 
 public interface GroupQuestionSubmitOperation {
-  @PostMapping("/groupquestionsubmit/add")
+  @PostMapping("/groupquestionsubmits/add")
   public ResponseEntity<?> addGroupQuestionSubmit(
       @Valid @RequestBody GroupQuestionSubmitRequest groupquestionsubmitRequest);
 
   @GetMapping("/groupquestionsubmits")
   public ResponseEntity<List<GroupQuestionSubmit>> getAllGroupQuestionSubmits();
 
-  @GetMapping("/groupquestionsubmit/{id}")
+  @GetMapping("/groupquestionsubmits/{id}")
   public ResponseEntity<GroupQuestionSubmit> getGroupQuestionSubmitById(
       @PathVariable("id") long id);
 
-  @PutMapping("/groupquestionsubmit/{id}")
+  @PutMapping("/groupquestionsubmits/{id}")
   public ResponseEntity<GroupQuestionSubmit> updateGroupQuestionSubmit(
       @PathVariable("id") long id,
       @RequestBody GroupQuestionSubmit groupquestionsubmit);
 
-  @DeleteMapping("/groupquestionsubmit/{id}")
+  @DeleteMapping("/groupquestionsubmits/{id}")
   public ResponseEntity<?> deleteGroupQuestionSubmit(
       @PathVariable("id") long id);
 

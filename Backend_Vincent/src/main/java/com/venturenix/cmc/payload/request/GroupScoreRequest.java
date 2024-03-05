@@ -20,13 +20,13 @@ public class GroupScoreRequest {
   private Long questionid;
 
   //@NotBlank
-  private Integer testcase_pass_total;
+  private Integer testcasepasstotal;
 
   //@NotBlank
-  private Double testcase_score_total;
+  private Double testcasescoretotal;
 
   //@NotBlank
-  private Integer testcase_total;          
+  private Integer testcasetotal;          
 
   //@NotBlank
   private String status;
@@ -68,27 +68,27 @@ public class GroupScoreRequest {
   }  
 
   public Integer getTestcasetotal() {
-    return testcase_total;
+    return testcasetotal;
   }
 
-  public void setTestcasetotal(Integer testcase_total) {
-    this.testcase_total = testcase_total;
+  public void setTestcasetotal(Integer testcasetotal) {
+    this.testcasetotal = testcasetotal;
   }  
 
   public Integer getTestcasepasstotal() {
-    return testcase_pass_total;
+    return testcasepasstotal;
   }
 
-  public void setTestcasepasstotal(Integer testcase_pass_total) {
-    this.testcase_pass_total = testcase_pass_total;
+  public void setTestcasepasstotal(Integer testcasepasstotal) {
+    this.testcasepasstotal = testcasepasstotal;
   } 
 
   public Double getTestcasescoretotal() {
-    return testcase_score_total;
+    return testcasescoretotal;
   }
 
-  public void setTestcasescoretotal(Double testcase_score_total) {
-    this.testcase_score_total = testcase_score_total;
+  public void setTestcasescoretotal(Double testcasescoretotal) {
+    this.testcasescoretotal = testcasescoretotal;
   } 
 
 

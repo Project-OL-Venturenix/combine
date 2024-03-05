@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 @Entity
-@Table(name = "groups_")
+@Table(name = "groups")
 public class Group {
   /*
    * username and email must be unique 

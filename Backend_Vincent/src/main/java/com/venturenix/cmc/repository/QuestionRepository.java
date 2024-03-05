@@ -8,12 +8,12 @@ import com.venturenix.cmc.entity.QuestionBank;
 @Repository
 public interface QuestionRepository extends JpaRepository<QuestionBank, Long> {
   @Query(
-      value = "SELECT test_compute_case FROM question_bank WHERE question_id = ?1",
+      value = "SELECT testComputeCase FROM questionbank WHERE questionId = ?1",
       nativeQuery = true)
   String getTestComputeCase(Long questionId);
 
   @Query(
-      value = "SELECT method_signatures FROM question_bank WHERE question_id = ?1",
+      value = "SELECT methodSignatures FROM questionbank WHERE questionId = ?1",
       nativeQuery = true)
   String getMethodSignatures(Long questionId);
 }

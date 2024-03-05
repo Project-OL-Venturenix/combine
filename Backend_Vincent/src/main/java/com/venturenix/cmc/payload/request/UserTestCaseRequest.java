@@ -20,23 +20,23 @@ public class UserTestCaseRequest {
   //@NotBlank
   private Long testcaseid;
   //@NotBlank
-  private OffsetDateTime run_start_time_utc;
+  private OffsetDateTime runstarttimeutc;
   //@NotBlank  
-  private OffsetDateTime  run_end_time_utc;
+  private OffsetDateTime  runendtimeutc;
 
   //@NotBlank  
-  private OffsetDateTime  run_time_utc;
+  private OffsetDateTime  runtimeutc;
 
   //@NotBlank  
-  private LocalDateTime  run_start_time;    
+  private LocalDateTime  runstarttime;    
   //@NotBlank  
-  private LocalDateTime run_end_time;
+  private LocalDateTime runendtime;
   //@NotBlank  
   private String testcasefilepath;
   //@NotBlank  
   private String filename;    
   //@NotBlank
-  private String testcase_pass_status;      
+  private String testcasepassstatus;      
 
   //@NotBlank
   private String status;
@@ -86,44 +86,44 @@ public class UserTestCaseRequest {
   }  
 
   public OffsetDateTime getRunstarttimeutc() {
-    return run_start_time_utc;
+    return runstarttimeutc;
   }  
 
-  public void setRunstarttimeutc(OffsetDateTime run_start_time_utc) {
-    this.run_start_time_utc = run_start_time_utc;
+  public void setRunstarttimeutc(OffsetDateTime runstarttimeutc) {
+    this.runstarttimeutc = runstarttimeutc;
   }  
 
   public OffsetDateTime getRunendtimeutc() {
-    return run_end_time_utc;
+    return runendtimeutc;
   }  
 
-  public void setRunendtimeutc(OffsetDateTime run_end_time_utc) {
-    this.run_end_time_utc = run_end_time_utc;
+  public void setRunendtimeutc(OffsetDateTime runendtimeutc) {
+    this.runendtimeutc = runendtimeutc;
   }    
 
   
   public OffsetDateTime getRuntimeutc() {
-    return run_time_utc;
+    return runtimeutc;
   }  
 
-  public void setRuntimeutc(OffsetDateTime run_time_utc) {
-    this.run_time_utc = run_time_utc;
+  public void setRuntimeutc(OffsetDateTime runtimeutc) {
+    this.runtimeutc = runtimeutc;
   } 
 
   public LocalDateTime getRunstarttime() {
-    return run_start_time;
+    return runstarttime;
   }  
 
-  public void setRunstarttime(LocalDateTime run_start_time) {
-    this.run_start_time = run_start_time;
+  public void setRunstarttime(LocalDateTime runstarttime) {
+    this.runstarttime = runstarttime;
   } 
 
   public LocalDateTime getRunendtime() {
-    return run_end_time;
+    return runendtime;
   }  
 
-  public void setRunendtime(LocalDateTime run_end_time) {
-    this.run_end_time = run_end_time;
+  public void setRunendtime(LocalDateTime runendtime) {
+    this.runendtime = runendtime;
   }   
 
   public String getTestcasefilepath() {
@@ -144,11 +144,11 @@ public class UserTestCaseRequest {
 
 
   public String getTestcasepassstatus() {
-    return testcase_pass_status;
+    return testcasepassstatus;
   }
 
-  public void setTestcasepassstatus(String testcase_pass_status) {
-    this.testcase_pass_status = testcase_pass_status;
+  public void setTestcasepassstatus(String testcasepassstatus) {
+    this.testcasepassstatus = testcasepassstatus;
   }    
 
 

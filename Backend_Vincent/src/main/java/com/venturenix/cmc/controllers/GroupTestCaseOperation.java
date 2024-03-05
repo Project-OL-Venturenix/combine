@@ -19,18 +19,18 @@ import jakarta.validation.Valid;
 
 public interface GroupTestCaseOperation {
   
-  @PostMapping("/grouptestcase/add")
+  @PostMapping("/grouptestcases/add")
   public ResponseEntity<?> addGroupTestCase(@Valid @RequestBody GroupTestCaseRequest grouptestcaseRequest);
 
   @GetMapping("/grouptestcases")
   public ResponseEntity<List<GroupTestCase>> getAllGroupTestCases();
 
-  @GetMapping("/grouptestcase/{id}")
+  @GetMapping("/grouptestcases/{id}")
   public ResponseEntity<GroupTestCase> getGroupTestCaseById(@PathVariable("id") long id);
 
-  @PutMapping("/grouptestcase/{id}")
+  @PutMapping("/grouptestcases/{id}")
   public ResponseEntity<GroupTestCase> updateGroupTestCase(@PathVariable("id") long id, @RequestBody GroupTestCase grouptestcase);
 
-  @DeleteMapping("/grouptestcase/{id}")
+  @DeleteMapping("/grouptestcases/{id}")
   public ResponseEntity<?> deleteGroupTestCase(@PathVariable("id") long id);
 }

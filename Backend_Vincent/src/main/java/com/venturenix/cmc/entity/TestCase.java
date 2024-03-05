@@ -31,13 +31,15 @@ import lombok.Setter;
 public class TestCase implements Serializable {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @JsonProperty("testcase_id")
+        @JsonProperty("testcaseId")
         private Long testcaseId;
 
-        @ManyToOne
-        @JoinColumn(name = "question_id", referencedColumnName = "question_id")
-        private QuestionBank questionBank;
+        // @ManyToOne
+        // @JoinColumn(name = "questionId", referencedColumnName = "questionId")
+        // private QuestionBank questionBank;
 
+        private Long questionId;
+        
         @Nonnull
         private String expectedOutput;
 

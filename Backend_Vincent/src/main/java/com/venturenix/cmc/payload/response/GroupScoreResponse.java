@@ -19,13 +19,13 @@ public class GroupScoreResponse {
   private Long questionid;
 
  
-  private Integer testcase_pass_total;
+  private Integer testcasepasstotal;
 
  
-  private Double testcase_score_total;
+  private Double testcasescoretotal;
 
  
-  private Integer testcase_total;          
+  private Integer testcasetotal;          
 
   private String status;
   
@@ -41,15 +41,15 @@ public class GroupScoreResponse {
   private Integer updatedby;
   
   
-  public GroupScoreResponse(String accessToken, Long id, Long eventid, Long groupid, Long questionid, Integer testcase_pass_total, Double testcase_score_total, Integer testcase_total, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public GroupScoreResponse(String accessToken, Long id, Long eventid, Long groupid, Long questionid, Integer testcasepasstotal, Double testcasescoretotal, Integer testcasetotal, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
     this.token = accessToken;
     this.id = id;
     this.eventid = eventid;
     this.groupid = groupid;
     this.questionid = questionid;
-    this.testcase_pass_total = testcase_pass_total;
-    this.testcase_score_total = testcase_score_total;
-    this.testcase_total = testcase_total;
+    this.testcasepasstotal = testcasepasstotal;
+    this.testcasescoretotal = testcasescoretotal;
+    this.testcasetotal = testcasetotal;
     this.status = status;
     this.createddate = createddate;
     this.createdby = createdby;
@@ -107,27 +107,27 @@ public class GroupScoreResponse {
   }  
 
   public Integer getTestcasetotal() {
-    return testcase_total;
+    return testcasetotal;
   }
 
-  public void setTestcasetotal(Integer testcase_total) {
-    this.testcase_total = testcase_total;
+  public void setTestcasetotal(Integer testcasetotal) {
+    this.testcasetotal = testcasetotal;
   }  
 
   public Integer getTestcasepasstotal() {
-    return testcase_pass_total;
+    return testcasepasstotal;
   }
 
-  public void setTestcasepasstotal(Integer testcase_pass_total) {
-    this.testcase_pass_total = testcase_pass_total;
+  public void setTestcasepasstotal(Integer testcasepasstotal) {
+    this.testcasepasstotal = testcasepasstotal;
   } 
 
   public Double getTestcasescoretotal() {
-    return testcase_score_total;
+    return testcasescoretotal;
   }
 
-  public void setTestcasescoretotal(Double testcase_score_total) {
-    this.testcase_score_total = testcase_score_total;
+  public void setTestcasescoretotal(Double testcasescoretotal) {
+    this.testcasescoretotal = testcasescoretotal;
   } 
   public String getStatus() {
     return status;

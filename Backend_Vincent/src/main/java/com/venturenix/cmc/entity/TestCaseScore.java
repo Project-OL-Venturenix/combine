@@ -11,8 +11,8 @@ public class TestCaseScore {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private String testcase_score_desc;
-  private Double testcase_score;
+  private String testcasescoredesc;
+  private Double testcasescore;
   private String status;
   private LocalDateTime createddate;
   private Integer createdby;
@@ -23,9 +23,9 @@ public class TestCaseScore {
     
   }
 
-  public TestCaseScore(String testcase_score_desc, Double testcase_score, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
-    this.testcase_score_desc = testcase_score_desc;
-    this.testcase_score = testcase_score;
+  public TestCaseScore(String testcasescoredesc, Double testcasescore, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+    this.testcasescoredesc = testcasescoredesc;
+    this.testcasescore = testcasescore;
     this.status = status;
     this.createddate = createddate;
     this.createdby = createdby;
@@ -44,19 +44,19 @@ public class TestCaseScore {
   }
 
   public String getTestcasescoredesc() {
-    return testcase_score_desc;
+    return testcasescoredesc;
   }
 
-  public void setTestcasescoredesc(String testcase_score_desc) {
-    this.testcase_score_desc = testcase_score_desc;
+  public void setTestcasescoredesc(String testcasescoredesc) {
+    this.testcasescoredesc = testcasescoredesc;
   }  
 
   public Double getTestcasescore() {
-    return testcase_score;
+    return testcasescore;
   }
 
-  public void setTestcasescore(Double testcase_score) {
-    this.testcase_score = testcase_score;
+  public void setTestcasescore(Double testcasescore) {
+    this.testcasescore = testcasescore;
   }
 
   public String getStatus() {

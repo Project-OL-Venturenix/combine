@@ -1,3 +1,4 @@
+com/venturenix/cmc/controllers/TestController.class
 com/venturenix/cmc/payload/request/UserRequest.class
 com/venturenix/cmc/service/QuestionBankService.class
 com/venturenix/cmc/payload/request/UserTestCaseRequest.class

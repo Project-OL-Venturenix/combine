@@ -15,21 +15,21 @@ import com.venturenix.cmc.payload.request.TestCaseScoreRequest;
 import jakarta.validation.Valid;
 
 public interface GroupScoreOperation {
-  @PostMapping("/groupscore/add")
+  @PostMapping("/groupscores/add")
   ResponseEntity<?> addGroupScore(
       @Valid @RequestBody GroupScoreRequest groupscoreRequest);
 
   @GetMapping("/groupscores")
   ResponseEntity<List<GroupScore>> getAllGroupScores();
 
-  @GetMapping("/groupscore/{id}")
+  @GetMapping("/groupscores/{id}")
   ResponseEntity<GroupScore> getGroupScoreById(@PathVariable("id") long id);
 
-  @PutMapping("/groupscore/{id}")
+  @PutMapping("/groupscores/{id}")
   ResponseEntity<GroupScore> updateGroupScore(@PathVariable("id") long id,
       @RequestBody GroupScore groupscore);
 
-  @DeleteMapping("/groupscore/{id}")
+  @DeleteMapping("/groupscores/{id}")
   ResponseEntity<?> deleteGroupScore(@PathVariable("id") long id);
 
 }

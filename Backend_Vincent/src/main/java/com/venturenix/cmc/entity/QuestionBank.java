@@ -18,12 +18,12 @@ import java.util.List; // Add missing import statement for List
 @Setter
 @Builder
 @Entity
-@Table(name = "Question_Bank")
+@Table(name = "questions")
 public class QuestionBank implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @JsonProperty("question_id")
-  @Column(name = "question_id")
+  @JsonProperty("questionId")
+  @Column(name = "questionId")
   private Long questionId;
 
   @OneToMany(cascade = CascadeType.ALL)

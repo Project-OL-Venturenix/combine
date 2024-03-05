@@ -14,19 +14,19 @@ import com.venturenix.cmc.payload.response.MessageResponse;
 import jakarta.validation.Valid;
 
 public interface UserOperation {
-  @PostMapping("/user/add")
+  @PostMapping("/users/add")
   ResponseEntity<?> addUser(@Valid @RequestBody UserRequest userRequest);
 
   @GetMapping("/users")
   ResponseEntity<List<User>> getAllUsers();
 
-  @GetMapping("/user/{id}")
+  @GetMapping("/users/{id}")
   ResponseEntity<User> getUserById(@PathVariable long id);
 
-  @PutMapping("/user/{id}")
+  @PutMapping("/users/{id}")
   ResponseEntity<User> updateUser(@PathVariable long id,
       @RequestBody User user);
 
-  @DeleteMapping("/user/{id}")
+  @DeleteMapping("/users/{id}")
   ResponseEntity<?> deleteUser(@PathVariable long id);
 }

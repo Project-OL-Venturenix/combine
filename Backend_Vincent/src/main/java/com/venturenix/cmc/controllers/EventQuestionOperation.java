@@ -13,21 +13,21 @@ import com.venturenix.cmc.payload.request.EventQuestionRequest;
 import jakarta.validation.Valid;
 
 public interface EventQuestionOperation {
-  @PostMapping("/eventquestion/add")
+  @PostMapping("/eventquestions/add")
   public ResponseEntity<?> addEventQuestion(
       @Valid @RequestBody EventQuestionRequest eventQuestionRequest);
 
   @GetMapping("/eventquestions")
   public ResponseEntity<List<EventQuestion>> getAllEventQuestions();
 
-  @GetMapping("/eventquestion/{id}")
+  @GetMapping("/eventquestions/{id}")
   public ResponseEntity<EventQuestion> getEventQuestionById(
       @PathVariable("id") long id);
 
-  @PutMapping("/eventquestion/{id}")
+  @PutMapping("/eventquestions/{id}")
   public ResponseEntity<EventQuestion> updateEventQuestion(
       @PathVariable("id") long id, @RequestBody EventQuestion eventQuestion);
 
-  @DeleteMapping("/eventquestion/{id}")
+  @DeleteMapping("/eventquestions/{id}")
   public ResponseEntity<?> deleteEventQuestion(@PathVariable("id") long id);
 }

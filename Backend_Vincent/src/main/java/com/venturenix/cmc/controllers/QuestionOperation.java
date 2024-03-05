@@ -15,7 +15,7 @@ import jakarta.validation.Valid;
 
 public interface QuestionOperation {
 
-  @PostMapping("/question/add")
+  @PostMapping("/questions/add")
   public ResponseEntity<?> addQuestion(
       @Valid @RequestBody QuestionRequest questionRequest);
 
@@ -30,10 +30,10 @@ public interface QuestionOperation {
   public ResponseEntity<QuestionResponse> getQuestionSubmitById(
       @PathVariable("id") String id);
 
-  @PutMapping("/question/{id}")
+  @PutMapping("/questions/{id}")
   public ResponseEntity<QuestionBank> updateQuestion(
       @PathVariable("id") long id, @RequestBody QuestionBank question);
 
-  @DeleteMapping("/question/{id}")
+  @DeleteMapping("/questions/{id}")
   public ResponseEntity<?> deleteQuestion(@PathVariable("id") long id);
 }

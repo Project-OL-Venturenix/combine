@@ -18,18 +18,18 @@ import com.venturenix.cmc.entity.UserTestCase;
 
 public interface UserTestCaseOperation {
   
-  @PostMapping("/usertestcase/add")
+  @PostMapping("/usertestcases/add")
   public ResponseEntity<?> addUserTestCase(@Valid @RequestBody UserTestCaseRequest usertestcaseRequest);
 
   @GetMapping("/usertestcases")
   public ResponseEntity<List<UserTestCase>> getAllUserTestCases();
 
-  @GetMapping("/usertestcase/{id}")
+  @GetMapping("/usertestcases/{id}")
   public ResponseEntity<UserTestCase> getUserTestCaseById(@PathVariable("id") long id);
 
-  @PutMapping("/usertestcase/{id}")
+  @PutMapping("/usertestcases/{id}")
   public ResponseEntity<UserTestCase> updateUserTestCase(@PathVariable("id") long id, @RequestBody UserTestCase usertestcase);
 
-  @DeleteMapping("/usertestcase/{id}")
+  @DeleteMapping("/usertestcases/{id}")
   public ResponseEntity<?> deleteUserTestCase(@PathVariable("id") long id);
 }

@@ -15,21 +15,20 @@ import com.venturenix.cmc.payload.response.GroupUserDTO;
 import jakarta.validation.Valid;
 
 public interface GroupUserOperation {
-  @PostMapping("/groupuser/add")
-
+  @PostMapping("/groupusers/add")
   ResponseEntity<?> addGroupUser(
       @Valid @RequestBody GroupUserRequest groupuserRequest);
 
   @GetMapping("/groupusers")
   ResponseEntity<List<GroupUserDTO>> getAllGroupUsers();
 
-  @GetMapping("/groupuser/{id}")
+  @GetMapping("/groupusers/{id}")
   ResponseEntity<GroupUser> getGroupUserById(@PathVariable long id);
 
-  @PutMapping("/groupuser/{id}")
+  @PutMapping("/groupusers/{id}")
   ResponseEntity<GroupUser> updateGroupUser(@PathVariable long id,
       @RequestBody GroupUser groupuser);
 
-  @DeleteMapping("/groupuser/{id}")
+  @DeleteMapping("/groupusers/{id}")
   ResponseEntity<?> deleteGroupUser(@PathVariable long id);
 }

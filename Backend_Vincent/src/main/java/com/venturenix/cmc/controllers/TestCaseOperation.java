@@ -14,20 +14,20 @@ import com.venturenix.cmc.payload.response.TestCaseResponse;
 import jakarta.validation.Valid;
 
 public interface TestCaseOperation {
-  @PostMapping("/testcase/add")
+  @PostMapping("/testcases/add")
   ResponseEntity<?> addTestCase(
       @Valid @RequestBody TestCaseRequest testcaseRequest);
 
   @GetMapping("/testcases")
   ResponseEntity<List<TestCase>> getAllTestCases();
 
-  @GetMapping("/testcase/{id}")
+  @GetMapping("/testcases/{id}")
   ResponseEntity<TestCaseResponse> getTestCaseById(@PathVariable String id);
 
-  @PutMapping("/testcase/{id}")
+  @PutMapping("/testcases/{id}")
   ResponseEntity<TestCase> updateTestCase(@PathVariable long id,
       @RequestBody TestCase testcase);
 
-  @DeleteMapping("/testcase/{id}")
+  @DeleteMapping("/testcases/{id}")
   ResponseEntity<?> deleteTestCase(@PathVariable long id);
 }

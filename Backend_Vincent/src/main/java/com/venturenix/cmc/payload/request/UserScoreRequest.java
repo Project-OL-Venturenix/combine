@@ -20,7 +20,7 @@ public class UserScoreRequest {
   private Double testcaseScoreTotal;
 
   // @NotBlank
-  private Integer testcase_total = 10;
+  private Integer testcasetotal = 10;
 
 
 
@@ -55,7 +55,7 @@ public class UserScoreRequest {
   }
 
   public Integer getTestcasetotal() {
-    return testcase_total;
+    return testcasetotal;
   }
 
   public Integer getTestcasepasstotal() {

@@ -15,26 +15,26 @@ import jakarta.validation.Valid;
 
 public interface UserScoreOperation {
 
-  @PostMapping("/userscore/addScore")
+  @PostMapping("/userscores/addScore")
   boolean addScore(@RequestParam String eventid, //
       @RequestParam String userid, //
       @RequestParam String questionid, //
       @RequestParam String testcasePassTotal);
 
-  @PostMapping("/userscore/add")
+  @PostMapping("/userscores/add")
   ResponseEntity<?> addUserScore(
       @Valid @RequestBody UserScoreRequest userscoreRequest);
 
   @GetMapping("/userscores")
   ResponseEntity<List<UserScore>> getAllUserScores();
 
-  @GetMapping("/userscore/{id}")
+  @GetMapping("/userscores/{id}")
   ResponseEntity<UserScore> getUserScoreById(@PathVariable long id);
 
-  @PutMapping("/userscore/{id}")
+  @PutMapping("/userscores/{id}")
   ResponseEntity<UserScore> updateUserScore(@PathVariable long id,
       @RequestBody UserScore userscore);
 
-  @DeleteMapping("/userscore/{id}")
+  @DeleteMapping("/userscores/{id}")
   ResponseEntity<?> deleteUserScore(@PathVariable long id);
 }

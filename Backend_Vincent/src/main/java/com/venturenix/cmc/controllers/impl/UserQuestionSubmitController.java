@@ -1,55 +1,31 @@
 package com.venturenix.cmc.controllers.impl;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import com.venturenix.cmc.entity.ERole;
-import com.venturenix.cmc.entity.Role;
-import com.venturenix.cmc.entity.User;
+import com.venturenix.cmc.controllers.UserQuestionSubmitOperation;
 import com.venturenix.cmc.entity.UserQuestionSubmit;
-import com.venturenix.cmc.payload.request.LoginRequest;
-import com.venturenix.cmc.payload.request.SignupRequest;
 import com.venturenix.cmc.payload.request.UserQuestionSubmitRequest;
-import com.venturenix.cmc.payload.response.JwtResponse;
-import com.venturenix.cmc.payload.response.UserQuestionSubmitResponse;
 import com.venturenix.cmc.payload.response.MessageResponse;
+import com.venturenix.cmc.repository.UserQuestionSubmitRepository;
 import com.venturenix.cmc.repository.RoleRepository;
 import com.venturenix.cmc.repository.UserRepository;
-import com.venturenix.cmc.repository.UserQuestionSubmitRepository;
 import com.venturenix.cmc.security.jwt.JwtUtils;
-import com.venturenix.cmc.security.services.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
-public class UserQuestionSubmitController {
+public class UserQuestionSubmitController
+    implements UserQuestionSubmitOperation {
   @Autowired
   AuthenticationManager authenticationManager;
 
@@ -79,7 +55,8 @@ public class UserQuestionSubmitController {
         userquestionsubmitRequest.getSubmittime(),
         userquestionsubmitRequest.getRuntimebymsec(),
         userquestionsubmitRequest.getStatus(), java.time.LocalDateTime.now(),
-        userquestionsubmitRequest.getCreatedby(), java.time.LocalDateTime.now(),
+        userquestionsubmitRequest.getCreatedby(),
+        java.time.LocalDateTime.now(),
         userquestionsubmitRequest.getUpdatedby());
     userquestionsubmitRepository.save(userquestionsubmit);
     return ResponseEntity
@@ -91,7 +68,8 @@ public class UserQuestionSubmitController {
     try {
       List<UserQuestionSubmit> userquestionsubmits =
           new ArrayList<UserQuestionSubmit>();
-      userquestionsubmitRepository.findAll().forEach(userquestionsubmits::add);
+      userquestionsubmitRepository.findAll()
+          .forEach(userquestionsubmits::add);
       if (userquestionsubmits.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
@@ -103,7 +81,8 @@ public class UserQuestionSubmitController {
 
   }
 
-  public ResponseEntity<UserQuestionSubmit> getUserQuestionSubmitById(long id) {
+  public ResponseEntity<UserQuestionSubmit> getUserQuestionSubmitById(
+      long id) {
     Optional<UserQuestionSubmit> userquestionsubmitData =
         userquestionsubmitRepository.findById(id);
     if (userquestionsubmitData.isPresent()) {

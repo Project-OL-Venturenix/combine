@@ -13,20 +13,20 @@ import com.venturenix.cmc.payload.request.GroupRequest;
 import jakarta.validation.Valid;
 
 public interface GroupOperation {
-  @PostMapping("/group/add")
+  @PostMapping("/groups/add")
   ResponseEntity<?> addGroup(@Valid @RequestBody GroupRequest groupRequest);
 
   @GetMapping("/groups")
   ResponseEntity<List<Group>> getAllGroups();
 
-  @GetMapping("/group/{id}")
+  @GetMapping("/groups/{id}")
   ResponseEntity<Group> getGroupById(@PathVariable("id") long id);
 
-  @PutMapping("/group/{id}")
+  @PutMapping("/groups/{id}")
   ResponseEntity<Group> updateGroup(@PathVariable("id") long id,
       @RequestBody Group group);
 
-  @DeleteMapping("/group/{id}")
+  @DeleteMapping("/groups/{id}")
   ResponseEntity<?> deleteGroup(@PathVariable("id") long id);
 
 }

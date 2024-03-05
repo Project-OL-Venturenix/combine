@@ -23,9 +23,9 @@ public class UserScore {
   private Long eventid;
   private Long userid;
   private Long questionid;
-  @JsonProperty("testcase_pass_total")
+  @JsonProperty("testcasepasstotal")
   private Integer testcasePassTotal;
-  @JsonProperty("testcase_score_total")
+  @JsonProperty("testcasescoretotal")
   private Double testcaseScoreTotal;
   private String status;
   private LocalDateTime createddate;
@@ -36,7 +36,7 @@ public class UserScore {
 
 
   public UserScore(Long eventid, Long userid, Long questionid,
-      Integer testcase_total, Integer testcasePassTotal,
+      Integer testcasetotal, Integer testcasePassTotal,
       Double testcaseScoreTotal, String status, LocalDateTime createddate,
       Integer createdby, LocalDateTime updateddate, Integer updatedby) {
     this.eventid = eventid;

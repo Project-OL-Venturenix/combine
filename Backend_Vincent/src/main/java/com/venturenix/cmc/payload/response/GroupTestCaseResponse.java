@@ -23,19 +23,19 @@ public class GroupTestCaseResponse {
 
   private Long userid;
 
-  private OffsetDateTime run_start_time_utc;
+  private OffsetDateTime runstarttimeutc;
 
-  private OffsetDateTime  run_end_time_utc;
+  private OffsetDateTime  runendtimeutc;
 
-  private LocalDateTime  run_start_time;    
+  private LocalDateTime  runstarttime;    
 
-  private LocalDateTime run_end_time;
+  private LocalDateTime runendtime;
 
   private String testcasefilepath;
 
   private String filename;    
 
-  private String testcase_pass_status;
+  private String testcasepassstatus;
 
   private String status;
   
@@ -51,7 +51,7 @@ public class GroupTestCaseResponse {
   private Integer updatedby;
   
   
-  public GroupTestCaseResponse(String accessToken, Long id, Long eventid, Long groupid, Long questionid, Long testcaseid, Long userid, OffsetDateTime run_start_time_utc, OffsetDateTime run_end_time_utc, LocalDateTime run_start_time, LocalDateTime run_end_time, String testcasefilepath, String filename, String testcase_pass_status, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public GroupTestCaseResponse(String accessToken, Long id, Long eventid, Long groupid, Long questionid, Long testcaseid, Long userid, OffsetDateTime runstarttimeutc, OffsetDateTime runendtimeutc, LocalDateTime runstarttime, LocalDateTime runendtime, String testcasefilepath, String filename, String testcasepassstatus, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
     this.token = accessToken;
     this.id = id;
     this.eventid = eventid;
@@ -59,13 +59,13 @@ public class GroupTestCaseResponse {
     this.questionid = questionid;
     this.testcaseid = testcaseid;
     this.userid = userid;
-    this.run_start_time_utc = run_start_time_utc;
-    this.run_end_time_utc = run_end_time_utc;
-    this.run_start_time = run_start_time;
-    this.run_end_time = run_end_time;
+    this.runstarttimeutc = runstarttimeutc;
+    this.runendtimeutc = runendtimeutc;
+    this.runstarttime = runstarttime;
+    this.runendtime = runendtime;
     this.testcasefilepath = testcasefilepath;    
     this.filename = filename;
-    this.testcase_pass_status = testcase_pass_status;  
+    this.testcasepassstatus = testcasepassstatus;  
     this.status = status;
     this.createddate = createddate;
     this.createdby = createdby;
@@ -139,43 +139,43 @@ public class GroupTestCaseResponse {
   }  
 
   public String getTestcasepassstatus() {
-    return testcase_pass_status;
+    return testcasepassstatus;
   }
 
-  public void setTestcasepassstatus(String testcase_pass_status) {
-    this.testcase_pass_status = testcase_pass_status;
+  public void setTestcasepassstatus(String testcasepassstatus) {
+    this.testcasepassstatus = testcasepassstatus;
   }    
 
   public OffsetDateTime getRunstarttimeutc() {
-    return run_start_time_utc;
+    return runstarttimeutc;
   }  
 
-  public void setRunstarttimeutc(OffsetDateTime run_start_time_utc) {
-    this.run_start_time_utc = run_start_time_utc;
+  public void setRunstarttimeutc(OffsetDateTime runstarttimeutc) {
+    this.runstarttimeutc = runstarttimeutc;
   }  
 
   public OffsetDateTime getRunendtimeutc() {
-    return run_end_time_utc;
+    return runendtimeutc;
   }  
 
-  public void setRunendtimeutc(OffsetDateTime run_end_time_utc) {
-    this.run_end_time_utc = run_end_time_utc;
+  public void setRunendtimeutc(OffsetDateTime runendtimeutc) {
+    this.runendtimeutc = runendtimeutc;
   }    
 
   public LocalDateTime getRunstarttime() {
-    return run_start_time;
+    return runstarttime;
   }  
 
-  public void setRunstarttime(LocalDateTime run_start_time) {
-    this.run_start_time = run_start_time;
+  public void setRunstarttime(LocalDateTime runstarttime) {
+    this.runstarttime = runstarttime;
   } 
 
   public LocalDateTime getRunendtime() {
-    return run_end_time;
+    return runendtime;
   }  
 
-  public void setRunendtime(LocalDateTime run_end_time) {
-    this.run_end_time = run_end_time;
+  public void setRunendtime(LocalDateTime runendtime) {
+    this.runendtime = runendtime;
   }   
 
   public String getTestcasefilepath() {

@@ -13,21 +13,21 @@ import com.venturenix.cmc.payload.request.EventRequest;
 import jakarta.validation.Valid;
 
 public interface EventOperation {
-  @PostMapping("/event/add")
+  @PostMapping("/events/add")
    ResponseEntity<?> addEvent(
       @Valid @RequestBody EventRequest eventRequest);
 
   @GetMapping("/events")
   ResponseEntity<List<Event>> getAllEvents();
 
-  @GetMapping("/event/{id}")
+  @GetMapping("/events/{id}")
    ResponseEntity<Event> getEventById(@PathVariable("id") long id);
 
-  @PutMapping("/event/{id}")
+  @PutMapping("/events/{id}")
    ResponseEntity<Event> updateEvent(@PathVariable("id") long id,
       @RequestBody Event event);
 
-  @DeleteMapping("/event/{id}")
+  @DeleteMapping("/events/{id}")
    ResponseEntity<?> deleteEvent(@PathVariable("id") long id);
 
 }

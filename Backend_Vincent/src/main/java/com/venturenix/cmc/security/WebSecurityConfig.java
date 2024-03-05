@@ -21,6 +21,13 @@ import com.venturenix.cmc.security.jwt.AuthEntryPointJwt;
 import com.venturenix.cmc.security.jwt.AuthTokenFilter;
 import com.venturenix.cmc.security.services.UserDetailsServiceImpl;
 
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.Customizer;
+
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
 @Configuration
 @EnableMethodSecurity
 // (securedEnabled = true,
@@ -84,26 +91,27 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable())
+        .cors(Customizer.withDefaults())
         .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> 
           auth.requestMatchers("/api/auth/**").permitAll()
               .requestMatchers("/api/test/**").permitAll()
-              .requestMatchers("/api/event/**").permitAll()
-              .requestMatchers("/api/eventgroup/**").permitAll()
-              .requestMatchers("/api/eventquestion/**").permitAll()
-              .requestMatchers("/api/eventuser/**").permitAll()
-              .requestMatchers("/api/group/**").permitAll()
-              .requestMatchers("/api/groupquestionsubmit/**").permitAll()
-              .requestMatchers("/api/groupscore/**").permitAll()
-              .requestMatchers("/api/grouptestcase/**").permitAll()
-              .requestMatchers("/api/grouptuser/**").permitAll()
-              .requestMatchers("/api/question/**").permitAll()
-              .requestMatchers("/api/testcase/**").permitAll()
-              .requestMatchers("/api/user/**").permitAll()
-              .requestMatchers("/api/userquestionsubmit/**").permitAll()
-              .requestMatchers("/api/userscore/**").permitAll()
-              .requestMatchers("/api/usertestcase/**").permitAll()
+              .requestMatchers("/api/events/**").permitAll()
+              .requestMatchers("/api/eventgroups/**").permitAll()
+              .requestMatchers("/api/eventquestions/**").permitAll()
+              .requestMatchers("/api/eventusers/**").permitAll()
+              .requestMatchers("/api/groups/**").permitAll()
+              .requestMatchers("/api/groupquestionsubmits/**").permitAll()
+              .requestMatchers("/api/groupscores/**").permitAll()
+              .requestMatchers("/api/grouptestcases/**").permitAll()
+              .requestMatchers("/api/grouptusers/**").permitAll()
+              .requestMatchers("/api/questions/**").permitAll()
+              .requestMatchers("/api/testcases/**").permitAll()
+              .requestMatchers("/api/users/**").permitAll()
+              .requestMatchers("/api/userquestionsubmits/**").permitAll()
+              .requestMatchers("/api/userscores/**").permitAll()
+              .requestMatchers("/api/usertestcases/**").permitAll()
               .anyRequest().authenticated()
         );
     

@@ -10,31 +10,38 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.venturenix.cmc.entity.UserScore;
+import com.venturenix.cmc.entity.UserTestCase;
 import com.venturenix.cmc.payload.request.UserScoreRequest;
+import com.venturenix.cmc.payload.response.UserScoreDTO;
 import jakarta.validation.Valid;
 
 public interface UserScoreOperation {
 
-  @PostMapping("/userscores/addScore")
-  boolean addScore(@RequestParam String eventid, //
-      @RequestParam String userid, //
-      @RequestParam String questionid, //
-      @RequestParam String testcasePassTotal);
+    @PostMapping("/userscores/addScore")
+    boolean addScore(@RequestParam String eventid, //
+            @RequestParam String userid, //
+            @RequestParam String questionid, //
+            @RequestParam String testcasePassTotal);
 
-  @PostMapping("/userscores/add")
-  ResponseEntity<?> addUserScore(
-      @Valid @RequestBody UserScoreRequest userscoreRequest);
+    @PostMapping("/userscores/add")
+    ResponseEntity<?> addUserScore(
+            @Valid @RequestBody UserScoreRequest userscoreRequest);
 
-  @GetMapping("/userscores")
-  ResponseEntity<List<UserScore>> getAllUserScores();
+    @GetMapping("/userscores")
+    ResponseEntity<List<UserScore>> getAllUserScores();
 
-  @GetMapping("/userscores/{id}")
-  ResponseEntity<UserScore> getUserScoreById(@PathVariable long id);
+    @GetMapping("/userscores/{id}")
+    ResponseEntity<UserScore> getUserScoreById(@PathVariable long id);
 
-  @PutMapping("/userscores/{id}")
-  ResponseEntity<UserScore> updateUserScore(@PathVariable long id,
-      @RequestBody UserScore userscore);
+    @PutMapping("/userscores/{id}")
+    ResponseEntity<UserScore> updateUserScore(@PathVariable long id,
+            @RequestBody UserScore userscore);
 
-  @DeleteMapping("/userscores/{id}")
-  ResponseEntity<?> deleteUserScore(@PathVariable long id);
+    @DeleteMapping("/userscores/{id}")
+    ResponseEntity<?> deleteUserScore(@PathVariable long id);
+
+    @GetMapping("/usertestcases/eventid/{eventid}")
+    public ResponseEntity<UserScoreDTO> getUserTestCaseByEventId(
+            @PathVariable("eventid") String eventid);
+
 }

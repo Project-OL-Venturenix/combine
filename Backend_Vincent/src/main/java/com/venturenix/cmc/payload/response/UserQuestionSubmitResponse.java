@@ -10,46 +10,46 @@ public class UserQuestionSubmitResponse {
   private String type = "Bearer";
   private Long id; 
 
-  private Long eventid;
+  private Long eventId;
 
 
-  private Long questionid;  
+  private Long questionId;  
 
 
-  private Long userid;  
+  private Long userId;  
 
 
-  private Double runtimebymsec;  
+  private Double runtimebyMsec;  
 
-  private LocalDateTime submittime;  
+  private LocalDateTime submitTime;  
 
   private String status;
   
-  private LocalDateTime createddate;
+  private LocalDateTime createdDate;
 
   
-  private Integer createdby;
+  private Integer createdBy;
 
   
-  private LocalDateTime updateddate;
+  private LocalDateTime updatedDate;
 
   
-  private Integer updatedby;
+  private Integer updatedBy;
   
   
-  public UserQuestionSubmitResponse(String accessToken, Long id, Long eventid, Long questionid, Long userid, Double runtimebymsec, LocalDateTime submittime, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public UserQuestionSubmitResponse(String accessToken, Long id, Long eventId, Long questionId, Long userId, Double runtimebyMsec, LocalDateTime submitTime, String status, LocalDateTime createdDate, Integer createdBy, LocalDateTime updatedDate, Integer updatedBy) {
     this.token = accessToken;
     this.id = id;
-    this.eventid = eventid;
-    this.questionid = questionid;
-    this.userid = userid;
-    this.runtimebymsec = runtimebymsec;
-    this.submittime = submittime;
+    this.eventId = eventId;
+    this.questionId = questionId;
+    this.userId = userId;
+    this.runtimebyMsec = runtimebyMsec;
+    this.submitTime = submitTime;
     this.status = status;
-    this.createddate = createddate;
-    this.createdby = createdby;
-    this.updateddate = updateddate;
-    this.updatedby = updatedby;
+    this.createdDate = createdDate;
+    this.createdBy = createdBy;
+    this.updatedDate = updatedDate;
+    this.updatedBy = updatedBy;
   
   }
 
@@ -77,44 +77,44 @@ public class UserQuestionSubmitResponse {
     this.id = id;
   }
 
-    public Long getEventid() {
-    return eventid;
+    public Long getEventId() {
+    return eventId;
   }
 
-  public void setEventid(Long eventid) {
-    this.eventid = eventid;
+  public void setEventid(Long eventId) {
+    this.eventId = eventId;
   }
 
-   public Long getQuestionid() {
-    return questionid;
+   public Long getQuestionId() {
+    return questionId;
   }
 
-  public void setQuestionid(Long questionid) {
-    this.questionid = questionid;
+  public void setQuestionid(Long questionId) {
+    this.questionId = questionId;
   }
 
-  public Long getUserid() {
-    return userid;
+  public Long getUserId() {
+    return userId;
   }
 
-  public void setUserid(Long userid) {
-    this.userid = userid;
+  public void setUserid(Long userId) {
+    this.userId = userId;
   }  
 
   public Double getRuntimebymsec() {
-    return runtimebymsec;
+    return runtimebyMsec;
   }
 
-  public void setRuntimebymsec(Double runtimebymsec) {
-    this.runtimebymsec = runtimebymsec;
+  public void setRuntimebymsec(Double runtimebyMsec) {
+    this.runtimebyMsec = runtimebyMsec;
   }  
 
   public LocalDateTime getSubmittime() {
-    return submittime;
+    return submitTime;
   }
 
-  public void setSubmittime(LocalDateTime submittime) {
-    this.submittime = submittime;
+  public void setSubmittime(LocalDateTime submitTime) {
+    this.submitTime = submitTime;
   }  
 
   public String getStatus() {
@@ -125,35 +125,35 @@ public class UserQuestionSubmitResponse {
     this.status = status;
   }
 
-public Integer getCreatedby() {
-    return createdby;
+public Integer getCreatedBy() {
+    return createdBy;
   }
 
-  public void setCreatedby(Integer createdby) {
-    this.createdby = createdby;
+  public void setCreatedBy(Integer createdBy) {
+    this.createdBy = createdBy;
   }
 
-  public LocalDateTime getCreateddate() {
-    return createddate;
+  public LocalDateTime getCreatedDate() {
+    return createdDate;
   }
 
-  public void setCreateddate(LocalDateTime createddate) {
-    this.createddate = createddate;
+  public void setCreatedDate(LocalDateTime createdDate) {
+    this.createdDate = createdDate;
   }
 
-   public Integer getUpdatedby() {
-    return updatedby;
+   public Integer getUpdatedBy() {
+    return updatedBy;
   }
 
-  public void setUpdatedby(Integer updatedby) {
-    this.updatedby = updatedby;
+  public void setUpdatedBy(Integer updatedBy) {
+    this.updatedBy = updatedBy;
   }
 
-  public LocalDateTime getUpdateddate() {
-    return updateddate;
+  public LocalDateTime getupdatedDate() {
+    return updatedDate;
   }
 
-  public void setUpdateddate(LocalDateTime updateddate) {
-    this.updateddate = updateddate;
+  public void setUpdatedDate(LocalDateTime updatedDate) {
+    this.updatedDate = updatedDate;
   }
 }

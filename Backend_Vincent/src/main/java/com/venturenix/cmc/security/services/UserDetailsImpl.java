@@ -11,18 +11,32 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.venturenix.cmc.entity.User;
+import com.venturenix.cmc.entity.user.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ToString
+@EqualsAndHashCode
+@Getter
+@Setter
 public class UserDetailsImpl implements UserDetails {
   private static final long serialVersionUID = 1L;
 
   private Long id;
 
-  private String firstname;
+  private String firstName;
 
-  private String lastname;
+  private String lastName;
 
-  private String username;
+  private String userName;
 
   private String email;
 
@@ -54,29 +68,35 @@ public class UserDetailsImpl implements UserDetails {
   private Integer sa_experience;
 
   @JsonIgnore
-  private LocalDateTime createddate;
+  private LocalDateTime createdDate;
 
   @JsonIgnore
-  private Integer createdby;
+  private Integer createdBy;
 
   @JsonIgnore
-  private LocalDateTime updateddate;
+  private LocalDateTime updatedDate;
 
   @JsonIgnore
-  private Integer updatedby; 
+  private Integer updatedBy;
 
   @JsonIgnore
   private String status;
 
   private Collection<? extends GrantedAuthority> authorities;
 
-  public UserDetailsImpl(Long id, String firstname, String lastname, String mobile, String email, String username, String password, String company, String title, Integer py_experience, Integer jv_experience, Integer js_experience, Integer cs_experience, Integer sa_experience, String status, LocalDateTime createdate, Integer createby, LocalDateTime updatedate, Integer updateby, Collection<? extends GrantedAuthority> authorities) {
+  public UserDetailsImpl(Long id, String firstName, String lastName,
+      String mobile, String email, String userName, String password,
+      String company, String title, Integer py_experience,
+      Integer jv_experience, Integer js_experience, Integer cs_experience,
+      Integer sa_experience, String status, LocalDateTime createdate,
+      Integer createby, LocalDateTime updatedate, Integer updateby,
+      Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
-    this.firstname = firstname;
-    this.lastname = lastname;
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.mobile = mobile;
     this.email = email;
-    this.username = username;
+    this.userName = userName;
     this.password = password;
     this.company = company;
     this.title = title;
@@ -86,10 +106,10 @@ public class UserDetailsImpl implements UserDetails {
     this.cs_experience = cs_experience;
     this.sa_experience = sa_experience;
     this.status = status;
-    this.createddate = createddate;
-    this.createdby = createdby;
-    this.updateddate = updateddate;
-    this.updatedby = updatedby;
+    this.createdDate = createdDate;
+    this.createdBy = createdBy;
+    this.updatedDate = updatedDate;
+    this.updatedBy = updatedBy;
     this.authorities = authorities;
   }
 
@@ -98,49 +118,31 @@ public class UserDetailsImpl implements UserDetails {
         .map(role -> new SimpleGrantedAuthority(role.getName().name()))
         .collect(Collectors.toList());
 
-    return new UserDetailsImpl(
-        user.getId(), 
-        user.getFirstname(), 
-        user.getLastname(), 
-        user.getMobile(), 
-        user.getEmail(),
-        user.getUsername(), 
-        user.getPassword(), 
-        user.getCompany(), 
-        user.getTitle(), 
-        user.getPy_experience(), 
-        user.getJv_experience(), 
-        user.getJs_experience(), 
-        user.getCs_experience(), 
-        user.getSa_experience(), 
-        user.getStatus(), 
-        user.getCreateddate(), 
-        user.getCreatedby(), 
-        user.getUpdateddate(), 
-        user.getUpdatedby(), 
+    return new UserDetailsImpl(user.getId(), //
+        user.getFirstName(), //
+        user.getLastName(), //
+        user.getMobile(), //
+        user.getEmail(), //
+        user.getUserName(), //
+        user.getPassword(), //
+        user.getCompany(), //
+        user.getTitle(), //
+        user.getPyExperience(), //
+        user.getJvExperience(), //
+        user.getJsExperience(), //
+        user.getCsExperience(), //
+        user.getSaExperience(), //
+        user.getStatus(), //
+        user.getCreatedDate(), //
+        user.getCreatedBy(), //
+        user.getUpdatedDate(), //
+        user.getUpdatedBy(), //
         authorities);
   }
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return authorities;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public String getFirstname() {
-    return firstname;
-  }
-
-  public String getLastname() {
-    return lastname;
-  }  
-
-
-  public String getEmail() {
-    return email;
   }
 
   @Override
@@ -150,78 +152,7 @@ public class UserDetailsImpl implements UserDetails {
 
   @Override
   public String getUsername() {
-    return username;
-  }
-
-  
-  
-  public String getMobile() {
-    return mobile;
-  }
-
-  
-  public String getCompany() {
-    return company;
-  }
-
-  
-  
-  public String getTitle() {
-    return title;
-  }
-
-  
-  public Integer getPy_experience() {
-    return py_experience;
-  }
-
-  
-  
-  public Integer getJv_experience() {
-    return jv_experience;
-  }
-
-  
-  public Integer getJs_experience() {
-    return js_experience;
-  }
-
-  
-  
-  public Integer getCs_experience() {
-    return cs_experience;
-  }
-
-  
-  public Integer getSa_experience() {
-    return sa_experience;
-  }
-
-public Integer getCreatedby() {
-    return createdby;
-  }
-
-
-
-  public LocalDateTime getCreateddate() {
-    return createddate;
-  }
-
-
-   public Integer getUpdatedby() {
-    return updatedby;
-  }
-
-
-
-  public LocalDateTime getUpdateddate() {
-    return updateddate;
-  }
-
-
-
-  public String getStatus() {
-    return status;
+    return userName;
   }
 
   @Override

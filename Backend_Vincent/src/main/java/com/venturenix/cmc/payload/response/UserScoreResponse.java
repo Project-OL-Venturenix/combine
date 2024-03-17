@@ -10,59 +10,59 @@ public class UserScoreResponse {
   private String type = "Bearer";
   private Long id;
 
-  private Long eventid;
+  private Long eventId;
 
 
-  private Long userid;
+  private Long userId;
 
 
-  private Long questionid;
+  private Long questionId;
 
 
-  private Integer testcasepasstotal;
+  private Integer testcasepassTotal;
 
 
-  private Double testcasescoretotal;
+  private Double testcasescoreTotal;
 
 
-  private Integer testcasetotal;
+  private Integer testcaseTotal;
 
   private String status;
 
   private boolean isPass() {
-    return this.testcasepasstotal == 10;
+    return this.testcasepassTotal == 10;
   };
 
-  private LocalDateTime createddate;
+  private LocalDateTime createdDate;
 
 
-  private Integer createdby;
+  private Integer createdBy;
 
 
-  private LocalDateTime updateddate;
+  private LocalDateTime updatedDate;
 
 
-  private Integer updatedby;
+  private Integer updatedBy;
 
 
-  public UserScoreResponse(String accessToken, Long id, Long eventid,
-      Long userid, Long questionid, Integer testcasetotal,
-      Integer testcasepasstotal, Double testcasescoretotal,
-      LocalDateTime createddate, Integer createdby, LocalDateTime updateddate,
-      Integer updatedby) {
+  public UserScoreResponse(String accessToken, Long id, Long eventId,
+      Long userId, Long questionId, Integer testcaseTotal,
+      Integer testcasepassTotal, Double testcasescoreTotal,
+      LocalDateTime createdDate, Integer createdBy, LocalDateTime updatedDate,
+      Integer updatedBy) {
     this.token = accessToken;
     this.id = id;
-    this.eventid = eventid;
-    this.userid = userid;
-    this.questionid = questionid;
-    this.testcasepasstotal = testcasepasstotal;
-    this.testcasescoretotal = testcasescoretotal;
-    this.testcasetotal = testcasetotal;
+    this.eventId = eventId;
+    this.userId = userId;
+    this.questionId = questionId;
+    this.testcasepassTotal = testcasepassTotal;
+    this.testcasescoreTotal = testcasescoreTotal;
+    this.testcaseTotal = testcaseTotal;
     this.status = this.isPass() == true ? "Pass" : "Fail";
-    this.createddate = createddate;
-    this.createdby = createdby;
-    this.updateddate = updateddate;
-    this.updatedby = updatedby;
+    this.createdDate = createdDate;
+    this.createdBy = createdBy;
+    this.updatedDate = updatedDate;
+    this.updatedBy = updatedBy;
 
   }
 
@@ -90,52 +90,52 @@ public class UserScoreResponse {
     this.id = id;
   }
 
-  public Long getEventid() {
-    return eventid;
+  public Long getEventId() {
+    return eventId;
   }
 
-  public void setEventid(Long eventid) {
-    this.eventid = eventid;
+  public void setEventid(Long eventId) {
+    this.eventId = eventId;
   }
 
-  public Long getUserid() {
-    return userid;
+  public Long getUserId() {
+    return userId;
   }
 
-  public void setUserid(Long userid) {
-    this.userid = userid;
+  public void setUserid(Long userId) {
+    this.userId = userId;
   }
 
-  public Long getQuestionid() {
-    return questionid;
+  public Long getQuestionId() {
+    return questionId;
   }
 
-  public void setQuestionid(Long questionid) {
-    this.questionid = questionid;
+  public void setQuestionid(Long questionId) {
+    this.questionId = questionId;
   }
 
   public Integer getTestcasetotal() {
-    return testcasetotal;
+    return testcaseTotal;
   }
 
-  public void setTestcasetotal(Integer testcasetotal) {
-    this.testcasetotal = testcasetotal;
+  public void setTestcasetotal(Integer testcaseTotal) {
+    this.testcaseTotal = testcaseTotal;
   }
 
   public Integer getTestcasepasstotal() {
-    return testcasepasstotal;
+    return testcasepassTotal;
   }
 
-  public void setTestcasepasstotal(Integer testcasepasstotal) {
-    this.testcasepasstotal = testcasepasstotal;
+  public void setTestcasepasstotal(Integer testcasepassTotal) {
+    this.testcasepassTotal = testcasepassTotal;
   }
 
   public Double getTestcasescoretotal() {
-    return testcasescoretotal;
+    return testcasescoreTotal;
   }
 
-  public void setTestcasescoretotal(Double testcasescoretotal) {
-    this.testcasescoretotal = testcasescoretotal;
+  public void setTestcasescoretotal(Double testcasescoreTotal) {
+    this.testcasescoreTotal = testcasescoreTotal;
   }
 
   public String getStatus() {
@@ -146,35 +146,35 @@ public class UserScoreResponse {
     this.status = this.isPass() == true ? "Pass" : "Fail";
   }
 
-  public Integer getCreatedby() {
-    return createdby;
+  public Integer getCreatedBy() {
+    return createdBy;
   }
 
-  public void setCreatedby(Integer createdby) {
-    this.createdby = createdby;
+  public void setCreatedBy(Integer createdBy) {
+    this.createdBy = createdBy;
   }
 
-  public LocalDateTime getCreateddate() {
-    return createddate;
+  public LocalDateTime getCreatedDate() {
+    return createdDate;
   }
 
-  public void setCreateddate(LocalDateTime createddate) {
-    this.createddate = createddate;
+  public void setCreatedDate(LocalDateTime createdDate) {
+    this.createdDate = createdDate;
   }
 
-  public Integer getUpdatedby() {
-    return updatedby;
+  public Integer getUpdatedBy() {
+    return updatedBy;
   }
 
-  public void setUpdatedby(Integer updatedby) {
-    this.updatedby = updatedby;
+  public void setUpdatedBy(Integer updatedBy) {
+    this.updatedBy = updatedBy;
   }
 
-  public LocalDateTime getUpdateddate() {
-    return updateddate;
+  public LocalDateTime getupdatedDate() {
+    return updatedDate;
   }
 
-  public void setUpdateddate(LocalDateTime updateddate) {
-    this.updateddate = updateddate;
+  public void setUpdatedDate(LocalDateTime updatedDate) {
+    this.updatedDate = updatedDate;
   }
 }

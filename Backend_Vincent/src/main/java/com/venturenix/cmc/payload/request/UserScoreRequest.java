@@ -1,95 +1,37 @@
 package com.venturenix.cmc.payload.request;
 
-import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class UserScoreRequest {
 
   // @NotBlank
-  private Long eventid;
+  private Long eventId;
 
   // @NotBlank
-  private Long userid;
+  private Long userId;
 
   // @NotBlank
-  private Long questionid;
+  private Long questionId;
 
   // @NotBlank
-  private Integer testcasePassTotal;
+  private Integer testcasepassTotal;
 
   // @NotBlank
-  private Double testcaseScoreTotal;
+  private Double testcasescoreTotal;
 
   // @NotBlank
-  private Integer testcasetotal = 10;
+  private Integer testcaseTotal = 10;
 
 
 
-  private Integer createdby;
+  private Integer createdBy;
 
 
 
-  private Integer updatedby;
+  private Integer updatedBy;
 
-  public Long getEventid() {
-    return eventid;
-  }
-
-  public void setEventid(Long eventid) {
-    this.eventid = eventid;
-  }
-
-  public Long getUserid() {
-    return userid;
-  }
-
-  public void setUserid(Long userid) {
-    this.userid = userid;
-  }
-
-  public Long getQuestionid() {
-    return questionid;
-  }
-
-  public void setQuestionid(Long questionid) {
-    this.questionid = questionid;
-  }
-
-  public Integer getTestcasetotal() {
-    return testcasetotal;
-  }
-
-  public Integer getTestcasepasstotal() {
-    return testcasePassTotal;
-  }
-
-  public void setTestcasepasstotal(Integer testcasePassTotal) {
-    this.testcasePassTotal = testcasePassTotal;
-  }
-
-  public Double getTestcasescoretotal() {
-    return testcaseScoreTotal;
-  }
-
-  public void setTestcasescoretotal(Double testcaseScoreTotal) {
-    this.testcaseScoreTotal = testcaseScoreTotal;
-  }
-
-
-  public Integer getCreatedby() {
-    return createdby;
-  }
-
-  public void setCreatedby(Integer createdby) {
-    this.createdby = createdby;
-  }
-
-
-  public Integer getUpdatedby() {
-    return updatedby;
-  }
-
-  public void setUpdatedby(Integer updatedby) {
-    this.updatedby = updatedby;
-  }
 
 }

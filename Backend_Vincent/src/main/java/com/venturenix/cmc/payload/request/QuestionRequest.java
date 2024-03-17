@@ -1,15 +1,11 @@
 package com.venturenix.cmc.payload.request;
 
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.annotation.Nonnull;
-import jakarta.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,10 +23,12 @@ public class QuestionRequest {
   // @Nonnull
   private String methodSignatures;
 
-  private LocalDateTime createddate;
-  private Integer createdby;
-  private LocalDateTime updateddate;
-  private Integer updatedby;
+  private Integer targetCompleteTime;
+
+  private LocalDateTime createdDate;
+  private Integer createdBy;
+  private LocalDateTime updatedDate;
+  private Integer updatedBy;
 
 
 

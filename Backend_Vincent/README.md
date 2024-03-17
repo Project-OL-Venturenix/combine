@@ -32,7 +32,7 @@ Open `src/main/resources/application.properties`
 - For PostgreSQL:
 ```
 spring.datasource.url= jdbc:postgresql://localhost:5432/testdb
-spring.datasource.username= postgres
+spring.datasource.userName= postgres
 spring.datasource.password= 123
 
 spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation= true
@@ -48,7 +48,7 @@ bezkoder.app.jwtExpirationMs= 86400000
 - For MySQL
 ```
 spring.datasource.url=jdbc:mysql://localhost:3306/testdb_spring?useSSL=false
-spring.datasource.username=root
+spring.datasource.userName=root
 spring.datasource.password=123456
 
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect

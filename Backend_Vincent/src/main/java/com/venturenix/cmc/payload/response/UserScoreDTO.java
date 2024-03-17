@@ -1,5 +1,6 @@
 package com.venturenix.cmc.payload.response;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
@@ -22,5 +23,7 @@ public class UserScoreDTO {
   public static class UserResult {
     private String name;
     private Map<String, Integer> score;
+    private Map<String, LocalDateTime> submitTime;
+    private Map<String, String> runtime;
   }
 }

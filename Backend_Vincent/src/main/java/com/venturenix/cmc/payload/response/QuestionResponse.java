@@ -25,8 +25,8 @@ public class QuestionResponse {
   private String classDeclaration;
   private String code;
   private String mainMethod;
-  private Integer createddate;
-  private Integer createdby;
-  private LocalDateTime updateddate;
-  private Integer updatedby;
+  private Integer createdDate;
+  private Integer createdBy;
+  private LocalDateTime updatedDate;
+  private Integer updatedBy;
 }

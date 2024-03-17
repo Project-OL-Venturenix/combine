@@ -14,28 +14,28 @@ public class TestCaseScoreResponse {
   private Double testcasescore;
   private String status;
   
-  private LocalDateTime createddate;
+  private LocalDateTime createdDate;
 
   
-  private Integer createdby;
+  private Integer createdBy;
 
   
-  private LocalDateTime updateddate;
+  private LocalDateTime updatedDate;
 
   
-  private Integer updatedby;
+  private Integer updatedBy;
   
   
-  public TestCaseScoreResponse(String accessToken, Long id, String testcasescoredesc, Double testcasescore,  String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public TestCaseScoreResponse(String accessToken, Long id, String testcasescoredesc, Double testcasescore,  String status, LocalDateTime createdDate, Integer createdBy, LocalDateTime updatedDate, Integer updatedBy) {
     this.token = accessToken;
     this.id = id;
     this.testcasescoredesc = testcasescoredesc;
     this.testcasescore = testcasescore;
     this.status = status;
-    this.createddate = createddate;
-    this.createdby = createdby;
-    this.updateddate = updateddate;
-    this.updatedby = updatedby;
+    this.createdDate = createdDate;
+    this.createdBy = createdBy;
+    this.updatedDate = updatedDate;
+    this.updatedBy = updatedBy;
   
   }
 
@@ -88,35 +88,35 @@ public class TestCaseScoreResponse {
     this.status = status;
   }
 
-public Integer getCreatedby() {
-    return createdby;
+public Integer getCreatedBy() {
+    return createdBy;
   }
 
-  public void setCreatedby(Integer createdby) {
-    this.createdby = createdby;
+  public void setCreatedBy(Integer createdBy) {
+    this.createdBy = createdBy;
   }
 
-  public LocalDateTime getCreateddate() {
-    return createddate;
+  public LocalDateTime getCreatedDate() {
+    return createdDate;
   }
 
-  public void setCreateddate(LocalDateTime createddate) {
-    this.createddate = createddate;
+  public void setCreatedDate(LocalDateTime createdDate) {
+    this.createdDate = createdDate;
   }
 
-   public Integer getUpdatedby() {
-    return updatedby;
+   public Integer getUpdatedBy() {
+    return updatedBy;
   }
 
-  public void setUpdatedby(Integer updatedby) {
-    this.updatedby = updatedby;
+  public void setUpdatedBy(Integer updatedBy) {
+    this.updatedBy = updatedBy;
   }
 
-  public LocalDateTime getUpdateddate() {
-    return updateddate;
+  public LocalDateTime getupdatedDate() {
+    return updatedDate;
   }
 
-  public void setUpdateddate(LocalDateTime updateddate) {
-    this.updateddate = updateddate;
+  public void setUpdatedDate(LocalDateTime updatedDate) {
+    this.updatedDate = updatedDate;
   }
 }

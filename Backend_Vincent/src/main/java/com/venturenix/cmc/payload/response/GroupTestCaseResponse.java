@@ -11,66 +11,66 @@ public class GroupTestCaseResponse {
   private String type = "Bearer";
   private Long id; 
  
-  private Long eventid;
+  private Long eventId;
 
  
-  private Long groupid;
+  private Long groupId;
 
  
-  private Long questionid;
+  private Long questionId;
 
   private Long testcaseid;
 
-  private Long userid;
+  private Long userId;
 
-  private OffsetDateTime runstarttimeutc;
+  private OffsetDateTime runstartTimeutc;
 
-  private OffsetDateTime  runendtimeutc;
+  private OffsetDateTime  runendTimeutc;
 
-  private LocalDateTime  runstarttime;    
+  private LocalDateTime  runstartTime;    
 
-  private LocalDateTime runendtime;
+  private LocalDateTime runendTime;
 
   private String testcasefilepath;
 
-  private String filename;    
+  private String fileName;    
 
   private String testcasepassstatus;
 
   private String status;
   
-  private LocalDateTime createddate;
+  private LocalDateTime createdDate;
 
   
-  private Integer createdby;
+  private Integer createdBy;
 
   
-  private LocalDateTime updateddate;
+  private LocalDateTime updatedDate;
 
   
-  private Integer updatedby;
+  private Integer updatedBy;
   
   
-  public GroupTestCaseResponse(String accessToken, Long id, Long eventid, Long groupid, Long questionid, Long testcaseid, Long userid, OffsetDateTime runstarttimeutc, OffsetDateTime runendtimeutc, LocalDateTime runstarttime, LocalDateTime runendtime, String testcasefilepath, String filename, String testcasepassstatus, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public GroupTestCaseResponse(String accessToken, Long id, Long eventId, Long groupId, Long questionId, Long testcaseid, Long userId, OffsetDateTime runstartTimeutc, OffsetDateTime runendTimeutc, LocalDateTime runstartTime, LocalDateTime runendTime, String testcasefilepath, String fileName, String testcasepassstatus, String status, LocalDateTime createdDate, Integer createdBy, LocalDateTime updatedDate, Integer updatedBy) {
     this.token = accessToken;
     this.id = id;
-    this.eventid = eventid;
-    this.groupid = groupid;
-    this.questionid = questionid;
+    this.eventId = eventId;
+    this.groupId = groupId;
+    this.questionId = questionId;
     this.testcaseid = testcaseid;
-    this.userid = userid;
-    this.runstarttimeutc = runstarttimeutc;
-    this.runendtimeutc = runendtimeutc;
-    this.runstarttime = runstarttime;
-    this.runendtime = runendtime;
+    this.userId = userId;
+    this.runstartTimeutc = runstartTimeutc;
+    this.runendTimeutc = runendTimeutc;
+    this.runstartTime = runstartTime;
+    this.runendTime = runendTime;
     this.testcasefilepath = testcasefilepath;    
-    this.filename = filename;
+    this.fileName = fileName;
     this.testcasepassstatus = testcasepassstatus;  
     this.status = status;
-    this.createddate = createddate;
-    this.createdby = createdby;
-    this.updateddate = updateddate;
-    this.updatedby = updatedby;
+    this.createdDate = createdDate;
+    this.createdBy = createdBy;
+    this.updatedDate = updatedDate;
+    this.updatedBy = updatedBy;
   
   }
 
@@ -98,36 +98,36 @@ public class GroupTestCaseResponse {
     this.id = id;
   }
 
-  public Long getEventid() {
-    return eventid;
+  public Long getEventId() {
+    return eventId;
   }
 
-  public void setEventid(Long eventid) {
-    this.eventid = eventid;
+  public void setEventid(Long eventId) {
+    this.eventId = eventId;
   }
 
-  public Long getGroupid() {
-    return groupid;
+  public Long getGroupId() {
+    return groupId;
   }
 
-  public void setGroupid(Long groupid) {
-    this.groupid = groupid;
+  public void setGroupid(Long groupId) {
+    this.groupId = groupId;
   }
 
-  public Long getUserid() {
-    return userid;
+  public Long getUserId() {
+    return userId;
   }
 
-  public void setUserid(Long userid) {
-    this.userid = userid;
+  public void setUserid(Long userId) {
+    this.userId = userId;
   }
 
-  public Long getQuestionid() {
-    return questionid;
+  public Long getQuestionId() {
+    return questionId;
   }
 
-  public void setQuestionid(Long questionid) {
-    this.questionid = questionid;
+  public void setQuestionid(Long questionId) {
+    this.questionId = questionId;
   }
 
   public Long getTestcaseid() {
@@ -147,35 +147,35 @@ public class GroupTestCaseResponse {
   }    
 
   public OffsetDateTime getRunstarttimeutc() {
-    return runstarttimeutc;
+    return runstartTimeutc;
   }  
 
-  public void setRunstarttimeutc(OffsetDateTime runstarttimeutc) {
-    this.runstarttimeutc = runstarttimeutc;
+  public void setRunstarttimeutc(OffsetDateTime runstartTimeutc) {
+    this.runstartTimeutc = runstartTimeutc;
   }  
 
   public OffsetDateTime getRunendtimeutc() {
-    return runendtimeutc;
+    return runendTimeutc;
   }  
 
-  public void setRunendtimeutc(OffsetDateTime runendtimeutc) {
-    this.runendtimeutc = runendtimeutc;
+  public void setRunendtimeutc(OffsetDateTime runendTimeutc) {
+    this.runendTimeutc = runendTimeutc;
   }    
 
   public LocalDateTime getRunstarttime() {
-    return runstarttime;
+    return runstartTime;
   }  
 
-  public void setRunstarttime(LocalDateTime runstarttime) {
-    this.runstarttime = runstarttime;
+  public void setRunstarttime(LocalDateTime runstartTime) {
+    this.runstartTime = runstartTime;
   } 
 
   public LocalDateTime getRunendtime() {
-    return runendtime;
+    return runendTime;
   }  
 
-  public void setRunendtime(LocalDateTime runendtime) {
-    this.runendtime = runendtime;
+  public void setRunendtime(LocalDateTime runendTime) {
+    this.runendTime = runendTime;
   }   
 
   public String getTestcasefilepath() {
@@ -187,11 +187,11 @@ public class GroupTestCaseResponse {
   }   
 
   public String getFilename() {
-    return filename;
+    return fileName;
   }  
 
-  public void setFilename(String filename) {
-    this.filename = filename;
+  public void setFilename(String fileName) {
+    this.fileName = fileName;
   }     
 
   public String getStatus() {
@@ -202,35 +202,35 @@ public class GroupTestCaseResponse {
     this.status = status;
   }
 
-public Integer getCreatedby() {
-    return createdby;
+public Integer getCreatedBy() {
+    return createdBy;
   }
 
-  public void setCreatedby(Integer createdby) {
-    this.createdby = createdby;
+  public void setCreatedBy(Integer createdBy) {
+    this.createdBy = createdBy;
   }
 
-  public LocalDateTime getCreateddate() {
-    return createddate;
+  public LocalDateTime getCreatedDate() {
+    return createdDate;
   }
 
-  public void setCreateddate(LocalDateTime createddate) {
-    this.createddate = createddate;
+  public void setCreatedDate(LocalDateTime createdDate) {
+    this.createdDate = createdDate;
   }
 
-   public Integer getUpdatedby() {
-    return updatedby;
+   public Integer getUpdatedBy() {
+    return updatedBy;
   }
 
-  public void setUpdatedby(Integer updatedby) {
-    this.updatedby = updatedby;
+  public void setUpdatedBy(Integer updatedBy) {
+    this.updatedBy = updatedBy;
   }
 
-  public LocalDateTime getUpdateddate() {
-    return updateddate;
+  public LocalDateTime getupdatedDate() {
+    return updatedDate;
   }
 
-  public void setUpdateddate(LocalDateTime updateddate) {
-    this.updateddate = updateddate;
+  public void setUpdatedDate(LocalDateTime updatedDate) {
+    this.updatedDate = updatedDate;
   }
 }

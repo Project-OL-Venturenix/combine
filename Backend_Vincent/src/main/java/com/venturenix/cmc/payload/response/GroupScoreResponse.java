@@ -10,51 +10,51 @@ public class GroupScoreResponse {
   private String type = "Bearer";
   private Long id; 
  
-  private Long eventid;
+  private Long eventId;
 
  
-  private Long groupid;
+  private Long groupId;
 
  
-  private Long questionid;
+  private Long questionId;
 
  
-  private Integer testcasepasstotal;
+  private Integer testcasepassTotal;
 
  
-  private Double testcasescoretotal;
+  private Double testcasescoreTotal;
 
  
-  private Integer testcasetotal;          
+  private Integer testcaseTotal;          
 
   private String status;
   
-  private LocalDateTime createddate;
+  private LocalDateTime createdDate;
 
   
-  private Integer createdby;
+  private Integer createdBy;
 
   
-  private LocalDateTime updateddate;
+  private LocalDateTime updatedDate;
 
   
-  private Integer updatedby;
+  private Integer updatedBy;
   
   
-  public GroupScoreResponse(String accessToken, Long id, Long eventid, Long groupid, Long questionid, Integer testcasepasstotal, Double testcasescoretotal, Integer testcasetotal, String status, LocalDateTime createddate, Integer createdby, LocalDateTime updateddate, Integer updatedby) {
+  public GroupScoreResponse(String accessToken, Long id, Long eventId, Long groupId, Long questionId, Integer testcasepassTotal, Double testcasescoreTotal, Integer testcaseTotal, String status, LocalDateTime createdDate, Integer createdBy, LocalDateTime updatedDate, Integer updatedBy) {
     this.token = accessToken;
     this.id = id;
-    this.eventid = eventid;
-    this.groupid = groupid;
-    this.questionid = questionid;
-    this.testcasepasstotal = testcasepasstotal;
-    this.testcasescoretotal = testcasescoretotal;
-    this.testcasetotal = testcasetotal;
+    this.eventId = eventId;
+    this.groupId = groupId;
+    this.questionId = questionId;
+    this.testcasepassTotal = testcasepassTotal;
+    this.testcasescoreTotal = testcasescoreTotal;
+    this.testcaseTotal = testcaseTotal;
     this.status = status;
-    this.createddate = createddate;
-    this.createdby = createdby;
-    this.updateddate = updateddate;
-    this.updatedby = updatedby;
+    this.createdDate = createdDate;
+    this.createdBy = createdBy;
+    this.updatedDate = updatedDate;
+    this.updatedBy = updatedBy;
   
   }
 
@@ -82,52 +82,52 @@ public class GroupScoreResponse {
     this.id = id;
   }
 
-   public Long getEventid() {
-    return eventid;
+   public Long getEventId() {
+    return eventId;
   }
 
-  public void setEventid(Long eventid) {
-    this.eventid = eventid;
+  public void setEventid(Long eventId) {
+    this.eventId = eventId;
   }  
 
-  public Long getGroupid() {
-    return groupid;
+  public Long getGroupId() {
+    return groupId;
   }
 
-  public void setGroupid(Long groupid) {
-    this.groupid = groupid;
+  public void setGroupid(Long groupId) {
+    this.groupId = groupId;
   }
 
-  public Long getQuestionid() {
-    return questionid;
+  public Long getQuestionId() {
+    return questionId;
   }
 
-  public void setQuestionid(Long questionid) {
-    this.questionid = questionid;
+  public void setQuestionid(Long questionId) {
+    this.questionId = questionId;
   }  
 
   public Integer getTestcasetotal() {
-    return testcasetotal;
+    return testcaseTotal;
   }
 
-  public void setTestcasetotal(Integer testcasetotal) {
-    this.testcasetotal = testcasetotal;
+  public void setTestcasetotal(Integer testcaseTotal) {
+    this.testcaseTotal = testcaseTotal;
   }  
 
   public Integer getTestcasepasstotal() {
-    return testcasepasstotal;
+    return testcasepassTotal;
   }
 
-  public void setTestcasepasstotal(Integer testcasepasstotal) {
-    this.testcasepasstotal = testcasepasstotal;
+  public void setTestcasepasstotal(Integer testcasepassTotal) {
+    this.testcasepassTotal = testcasepassTotal;
   } 
 
   public Double getTestcasescoretotal() {
-    return testcasescoretotal;
+    return testcasescoreTotal;
   }
 
-  public void setTestcasescoretotal(Double testcasescoretotal) {
-    this.testcasescoretotal = testcasescoretotal;
+  public void setTestcasescoretotal(Double testcasescoreTotal) {
+    this.testcasescoreTotal = testcasescoreTotal;
   } 
   public String getStatus() {
     return status;
@@ -137,35 +137,35 @@ public class GroupScoreResponse {
     this.status = status;
   }
 
-public Integer getCreatedby() {
-    return createdby;
+public Integer getCreatedBy() {
+    return createdBy;
   }
 
-  public void setCreatedby(Integer createdby) {
-    this.createdby = createdby;
+  public void setCreatedBy(Integer createdBy) {
+    this.createdBy = createdBy;
   }
 
-  public LocalDateTime getCreateddate() {
-    return createddate;
+  public LocalDateTime getCreatedDate() {
+    return createdDate;
   }
 
-  public void setCreateddate(LocalDateTime createddate) {
-    this.createddate = createddate;
+  public void setCreatedDate(LocalDateTime createdDate) {
+    this.createdDate = createdDate;
   }
 
-   public Integer getUpdatedby() {
-    return updatedby;
+   public Integer getUpdatedBy() {
+    return updatedBy;
   }
 
-  public void setUpdatedby(Integer updatedby) {
-    this.updatedby = updatedby;
+  public void setUpdatedBy(Integer updatedBy) {
+    this.updatedBy = updatedBy;
   }
 
-  public LocalDateTime getUpdateddate() {
-    return updateddate;
+  public LocalDateTime getupdatedDate() {
+    return updatedDate;
   }
 
-  public void setUpdateddate(LocalDateTime updateddate) {
-    this.updateddate = updateddate;
+  public void setUpdatedDate(LocalDateTime updatedDate) {
+    this.updatedDate = updatedDate;
   }
 }

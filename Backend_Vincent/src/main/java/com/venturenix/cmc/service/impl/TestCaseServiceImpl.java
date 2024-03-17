@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.venturenix.cmc.payload.response.TestCaseDTO;
-import com.venturenix.cmc.repository.TestCaseRepository;
+import com.venturenix.cmc.repository.questionBank.TestCaseRepository;
 import com.venturenix.cmc.service.QuestionBankService;
 import com.venturenix.cmc.service.TestCaseService;
 
@@ -83,7 +83,7 @@ public class TestCaseServiceImpl implements TestCaseService {
     return testCaseBuilder.toString();
   }
 
-  // public Long QuestionId() {
+  // public Long questionId() {
   // return this.getQuestionBank().getQuestionId();
   // }
   @Override

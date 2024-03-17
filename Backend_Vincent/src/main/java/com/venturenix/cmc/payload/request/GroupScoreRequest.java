@@ -1,135 +1,44 @@
 package com.venturenix.cmc.payload.request;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
-import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class GroupScoreRequest {
 
   //@NotBlank
-  private Long eventid;
+  private Long eventId;
 
   //@NotBlank
-  private Long groupid;
+  private Long groupId;
 
   //@NotBlank
-  private Long questionid;
+  private Long questionId;
 
   //@NotBlank
-  private Integer testcasepasstotal;
+  private Integer testcasepassTotal;
 
   //@NotBlank
-  private Double testcasescoretotal;
+  private Double testcasescoreTotal;
 
   //@NotBlank
-  private Integer testcasetotal;          
+  private Integer testcaseTotal;          
 
   //@NotBlank
   private String status;
 
   
-  private LocalDateTime createddate;
+  private LocalDateTime createdDate;
 
   
-  private Integer createdby;
+  private Integer createdBy;
 
   
-  private LocalDateTime updateddate;
+  private LocalDateTime updatedDate;
 
   
-  private Integer updatedby;
-
-  public Long getEventid() {
-    return eventid;
-  }
-
-  public void setEventid(Long eventid) {
-    this.eventid = eventid;
-  }  
-
-  public Long getGroupid() {
-    return groupid;
-  }
-
-  public void setGroupid(Long groupid) {
-    this.groupid = groupid;
-  }
-
-  public Long getQuestionid() {
-    return questionid;
-  }
-
-  public void setQuestionid(Long questionid) {
-    this.questionid = questionid;
-  }  
-
-  public Integer getTestcasetotal() {
-    return testcasetotal;
-  }
-
-  public void setTestcasetotal(Integer testcasetotal) {
-    this.testcasetotal = testcasetotal;
-  }  
-
-  public Integer getTestcasepasstotal() {
-    return testcasepasstotal;
-  }
-
-  public void setTestcasepasstotal(Integer testcasepasstotal) {
-    this.testcasepasstotal = testcasepasstotal;
-  } 
-
-  public Double getTestcasescoretotal() {
-    return testcasescoretotal;
-  }
-
-  public void setTestcasescoretotal(Double testcasescoretotal) {
-    this.testcasescoretotal = testcasescoretotal;
-  } 
-
-
-
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
- public Integer getCreatedby() {
-    return createdby;
-  }
-
-  public void setCreatedby(Integer createdby) {
-    this.createdby = createdby;
-  }
-
-  public LocalDateTime getCreateddate() {
-    return createddate;
-  }
-
-  public void setCreateddate(LocalDateTime createddate) {
-    this.createddate = createddate;
-  }
-
-   public Integer getUpdatedby() {
-    return updatedby;
-  }
-
-  public void setUpdatedby(Integer updatedby) {
-    this.updatedby = updatedby;
-  }
-
-  public LocalDateTime getUpdateddate() {
-    return updateddate;
-  }
-
-  public void setUpdateddate(LocalDateTime updateddate) {
-    this.updateddate = updateddate;
-  }
+  private Integer updatedBy;
 
 }

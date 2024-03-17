@@ -9,9 +9,9 @@ public class JwtResponse {
   private String token;
   private String type = "Bearer";
   private Long id;
-  private String firstname;
-  private String lastname;
-  private String username;
+  private String firstName;
+  private String lastName;
+  private String userName;
   private String email;
   private String mobile;
   private String company;
@@ -21,22 +21,22 @@ public class JwtResponse {
   private Integer js_experience;
   private Integer cs_experience;
   private Integer sa_experience;
-  private LocalDateTime createddate;
-  private Integer createdby;
-  private LocalDateTime updateddate;
-  private Integer updatedby; 
+  private LocalDateTime createdDate;
+  private Integer createdBy;
+  private LocalDateTime updatedDate;
+  private Integer updatedBy; 
   private String status;
 
   private List<String> roles;
 
-  public JwtResponse(String accessToken, Long id, String firstname, String lastname, String mobile, String email, String username, String company, String title, Integer py_experience, Integer jv_experience, Integer js_experience, Integer cs_experience, Integer sa_experience, String status, LocalDateTime createdate, Integer createby, LocalDateTime updatedate, Integer updateby, List<String> roles) {
+  public JwtResponse(String accessToken, Long id, String firstName, String lastName, String mobile, String email, String userName, String company, String title, Integer py_experience, Integer jv_experience, Integer js_experience, Integer cs_experience, Integer sa_experience, String status, LocalDateTime createdate, Integer createby, LocalDateTime updatedate, Integer updateby, List<String> roles) {
     this.token = accessToken;
     this.id = id;
-    this.firstname = firstname;
-    this.lastname = lastname;    
+    this.firstName = firstName;
+    this.lastName = lastName;    
     this.mobile = mobile;
     this.email = email;
-    this.username = username;
+    this.userName = userName;
     this.company = company;
     this.title = title;
     this.py_experience = py_experience;
@@ -45,10 +45,10 @@ public class JwtResponse {
     this.cs_experience = cs_experience;
     this.sa_experience = sa_experience;
     this.status = status;
-    this.createddate = createddate;
-    this.createdby = createdby;
-    this.updateddate = updateddate;
-    this.updatedby = updatedby;
+    this.createdDate = createdDate;
+    this.createdBy = createdBy;
+    this.updatedDate = updatedDate;
+    this.updatedBy = updatedBy;
     this.roles = roles;
   }
 
@@ -77,19 +77,19 @@ public class JwtResponse {
   }
 
   public String getFirstname() {
-    return firstname;
+    return firstName;
   }
 
-  public void setFirstname(String firstname) {
-    this.firstname = firstname;
+  public void setFirstname(String firstName) {
+    this.firstName = firstName;
   }
 
   public String getLastname() {
-    return lastname;
+    return lastName;
   }
 
-  public void setLastname(String lastname) {
-    this.lastname = lastname;
+  public void setLastname(String lastName) {
+    this.lastName = lastName;
   }
 
 
@@ -102,11 +102,11 @@ public class JwtResponse {
   }
 
   public String getUsername() {
-    return username;
+    return userName;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  public void setUsername(String userName) {
+    this.userName = userName;
   }
 
   public String getCompany() {
@@ -173,36 +173,36 @@ public class JwtResponse {
     this.sa_experience = sa_experience;
   }  
 
-public Integer getCreatedby() {
-    return createdby;
+public Integer getCreatedBy() {
+    return createdBy;
   }
 
-  public void setCreatedby(Integer createdby) {
-    this.createdby = createdby;
+  public void setCreatedBy(Integer createdBy) {
+    this.createdBy = createdBy;
   }
 
-  public LocalDateTime getCreateddate() {
-    return createddate;
+  public LocalDateTime getCreatedDate() {
+    return createdDate;
   }
 
-  public void setCreateddate(LocalDateTime createddate) {
-    this.createddate = createddate;
+  public void setCreatedDate(LocalDateTime createdDate) {
+    this.createdDate = createdDate;
   }
 
-   public Integer getUpdatedby() {
-    return updatedby;
+   public Integer getUpdatedBy() {
+    return updatedBy;
   }
 
-  public void setUpdatedby(Integer updatedby) {
-    this.updatedby = updatedby;
+  public void setUpdatedBy(Integer updatedBy) {
+    this.updatedBy = updatedBy;
   }
 
-  public LocalDateTime getUpdateddate() {
-    return updateddate;
+  public LocalDateTime getupdatedDate() {
+    return updatedDate;
   }
 
-  public void setUpdateddate(LocalDateTime updateddate) {
-    this.updateddate = updateddate;
+  public void setUpdatedDate(LocalDateTime updatedDate) {
+    this.updatedDate = updatedDate;
   }
 
 

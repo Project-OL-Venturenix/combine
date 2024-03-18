@@ -29,8 +29,8 @@ import com.vtxlab.projectol.backend_oscar.repository.questionBank.TestCaseReposi
 import com.vtxlab.projectol.backend_oscar.repository.user.RoleRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.UserRepository;
 import com.vtxlab.projectol.backend_oscar.security.jwt.JwtUtils;
-import com.vtxlab.projectol.backend_oscar.service.QuestionBankService;
-import com.vtxlab.projectol.backend_oscar.service.TestCaseService;
+import com.vtxlab.projectol.backend_oscar.service.questionBank.QuestionBankService;
+import com.vtxlab.projectol.backend_oscar.service.questionBank.TestCaseService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;

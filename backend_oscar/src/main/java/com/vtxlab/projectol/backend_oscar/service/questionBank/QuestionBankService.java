@@ -1,4 +1,4 @@
-package com.vtxlab.projectol.backend_oscar.service;
+package com.vtxlab.projectol.backend_oscar.service.questionBank;
 
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBank;
 

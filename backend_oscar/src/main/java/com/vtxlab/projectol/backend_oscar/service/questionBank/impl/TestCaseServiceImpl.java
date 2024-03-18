@@ -1,12 +1,12 @@
-package com.vtxlab.projectol.backend_oscar.service.impl;
+package com.vtxlab.projectol.backend_oscar.service.questionBank.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.vtxlab.projectol.backend_oscar.payload.response.question.TestCaseDTO;
 import com.vtxlab.projectol.backend_oscar.repository.questionBank.TestCaseRepository;
-import com.vtxlab.projectol.backend_oscar.service.QuestionBankService;
-import com.vtxlab.projectol.backend_oscar.service.TestCaseService;
+import com.vtxlab.projectol.backend_oscar.service.questionBank.QuestionBankService;
+import com.vtxlab.projectol.backend_oscar.service.questionBank.TestCaseService;
 
 @Service
 public class TestCaseServiceImpl implements TestCaseService {

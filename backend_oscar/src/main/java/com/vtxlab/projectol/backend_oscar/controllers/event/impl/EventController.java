@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,29 +15,11 @@ import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import com.vtxlab.projectol.backend_oscar.payload.request.event.EventRequest;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.MessageResponse;
 import com.vtxlab.projectol.backend_oscar.repository.event.EventRepository;
-import com.vtxlab.projectol.backend_oscar.repository.user.RoleRepository;
-import com.vtxlab.projectol.backend_oscar.repository.user.UserRepository;
-import com.vtxlab.projectol.backend_oscar.security.jwt.JwtUtils;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class EventController implements EventOperation {
-  @Autowired
-  AuthenticationManager authenticationManager;
-
-
-  @Autowired
-  UserRepository userRepository;
-
-  @Autowired
-  RoleRepository roleRepository;
-
-  @Autowired
-  PasswordEncoder encoder;
-
-  @Autowired
-  JwtUtils jwtUtils;
 
   @Autowired
   EventRepository eventRepository;

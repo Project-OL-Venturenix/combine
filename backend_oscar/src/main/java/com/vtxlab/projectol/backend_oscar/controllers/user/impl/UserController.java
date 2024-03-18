@@ -132,39 +132,53 @@ public class UserController implements UserOperation {
 
   }
 
+  @Override
+  public ResponseEntity<User> getUserByEventId(String eventid) {
+    Long eventId = Long.valueOf(eventid);
+    Optional<User> result = userRepository.findAll().stream()//
+        .filter(e -> e.getEvents().stream()
+            .anyMatch(event -> event.getId().equals(eventId)))//
+        .findFirst();
+    if (result.isPresent()) {
+      return ResponseEntity.ok(result.get());
+    } else {
+      return ResponseEntity.ok(new User());
+    }
+  }
+
   // @Override
   // public ResponseEntity<UserScoreDTO> getUserTestCaseByEventId(String eventid) {
-  //   Long eventId = Long.valueOf(eventid);
-  //   List<UserScore> target = userscoreRepository.findByEventId(eventId);
+  // Long eventId = Long.valueOf(eventid);
+  // List<UserScore> target = userscoreRepository.findByEventId(eventId);
 
-  //   Map<Long, UserScoreDTO.UserResult> userResultMap = new HashMap<>();
+  // Map<Long, UserScoreDTO.UserResult> userResultMap = new HashMap<>();
 
-  //   for (UserScore userScore : target) {
-  //     Optional<User> userOptional =
-  //         userRepository.findById(userScore.getUser().getId());
-  //     if (!userResultMap.containsKey(userScore.getUser().getId())) {
-  //       UserScoreDTO.UserResult userResult = new UserScoreDTO.UserResult();
-  //       userResult.setName(userOptional.get().getUserName()); // Assuming user id as name
-  //       userResult.setScore(new HashMap<>());
-  //       userResultMap.put(userScore.getUser().getId(), userResult);
-  //     }
+  // for (UserScore userScore : target) {
+  // Optional<User> userOptional =
+  // userRepository.findById(userScore.getUser().getId());
+  // if (!userResultMap.containsKey(userScore.getUser().getId())) {
+  // UserScoreDTO.UserResult userResult = new UserScoreDTO.UserResult();
+  // userResult.setName(userOptional.get().getUserName()); // Assuming user id as name
+  // userResult.setScore(new HashMap<>());
+  // userResultMap.put(userScore.getUser().getId(), userResult);
+  // }
 
-  //     String questionKey = "Q" + userScore.getQuestion().getQuestionId();
-  //     int score = userScore.getResultOfPassingTestecase();
+  // String questionKey = "Q" + userScore.getQuestion().getQuestionId();
+  // int score = userScore.getResultOfPassingTestecase();
 
-  //     UserScoreDTO.UserResult userResult =
-  //         userResultMap.get(userScore.getUser().getId());
-  //     userResult.getScore().put(questionKey, score);
-  //   }
+  // UserScoreDTO.UserResult userResult =
+  // userResultMap.get(userScore.getUser().getId());
+  // userResult.getScore().put(questionKey, score);
+  // }
 
-  //   List<UserScoreDTO.UserResult> userResults =
-  //       new ArrayList<>(userResultMap.values());
+  // List<UserScoreDTO.UserResult> userResults =
+  // new ArrayList<>(userResultMap.values());
 
-  //   UserScoreDTO userScoreDTO = new UserScoreDTO();
-  //   userScoreDTO.setEventId(eventId.intValue());
-  //   userScoreDTO.setResult(userResults);
+  // UserScoreDTO userScoreDTO = new UserScoreDTO();
+  // userScoreDTO.setEventId(eventId.intValue());
+  // userScoreDTO.setResult(userResults);
 
-  //   return ResponseEntity.ok(userScoreDTO);
+  // return ResponseEntity.ok(userScoreDTO);
   // }
 }
 

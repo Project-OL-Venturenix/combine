@@ -1,4 +1,4 @@
-package com.vtxlab.projectol.backend_oscar.service;
+package com.vtxlab.projectol.backend_oscar.service.questionBank;
 
 import java.util.List;
 import com.vtxlab.projectol.backend_oscar.payload.response.question.TestCaseDTO;

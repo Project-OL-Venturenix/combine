@@ -22,8 +22,9 @@ public interface UserOperation {
   // ResponseEntity<UserScoreDTO> getUserTestCaseByEventId(
   //     @PathVariable String eventid);
 
-  @GetMapping("/user/eventid/{eventid}")
-  ResponseEntity<User> getUserByEventId(@PathVariable String eventid );
+  @GetMapping("/user/eventid/{eventid}/userid/{userid}")
+  ResponseEntity<User> getUserByEventId(@PathVariable String eventid,
+      @PathVariable String userid);
 
   @GetMapping("/users")
   ResponseEntity<List<User>> getAllUsers();

@@ -133,11 +133,12 @@ public class UserController implements UserOperation {
   }
 
   @Override
-  public ResponseEntity<User> getUserByEventId(String eventid) {
+  public ResponseEntity<User> getUserByEventId(String eventid,String userid) {
     Long eventId = Long.valueOf(eventid);
+    Long userId = Long.valueOf(userid);
     Optional<User> result = userRepository.findAll().stream()//
         .filter(e -> e.getEvents().stream()
-            .anyMatch(event -> event.getId().equals(eventId)))//
+            .anyMatch(user -> user.getId().equals(userId)))//
         .findFirst();
     if (result.isPresent()) {
       return ResponseEntity.ok(result.get());

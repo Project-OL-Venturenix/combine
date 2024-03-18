@@ -27,10 +27,12 @@ public interface QuestionOperation {
         @GetMapping("/questions")
         public ResponseEntity<List<QuestionBank>> getAllQuestions();
 
-        @GetMapping("/questionList")
-        @ResponseStatus(HttpStatus.OK)
-        public List<QuestionBank> getQuestionListByEventId(
-                        @RequestParam String eventId);
+        @GetMapping("/questions/{eventid}")
+        public ResponseEntity<List<QuestionBank>> getQuestionByEventId(
+                        @PathVariable String eventid);
+
+
+
 
         @PatchMapping("/addEventQuestion/event/{eventId}/question/{questionId}")
         public ResponseEntity<?> addQuestionInEvent(//
@@ -58,4 +60,5 @@ public interface QuestionOperation {
 
         @DeleteMapping("/questions/{id}")
         public ResponseEntity<?> deleteQuestion(@PathVariable("id") long id);
+
 }

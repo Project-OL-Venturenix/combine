@@ -17,6 +17,7 @@ import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBank;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBonusRuntime;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.TestCase;
+import com.vtxlab.projectol.backend_oscar.entity.user.User;
 import com.vtxlab.projectol.backend_oscar.payload.Mapper;
 import com.vtxlab.projectol.backend_oscar.payload.request.question.QuestionRequest;
 import com.vtxlab.projectol.backend_oscar.payload.response.question.QuestionResponse;
@@ -251,15 +252,16 @@ public class QuestionController implements QuestionOperation {
     }
   }
 
+
   @Override
-  public List<QuestionBank> getQuestionListByEventId(String eventId) {
-    TypedQuery<Event> query = entityManager.createQuery(
-        "SELECT e FROM Event e WHERE e.id = :eventId", Event.class);
-    query.setParameter("eventId", Long.parseLong(eventId));
-    Event event = query.getSingleResult();
+  public ResponseEntity<List<QuestionBank>> getQuestionByEventId(
+      String eventid) {
+    Long eventId = Long.valueOf(eventid);
+    List<QuestionBank> result = questionRepository.findAll().stream()//
+        .filter(e -> e.getEvents().stream()
+            .allMatch(event -> event.getId().equals(eventId)))//
+        .collect(Collectors.toList());
 
-    return List.copyOf(event.getQuestions());
+    return new ResponseEntity<>(result, HttpStatus.OK);
   }
-
-
 }

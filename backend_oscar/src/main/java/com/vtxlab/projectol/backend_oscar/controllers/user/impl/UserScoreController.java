@@ -162,40 +162,43 @@ public class UserScoreController implements UserScoreOperation {
     Long userID = Long.valueOf(userid);
     Long questionID = Long.valueOf(questionid);
 
-    Optional<Event> event = eventRepository.findById(eventID);
-    Optional<User> user = userRepository.findById(userID);
-    Optional<QuestionBank> question = questionRepository.findById(questionID);
-    Optional<QuestionBonusRuntime> questionBonusRuntime =
-        questionBonusRuntimeRepo.findById(questionID);
-    Integer testcasePass = Integer.valueOf(testcasePassTotal);
-    if (eventRepository.findById(eventID).isPresent()
-        && userRepository.findById(userID).isPresent()
-        && questionRepository.findById(questionID).isPresent()) {
-      userscoreRepository.saveAndFlush(UserScore.builder()//
-          .event(event.get())//
-          .user(user.get())//
-          .question(question.get())//
-          .resultOfPassingTestecase(testcasePass)//
-          .status(testcasePass == 10 ? "Pass All Test Cases" : "Fail")//
-          .submitTime(submitTimeRunTimeDTO.getSubmitTime())//
-          .runtimebyMsec(submitTimeRunTimeDTO.getRunTimeByMsec())//
+    Optional<UserScore> builder = userscoreRepository
+        .findByEventIdAndUserIdAndQuestionId(eventID, userID, questionID);
+    if (!builder.isPresent()) {
+      Optional<Event> event = eventRepository.findById(eventID);
+      Optional<User> user = userRepository.findById(userID);
+      Optional<QuestionBank> question = questionRepository.findById(questionID);
+      Optional<QuestionBonusRuntime> questionBonusRuntime =
+          questionBonusRuntimeRepo.findById(questionID);
+      Integer testcasePass = Integer.valueOf(testcasePassTotal);
 
-          .BonusUnder30Mins(event.get().getTargetStartTime().getMinute()
-              - submitTimeRunTimeDTO.getSubmitTime().getMinute() < 30 ? "1"
-                  : "0")//
-          .BonusWithinQuestionRuntime(questionBonusRuntime.get()
-              .getBonusRuntime() > submitTimeRunTimeDTO.getRunTimeByMsec() ? "1"
-                  : "0")//
-
-          .createdDate(LocalDateTime.now())//
-          .updatedDate(LocalDateTime.now())//
-          .build());
-      return true;
+      if (event.isPresent() && user.isPresent() && question.isPresent()) {
+        userscoreRepository.saveAndFlush(UserScore.builder().event(event.get())
+            .user(user.get()).question(question.get())//
+            .resultOfPassingTestecase(testcasePass)//
+            .status(testcasePass == 10 ? "Pass All Test Cases" : "Fail")//
+            .submitTime(submitTimeRunTimeDTO.getSubmitTime())//
+            .runtimebyMsec(submitTimeRunTimeDTO.getRunTimeByMsec())//
+            .BonusUnder30Mins(event.get().getTargetStartTime().getMinute()
+                - submitTimeRunTimeDTO.getSubmitTime().getMinute() < 30 ? "1"
+                    : "0")//
+            .BonusWithinQuestionRuntime(questionBonusRuntime.get()
+                .getBonusRuntime() > submitTimeRunTimeDTO.getRunTimeByMsec()
+                    ? "1"
+                    : "0")//
+            .createdDate(LocalDateTime.now()).updatedDate(LocalDateTime.now())
+            .build());
+        return true;
+      } else {
+        return false;
+      }
     } else {
-      return false;
+      builder.get().setSubmitTime(submitTimeRunTimeDTO.getSubmitTime());
+      builder.get().setRuntimebyMsec(submitTimeRunTimeDTO.getRunTimeByMsec());
+      userscoreRepository.save(builder.get());
+      return true;
     }
   }
-
   // @Override
   // public ResponseEntity<UserScoreDTO> getUserTestCaseByEventId(String eventid) {
   // Long eventID = Long.valueOf(eventid);
@@ -301,23 +304,4 @@ public class UserScoreController implements UserScoreOperation {
 
     return ResponseEntity.ok(userScoreDTO);
   }
-
-  @Override
-  public ResponseEntity<?> updateUserScore(String eventid, String userid,
-      String questionid, String testcasePassTotal,
-      SubmitTimeRunTimeDTO submitTimeRunTimeDTO) {
-    Long eventId = Long.valueOf(eventid);
-    Long userId = Long.valueOf(userid);
-    Long questionId = Long.valueOf(questionid);
-    UserScore builder = userscoreRepository
-        .findByEventIdAndUserIdAndQuestionId(eventId, userId, questionId);
-
-    builder.setSubmitTime(submitTimeRunTimeDTO.getSubmitTime());
-    builder.setRuntimebyMsec(submitTimeRunTimeDTO.getRunTimeByMsec());
-    userscoreRepository.save(builder);
-    return ResponseEntity
-        .ok(new MessageResponse("Update UserScore successfully!"));
-
-  }
-
 }

@@ -34,13 +34,6 @@ public interface UserScoreOperation {
   @GetMapping("/userscores/{id}")
   ResponseEntity<UserScore> getUserScoreById(@PathVariable long id);
 
-  @PutMapping("/userscores/updateScore")
-  ResponseEntity<?> updateUserScore(@RequestParam String eventid, //
-      @RequestParam String userid, //
-      @RequestParam String questionid, //
-      @RequestParam String testcasePassTotal,
-      @RequestBody SubmitTimeRunTimeDTO submitTimeRunTimeDTO);
-
   @DeleteMapping("/userscores/{id}")
   ResponseEntity<?> deleteUserScore(@PathVariable long id);
 

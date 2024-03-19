@@ -60,6 +60,7 @@ public class UserScore {
   private String status;
   
   private LocalDateTime createdDate;
+
   private LocalDateTime updatedDate;
 
 }

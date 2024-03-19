@@ -1,6 +1,5 @@
 package com.vtxlab.projectol.backend_oscar.controllers.user.impl;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -301,6 +300,24 @@ public class UserScoreController implements UserScoreOperation {
     userScoreDTO.setResult(userResults);
 
     return ResponseEntity.ok(userScoreDTO);
+  }
+
+  @Override
+  public ResponseEntity<?> updateUserScore(String eventid, String userid,
+      String questionid, String testcasePassTotal,
+      SubmitTimeRunTimeDTO submitTimeRunTimeDTO) {
+    Long eventId = Long.valueOf(eventid);
+    Long userId = Long.valueOf(userid);
+    Long questionId = Long.valueOf(questionid);
+    UserScore builder = userscoreRepository
+        .findByEventIdAndUserIdAndQuestionId(eventId, userId, questionId);
+
+    builder.setSubmitTime(submitTimeRunTimeDTO.getSubmitTime());
+    builder.setRuntimebyMsec(submitTimeRunTimeDTO.getRunTimeByMsec());
+    userscoreRepository.save(builder);
+    return ResponseEntity
+        .ok(new MessageResponse("Update UserScore successfully!"));
+
   }
 
 }

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.vtxlab.projectol.backend_oscar.entity.user.UserScore;
@@ -33,9 +34,12 @@ public interface UserScoreOperation {
   @GetMapping("/userscores/{id}")
   ResponseEntity<UserScore> getUserScoreById(@PathVariable long id);
 
-//   @PutMapping("/userscores/{id}")
-//   ResponseEntity<UserScore> updateUserScore(@PathVariable long id,
-//       @RequestBody UserScore userscore);
+  @PutMapping("/userscores/updateScore")
+  ResponseEntity<?> updateUserScore(@RequestParam String eventid, //
+      @RequestParam String userid, //
+      @RequestParam String questionid, //
+      @RequestParam String testcasePassTotal,
+      @RequestBody SubmitTimeRunTimeDTO submitTimeRunTimeDTO);
 
   @DeleteMapping("/userscores/{id}")
   ResponseEntity<?> deleteUserScore(@PathVariable long id);
@@ -44,5 +48,6 @@ public interface UserScoreOperation {
   // }
 
   @GetMapping("/usertestcases/eventid/{eventid}")
-  ResponseEntity<UserScoreDTO> getUserTestCaseByEventId(@PathVariable String eventid);
+  ResponseEntity<UserScoreDTO> getUserTestCaseByEventId(
+      @PathVariable String eventid);
 }

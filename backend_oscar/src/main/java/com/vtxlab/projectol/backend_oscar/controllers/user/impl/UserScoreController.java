@@ -24,13 +24,8 @@ import com.vtxlab.projectol.backend_oscar.payload.request.question.SubmitTimeRun
 import com.vtxlab.projectol.backend_oscar.payload.request.user.UserScoreRequest;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.MessageResponse;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.UserScoreDTO;
-import com.vtxlab.projectol.backend_oscar.repository.event.EventRepository;
-import com.vtxlab.projectol.backend_oscar.repository.questionBank.QuestionBankRepository;
-import com.vtxlab.projectol.backend_oscar.repository.questionBank.QuestionBonusRuntimeRepo;
-import com.vtxlab.projectol.backend_oscar.repository.user.RoleRepository;
-import com.vtxlab.projectol.backend_oscar.repository.user.UserQuestionSubmissionRepository;
-import com.vtxlab.projectol.backend_oscar.repository.user.UserRepository;
 import com.vtxlab.projectol.backend_oscar.security.jwt.JwtUtils;
+import com.vtxlab.projectol.backend_oscar.service.user.UserScoreService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -39,13 +34,6 @@ public class UserScoreController implements UserScoreOperation {
   @Autowired
   AuthenticationManager authenticationManager;
 
-
-  @Autowired
-  UserRepository userRepository;
-
-  @Autowired
-  RoleRepository roleRepository;
-
   @Autowired
   PasswordEncoder encoder;
 
@@ -53,37 +41,12 @@ public class UserScoreController implements UserScoreOperation {
   JwtUtils jwtUtils;
 
   @Autowired
-  UserQuestionSubmissionRepository userscoreRepository;
-
-  @Autowired
-  private EventRepository eventRepository;
-
-  @Autowired
-  private QuestionBankRepository questionRepository;
-
-  @Autowired
-  private QuestionBonusRuntimeRepo questionBonusRuntimeRepo;
+  private UserScoreService userScoreService;
 
   public ResponseEntity<?> addUserScore(UserScoreRequest userscoreRequest) {
-    Optional<Event> event =
-        eventRepository.findById(userscoreRequest.getEventId());
-    Optional<User> user = userRepository.findById(userscoreRequest.getUserId());
-    Optional<QuestionBank> question =
-        questionRepository.findById(userscoreRequest.getQuestionId());
-    UserScore userscore = UserScore.builder()//
-        .event(event.get())//
-        .user(user.get())//
-        .question(question.get())//
-        .resultOfPassingTestecase(
-            userscoreRequest.getResultOfPassingTestecase() == 10 ? 3 : 0)//
-        .status(userscoreRequest.getResultOfPassingTestecase() == 10
-            ? "Pass All Test Cases"
-            : "Fail")//
-        .createdDate(LocalDateTime.now())//
-        .updatedDate(LocalDateTime.now())//
-        .build();
-
-    userscoreRepository.save(userscore);
+    if (!userScoreService.addUserScore(userscoreRequest))
+      return ResponseEntity.badRequest()
+          .body(new MessageResponse("Fail Add User Score"));
     return ResponseEntity
         .ok(new MessageResponse("Add UserScore successfully!"));
 
@@ -91,8 +54,7 @@ public class UserScoreController implements UserScoreOperation {
 
   public ResponseEntity<List<UserScore>> getAllUserScores() {
     try {
-      List<UserScore> userscores = new ArrayList<UserScore>();
-      userscoreRepository.findAll().forEach(userscores::add);
+      List<UserScore> userscores = userScoreService.getAllUserScores();
       if (userscores.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
@@ -104,51 +66,19 @@ public class UserScoreController implements UserScoreOperation {
 
   }
 
-  public ResponseEntity<UserScore> getUserScoreById(long id) {
-    Optional<UserScore> userscoreData = userscoreRepository.findById(id);
-    if (userscoreData.isPresent()) {
-      return new ResponseEntity<>(userscoreData.get(), HttpStatus.OK);
-    } else {
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+  public ResponseEntity<UserScore> getUserScoreById(String id) {
+    Long userId = Long.valueOf(id);
+    UserScore userscoreData = userScoreService.getUserScoreById(userId);
+    return new ResponseEntity<>(userscoreData, HttpStatus.OK);
   }
 
-  // public ResponseEntity<UserScore> updateUserScore(long id,
-  // UserScore userscore) {
-  // Optional<Event> event =
-  // eventRepository.findById(userscore.getEventId());
-  // Optional<User> user = userRepository.findById(userscoreRequest.getUserId());
-  // Optional<QuestionBank> question =
-  // questionRepository.findById(userscoreRequest.getQuestionId());
 
-  // Optional<UserScore> userscoreData = userscoreRepository.findById(id);
-
-  // if (userscoreData.isPresent()) {
-  // UserScore userscore = UserScore.builder()//
-  // .event(event.get())//
-  // .user(user.get())//
-  // .question(question.get())//
-  // .resultOfPassingTestecase(
-  // userscoreRequest.getResultOfPassingTestecase() == 10 ? 3 : 0)//
-  // .status(userscoreRequest.getResultOfPassingTestecase() == 10
-  // ? "Pass All Test Cases"
-  // : "Fail")//
-  // .createdDate(LocalDateTime.now())//
-  // .updatedDate(LocalDateTime.now())//
-  // .build();
-
-  // return new ResponseEntity<>(userscoreRepository.save(userscore),
-  // HttpStatus.OK);
-  // } else {
-  // return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-  // }
-  // }
-
-  public ResponseEntity<?> deleteUserScore(long id) {
+  public ResponseEntity<?> deleteUserScore(String id) {
+    Long userId = Long.valueOf(id);
     try {
-      userscoreRepository.deleteById(id);
-      return ResponseEntity
-          .ok(new MessageResponse("Delete UserScore " + id + " successfully!"));
+      userScoreService.deleteUserScore(userId);
+      return ResponseEntity.ok(
+          new MessageResponse("Delete UserScore " + userId + " successfully!"));
     } catch (Exception e) {
       return ResponseEntity
           .ok(new MessageResponse("HttpStatus.INTERNAL_SERVER_ERROR"));
@@ -161,149 +91,17 @@ public class UserScoreController implements UserScoreOperation {
     Long eventID = Long.valueOf(eventid);
     Long userID = Long.valueOf(userid);
     Long questionID = Long.valueOf(questionid);
+    Integer testcasePass = Integer.valueOf(testcasePassTotal);
 
-    Optional<UserScore> builder = userscoreRepository
-        .findByEventIdAndUserIdAndQuestionId(eventID, userID, questionID);
-    if (!builder.isPresent()) {
-      Optional<Event> event = eventRepository.findById(eventID);
-      Optional<User> user = userRepository.findById(userID);
-      Optional<QuestionBank> question = questionRepository.findById(questionID);
-      Optional<QuestionBonusRuntime> questionBonusRuntime =
-          questionBonusRuntimeRepo.findById(questionID);
-      Integer testcasePass = Integer.valueOf(testcasePassTotal);
-
-      if (event.isPresent() && user.isPresent() && question.isPresent()) {
-        userscoreRepository.saveAndFlush(UserScore.builder().event(event.get())
-            .user(user.get()).question(question.get())//
-            .resultOfPassingTestecase(testcasePass)//
-            .status(testcasePass == 10 ? "Pass All Test Cases" : "Fail")//
-            .submitTime(submitTimeRunTimeDTO.getSubmitTime())//
-            .runtimebyMsec(submitTimeRunTimeDTO.getRunTimeByMsec())//
-            .BonusUnder30Mins(event.get().getTargetStartTime().getMinute()
-                - submitTimeRunTimeDTO.getSubmitTime().getMinute() < 30
-                && testcasePass == 10 ? "1" : "0")//
-            .BonusWithinQuestionRuntime(questionBonusRuntime.get()
-                .getBonusRuntime() > submitTimeRunTimeDTO.getRunTimeByMsec()
-                    ? "1"
-                    : "0")//
-            .createdDate(LocalDateTime.now()).updatedDate(LocalDateTime.now())
-            .build());
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      Integer testcasePass = Integer.valueOf(testcasePassTotal);
-      builder.get().setResultOfPassingTestecase(testcasePass);
-      builder.get().setSubmitTime(submitTimeRunTimeDTO.getSubmitTime());
-      builder.get().setRuntimebyMsec(submitTimeRunTimeDTO.getRunTimeByMsec());
-      userscoreRepository.save(builder.get());
-      return true;
-    }
+    return userScoreService.addScore(eventID, userID, questionID, testcasePass,
+        submitTimeRunTimeDTO);
   }
-  // @Override
-  // public ResponseEntity<UserScoreDTO> getUserTestCaseByEventId(String eventid) {
-  // Long eventID = Long.valueOf(eventid);
-  // List<UserScore> target = userscoreRepository.findByEventid(eventID);
-  // UserScoreDTO result = target.stream()
-  // .filter(e -> e.getEventid().equals(eventID))
-  // .collect(Collectors.groupingBy(UserScore::getUserid)) // Grouping by userid
-  // .entrySet().stream()
-  // .map(entry -> {
-  // Long userId = entry.getKey();
-  // List<UserScore> userScores = entry.getValue();
-  // List<UserScoreDTO.UserResult> userResults = new ArrayList<>();
 
-  // // Calculate cumulative scores for each question
-  // Map<Long, Integer> scores = new HashMap<>();
-  // Map<Long, Integer> questionCount = new HashMap<>();
-  // for (UserScore userScore : userScores) {
-  // Long questionId = userScore.getQuestionid();
-  // scores.put(questionId, scores.getOrDefault(questionId, 0) + userScore.getTestCasePasstotal());
-  // questionCount.put(questionId, questionCount.getOrDefault(questionId, 0) + 1);
-  // }
-
-  // // Create UserResult object with cumulative scores
-  // Optional<User> userOptional = userRepository.findById(userId);
-  // userOptional.ifPresent(user -> {
-  // Map<String, Integer> scoreMap = new HashMap<>();
-  // for (Map.Entry<Long, Integer> data : scores.entrySet()) {
-  // Long questionId = data.getKey();
-  // int score = data.getValue();
-  // int count = questionCount.get(questionId);
-  // scoreMap.put("Q" + questionId, score / count);
-  // }
-  // userResults.add(UserScoreDTO.UserResult.builder()
-  // .name(user.getUsername())
-  // .score(scoreMap)
-  // .build());
-  // });
-
-  // // Create UserScoreDTO with eventId and UserResults
-  // return UserScoreDTO.builder()
-  // .eventId(eventID.intValue())
-  // .result(userResults)
-  // .build();
-  // })
-  // .collect(Collectors.toList());
-
-  // return ResponseEntity.ok(result);
-  // }
   @Override
   public ResponseEntity<UserScoreDTO> getUserTestCaseByEventId(String eventid) {
     Long eventId = Long.valueOf(eventid);
-    List<UserScore> target = userscoreRepository.findByEventId(eventId);
-
-    Map<Long, UserScoreDTO.UserResult> userResultMap = new HashMap<>();
-
-    for (UserScore userScore : target) {
-      Optional<User> userOptional =
-          userRepository.findById(userScore.getUser().getId());
-      if (!userResultMap.containsKey(userScore.getUser().getId())) {
-        UserScoreDTO.UserResult userResult = new UserScoreDTO.UserResult();
-        userResult.setName(userOptional.get().getUserName()); // Assuming user id as name
-        // passingTestCaseNumber
-        userResult.setPassingTestCaseNumber(new HashMap<>());
-        userResultMap.put(userScore.getUser().getId(), userResult);
-        // score
-        userResult.setScore(new HashMap<>());
-        userResultMap.put(userScore.getUser().getId(), userResult);
-        // submitTime
-        userResult.setSubmitTime(new HashMap<>());
-        userResultMap.put(userScore.getUser().getId(), userResult);
-        // runtime
-        userResult.setRuntime(new HashMap<>());
-        userResultMap.put(userScore.getUser().getId(), userResult);
-
-      }
-
-      String questionKey = "Q" + userScore.getQuestion().getQuestionId();
-      int score = userScore.getResultOfPassingTestecase() == 10 ? 3 : 0;
-      int bonus30Mins = Integer.valueOf(userScore.getBonusUnder30Mins());
-      int runTimeBonus =
-          Integer.valueOf(userScore.getBonusWithinQuestionRuntime());
-      int total = score + bonus30Mins + runTimeBonus;
-      userResultMap.get(userScore.getUser().getId()).getPassingTestCaseNumber()
-          .put(questionKey, userScore.getResultOfPassingTestecase());
-      UserScoreDTO.UserResult userResult =
-          userResultMap.get(userScore.getUser().getId());
-      userResult.getScore().put(questionKey, total);
-      // submit time
-      LocalDateTime submitTime = userScore.getSubmitTime();
-      userResult.getSubmitTime().put(questionKey, submitTime);
-      // rutime
-      String runtime = String.valueOf(userScore.getRuntimebyMsec());
-      userResult.getRuntime().put(questionKey, runtime);
-
-    }
-
-    List<UserScoreDTO.UserResult> userResults =
-        new ArrayList<>(userResultMap.values());
-
-    UserScoreDTO userScoreDTO = new UserScoreDTO();
-    userScoreDTO.setEventId(eventId.intValue());
-    userScoreDTO.setResult(userResults);
-
+    UserScoreDTO userScoreDTO =
+        userScoreService.getUserTestCaseByEventId(eventId);
     return ResponseEntity.ok(userScoreDTO);
   }
 }

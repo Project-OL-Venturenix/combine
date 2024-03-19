@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 
 public interface EventService {
+  
   Event save(Event event);
 
   List<Event> findAll();

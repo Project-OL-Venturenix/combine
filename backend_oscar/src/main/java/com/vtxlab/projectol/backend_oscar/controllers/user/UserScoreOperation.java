@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.vtxlab.projectol.backend_oscar.entity.user.UserScore;
@@ -32,10 +31,10 @@ public interface UserScoreOperation {
   ResponseEntity<List<UserScore>> getAllUserScores();
 
   @GetMapping("/userscores/{id}")
-  ResponseEntity<UserScore> getUserScoreById(@PathVariable long id);
+  ResponseEntity<UserScore> getUserScoreById(@PathVariable String id);
 
   @DeleteMapping("/userscores/{id}")
-  ResponseEntity<?> deleteUserScore(@PathVariable long id);
+  ResponseEntity<?> deleteUserScore(@PathVariable String id);
 
   // return ResponseEntity.ok(result);
   // }

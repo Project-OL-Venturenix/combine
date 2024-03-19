@@ -24,8 +24,8 @@ public interface UserOperation {
   //     @PathVariable String eventid);
 
   @GetMapping("/user/eventid/{eventid}")
-  // ResponseEntity<User> getUserByEventId(@PathVariable String eventid,HttpServletRequest request);
-  ResponseEntity<User> getUserByEventId(@PathVariable String eventid,String jwt);
+  ResponseEntity<User> getUserByEventId(@PathVariable String eventid,HttpServletRequest request);
+  // ResponseEntity<User> getUserByEventId(@PathVariable String eventid,String jwt);
 
   @GetMapping("/users")
   ResponseEntity<List<User>> getAllUsers();

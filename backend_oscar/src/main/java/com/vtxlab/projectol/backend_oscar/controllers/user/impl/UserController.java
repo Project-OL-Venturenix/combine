@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.vtxlab.projectol.backend_oscar.controllers.user.UserOperation;
@@ -146,8 +147,11 @@ public class UserController implements UserOperation {
   }
 
   @Override
-  public ResponseEntity<User> getUserByEventId(String eventid,
-      String jwt) {
+  // public ResponseEntity<User> getUserByEventId(String eventid,
+  // String jwt)
+  public ResponseEntity<User> getUserByEventId(@PathVariable String eventid,
+      HttpServletRequest request) {
+    String jwt = parseJwt(request);
     Long eventId = Long.valueOf(eventid);
     String userName = null;
     if (jwt != null && jwtUtils.validateJwtToken(jwt)) {

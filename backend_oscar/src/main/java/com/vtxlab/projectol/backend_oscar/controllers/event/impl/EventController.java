@@ -15,6 +15,7 @@ import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import com.vtxlab.projectol.backend_oscar.payload.request.event.EventRequest;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.MessageResponse;
 import com.vtxlab.projectol.backend_oscar.repository.event.EventRepository;
+import com.vtxlab.projectol.backend_oscar.service.event.EventService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -22,7 +23,7 @@ import com.vtxlab.projectol.backend_oscar.repository.event.EventRepository;
 public class EventController implements EventOperation {
 
   @Autowired
-  EventRepository eventRepository;
+  EventService eventService;
 
   public ResponseEntity<?> addEvent(EventRequest eventRequest) {
     Event builder = Event.builder()//
@@ -37,14 +38,14 @@ public class EventController implements EventOperation {
         .updatedBy(eventRequest.getUpdatedBy())//
         .build();
 
-    eventRepository.save(builder);
+    eventService.save(builder);
     return ResponseEntity.ok(new MessageResponse("Add Event successfully!"));
 
   }
 
   public ResponseEntity<List<Event>> getAllEvents() {
     try {
-      List<Event> events = eventRepository.findAll();
+      List<Event> events = eventService.findAll();
       if (events.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
@@ -57,7 +58,7 @@ public class EventController implements EventOperation {
   }
 
   public ResponseEntity<Event> getEventById(long id) {
-    Optional<Event> eventData = eventRepository.findById(id);
+    Optional<Event> eventData = eventService.findById(id);
     if (eventData.isPresent()) {
       return new ResponseEntity<>(eventData.get(), HttpStatus.OK);
     } else {
@@ -66,7 +67,7 @@ public class EventController implements EventOperation {
   }
 
   public ResponseEntity<Event> updateEvent(long id, Event event) {
-    Optional<Event> eventData = eventRepository.findById(id);
+    Optional<Event> eventData = eventService.findById(id);
 
     if (eventData.isPresent()) {
       Event _event = eventData.get();
@@ -74,7 +75,7 @@ public class EventController implements EventOperation {
       _event.setStatus(event.getStatus());
       _event.setUpdatedDate(LocalDateTime.now());
       _event.setUpdatedBy(event.getUpdatedBy());
-      return new ResponseEntity<>(eventRepository.save(_event), HttpStatus.OK);
+      return new ResponseEntity<>(eventService.save(_event), HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -82,7 +83,7 @@ public class EventController implements EventOperation {
 
   public ResponseEntity<?> deleteEvent(long id) {
     try {
-      eventRepository.deleteById(id);
+      eventService.deleteById(id);
       return ResponseEntity
           .ok(new MessageResponse("Delete Event " + id + " successfully!"));
     } catch (Exception e) {

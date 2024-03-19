@@ -16,6 +16,7 @@ import com.vtxlab.projectol.backend_oscar.exception.QuestionInputFormatException
 import com.vtxlab.projectol.backend_oscar.exception.RestClientException;
 import com.vtxlab.projectol.backend_oscar.exception.TestcaseInputFormatException;
 import com.vtxlab.projectol.backend_oscar.exception.exceptionEnum.Syscode;
+import io.jsonwebtoken.JwtException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -46,6 +47,15 @@ public class GlobalExceptionHandler {
   public ApiResp<Void> runtimeExceptionHandler(BusinessRuntimeException e) {
     return ApiResp.<Void>builder() //
         .Syscode(getRespCode(e).getSyscode()) //
+        .message(e.getMessage())//
+        // .data(null) //
+        .build();
+  }
+  @ExceptionHandler(value = JwtException.class)
+  @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+  public ApiResp<Void> JwtExceptionHandler(JwtException e) {
+    return ApiResp.<Void>builder() //
+        .Syscode(Syscode.INVALID_OPERATION.getSyscode()) //
         .message(e.getMessage())//
         // .data(null) //
         .build();

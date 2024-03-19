@@ -17,6 +17,11 @@ public enum Syscode {
   INVALID_METHOD_SIGNATURE_INPUT("23", "Invalid method signature input"), //
 
   INVALID_OPERATION("1000", "Invalid operation"), //
+  //jwt
+  INVALID_JWT("1001", "Invalid jwt"),//
+  JWT_EXPIRED_EXCEPTION("1002","JWT token is expired"),//
+  JWT_UNSUPPORTED_EXCEPTION("1003","JWT token is unsupported"),//
+  JWT_ILLEGALARGUMENT_EXCEPTION("1004","JWT token is unsupported"),//
   // Api error
   API_ERROR("100", "API error"); //
 

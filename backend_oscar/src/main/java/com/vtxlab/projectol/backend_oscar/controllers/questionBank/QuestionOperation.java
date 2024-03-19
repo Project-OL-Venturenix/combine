@@ -31,9 +31,6 @@ public interface QuestionOperation {
         public ResponseEntity<List<QuestionBank>> getQuestionByEventId(
                         @PathVariable String eventid);
 
-
-
-
         @PatchMapping("/addEventQuestion/event/{eventId}/question/{questionId}")
         public ResponseEntity<?> addQuestionInEvent(//
                         @PathVariable("eventId") Long eventId, //

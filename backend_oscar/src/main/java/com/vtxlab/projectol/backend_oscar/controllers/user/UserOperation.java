@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.vtxlab.projectol.backend_oscar.entity.user.User;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface UserOperation {
 
@@ -22,9 +23,8 @@ public interface UserOperation {
   // ResponseEntity<UserScoreDTO> getUserTestCaseByEventId(
   //     @PathVariable String eventid);
 
-  @GetMapping("/user/eventid/{eventid}/userid/{userid}")
-  ResponseEntity<User> getUserByEventId(@PathVariable String eventid,
-      @PathVariable String userid);
+  @GetMapping("/user/eventid/{eventid}")
+  ResponseEntity<User> getUserByEventId(@PathVariable String eventid,HttpServletRequest request);
 
   @GetMapping("/users")
   ResponseEntity<List<User>> getAllUsers();

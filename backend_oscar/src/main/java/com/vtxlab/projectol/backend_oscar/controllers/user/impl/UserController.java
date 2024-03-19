@@ -1,30 +1,30 @@
 package com.vtxlab.projectol.backend_oscar.controllers.user.impl;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.vtxlab.projectol.backend_oscar.controllers.user.UserOperation;
 import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import com.vtxlab.projectol.backend_oscar.entity.user.User;
-import com.vtxlab.projectol.backend_oscar.entity.user.UserScore;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.MessageResponse;
-import com.vtxlab.projectol.backend_oscar.payload.response.user.UserScoreDTO;
 import com.vtxlab.projectol.backend_oscar.repository.event.EventRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.RoleRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.UserQuestionSubmissionRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.UserRepository;
 import com.vtxlab.projectol.backend_oscar.security.jwt.JwtUtils;
+import com.vtxlab.projectol.backend_oscar.service.user.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -50,6 +50,9 @@ public class UserController implements UserOperation {
 
   @Autowired
   JwtUtils jwtUtils;
+
+  @Autowired
+  private UserService userService;
 
   public ResponseEntity<List<User>> getAllUsers() {
     try {
@@ -132,20 +135,40 @@ public class UserController implements UserOperation {
 
   }
 
-  @Override
-  public ResponseEntity<User> getUserByEventId(String eventid, String userid) {
-    Long eventId = Long.valueOf(eventid);
-    Long userId = Long.valueOf(userid);
-    Optional<User> result = userRepository.findAll().stream()//
-        .filter(e -> e.getEvents().stream()
-            .allMatch(event -> event.getId().equals(eventId)))//
-        .filter(e -> e.getId().equals(userId))//
-        .findFirst();
+  private String parseJwt(HttpServletRequest request) {
+    String headerAuth = request.getHeader("Authorization");
 
-    if (result.isPresent()) {
-      return ResponseEntity.ok(result.get());
+    if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
+      return headerAuth.substring(7);
+    }
+
+    return null;
+  }
+
+  @Override
+  public ResponseEntity<User> getUserByEventId(String eventid,
+      HttpServletRequest request) {
+    Long eventId = Long.valueOf(eventid);
+    String jwt = parseJwt(request);
+    String userName = null;
+    if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+      userName = jwtUtils.getUserNameFromJwtToken(jwt);
+    }
+    // Find the user by username
+    User user = userRepository.findByUserName(userName).get();
+
+    if (user != null) {
+      // Check if the user is associated with the given event ID
+      boolean userAssociatedWithEvent = user.getEvents().stream()
+          .anyMatch(event -> event.getId().equals(eventId));
+
+      if (userAssociatedWithEvent) {
+        return new ResponseEntity<>(user, HttpStatus.OK);
+      } else {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      }
     } else {
-      return ResponseEntity.ok(new User());
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }
 

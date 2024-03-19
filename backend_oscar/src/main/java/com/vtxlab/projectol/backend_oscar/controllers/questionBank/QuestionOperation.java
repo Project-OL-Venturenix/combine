@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBank;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBonusRuntime;
 import com.vtxlab.projectol.backend_oscar.payload.request.question.QuestionRequest;
+import com.vtxlab.projectol.backend_oscar.payload.response.question.QuestionBankDTO;
 import com.vtxlab.projectol.backend_oscar.payload.response.question.QuestionResponse;
 import jakarta.validation.Valid;
 
@@ -28,7 +29,7 @@ public interface QuestionOperation {
         public ResponseEntity<List<QuestionBank>> getAllQuestions();
 
         @GetMapping("/questions/{eventid}")
-        public ResponseEntity<List<QuestionBank>> getQuestionByEventId(
+        public ResponseEntity<List<QuestionBankDTO>> getQuestionByEventId(
                         @PathVariable String eventid);
 
         @PatchMapping("/addEventQuestion/event/{eventId}/question/{questionId}")

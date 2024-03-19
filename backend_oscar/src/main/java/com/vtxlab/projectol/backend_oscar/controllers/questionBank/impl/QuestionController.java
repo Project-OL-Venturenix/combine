@@ -17,9 +17,9 @@ import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBank;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBonusRuntime;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.TestCase;
-import com.vtxlab.projectol.backend_oscar.entity.user.User;
 import com.vtxlab.projectol.backend_oscar.payload.Mapper;
 import com.vtxlab.projectol.backend_oscar.payload.request.question.QuestionRequest;
+import com.vtxlab.projectol.backend_oscar.payload.response.question.QuestionBankDTO;
 import com.vtxlab.projectol.backend_oscar.payload.response.question.QuestionResponse;
 import com.vtxlab.projectol.backend_oscar.payload.response.question.TestCaseDTO;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.MessageResponse;
@@ -34,7 +34,6 @@ import com.vtxlab.projectol.backend_oscar.service.questionBank.QuestionBankServi
 import com.vtxlab.projectol.backend_oscar.service.questionBank.TestCaseService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -161,7 +160,7 @@ public class QuestionController implements QuestionOperation {
     log.info("testcaseData : " + testcaseData.orElse(null));
 
     List<TestCaseDTO> testCases = testCaseRepository.findAll().stream()//
-        .filter(e -> e.getQuestionBank().equals(questionId))//
+        .filter(e -> e.getQuestionBank().getQuestionId().equals(questionId))//
         .map(e -> Mapper.map(e))//
         .collect(Collectors.toList());
     log.info("testCases : " + testCases.get(0));
@@ -254,12 +253,13 @@ public class QuestionController implements QuestionOperation {
 
 
   @Override
-  public ResponseEntity<List<QuestionBank>> getQuestionByEventId(
+  public ResponseEntity<List<QuestionBankDTO>> getQuestionByEventId(
       String eventid) {
     Long eventId = Long.valueOf(eventid);
-    List<QuestionBank> result = questionRepository.findAll().stream()//
+    List<QuestionBankDTO> result = questionRepository.findAll().stream()//
         .filter(e -> e.getEvents().stream()
             .allMatch(event -> event.getId().equals(eventId)))//
+        .map(e -> Mapper.map(e))//
         .collect(Collectors.toList());
 
     return new ResponseEntity<>(result, HttpStatus.OK);

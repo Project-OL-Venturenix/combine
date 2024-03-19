@@ -193,6 +193,8 @@ public class UserScoreController implements UserScoreOperation {
         return false;
       }
     } else {
+      Integer testcasePass = Integer.valueOf(testcasePassTotal);
+      builder.get().setResultOfPassingTestecase(testcasePass);
       builder.get().setSubmitTime(submitTimeRunTimeDTO.getSubmitTime());
       builder.get().setRuntimebyMsec(submitTimeRunTimeDTO.getRunTimeByMsec());
       userscoreRepository.save(builder.get());

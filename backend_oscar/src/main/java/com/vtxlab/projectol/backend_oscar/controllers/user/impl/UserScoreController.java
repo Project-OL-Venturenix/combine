@@ -180,8 +180,8 @@ public class UserScoreController implements UserScoreOperation {
             .submitTime(submitTimeRunTimeDTO.getSubmitTime())//
             .runtimebyMsec(submitTimeRunTimeDTO.getRunTimeByMsec())//
             .BonusUnder30Mins(event.get().getTargetStartTime().getMinute()
-                - submitTimeRunTimeDTO.getSubmitTime().getMinute() < 30 ? "1"
-                    : "0")//
+                - submitTimeRunTimeDTO.getSubmitTime().getMinute() < 30
+                && testcasePass == 10 ? "1" : "0")//
             .BonusWithinQuestionRuntime(questionBonusRuntime.get()
                 .getBonusRuntime() > submitTimeRunTimeDTO.getRunTimeByMsec()
                     ? "1"

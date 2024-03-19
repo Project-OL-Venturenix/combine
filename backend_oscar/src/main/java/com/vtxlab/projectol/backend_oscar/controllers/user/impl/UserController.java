@@ -6,18 +6,19 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.vtxlab.projectol.backend_oscar.controllers.user.UserOperation;
 import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import com.vtxlab.projectol.backend_oscar.entity.user.User;
+import com.vtxlab.projectol.backend_oscar.exception.UserNotInEventException;
+import com.vtxlab.projectol.backend_oscar.exception.exceptionEnum.Syscode;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.MessageResponse;
 import com.vtxlab.projectol.backend_oscar.repository.event.EventRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.RoleRepository;
@@ -26,7 +27,9 @@ import com.vtxlab.projectol.backend_oscar.repository.user.UserRepository;
 import com.vtxlab.projectol.backend_oscar.security.jwt.JwtUtils;
 import com.vtxlab.projectol.backend_oscar.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
@@ -151,26 +154,35 @@ public class UserController implements UserOperation {
   // String jwt)
   public ResponseEntity<User> getUserByEventId(@PathVariable String eventid,
       HttpServletRequest request) {
+    // Parse JWT token from request
     String jwt = parseJwt(request);
     Long eventId = Long.valueOf(eventid);
+
+    // Check if JWT token is valid and extract username
     String userName = null;
     if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
       userName = jwtUtils.getUserNameFromJwtToken(jwt);
     }
-    // Find the user by username
-    User user = userRepository.findByUserName(userName).get();
 
-    if (user != null) {
+    // Find the user by username
+    Optional<User> optionalUser = userRepository.findByUserName(userName);
+    if (optionalUser.isPresent()) {
+      User user = optionalUser.get();
+      log.info("user: " + user);
+
       // Check if the user is associated with the given event ID
       boolean userAssociatedWithEvent = user.getEvents().stream()
           .anyMatch(event -> event.getId().equals(eventId));
 
+      // If user is associated with the event, return the user
       if (userAssociatedWithEvent) {
         return new ResponseEntity<>(user, HttpStatus.OK);
       } else {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        // If user is not associated with the event, throw UserNotInEventException
+        throw new UserNotInEventException(Syscode.USER_NOT_IN_EVENT);
       }
     } else {
+      // If user is not found, return HTTP status 404
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }

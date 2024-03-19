@@ -15,6 +15,7 @@ import com.vtxlab.projectol.backend_oscar.exception.InvalidUserIdInputException;
 import com.vtxlab.projectol.backend_oscar.exception.QuestionInputFormatException;
 import com.vtxlab.projectol.backend_oscar.exception.RestClientException;
 import com.vtxlab.projectol.backend_oscar.exception.TestcaseInputFormatException;
+import com.vtxlab.projectol.backend_oscar.exception.UserNotInEventException;
 import com.vtxlab.projectol.backend_oscar.exception.exceptionEnum.Syscode;
 import io.jsonwebtoken.JwtException;
 
@@ -51,6 +52,7 @@ public class GlobalExceptionHandler {
         // .data(null) //
         .build();
   }
+
   @ExceptionHandler(value = JwtException.class)
   @ResponseStatus(value = HttpStatus.BAD_REQUEST)
   public ApiResp<Void> JwtExceptionHandler(JwtException e) {
@@ -96,6 +98,9 @@ public class GlobalExceptionHandler {
     }
     if (e instanceof QuestionInputFormatException) {
       return Syscode.INVALID_QUESTION_FORMAT_INPUT;
+    }
+    if (e instanceof UserNotInEventException) {
+      return Syscode.USER_NOT_IN_EVENT;
     }
     // return null;
     return Syscode.INVALID_OPERATION;

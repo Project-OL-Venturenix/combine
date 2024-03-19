@@ -147,9 +147,8 @@ public class UserController implements UserOperation {
 
   @Override
   public ResponseEntity<User> getUserByEventId(String eventid,
-      HttpServletRequest request) {
+      String jwt) {
     Long eventId = Long.valueOf(eventid);
-    String jwt = parseJwt(request);
     String userName = null;
     if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
       userName = jwtUtils.getUserNameFromJwtToken(jwt);

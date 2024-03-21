@@ -14,6 +14,7 @@ import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import com.vtxlab.projectol.backend_oscar.payload.request.event.EventRequest;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.MessageResponse;
 import com.vtxlab.projectol.backend_oscar.service.event.EventService;
+import jakarta.persistence.EntityManager;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -64,20 +65,7 @@ public class EventController implements EventOperation {
     }
   }
 
-  public ResponseEntity<Event> updateEvent(long id, Event event) {
-    Optional<Event> eventData = eventService.findById(id);
 
-    if (eventData.isPresent()) {
-      Event _event = eventData.get();
-      _event.setName(event.getName());
-      _event.setStatus(event.getStatus());
-      _event.setUpdatedDate(LocalDateTime.now());
-      _event.setUpdatedBy(event.getUpdatedBy());
-      return new ResponseEntity<>(eventService.save(_event), HttpStatus.OK);
-    } else {
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-  }
 
   public ResponseEntity<?> deleteEvent(long id) {
     try {
@@ -88,5 +76,25 @@ public class EventController implements EventOperation {
       return ResponseEntity
           .ok(new MessageResponse("HttpStatus.INTERNAL_SERVER_ERROR"));
     }
+  }
+
+  @Override
+  public Event updateEvent(long id, String status) {
+    Optional<Event> optionalEvent = eventService.findById(id);
+    if (optionalEvent.isPresent()) {
+      Event event = optionalEvent.get();
+      if (isValidStatus(status)) {
+        event.setStatus(status);
+        return eventService.save(event);
+      } else {
+        throw new IllegalArgumentException("Invalid status: " + status);
+      }
+    } else {
+      throw new IllegalArgumentException("Event not found with ID: " + id);
+    }
+  }
+
+  private boolean isValidStatus(String status) {
+    return status.equalsIgnoreCase("Open") || status.equalsIgnoreCase("Close");
   }
 }

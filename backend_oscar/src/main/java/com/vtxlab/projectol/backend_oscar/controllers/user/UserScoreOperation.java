@@ -36,9 +36,6 @@ public interface UserScoreOperation {
   @DeleteMapping("/userscores/{id}")
   ResponseEntity<?> deleteUserScore(@PathVariable String id);
 
-  // return ResponseEntity.ok(result);
-  // }
-
   @GetMapping("/usertestcases/eventid/{eventid}")
   ResponseEntity<UserScoreDTO> getUserTestCaseByEventId(
       @PathVariable String eventid);

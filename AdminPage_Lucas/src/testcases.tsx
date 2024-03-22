@@ -28,7 +28,7 @@ export const TestCaseEdit = () => (
     <Edit>
         <SimpleForm>
             <TextInput source="id" InputProps={{ disabled: true }} />
-            <TextInput source="methodSignatures" style={{ width: "100%" }} multiline/>
+            <TextInput source="methodSignatures" style={{ width: "100%" }} multiline />
             <TextInput source="testComputeCase" style={{ width: "100%" }} multiline />
             <TextInput source="input1" style={{ width: "100%" }} />
             <TextInput source="input2" style={{ width: "100%" }} />
@@ -41,13 +41,11 @@ export const TestCaseEdit = () => (
 export const TestCaseCreate = () => (
     <Create>
         <SimpleForm>
-            <TextInput source="id" />
-            <TextInput source="methodSignatures" />
-            <TextInput source="testComputeCase" />
-            <TextInput source="input1" />
-            <TextInput source="input2" />
-            <TextInput source="input3" />
-            <TextField source="expectedOutput" />
+            <TextInput source="questionId" />
+            <TextInput source="input1" style={{ width: "100%" }} />
+            <TextInput source="input2" style={{ width: "100%" }} />
+            <TextInput source="input3" style={{ width: "100%" }} />
+            <TextInput source="expectedOutput" style={{ width: "100%" }} />
         </SimpleForm>
     </Create>
 );

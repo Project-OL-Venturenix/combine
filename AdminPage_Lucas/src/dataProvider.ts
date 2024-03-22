@@ -28,15 +28,15 @@ export const dataProvider: DataProvider = {
             range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
             filter: JSON.stringify(params.filter),
         };
-            const url = `${apiUrl}/${resource}?${stringify(query)}`;
+        const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-            const { headers: responseHeaders, json } = await httpClient(url, { headers });
-            return ({
-                data: json,
-                total: parseInt((responseHeaders.get('content-range') || "0").split('/').pop() || '0', 100),
-            });
-        },
-    
+        const { headers: responseHeaders, json } = await httpClient(url, { headers });
+        return ({
+            data: json,
+            total: parseInt((responseHeaders.get('content-range') || "0").split('/').pop() || '0', 100),
+        });
+    },
+
 
     getOne: (resource, params) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`, { headers }).then(({ json }) => ({
@@ -92,7 +92,8 @@ export const dataProvider: DataProvider = {
             method: 'POST',
             body: JSON.stringify(params.data),
             headers
-        }).then(({ json }) => ({
+        }
+        ).then(({ json }) => ({
             data: { ...params.data, id: json.id } as any,
         })),
 

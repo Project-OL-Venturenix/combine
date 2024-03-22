@@ -3,7 +3,7 @@ import axios from "axios";
 export const getGroupUsers = async (accessToken) => {
     try {
         const response = await axios.get(
-            `http://localhost:8081/api/groupusers`,
+            `http://localhost:8082/api/groupusers`,
             {headers: {Authorization: `Bearer ${accessToken}`}}
         );
         return response;

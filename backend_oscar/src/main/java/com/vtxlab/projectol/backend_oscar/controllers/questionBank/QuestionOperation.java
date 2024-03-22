@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBank;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBonusRuntime;
@@ -53,10 +52,10 @@ public interface QuestionOperation {
 
         @PutMapping("/questions/{id}")
         public ResponseEntity<QuestionBank> updateQuestion(
-                        @PathVariable("id") long id,
+                        @PathVariable("id") String id,
                         @RequestBody QuestionBank question);
 
         @DeleteMapping("/questions/{id}")
-        public ResponseEntity<?> deleteQuestion(@PathVariable("id") long id);
+        public ResponseEntity<?> deleteQuestion(@PathVariable("id") String id);
 
 }

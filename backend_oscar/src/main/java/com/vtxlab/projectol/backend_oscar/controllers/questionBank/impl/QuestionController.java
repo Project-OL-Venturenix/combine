@@ -187,27 +187,31 @@ public class QuestionController implements QuestionOperation {
     }
   }
 
-  public ResponseEntity<QuestionBank> updateQuestion(long id,
+  @Override
+  public ResponseEntity<QuestionBank> updateQuestion(String id,
       QuestionBank question) {
-    Optional<QuestionBank> questionData = questionRepository.findById(id);
+    Long questionId = Long.parseLong(id);
+    Optional<QuestionBank> questionData =
+        questionRepository.findById(questionId);
 
     if (questionData.isPresent()) {
-      QuestionBank _question = questionData.get();
-      _question.setQuestion(question.getQuestion());
-      _question.setCreatedDate(LocalDateTime.now());
-      _question.setCreatedBy(question.getCreatedBy());
-      _question.setUpdatedDate(LocalDateTime.now());
-      _question.setUpdatedBy(question.getUpdatedBy());
-      return new ResponseEntity<>(questionRepository.save(_question),
+      questionData.get().setQuestion(question.getQuestion());
+      questionData.get().setTestComputeCase(question.getTestComputeCase());
+      questionData.get().setMethodSignatures(question.getMethodSignatures());
+      questionData.get()
+          .setTargetCompleteTime(question.getTargetCompleteTime());
+
+      return new ResponseEntity<>(questionRepository.save(questionData.get()),
           HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }
 
-  public ResponseEntity<?> deleteQuestion(long id) {
+  public ResponseEntity<?> deleteQuestion(String id) {
+    Long questionId = Long.parseLong(id);
     try {
-      questionRepository.deleteById(id);
+      questionRepository.deleteById(questionId);
       return ResponseEntity
           .ok(new MessageResponse("Delete Question " + id + " successfully!"));
     } catch (Exception e) {

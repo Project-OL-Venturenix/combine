@@ -74,7 +74,7 @@ const productionConfig = merge([
 ]);
 
 const developmentConfig = merge([
-  parts.loadEnv('http://localhost:8080'),
+  parts.loadEnv('http://localhost:8082'),
   parts.devServer({
     host: process.env.HOST,
     port: process.env.PORT,

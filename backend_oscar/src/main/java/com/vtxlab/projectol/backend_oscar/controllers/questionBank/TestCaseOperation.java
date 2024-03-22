@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.TestCase;
 import com.vtxlab.projectol.backend_oscar.payload.request.question.TestCaseRequest;
+import com.vtxlab.projectol.backend_oscar.payload.response.question.TestCaseDTO;
 import com.vtxlab.projectol.backend_oscar.payload.response.question.TestCaseResponse;
-import com.vtxlab.projectol.backend_oscar.payload.response.user.UserScoreDTO;
 import jakarta.validation.Valid;
 
 public interface TestCaseOperation {
@@ -21,15 +21,15 @@ public interface TestCaseOperation {
       @Valid @RequestBody TestCaseRequest testcaseRequest);
 
   @GetMapping("/testcases")
-  ResponseEntity<List<TestCase>> getAllTestCases();
+  ResponseEntity<List<TestCaseDTO>> getAllTestCases();
 
   @GetMapping("/testcases/{id}")
   ResponseEntity<TestCaseResponse> getTestCaseById(@PathVariable String id);
 
   @PutMapping("/testcases/{id}")
-  ResponseEntity<TestCase> updateTestCase(@PathVariable long id,
+  ResponseEntity<TestCase> updateTestCase(@PathVariable String id,
       @RequestBody TestCase testcase);
 
   @DeleteMapping("/testcases/{id}")
-  ResponseEntity<?> deleteTestCase(@PathVariable long id);
+  ResponseEntity<?> deleteTestCase(@PathVariable String id);
 }

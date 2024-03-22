@@ -3,6 +3,7 @@ package com.vtxlab.projectol.backend_oscar.controllers.questionBank.impl;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vtxlab.projectol.backend_oscar.controllers.questionBank.TestCaseOperation;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBank;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.TestCase;
+import com.vtxlab.projectol.backend_oscar.payload.Mapper;
 import com.vtxlab.projectol.backend_oscar.payload.request.question.TestCaseRequest;
+import com.vtxlab.projectol.backend_oscar.payload.response.question.TestCaseDTO;
 import com.vtxlab.projectol.backend_oscar.payload.response.question.TestCaseResponse;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.MessageResponse;
 import com.vtxlab.projectol.backend_oscar.repository.questionBank.QuestionBankRepository;
@@ -72,9 +75,25 @@ public class TestCaseController implements TestCaseOperation {
 
   }
 
-  public ResponseEntity<List<TestCase>> getAllTestCases() {
+  public ResponseEntity<List<TestCaseDTO>> getAllTestCases() {
     try {
-      List<TestCase> testcases = testcaseRepository.findAll();
+      List<TestCaseDTO> testcases =
+          testcaseRepository.findAll().stream().map(e -> {
+            QuestionBank targetQuestionBankData =
+                questionRepository.findById(e.getQuestionBank().getQuestionId())
+                    .orElseThrow(() -> new RuntimeException(
+                        "Error: Question is not found."));
+            return TestCaseDTO.builder()//
+                .id(e.getQuestionBank().getQuestionId())//
+                .methodSignatures(targetQuestionBankData.getMethodSignatures())//
+                .testComputeCase(targetQuestionBankData.getTestComputeCase())//
+                .input1(e.getInput1())//
+                .input2(e.getInput2())//
+                .input3(e.getInput3())//
+                .expectedOutput(e.getExpectedOutput())//
+                .build();//
+          })//
+              .collect(Collectors.toList());//
       if (testcases.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
@@ -88,11 +107,12 @@ public class TestCaseController implements TestCaseOperation {
 
   public ResponseEntity<TestCaseResponse> getTestCaseById(String id) {
     log.info("before testcaseData: ");
-    Optional<TestCase> testcaseData =
-        testcaseRepository.findById(Long.parseLong(id));
+    Long testcaseId = Long.parseLong(id);
+    Optional<TestCase> testcaseData = testcaseRepository.findById(testcaseId);
     log.info("testcaseData: " + testcaseData);
     QuestionBank targetQuestionBankData = questionRepository
-        .findById(testcaseData.get().getQuestionBank().getQuestionId()).orElseThrow(
+        .findById(testcaseData.get().getQuestionBank().getQuestionId())
+        .orElseThrow(
             () -> new RuntimeException("Error: Question is not found."));
 
     if (testcaseData.isPresent()) {
@@ -113,8 +133,9 @@ public class TestCaseController implements TestCaseOperation {
     }
   }
 
-  public ResponseEntity<TestCase> updateTestCase(long id, TestCase testcase) {
-    Optional<TestCase> testcaseData = testcaseRepository.findById(id);
+  public ResponseEntity<TestCase> updateTestCase(String id, TestCase testcase) {
+    Long testcaseId = Long.parseLong(id);
+    Optional<TestCase> testcaseData = testcaseRepository.findById(testcaseId);
     QuestionBank targetQuestionBankData = questionRepository
         .findById(testcase.getQuestionBank().getQuestionId()).orElseThrow(
             () -> new RuntimeException("Error: Question is not found."));
@@ -137,9 +158,10 @@ public class TestCaseController implements TestCaseOperation {
     }
   }
 
-  public ResponseEntity<?> deleteTestCase(long id) {
+  public ResponseEntity<?> deleteTestCase(String id) {
+    Long testcaseId = Long.parseLong(id);
     try {
-      testcaseRepository.deleteById(id);
+      testcaseRepository.deleteById(testcaseId);
       return ResponseEntity
           .ok(new MessageResponse("Delete TestCase " + id + " successfully!"));
     } catch (Exception e) {

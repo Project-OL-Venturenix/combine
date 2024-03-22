@@ -1,6 +1,7 @@
 package com.vtxlab.projectol.backend_oscar.entity.user;
 
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBank;
 import jakarta.persistence.Column;
@@ -28,6 +29,10 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @Table(name = "user_score")
+@JsonPropertyOrder({ "id", "event", "user", "question", "submitTime",
+    "resultOfPassingTestecase", "BonusUnder30Mins",
+    "BonusWithinQuestionRuntime", "runtimebyMsec", "status", "createdDate",
+    "updatedDate" })
 public class UserScore {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,10 +55,10 @@ public class UserScore {
   private Integer resultOfPassingTestecase;
 
   @Column(name = "bonus_under_30_mins")
-  private String BonusUnder30Mins;
+  private String bonusUnder30Mins;
 
   @Column(name = "bonus_within_question_runtime")
-  private String BonusWithinQuestionRuntime;
+  private String bonusWithinQuestionRuntime;
 
   private Integer runtimebyMsec;
 

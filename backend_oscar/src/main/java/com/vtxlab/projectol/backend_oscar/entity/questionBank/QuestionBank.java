@@ -3,6 +3,8 @@ package com.vtxlab.projectol.backend_oscar.entity.questionBank;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,10 +29,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Table(name = "questions")
+@JsonPropertyOrder({"id", "question", "testComputeCase", "methodSignatures",
+    "targetCompleteTime", "createdDate", "createdBy", "updatedDate",
+    "updatedBy"})
 public class QuestionBank {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "question_id")
+  @JsonProperty("id")
   private Long questionId;
 
   @OneToMany(mappedBy = "question")

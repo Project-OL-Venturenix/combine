@@ -2,7 +2,6 @@ package com.vtxlab.projectol.backend_oscar.entity.questionBank;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
@@ -12,7 +11,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -33,11 +31,13 @@ import lombok.Setter;
 public class TestCase implements Serializable {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @JsonProperty("testcaseId")
+        @Column(name = "testcaseId")
+        @JsonProperty("id")
         private Long testcaseId;
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "question_id")
+        @JsonProperty("question_id")
         private QuestionBank questionBank;
 
         @Nonnull

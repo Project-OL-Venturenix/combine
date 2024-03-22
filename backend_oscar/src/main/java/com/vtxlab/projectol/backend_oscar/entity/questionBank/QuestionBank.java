@@ -36,8 +36,8 @@ public class QuestionBank {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "question_id")
-  @JsonProperty("id")
-  private Long questionId;
+  // @JsonProperty("questionId")
+  private Long id;
 
   @OneToMany(mappedBy = "question")
   private Set<QuestionBonusRuntime> bonusRuntimes = new HashSet<>();

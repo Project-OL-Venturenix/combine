@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBank;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBonusRuntime;
@@ -27,7 +28,12 @@ public interface QuestionOperation {
         @GetMapping("/questions")
         public ResponseEntity<List<QuestionBank>> getAllQuestions();
 
-        @GetMapping("/questions/{eventid}")
+
+        @GetMapping("/questions/{id}")
+        public ResponseEntity<QuestionBank> getQuestionById(
+                        @PathVariable String id);
+
+        @GetMapping("/questions/event/{eventid}")
         public ResponseEntity<List<QuestionBankDTO>> getQuestionByEventId(
                         @PathVariable String eventid);
 

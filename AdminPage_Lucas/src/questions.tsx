@@ -26,9 +26,9 @@ export const QuestionEdit = () => (
     <Edit>
         <SimpleForm>
             <TextInput source="id" InputProps={{ disabled: true }} />
-            <TextInput source="question" multiline rows={5} />
-            <TextInput source="testComputeCase" multiline rows={5} />
-            <TextInput source="methodSignatures" multiline rows={5} />
+            <TextInput source="question" multiline rows={5} style={{ width: "80%" }} />
+            <TextInput source="testComputeCase" multiline rows={5} style={{ width: "80%" }} />
+            <TextInput source="methodSignatures" multiline rows={5} style={{ width: "80%" }} />
         </SimpleForm>
     </Edit>
 );
@@ -36,9 +36,9 @@ export const QuestionEdit = () => (
 export const QuestionCreate = () => (
     <Create>
         <SimpleForm>
-            <TextInput source="question" multiline rows={5} />
-            <TextInput source="testComputeCase" multiline rows={5} />
-            <TextInput source="methodSignatures" multiline rows={5} />
+            <TextInput source="question" multiline rows={5} style={{ width: "80%" }} />
+            <TextInput source="testComputeCase" multiline rows={5} style={{ width: "80%" }} />
+            <TextInput source="methodSignatures" multiline rows={5} style={{ width: "80%" }} />
         </SimpleForm>
     </Create>
 );

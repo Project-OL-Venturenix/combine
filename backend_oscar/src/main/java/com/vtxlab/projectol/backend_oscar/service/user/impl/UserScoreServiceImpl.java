@@ -164,7 +164,7 @@ public class UserScoreServiceImpl implements UserScoreService {
 
       }
 
-      String questionKey = "Q" + userScore.getQuestion().getId();
+      String questionKey = "Q" + userScore.getQuestion().getQuestionId();
       int score = userScore.getResultOfPassingTestecase() == 10 ? 3 : 0;
       int bonus30Mins = Integer.valueOf(userScore.getBonusUnder30Mins());
       int runTimeBonus =

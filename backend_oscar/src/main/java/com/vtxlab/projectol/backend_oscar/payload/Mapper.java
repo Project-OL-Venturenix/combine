@@ -9,7 +9,7 @@ public class Mapper {
   public static TestCaseDTO map(TestCase testCase) {
     return TestCaseDTO.builder()
         // .questionId(testCase.getQuestionBank().getQuestionId())//
-        .id(testCase.getQuestionBank().getId())//
+        .id(testCase.getQuestionBank().getQuestionId())//
         .input1(testCase.getInput1())//
         .input2(testCase.getInput2())//
         .input3(testCase.getInput3())//
@@ -19,7 +19,7 @@ public class Mapper {
 
   public static QuestionBankDTO map(QuestionBank questionBank) {
     return QuestionBankDTO.builder()//
-        .questionId(questionBank.getId())//
+        .questionId(questionBank.getQuestionId())//
         .question(questionBank.getQuestion())//
         .testComputeCase(questionBank.getTestComputeCase())//
         .methodSignatures(questionBank.getMethodSignatures())//

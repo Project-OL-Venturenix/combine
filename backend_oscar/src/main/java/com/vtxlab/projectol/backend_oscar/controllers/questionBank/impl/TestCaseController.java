@@ -80,11 +80,11 @@ public class TestCaseController implements TestCaseOperation {
       List<TestCaseDTO> testcases =
           testcaseRepository.findAll().stream().map(e -> {
             QuestionBank targetQuestionBankData =
-                questionRepository.findById(e.getQuestionBank().getId())
+                questionRepository.findById(e.getQuestionBank().getQuestionId())
                     .orElseThrow(() -> new RuntimeException(
                         "Error: Question is not found."));
             return TestCaseDTO.builder()//
-                .id(e.getQuestionBank().getId())//
+                .id(e.getQuestionBank().getQuestionId())//
                 .methodSignatures(targetQuestionBankData.getMethodSignatures())//
                 .testComputeCase(targetQuestionBankData.getTestComputeCase())//
                 .input1(e.getInput1())//
@@ -106,12 +106,11 @@ public class TestCaseController implements TestCaseOperation {
   }
 
   public ResponseEntity<TestCaseResponse> getTestCaseById(String id) {
-    log.info("before testcaseData: ");
     Long testcaseId = Long.parseLong(id);
     Optional<TestCase> testcaseData = testcaseRepository.findById(testcaseId);
-    log.info("testcaseData: " + testcaseData);
     QuestionBank targetQuestionBankData = questionRepository
-        .findById(testcaseData.get().getQuestionBank().getId()).orElseThrow(
+        .findById(testcaseData.get().getQuestionBank().getQuestionId())
+        .orElseThrow(
             () -> new RuntimeException("Error: Question is not found."));
 
     if (testcaseData.isPresent()) {
@@ -119,7 +118,7 @@ public class TestCaseController implements TestCaseOperation {
           .id(testcaseData.get().getTestcaseId())//
           // .mainMethod(testcaseData.get().getMainMethod())//
           .methodSignatures(targetQuestionBankData.getMethodSignatures())
-          .questionId(targetQuestionBankData.getId())//
+          .questionId(targetQuestionBankData.getQuestionId())//
           .createdDate(testcaseData.get().getCreatedDate())//
           .createdBy(testcaseData.get().getCreatedBy())//
           .updatedDate(testcaseData.get().getUpdatedDate())//
@@ -136,7 +135,7 @@ public class TestCaseController implements TestCaseOperation {
     Long testcaseId = Long.parseLong(id);
     Optional<TestCase> testcaseData = testcaseRepository.findById(testcaseId);
     QuestionBank targetQuestionBankData = questionRepository
-        .findById(testcase.getQuestionBank().getId()).orElseThrow(
+        .findById(testcase.getQuestionBank().getQuestionId()).orElseThrow(
             () -> new RuntimeException("Error: Question is not found."));
 
     if (testcaseData.isPresent()) {

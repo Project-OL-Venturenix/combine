@@ -120,7 +120,7 @@ public class QuestionController implements QuestionOperation {
     log.info("testcaseData : " + testcaseData.orElse(null));
 
     List<TestCaseDTO> testCases = testCaseRepository.findAll().stream()//
-        .filter(e -> e.getQuestionBank().getId().equals(questionId))//
+        .filter(e -> e.getQuestionBank().getQuestionId().equals(questionId))//
         .limit(3)//
         .map(e -> Mapper.map(e))//
         .collect(Collectors.toList());
@@ -129,7 +129,7 @@ public class QuestionController implements QuestionOperation {
 
     if (questionData.isPresent() && testcaseData.isPresent()) {
       QuestionResponse questionResponse = QuestionResponse.builder()
-          .questionId(questionData.get().getId())//
+          .questionId(questionData.get().getQuestionId())//
           .classDeclaration(
               testCaseService.generateClassDeclaration(questionId))//
           .code(testCaseService.generateFullCode(questionId))//
@@ -160,7 +160,7 @@ public class QuestionController implements QuestionOperation {
     log.info("testcaseData : " + testcaseData.orElse(null));
 
     List<TestCaseDTO> testCases = testCaseRepository.findAll().stream()//
-        .filter(e -> e.getQuestionBank().getId().equals(questionId))//
+        .filter(e -> e.getQuestionBank().getQuestionId().equals(questionId))//
         .map(e -> Mapper.map(e))//
         .collect(Collectors.toList());
     log.info("testCases : " + testCases.get(0));
@@ -168,7 +168,7 @@ public class QuestionController implements QuestionOperation {
 
     if (questionData.isPresent() && testcaseData.isPresent()) {
       QuestionResponse questionResponse = QuestionResponse.builder()
-          .questionId(questionData.get().getId())//
+          .questionId(questionData.get().getQuestionId())//
           .classDeclaration(
               testCaseService.generateClassDeclaration(questionId))//
           .code(testCaseService.generateFullCode(questionId))//
@@ -195,13 +195,17 @@ public class QuestionController implements QuestionOperation {
         questionRepository.findById(questionId);
 
     if (questionData.isPresent()) {
-      questionData.get().setQuestion(question.getQuestion());
-      questionData.get().setTestComputeCase(question.getTestComputeCase());
-      questionData.get().setMethodSignatures(question.getMethodSignatures());
-      questionData.get()
-          .setTargetCompleteTime(question.getTargetCompleteTime());
+      QuestionBank builder = QuestionBank.builder()//
+          .question(question.getQuestion())//
+          .testComputeCase(question.getTestComputeCase())//
+          .methodSignatures(question.getMethodSignatures())//
+          .createdDate(question.getCreatedDate())//
+          .createdBy(question.getCreatedBy())//
+          .updatedDate(LocalDateTime.now())//
+          .updatedBy(question.getUpdatedBy())//
+          .build();
 
-      return new ResponseEntity<>(questionRepository.save(questionData.get()),
+      return new ResponseEntity<>(questionRepository.save(builder),
           HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -267,5 +271,17 @@ public class QuestionController implements QuestionOperation {
         .collect(Collectors.toList());
 
     return new ResponseEntity<>(result, HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<QuestionBank> getQuestionById(String id) {
+    Long questionId = Long.parseLong(id);
+    Optional<QuestionBank> questionData =
+        questionRepository.findById(questionId);
+    if (questionData.isPresent()) {
+      return new ResponseEntity<>(questionData.get(), HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
 }

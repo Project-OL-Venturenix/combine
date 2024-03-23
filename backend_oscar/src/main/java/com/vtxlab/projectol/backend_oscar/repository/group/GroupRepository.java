@@ -1,22 +1,14 @@
-// package com.venturenix.cmc.repository.group;
+package com.vtxlab.projectol.backend_oscar.repository.group;
 
-// import java.util.Optional;
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import com.vtxlab.projectol.backend_oscar.entity.group.Group;
 
-// import org.springframework.data.jpa.repository.JpaRepository;
-// import org.springframework.stereotype.Repository;
-// import com.venturenix.cmc.entity.group.Group;
-// import java.util.List;
+@Repository
+public interface GroupRepository extends JpaRepository<Group, Long> {
 
-// @Repository
-// public interface GroupRepository extends JpaRepository<Group, Long> {
-
-//     Optional<Group> findById(Long id);
-
-//     Group findByName(String name);
-
-//     List<Group> findAll();
-    
-    
-
+  public List<Group> findByGroupsId(Long groupsId);
   
-// }
+}

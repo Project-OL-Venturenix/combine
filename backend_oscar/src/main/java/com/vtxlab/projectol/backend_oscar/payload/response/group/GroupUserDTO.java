@@ -1,6 +1,6 @@
 package com.vtxlab.projectol.backend_oscar.payload.response.group;
 
-import java.util.List;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +11,6 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 public class GroupUserDTO {
-  Long id;
   Long groupId;
-  Long userId;
+  Map<Long, String> users;
 }

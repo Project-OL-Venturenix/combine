@@ -1,6 +1,7 @@
 package com.vtxlab.projectol.backend_oscar.controllers.questionBank;
 
 import java.util.List;
+import java.util.Set;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public interface QuestionOperation {
                         @PathVariable String id);
 
         @GetMapping("/questions/event/{eventid}")
-        public ResponseEntity<List<QuestionBankDTO>> getQuestionByEventId(
+        public ResponseEntity<Set<QuestionBankDTO>> getQuestionByEventId(
                         @PathVariable String eventid);
 
         @PatchMapping("/addEventQuestion/event/{eventId}/question/{questionId}")

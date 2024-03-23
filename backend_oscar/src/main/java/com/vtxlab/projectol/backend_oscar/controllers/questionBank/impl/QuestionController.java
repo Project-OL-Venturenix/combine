@@ -3,6 +3,7 @@ package com.vtxlab.projectol.backend_oscar.controllers.questionBank.impl;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -261,14 +262,14 @@ public class QuestionController implements QuestionOperation {
 
 
   @Override
-  public ResponseEntity<List<QuestionBankDTO>> getQuestionByEventId(
+  public ResponseEntity<Set<QuestionBankDTO>> getQuestionByEventId(
       String eventid) {
     Long eventId = Long.valueOf(eventid);
-    List<QuestionBankDTO> result = questionRepository.findAll().stream()//
+    Set<QuestionBankDTO> result = questionRepository.findAll().stream()//
         .filter(e -> e.getEvents().stream()
             .allMatch(event -> event.getId().equals(eventId)))//
         .map(e -> Mapper.map(e))//
-        .collect(Collectors.toList());
+        .collect(Collectors.toSet());
 
     return new ResponseEntity<>(result, HttpStatus.OK);
   }

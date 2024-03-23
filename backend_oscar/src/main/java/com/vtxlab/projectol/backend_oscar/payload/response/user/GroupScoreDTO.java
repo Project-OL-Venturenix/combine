@@ -1,8 +1,8 @@
 package com.vtxlab.projectol.backend_oscar.payload.response.user;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import com.vtxlab.projectol.backend_oscar.payload.response.group.GroupUserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GroupScoreDTO {
   private int eventId;
-  private List<GroupResult> result;
+  private Set<GroupResult> result;
 
   @Data
   @Builder

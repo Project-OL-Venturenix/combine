@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -218,51 +219,61 @@ public class GroupController implements GroupOperation {
   // }
   public GroupScoreDTO getGroupScoreByEventId(String eventid) {
     Long eventId = Long.valueOf(eventid);
-    List<UserScore> userScores = userscoreRepository.findByEventId(eventId);
+    Set<UserScore> userScores = userscoreRepository.findByEventId(eventId)
+        .stream().collect(Collectors.toSet());
     Map<Long, GroupScoreDTO.GroupResult> userResultMap = new HashMap<>();
 
     for (UserScore userScore : userScores) {
-        Optional<User> userOptional = userRepository.findById(userScore.getUser().getId());
-        Optional<Group> groupOptional = groupRepository.findByEventsIdAndUsersId(eventId, userOptional.get().getId());
+      Optional<User> userOptional =
+          userRepository.findById(userScore.getUser().getId());
+      Optional<Group> groupOptional = groupRepository
+          .findByEventsIdAndUsersId(eventId, userOptional.get().getId());
 
-        if (!userResultMap.containsKey(userScore.getUser().getId())) {
-            GroupScoreDTO.GroupResult userResult = new GroupScoreDTO.GroupResult();
-            userResult.setGroupUserDTO(
-                    this.getGroupById(String.valueOf(groupOptional.get().getGroupsId()))); // Assuming user id as name
-            // passingTestCaseNumber
-            userResult.setPassingTestCaseNumber(new HashMap<>());
-            // score
-            userResult.setScore(new HashMap<>());
-            // submitTime
-            userResult.setSubmitTime(new HashMap<>());
-            // runtime
-            userResult.setRuntime(new HashMap<>());
-            userResultMap.put(userScore.getUser().getId(), userResult);
-        }
-
-        String questionKey = "Q" + userScore.getQuestion().getQuestionId();
-        int score = userScore.getResultOfPassingTestecase() == 10 ? 3 : 0;
-        int bonus30Mins = Integer.valueOf(userScore.getBonusUnder30Mins());
-        int runTimeBonus = Integer.valueOf(userScore.getBonusWithinQuestionRuntime());
-        int total = score + bonus30Mins + runTimeBonus;
-        
-        GroupScoreDTO.GroupResult userResult = userResultMap.get(userScore.getUser().getId());
-        userResult.getPassingTestCaseNumber().put(questionKey, userScore.getResultOfPassingTestecase());
-        userResult.getScore().put(questionKey, total);
-        // submit time
-        LocalDateTime submitTime = userScore.getSubmitTime();
-        userResult.getSubmitTime().put(questionKey, submitTime);
+      if (!userResultMap.containsKey(userScore.getUser().getId())) {
+        GroupScoreDTO.GroupResult userResult = new GroupScoreDTO.GroupResult();
+        userResult.setGroupUserDTO(this
+            .getGroupById(String.valueOf(groupOptional.get().getGroupsId()))); // Assuming user id as name
+        // passingTestCaseNumber
+        userResult.setPassingTestCaseNumber(new HashMap<>());
+        // score
+        userResult.setScore(new HashMap<>());
+        // submitTime
+        userResult.setSubmitTime(new HashMap<>());
         // runtime
-        String runtime = String.valueOf(userScore.getRuntimebyMsec());
-        userResult.getRuntime().put(questionKey, runtime);
-    }
+        userResult.setRuntime(new HashMap<>());
+        userResultMap.put(userScore.getUser().getId(), userResult);
+      }
 
-    List<GroupScoreDTO.GroupResult> userResults = new ArrayList<>(userResultMap.values());
+      String questionKey = "Q" + userScore.getQuestion().getQuestionId();
+      int score = userScore.getResultOfPassingTestecase() == 10 ? 3 : 0;
+      int bonus30Mins = Integer.valueOf(userScore.getBonusUnder30Mins());
+      int runTimeBonus =
+          Integer.valueOf(userScore.getBonusWithinQuestionRuntime());
+      int total = score + bonus30Mins + runTimeBonus;
+
+      GroupScoreDTO.GroupResult userResult =
+          userResultMap.get(userScore.getUser().getId());
+      userResult.getPassingTestCaseNumber().put(questionKey,
+          userScore.getResultOfPassingTestecase());
+      userResult.getScore().put(questionKey, total);
+      // submit time
+      LocalDateTime submitTime = userScore.getSubmitTime();
+      userResult.getSubmitTime().put(questionKey, submitTime);
+      // runtime
+      String runtime = String.valueOf(userScore.getRuntimebyMsec());
+      userResult.getRuntime().put(questionKey, runtime);
+    }
+    log.info("userResultMap.size() : " + userResultMap.size());
+    Set<GroupScoreDTO.GroupResult> userResults =
+        // new HashSet<>(userResultMap.values());
+        new HashSet<>(userResultMap.entrySet().stream()
+            .map(entry -> entry.getValue()).collect(Collectors.toSet()));
+
 
     GroupScoreDTO userScoreDTO = new GroupScoreDTO();
     userScoreDTO.setEventId(eventId.intValue());
     userScoreDTO.setResult(userResults);
 
     return userScoreDTO;
-}
+  }
 }

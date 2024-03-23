@@ -1,9 +1,13 @@
 package com.vtxlab.projectol.backend_oscar.controllers.group.impl;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +20,14 @@ import com.vtxlab.projectol.backend_oscar.controllers.group.GroupOperation;
 import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import com.vtxlab.projectol.backend_oscar.entity.group.Group;
 import com.vtxlab.projectol.backend_oscar.entity.user.User;
+import com.vtxlab.projectol.backend_oscar.entity.user.UserScore;
 import com.vtxlab.projectol.backend_oscar.payload.response.group.GroupUserDTO;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.MessageResponse;
+import com.vtxlab.projectol.backend_oscar.payload.response.user.UserScoreDTO;
 import com.vtxlab.projectol.backend_oscar.repository.event.EventRepository;
 import com.vtxlab.projectol.backend_oscar.repository.group.GroupRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.RoleRepository;
+import com.vtxlab.projectol.backend_oscar.repository.user.UserQuestionSubmissionRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.UserRepository;
 import com.vtxlab.projectol.backend_oscar.security.jwt.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +58,9 @@ public class GroupController implements GroupOperation {
 
   @Autowired
   GroupRepository groupRepository;
+
+  @Autowired
+  UserQuestionSubmissionRepository userscoreRepository;
 
   // public ResponseEntity<?> addGroup(
   // @Valid @RequestBody GroupRequest groupRequest) {
@@ -83,23 +93,7 @@ public class GroupController implements GroupOperation {
 
   }
 
-  @Override
-  public ResponseEntity<GroupUserDTO> getGroupById(String groupId) {
-    List<Group> groupData =
-        groupRepository.findByGroupsId(Long.valueOf(groupId));
-    log.info("groupData: {}", groupData);
-    GroupUserDTO builder = GroupUserDTO.builder()//
-        .groupId(Long.valueOf(groupId))//
-        .users(new HashMap<>())//
-        .build();
 
-    for (Group group : groupData) {
-      for (User user : group.getUsers()) {
-        builder.getUsers().put(user.getId(), user.getUserName());
-      }
-    }
-    return new ResponseEntity<>(builder, HttpStatus.OK);
-  }
 
   @Override
   public ResponseEntity<Group> updateGroup(long id, Group group) {
@@ -146,5 +140,79 @@ public class GroupController implements GroupOperation {
 
     groupRepository.save(builder);
     return true;
+  }
+
+
+
+  @Override
+  public GroupUserDTO getGroupById(String groupid) {
+    Long groupId = Long.valueOf(groupid);
+    List<Group> groupData = groupRepository.findByGroupsId(groupId);
+    Map<Long, String> userMap = new HashMap<>();
+    for (Group group : groupData) {
+      for (User user : group.getUsers()) {
+        userMap.put(user.getId(), user.getUserName());
+      }
+    }
+    return GroupUserDTO.builder().groupId(groupId).users(userMap).build();
+  }
+
+
+
+  @Override
+  public UserScoreDTO getGroupScoreByEventId(String eventid) {
+    Long eventId = Long.valueOf(eventid);
+    List<UserScore> userScores = userscoreRepository.findByEventId(eventId);
+    Map<Long, UserScoreDTO.UserResult> userResultMap = new HashMap<>();
+
+    for (UserScore userScore : userScores) {
+      Optional<User> userOptional =
+          userRepository.findById(userScore.getUser().getId());
+      if (!userResultMap.containsKey(userScore.getUser().getId())) {
+        UserScoreDTO.UserResult userResult = new UserScoreDTO.UserResult();
+        userResult.setName(userOptional.get().getUserName()); // Assuming user id as name
+        // passingTestCaseNumber
+        userResult.setPassingTestCaseNumber(new HashMap<>());
+        userResultMap.put(userScore.getUser().getId(), userResult);
+        // score
+        userResult.setScore(new HashMap<>());
+        userResultMap.put(userScore.getUser().getId(), userResult);
+        // submitTime
+        userResult.setSubmitTime(new HashMap<>());
+        userResultMap.put(userScore.getUser().getId(), userResult);
+        // runtime
+        userResult.setRuntime(new HashMap<>());
+        userResultMap.put(userScore.getUser().getId(), userResult);
+
+      }
+
+      String questionKey = "Q" + userScore.getQuestion().getQuestionId();
+      int score = userScore.getResultOfPassingTestecase() == 10 ? 3 : 0;
+      int bonus30Mins = Integer.valueOf(userScore.getBonusUnder30Mins());
+      int runTimeBonus =
+          Integer.valueOf(userScore.getBonusWithinQuestionRuntime());
+      int total = score + bonus30Mins + runTimeBonus;
+      userResultMap.get(userScore.getUser().getId()).getPassingTestCaseNumber()
+          .put(questionKey, userScore.getResultOfPassingTestecase());
+      UserScoreDTO.UserResult userResult =
+          userResultMap.get(userScore.getUser().getId());
+      userResult.getScore().put(questionKey, total);
+      // submit time
+      LocalDateTime submitTime = userScore.getSubmitTime();
+      userResult.getSubmitTime().put(questionKey, submitTime);
+      // rutime
+      String runtime = String.valueOf(userScore.getRuntimebyMsec());
+      userResult.getRuntime().put(questionKey, runtime);
+
+    }
+
+    List<UserScoreDTO.UserResult> userResults =
+        new ArrayList<>(userResultMap.values());
+
+    UserScoreDTO userScoreDTO = new UserScoreDTO();
+    userScoreDTO.setEventId(eventId.intValue());
+    userScoreDTO.setResult(userResults);
+
+    return userScoreDTO;
   }
 }

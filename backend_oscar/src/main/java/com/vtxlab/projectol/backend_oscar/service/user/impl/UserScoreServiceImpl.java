@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,6 @@ import com.vtxlab.projectol.backend_oscar.entity.user.User;
 import com.vtxlab.projectol.backend_oscar.entity.user.UserScore;
 import com.vtxlab.projectol.backend_oscar.payload.request.question.SubmitTimeRunTimeDTO;
 import com.vtxlab.projectol.backend_oscar.payload.request.user.UserScoreRequest;
-import com.vtxlab.projectol.backend_oscar.payload.response.user.MessageResponse;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.UserScoreDTO;
 import com.vtxlab.projectol.backend_oscar.repository.event.EventRepository;
 import com.vtxlab.projectol.backend_oscar.repository.questionBank.QuestionBankRepository;
@@ -26,7 +24,6 @@ import com.vtxlab.projectol.backend_oscar.repository.questionBank.QuestionBonusR
 import com.vtxlab.projectol.backend_oscar.repository.user.RoleRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.UserQuestionSubmissionRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.UserRepository;
-import com.vtxlab.projectol.backend_oscar.security.jwt.JwtUtils;
 import com.vtxlab.projectol.backend_oscar.service.user.UserScoreService;
 
 @Service

@@ -1,7 +1,6 @@
 package com.vtxlab.projectol.backend_oscar.entity.group;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import com.vtxlab.projectol.backend_oscar.entity.user.User;

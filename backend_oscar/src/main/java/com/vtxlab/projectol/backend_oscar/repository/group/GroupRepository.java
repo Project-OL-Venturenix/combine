@@ -13,4 +13,5 @@ public interface GroupRepository extends JpaRepository<Group, Long> {
 
   Optional<Group> findByEventsId(Long eventId);
 
+  Optional<Group> findByEventsIdAndUsersId(Long eventId, Long userId);
 }

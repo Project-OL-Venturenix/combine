@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import com.vtxlab.projectol.backend_oscar.entity.group.Group;
 import com.vtxlab.projectol.backend_oscar.payload.response.group.GroupUserDTO;
-import com.vtxlab.projectol.backend_oscar.payload.response.user.UserScoreDTO;
+import com.vtxlab.projectol.backend_oscar.payload.response.user.GroupScoreDTO;
 
 public interface GroupOperation {
   // @PostMapping("/groups/add")
@@ -32,7 +32,7 @@ public interface GroupOperation {
 
   @GetMapping("/groups/eventid/{eventid}")
   @ResponseStatus(HttpStatus.FOUND)
-  UserScoreDTO getGroupScoreByEventId(@PathVariable String eventid);
+  GroupScoreDTO getGroupScoreByEventId(@PathVariable String eventid);
 
   @PutMapping("/groups/{id}")
   ResponseEntity<Group> updateGroup(@PathVariable("id") long id,

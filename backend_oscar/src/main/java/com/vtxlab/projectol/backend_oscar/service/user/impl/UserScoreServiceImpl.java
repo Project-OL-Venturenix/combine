@@ -77,8 +77,7 @@ public class UserScoreServiceImpl implements UserScoreService {
                 && testcasePass == 10 ? "1" : "0")//
             .bonusWithinQuestionRuntime(questionBonusRuntime.get()
                 .getBonusRuntime() > submitTimeRunTimeDTO.getRunTimeByMsec()
-                    ? "1"
-                    : "0")//
+                && testcasePass == 10 ? "1" : "0")//
             .createdDate(LocalDateTime.now()).updatedDate(LocalDateTime.now())
             .build());
         return true;

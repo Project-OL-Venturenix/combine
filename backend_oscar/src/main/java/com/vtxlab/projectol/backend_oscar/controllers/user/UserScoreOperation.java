@@ -16,27 +16,27 @@ import jakarta.validation.Valid;
 
 public interface UserScoreOperation {
 
-  @PostMapping("/userscores/addScore")
-  boolean addScore(@RequestParam String eventid, //
-      @RequestParam String userid, //
-      @RequestParam String questionid, //
-      @RequestParam String testcasePassTotal,
-      @RequestBody SubmitTimeRunTimeDTO submitTimeRunTimeDTO);
+    @PostMapping("/userscores/addScore")
+    boolean addScore(@RequestParam String eventid, //
+            @RequestParam String userid, //
+            @RequestParam String questionid, //
+            @RequestParam String testcasePassTotal,
+            @RequestBody SubmitTimeRunTimeDTO submitTimeRunTimeDTO);
 
-  @PostMapping("/userscores")
-  ResponseEntity<?> addUserScore(
-      @Valid @RequestBody UserScoreRequest userscoreRequest);
+    @PostMapping("/userscores")
+    ResponseEntity<?> addUserScore(
+            @Valid @RequestBody UserScoreRequest userscoreRequest);
 
-  @GetMapping("/userscores")
-  ResponseEntity<List<UserScore>> getAllUserScores();
+    @GetMapping("/userscores")
+    ResponseEntity<List<UserScore>> getAllUserScores();
 
-  @GetMapping("/userscores/{id}")
-  ResponseEntity<UserScore> getUserScoreById(@PathVariable String id);
+    @GetMapping("/userscores/{id}")
+    ResponseEntity<UserScore> getUserScoreById(@PathVariable String id);
 
-  @DeleteMapping("/userscores/{id}")
-  ResponseEntity<?> deleteUserScore(@PathVariable String id);
+    @DeleteMapping("/userscores/{id}")
+    ResponseEntity<?> deleteUserScore(@PathVariable String id);
 
-  @GetMapping("/usertestcases/eventid/{eventid}")
-  ResponseEntity<UserScoreDTO> getUserTestCaseByEventId(
-      @PathVariable String eventid);
+    @GetMapping("/usertestcases/eventid/{eventid}")
+    ResponseEntity<UserScoreDTO> getUserTestCaseByEventId(
+            @PathVariable String eventid);
 }

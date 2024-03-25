@@ -20,6 +20,6 @@ public class QuestionBankDTO {
 
   private String methodSignatures;
 
-  private Integer targetCompleteTime;
+  private Integer bonusRuntime;
 
 }

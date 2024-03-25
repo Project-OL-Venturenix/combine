@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.vtxlab.projectol.backend_oscar.entity.group.Group;
 import com.vtxlab.projectol.backend_oscar.payload.response.group.GroupUserDTO;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.GroupScoreDTO;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface GroupOperation {
   // @PostMapping("/groups/add")
@@ -26,9 +27,10 @@ public interface GroupOperation {
   @GetMapping("/groups")
   ResponseEntity<List<Group>> getAllGroups();
 
-  @GetMapping("/groups/{id}")
-  @ResponseStatus(HttpStatus.CREATED)
-  GroupUserDTO getGroupById(@PathVariable("id") String id);
+  @GetMapping("/groups/{eventid}")
+  @ResponseStatus(HttpStatus.FOUND)
+  GroupUserDTO getGroupById(@PathVariable String eventid,
+      HttpServletRequest request);
 
   @GetMapping("/groups/eventid/{eventid}")
   @ResponseStatus(HttpStatus.FOUND)

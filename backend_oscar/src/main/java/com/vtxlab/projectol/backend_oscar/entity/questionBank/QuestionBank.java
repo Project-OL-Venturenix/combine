@@ -39,8 +39,6 @@ public class QuestionBank {
   @JsonProperty("id")
   private Long questionId;
 
-  @OneToMany(mappedBy = "question")
-  private Set<QuestionBonusRuntime> bonusRuntimes = new HashSet<>();
 
   @OneToMany(mappedBy = "questionBank")
   private Set<TestCase> testCases = new HashSet<>();
@@ -53,7 +51,7 @@ public class QuestionBank {
 
   private String methodSignatures;
 
-  private Integer targetCompleteTime;
+  private Integer bonusRuntime;
 
   private LocalDateTime createdDate;
 

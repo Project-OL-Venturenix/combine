@@ -23,7 +23,7 @@ public class Mapper {
         .question(questionBank.getQuestion())//
         .testComputeCase(questionBank.getTestComputeCase())//
         .methodSignatures(questionBank.getMethodSignatures())//
-        .targetCompleteTime(questionBank.getTargetCompleteTime())//
+        .bonusRuntime(questionBank.getBonusRuntime())//
         .build();
   }
 }

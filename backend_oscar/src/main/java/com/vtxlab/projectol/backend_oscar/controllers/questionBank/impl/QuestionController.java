@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vtxlab.projectol.backend_oscar.controllers.questionBank.QuestionOperation;
 import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBank;
-import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBonusRuntime;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.TestCase;
 import com.vtxlab.projectol.backend_oscar.payload.Mapper;
 import com.vtxlab.projectol.backend_oscar.payload.request.question.QuestionRequest;
@@ -26,7 +25,6 @@ import com.vtxlab.projectol.backend_oscar.payload.response.question.TestCaseDTO;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.MessageResponse;
 import com.vtxlab.projectol.backend_oscar.repository.event.EventRepository;
 import com.vtxlab.projectol.backend_oscar.repository.questionBank.QuestionBankRepository;
-import com.vtxlab.projectol.backend_oscar.repository.questionBank.QuestionBonusRuntimeRepo;
 import com.vtxlab.projectol.backend_oscar.repository.questionBank.TestCaseRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.RoleRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.UserRepository;
@@ -75,15 +73,13 @@ public class QuestionController implements QuestionOperation {
   @Autowired
   EventRepository eventRepository;
 
-  @Autowired
-  QuestionBonusRuntimeRepo questionBonusRuntimeRepo;
 
   public ResponseEntity<?> addQuestion(QuestionRequest questionRequest) {
     QuestionBank question = QuestionBank.builder()//
         .question(questionRequest.getQuestion())//
         .testComputeCase(questionRequest.getTestComputeCase())//
         .methodSignatures(questionRequest.getMethodSignatures())//
-        .targetCompleteTime(questionRequest.getTargetCompleteTime())//
+        .bonusRuntime(questionRequest.getBonusRuntime())//
         .createdDate(java.time.LocalDateTime.now())//
         .createdBy(questionRequest.getCreatedBy())//
         .updatedDate(java.time.LocalDateTime.now())//
@@ -223,18 +219,6 @@ public class QuestionController implements QuestionOperation {
       return ResponseEntity
           .ok(new MessageResponse("HttpStatus.INTERNAL_SERVER_ERROR"));
     }
-  }
-
-  @Override
-  public QuestionBonusRuntime updateQuestionBonus(String id,
-      QuestionBonusRuntime questionBonusRuntime) {
-    QuestionBank question =
-        questionRepository.findById(Long.parseLong(id)).get();
-    QuestionBonusRuntime builder = QuestionBonusRuntime.builder()//
-        .question(question)//
-        .bonusRuntime(questionBonusRuntime.getBonusRuntime())//
-        .build();
-    return questionBonusRuntimeRepo.save(builder);
   }
 
   // 每個testcase1分，每一題3分-》passalltestcase 3分，bonus（within 2ms） 1分，bonus (under 30mins) 1分 ，total 5分 ，alltestcase pass-》3 ，9/10 -》0

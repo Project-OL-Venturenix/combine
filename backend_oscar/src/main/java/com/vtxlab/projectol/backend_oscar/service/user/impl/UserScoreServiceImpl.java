@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBank;
-import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBonusRuntime;
 import com.vtxlab.projectol.backend_oscar.entity.user.User;
 import com.vtxlab.projectol.backend_oscar.entity.user.UserScore;
 import com.vtxlab.projectol.backend_oscar.payload.request.question.SubmitTimeRunTimeDTO;
@@ -20,7 +19,6 @@ import com.vtxlab.projectol.backend_oscar.payload.request.user.UserScoreRequest;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.UserScoreDTO;
 import com.vtxlab.projectol.backend_oscar.repository.event.EventRepository;
 import com.vtxlab.projectol.backend_oscar.repository.questionBank.QuestionBankRepository;
-import com.vtxlab.projectol.backend_oscar.repository.questionBank.QuestionBonusRuntimeRepo;
 import com.vtxlab.projectol.backend_oscar.repository.user.RoleRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.UserQuestionSubmissionRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.UserRepository;
@@ -49,9 +47,6 @@ public class UserScoreServiceImpl implements UserScoreService {
   @Autowired
   private QuestionBankRepository questionRepository;
 
-  @Autowired
-  private QuestionBonusRuntimeRepo questionBonusRuntimeRepo;
-
 
   @Override
   public boolean addScore(Long eventid, Long userid, Long questionid,
@@ -62,8 +57,6 @@ public class UserScoreServiceImpl implements UserScoreService {
       Optional<Event> event = eventRepository.findById(eventid);
       Optional<User> user = userRepository.findById(userid);
       Optional<QuestionBank> question = questionRepository.findById(questionid);
-      Optional<QuestionBonusRuntime> questionBonusRuntime =
-          questionBonusRuntimeRepo.findById(questionid);
 
       if (event.isPresent() && user.isPresent() && question.isPresent()) {
         userscoreRepository.saveAndFlush(UserScore.builder().event(event.get())
@@ -75,7 +68,7 @@ public class UserScoreServiceImpl implements UserScoreService {
             .bonusUnder30Mins(event.get().getTargetStartTime().getMinute()
                 - submitTimeRunTimeDTO.getSubmitTime().getMinute() < 30
                 && testcasePass == 10 ? "1" : "0")//
-            .bonusWithinQuestionRuntime(questionBonusRuntime.get()
+            .bonusWithinQuestionRuntime(question.get()
                 .getBonusRuntime() > submitTimeRunTimeDTO.getRunTimeByMsec()
                 && testcasePass == 10 ? "1" : "0")//
             .createdDate(LocalDateTime.now()).updatedDate(LocalDateTime.now())

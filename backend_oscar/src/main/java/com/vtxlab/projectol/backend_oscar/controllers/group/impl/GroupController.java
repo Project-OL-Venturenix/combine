@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +33,7 @@ import com.vtxlab.projectol.backend_oscar.repository.user.RoleRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.UserQuestionSubmissionRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.UserRepository;
 import com.vtxlab.projectol.backend_oscar.security.jwt.JwtUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -144,79 +146,6 @@ public class GroupController implements GroupOperation {
     return true;
   }
 
-
-
-  @Override
-  public GroupUserDTO getGroupById(String groupid) {
-    Long groupId = Long.valueOf(groupid);
-    List<Group> groupData = groupRepository.findByGroupsId(groupId);
-    Map<Long, String> userMap = new HashMap<>();
-    for (Group group : groupData) {
-      for (User user : group.getUsers()) {
-        userMap.put(user.getId(), user.getUserName());
-      }
-    }
-    return GroupUserDTO.builder().groupId(groupId).users(userMap).build();
-  }
-
-
-
-  // @Override
-  // public GroupScoreDTO getGroupScoreByEventId(String eventid) {
-  // Long eventId = Long.valueOf(eventid);
-  // List<UserScore> userScores = userscoreRepository.findByEventId(eventId);
-  // Map<Long, GroupScoreDTO.GroupResult> userResultMap = new HashMap<>();
-
-  // for (UserScore userScore : userScores) {
-  // Optional<User> userOptional =
-  // userRepository.findById(userScore.getUser().getId());
-  // Optional<Group> groupOptional = groupRepository
-  // .findByEventsIdAndUsersId(eventId, userOptional.get().getId());
-  // if (!userResultMap.containsKey(userScore.getUser().getId())) {
-  // GroupScoreDTO.GroupResult userResult = new GroupScoreDTO.GroupResult();
-  // userResult.setGroupUserDTO(
-  // this.getGroupById(String.valueOf(groupOptional.get().getGroupsId()))); // Assuming user id as name
-  // // passingTestCaseNumber
-  // userResult.setPassingTestCaseNumber(new HashMap<>());
-  // // score
-  // userResult.setScore(new HashMap<>());
-  // // submitTime
-  // userResult.setSubmitTime(new HashMap<>());
-  // // runtime
-  // userResult.setRuntime(new HashMap<>());
-  // userResultMap.put(userScore.getUser().getId(), userResult);
-
-  // }
-
-  // String questionKey = "Q" + userScore.getQuestion().getQuestionId();
-  // int score = userScore.getResultOfPassingTestecase() == 10 ? 3 : 0;
-  // int bonus30Mins = Integer.valueOf(userScore.getBonusUnder30Mins());
-  // int runTimeBonus =
-  // Integer.valueOf(userScore.getBonusWithinQuestionRuntime());
-  // int total = score + bonus30Mins + runTimeBonus;
-  // userResultMap.get(userScore.getUser().getId()).getPassingTestCaseNumber()
-  // .put(questionKey, userScore.getResultOfPassingTestecase());
-  // GroupScoreDTO.GroupResult userResult =
-  // userResultMap.get(userScore.getUser().getId());
-  // userResult.getScore().put(questionKey, total);
-  // // submit time
-  // LocalDateTime submitTime = userScore.getSubmitTime();
-  // userResult.getSubmitTime().put(questionKey, submitTime);
-  // // rutime
-  // String runtime = String.valueOf(userScore.getRuntimebyMsec());
-  // userResult.getRuntime().put(questionKey, runtime);
-
-  // }
-
-  // List<GroupScoreDTO.GroupResult> userResults =
-  // new ArrayList<>(userResultMap.values());
-
-  // GroupScoreDTO userScoreDTO = new GroupScoreDTO();
-  // userScoreDTO.setEventId(eventId.intValue());
-  // userScoreDTO.setResult(userResults);
-
-  // return userScoreDTO;
-  // }
   @Override
   public GroupScoreDTO getGroupScoreByEventId(String eventid) {
     Long eventIdLong = Long.valueOf(eventid);
@@ -272,5 +201,59 @@ public class GroupController implements GroupOperation {
     groupScoreDTO.setResult(groupResults);
 
     return groupScoreDTO;
+  }
+
+  private GroupUserDTO getGroupById(String groupid) {
+    Long groupId = Long.valueOf(groupid);
+    List<Group> groupData = groupRepository.findByGroupsId(groupId);
+    Map<Long, String> userMap = new HashMap<>();
+    for (Group group : groupData) {
+      for (User user : group.getUsers()) {
+        userMap.put(user.getId(), user.getUserName());
+      }
+    }
+    return GroupUserDTO.builder().groupId(groupId).users(userMap).build();
+  }
+
+
+  private String parseJwt(HttpServletRequest request) {
+    String headerAuth = request.getHeader("Authorization");
+
+    if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
+      return headerAuth.substring(7);
+    }
+
+    return null;
+  }
+
+  @Override
+  public GroupUserDTO getGroupById(String eventid, HttpServletRequest request) {
+    String jwt = parseJwt(request);
+    // Check if JWT token is valid and extract username
+    String userName = null;
+    if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+      userName = jwtUtils.getUserNameFromJwtToken(jwt);
+    }
+
+    // Find the user by username
+    Optional<User> optionalUser = userRepository.findByUserName(userName);
+    Optional<Event> optionalEvent =
+        eventRepository.findById(Long.valueOf(eventid));
+    if (optionalUser.isPresent() && optionalEvent.isPresent()) {
+      User user = optionalUser.get();
+      Event event = optionalEvent.get();
+      Optional<Group> groupOptional =
+          groupRepository.findByEventsIdAndUsersId(event.getId(), user.getId());
+      if (groupOptional.isPresent()) {
+        Group group = groupOptional.get();
+        Map<Long, String> userMap = new HashMap<>();
+        for (User userInGroup : group.getUsers()) {
+          userMap.put(userInGroup.getId(), userInGroup.getUserName());
+        }
+        return GroupUserDTO.builder().groupId(group.getGroupsId())
+            .users(userMap).build();
+      }
+    }
+    return null;
   }
 }

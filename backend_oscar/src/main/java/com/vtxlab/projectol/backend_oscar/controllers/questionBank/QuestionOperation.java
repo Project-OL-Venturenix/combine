@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBank;
-import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBonusRuntime;
 import com.vtxlab.projectol.backend_oscar.payload.request.question.QuestionRequest;
 import com.vtxlab.projectol.backend_oscar.payload.response.question.QuestionBankDTO;
 import com.vtxlab.projectol.backend_oscar.payload.response.question.QuestionResponse;
@@ -50,12 +49,6 @@ public interface QuestionOperation {
         @GetMapping("/questionSubmit/{id}")
         public ResponseEntity<QuestionResponse> getQuestionSubmitById(
                         @PathVariable("id") String id);
-
-        @PostMapping("/questionBonus/{id}")
-        @ResponseStatus(HttpStatus.CREATED)
-        public QuestionBonusRuntime updateQuestionBonus(
-                        @PathVariable("id") String id, //
-                        @RequestBody QuestionBonusRuntime questionBonusRuntime);
 
         @PutMapping("/questions/{id}")
         public ResponseEntity<QuestionBank> updateQuestion(

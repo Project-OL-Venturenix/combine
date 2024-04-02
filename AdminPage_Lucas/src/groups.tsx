@@ -1,13 +1,12 @@
 import {
-    List,
+    Create,
     Datagrid,
-    TextField,
-    ReferenceField,
-    EditButton,
-    SimpleForm,
-    ReferenceInput,
     Edit,
-    TextInput, Create
+    EditButton,
+    List,
+    SimpleForm,
+    TextField,
+    TextInput
 } from "react-admin";
 
 export const GroupList = () => (

@@ -3,6 +3,7 @@ package com.vtxlab.projectol.backend_oscar.controllers.event.impl;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.vtxlab.projectol.backend_oscar.controllers.event.EventOperation;
 import com.vtxlab.projectol.backend_oscar.entity.event.Event;
+import com.vtxlab.projectol.backend_oscar.payload.Mapper;
 import com.vtxlab.projectol.backend_oscar.payload.request.event.EventRequest;
+import com.vtxlab.projectol.backend_oscar.payload.response.event.EventDTO;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.MessageResponse;
 import com.vtxlab.projectol.backend_oscar.service.event.EventService;
-import jakarta.persistence.EntityManager;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -27,7 +29,7 @@ public class EventController implements EventOperation {
   public ResponseEntity<?> addEvent(EventRequest eventRequest) {
     Event builder = Event.builder()//
         .name(eventRequest.getName())//
-        .status(eventRequest.getStatus())//
+        .status("O")//
         .eventDate(eventRequest.getEventDate())
         .targetStartTime(eventRequest.getTargetStartTime())//
         .targetEndTime(eventRequest.getTargetEndTime())//
@@ -42,9 +44,10 @@ public class EventController implements EventOperation {
 
   }
 
-  public ResponseEntity<List<Event>> getAllEvents() {
+  public ResponseEntity<List<EventDTO>> getAllEvents() {
     try {
-      List<Event> events = eventService.findAll();
+      List<EventDTO> events = eventService.findAll().stream()
+          .map(e -> Mapper.map(e)).collect(Collectors.toList());
       if (events.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
@@ -56,10 +59,10 @@ public class EventController implements EventOperation {
 
   }
 
-  public ResponseEntity<Event> getEventById(long id) {
+  public ResponseEntity<EventDTO> getEventById(long id) {
     Optional<Event> eventData = eventService.findById(id);
     if (eventData.isPresent()) {
-      return new ResponseEntity<>(eventData.get(), HttpStatus.OK);
+      return new ResponseEntity<>(Mapper.map(eventData.get()), HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

@@ -35,7 +35,7 @@ public class TestCase implements Serializable {
         @JsonProperty("id")
         private Long testcaseId;
 
-        @ManyToOne(fetch = FetchType.LAZY)
+        @ManyToOne(fetch = FetchType.EAGER)
         @JoinColumn(name = "question_id")
         @JsonProperty("question_id")
         private QuestionBank questionBank;

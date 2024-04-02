@@ -91,9 +91,10 @@ public class QuestionController implements QuestionOperation {
 
   }
 
-  public ResponseEntity<List<QuestionBank>> getAllQuestions() {
+  public ResponseEntity<List<QuestionBankDTO>> getAllQuestions() {
     try {
-      List<QuestionBank> questions = questionRepository.findAll();
+      List<QuestionBankDTO> questions = questionRepository.findAll().stream()
+          .map(e -> Mapper.map(e)).collect(Collectors.toList());
       if (questions.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
@@ -249,24 +250,19 @@ public class QuestionController implements QuestionOperation {
   public ResponseEntity<Set<QuestionBankDTO>> getQuestionByEventId(
       String eventid) {
     Long eventId = Long.valueOf(eventid);
-    Set<QuestionBankDTO> result = questionRepository.findAll().stream()//
-        .filter(e -> e.getEvents().stream()
-            .allMatch(event -> event.getId().equals(eventId)))//
-        .map(e -> Mapper.map(e))//
-        .collect(Collectors.toSet());
-
+    Set<QuestionBankDTO> result =
+        questionRepository.findByEventsId(eventId).stream()//
+            .map(e -> Mapper.map(e))//
+            .collect(Collectors.toSet());
     return new ResponseEntity<>(result, HttpStatus.OK);
   }
 
   @Override
-  public ResponseEntity<QuestionBank> getQuestionById(String id) {
+  public ResponseEntity<QuestionResponse> generateQuestionById(String id) {
     Long questionId = Long.parseLong(id);
-    Optional<QuestionBank> questionData =
-        questionRepository.findById(questionId);
-    if (questionData.isPresent()) {
-      return new ResponseEntity<>(questionData.get(), HttpStatus.OK);
-    } else {
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+    QuestionResponse result =
+        questionBankService.generateQuestionBank(questionId);
+    return new ResponseEntity<>(result, HttpStatus.OK);
   }
 }
+

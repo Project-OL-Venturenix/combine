@@ -39,6 +39,8 @@ export const QuestionCreate = () => (
             <TextInput source="question" multiline rows={5} style={{ width: "80%" }} />
             <TextInput source="testComputeCase" multiline rows={5} style={{ width: "80%" }} />
             <TextInput source="methodSignatures" multiline rows={5} style={{ width: "80%" }} />
+            <TextInput source="targetCompleteTime" multiline rows={5} style={{ width: "80%" }} />
+
         </SimpleForm>
     </Create>
 );

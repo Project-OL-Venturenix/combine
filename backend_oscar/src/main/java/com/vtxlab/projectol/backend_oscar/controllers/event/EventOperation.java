@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import com.vtxlab.projectol.backend_oscar.payload.request.event.EventRequest;
+import com.vtxlab.projectol.backend_oscar.payload.response.event.EventDTO;
 import jakarta.validation.Valid;
 
 public interface EventOperation {
@@ -19,10 +20,10 @@ public interface EventOperation {
       ResponseEntity<?> addEvent(@Valid @RequestBody EventRequest eventRequest);
 
       @GetMapping("/events")
-      ResponseEntity<List<Event>> getAllEvents();
+      ResponseEntity<List<EventDTO>> getAllEvents();
 
       @GetMapping("/events/{id}")
-      ResponseEntity<Event> getEventById(@PathVariable("id") long id);
+      ResponseEntity<EventDTO> getEventById(@PathVariable("id") long id);
 
       @PutMapping("/events/{id}/{status}")
       @ResponseStatus(HttpStatus.CREATED)

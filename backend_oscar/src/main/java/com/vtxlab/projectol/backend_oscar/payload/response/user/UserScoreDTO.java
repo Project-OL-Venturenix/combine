@@ -1,30 +1,39 @@
 package com.vtxlab.projectol.backend_oscar.payload.response.user;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.vtxlab.projectol.backend_oscar.payload.response.event.EventDTO;
+import com.vtxlab.projectol.backend_oscar.payload.response.question.QuestionBankDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
+@JsonPropertyOrder({ "id", "event", "user", "question", "submitTime",
+    "resultOfPassingTestecase", "bonusUnder30Mins",
+    "bonusWithinQuestionRuntime", "runtimeByMsec", "status", "createdDate",
+    "updatedDate" })
 public class UserScoreDTO {
-  private int eventId;
-  private List<UserResult> result;
-
-  @Data
-  @Builder
-  @AllArgsConstructor
-  @NoArgsConstructor
-  public static class UserResult {
-    private String name;
-    private Map<String, Integer> score;
-    private Map<String, Integer> passingTestCaseNumber;
-    private Map<String, LocalDateTime> submitTime;
-    private Map<String, String> runtime;
-  }
+  private Long id;
+    private EventDTO event;
+    private UserDTO user;
+    private QuestionBankDTO question;
+    private LocalDateTime submitTime;
+    private Integer resultOfPassingTestecase;
+    private String bonusUnder30Mins;
+    private String bonusWithinQuestionRuntime;
+    private Integer runtimeByMsec;
+    private String status;
+    private LocalDateTime createdDate;
+    private LocalDateTime updatedDate;
 }

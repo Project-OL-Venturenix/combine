@@ -1,6 +1,7 @@
 package com.vtxlab.projectol.backend_oscar.controllers.user;
 
 import java.util.List;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import com.vtxlab.projectol.backend_oscar.entity.user.User;
+import com.vtxlab.projectol.backend_oscar.payload.response.user.UserDTO;
 import jakarta.servlet.http.HttpServletRequest;
 
 public interface UserOperation {
@@ -20,18 +23,20 @@ public interface UserOperation {
       @RequestParam("eventId") Long eventId);
 
   // @GetMapping("/usertestcases/eventid/{eventid}")
-  // ResponseEntity<UserScoreDTO> getUserTestCaseByEventId(
-  //     @PathVariable String eventid);
+  // ResponseEntity<UserScoreResult> getUserTestCaseByEventId(
+  // @PathVariable String eventid);
 
   @GetMapping("/user/eventid/{eventid}")
-  ResponseEntity<User> getUserByEventId(@PathVariable String eventid,HttpServletRequest request);
+  @ResponseStatus(HttpStatus.OK)
+  UserDTO getUserByEventId(@PathVariable String eventid,
+      HttpServletRequest request);
   // ResponseEntity<User> getUserByEventId(@PathVariable String eventid,String jwt);
 
   @GetMapping("/users")
-  ResponseEntity<List<User>> getAllUsers();
+  ResponseEntity<List<UserDTO>> getAllUsers();
 
   @GetMapping("/users/{id}")
-  ResponseEntity<User> getUserById(@PathVariable long id);
+  ResponseEntity<UserDTO> getUserById(@PathVariable long id);
 
   @PutMapping("/users/{id}")
   ResponseEntity<User> updateUser(@PathVariable long id,

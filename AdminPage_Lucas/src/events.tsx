@@ -49,10 +49,9 @@ export const EventCreate = () => (
         <SimpleForm>
             <TextInput source="name" required/>
             <TextInput source="status" required/>
-            <TextInput source="createddate"/>
-            <TextInput source="createdby"/>
-            <TextInput source="updateddate"/>
-            <TextInput source="updatedby"/>
+            <TextInput source="eventDate"/>
+            <TextInput source="targetStartTime"/>
+            <TextInput source="targetEndTime"/>
         </SimpleForm>
     </Create>
 );

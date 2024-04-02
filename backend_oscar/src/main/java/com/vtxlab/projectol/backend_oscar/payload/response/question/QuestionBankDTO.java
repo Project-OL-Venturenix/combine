@@ -1,5 +1,9 @@
 package com.vtxlab.projectol.backend_oscar.payload.response.question;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+import com.vtxlab.projectol.backend_oscar.payload.response.event.EventDTO;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,5 +25,15 @@ public class QuestionBankDTO {
   private String methodSignatures;
 
   private Integer bonusRuntime;
+
+  private LocalDateTime createdDate;
+
+  private Integer createdBy;
+
+  private LocalDateTime updatedDate;
+
+  private Integer updatedBy;
+
+  private Set<EventDTO> events = new HashSet<>();
 
 }

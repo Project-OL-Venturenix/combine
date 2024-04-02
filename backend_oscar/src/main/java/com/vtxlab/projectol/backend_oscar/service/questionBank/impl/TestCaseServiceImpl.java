@@ -1,6 +1,8 @@
 package com.vtxlab.projectol.backend_oscar.service.questionBank.impl;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.vtxlab.projectol.backend_oscar.payload.response.question.TestCaseDTO;
@@ -35,6 +37,56 @@ public class TestCaseServiceImpl implements TestCaseService {
           + //
           "        System.out.println(\n" + //
           "                \"Time taken for Test Case 10: \" + duration + \" milliseconds\");\n";
+
+  // public static final String TEST_COMPUTE_CASE =
+  // "public int testComputeCase(Question%s question, int input1, int input2, int input3, int expectedOutput) {\n";
+  public static String extractMethodName(String methodSignature) {
+    // Define a regular expression pattern to match the method name
+    String pattern = "\\s*(\\w+)\\s*\\(.*\\)"; // Matches "methodName(...)"
+
+    // Create a Pattern object
+    Pattern regex = Pattern.compile(pattern);
+
+    // Create a Matcher object
+    Matcher matcher = regex.matcher(methodSignature);
+
+    // Check if the pattern matches the method signature
+    if (matcher.find()) {
+      // Extract and return the method name
+      return matcher.group(1);
+    }
+
+    // Return null if no match is found
+    return null;
+  }
+
+  @Override
+  public String generateTestComputeCase(List<TestCaseDTO> testCases,
+      Long questionId) {
+    StringBuilder testCaseBuilder = new StringBuilder();
+    testCases.forEach(e -> {
+      testCaseBuilder.append("public int testComputeCase(Question")
+          .append(questionId).append(" question, ").append(e.getInput1());
+
+      if (e.getInput2() != null) {
+        testCaseBuilder.append(", ").append(e.getInput2());
+      }
+
+      if (e.getInput3() != null) {
+        testCaseBuilder.append(", ").append(e.getInput3());
+      }
+
+      testCaseBuilder.append(", ").append(e.getExpectedOutput())
+          .append("); \n");
+    });
+
+    testCaseBuilder.append(COUNT_RUNTIME)
+        .append(this.generateEndCodeBlock() + "\n");
+    testCaseBuilder.append(questionBankService.getTestComputeCase(questionId));
+    testCaseBuilder.append(this.generateEndCodeBlock());
+
+    return testCaseBuilder.toString();
+  }
 
   @Override
   public String generateTestCase(List<TestCaseDTO> testCases, Long questionId) {

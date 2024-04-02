@@ -50,11 +50,11 @@ public class Group {
   private Integer updatedBy;
 
 
-  @ManyToMany(fetch = FetchType.LAZY)
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(joinColumns = @JoinColumn(name = "groups_id"))
   private Set<Event> events;
 
-  @ManyToMany(fetch = FetchType.LAZY)
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(joinColumns = @JoinColumn(name = "groups_id"))
   private Set<User> users;
 

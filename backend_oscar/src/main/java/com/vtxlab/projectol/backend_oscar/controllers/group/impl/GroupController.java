@@ -1,7 +1,6 @@
 package com.vtxlab.projectol.backend_oscar.controllers.group.impl;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -23,10 +22,11 @@ import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import com.vtxlab.projectol.backend_oscar.entity.group.Group;
 import com.vtxlab.projectol.backend_oscar.entity.user.User;
 import com.vtxlab.projectol.backend_oscar.entity.user.UserScore;
+import com.vtxlab.projectol.backend_oscar.payload.Mapper;
+import com.vtxlab.projectol.backend_oscar.payload.response.group.GroupDTO;
 import com.vtxlab.projectol.backend_oscar.payload.response.group.GroupUserDTO;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.GroupScoreDTO;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.MessageResponse;
-import com.vtxlab.projectol.backend_oscar.payload.response.user.UserScoreDTO;
 import com.vtxlab.projectol.backend_oscar.repository.event.EventRepository;
 import com.vtxlab.projectol.backend_oscar.repository.group.GroupRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.RoleRepository;
@@ -83,13 +83,16 @@ public class GroupController implements GroupOperation {
   // }
 
   @Override
-  public ResponseEntity<List<Group>> getAllGroups() {
+  public ResponseEntity<List<GroupDTO>> getAllGroups() {
     try {
       List<Group> groups = groupRepository.findAll();
+      List<GroupDTO> result =
+          groups.stream().map(e -> Mapper.map(e)).collect(Collectors.toList());
+
       if (groups.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
-      return new ResponseEntity<>(groups, HttpStatus.OK);
+      return new ResponseEntity<>(result, HttpStatus.OK);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 

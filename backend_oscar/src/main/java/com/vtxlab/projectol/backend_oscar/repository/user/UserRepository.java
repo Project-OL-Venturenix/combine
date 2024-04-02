@@ -7,10 +7,12 @@ import com.vtxlab.projectol.backend_oscar.entity.user.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-  Optional<User> findByUserName(String email);
+  Optional<User> findByUserName(String userName);
 
-  Boolean existsByUserName(String email);
+  Boolean existsByUserName(String userName);
 
   Boolean existsByEmail(String email);
+
+  Optional<User> findByEventsIdAndUserName(Long eventId, String userName);
 
 }

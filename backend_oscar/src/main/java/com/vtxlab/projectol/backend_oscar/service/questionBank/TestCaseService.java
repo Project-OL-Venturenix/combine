@@ -11,4 +11,6 @@ public interface TestCaseService {
   public String generateFullCode(Long questionId);
 
   public String generateMainMethod(Long questionId);
+
+  String generateTestComputeCase(List<TestCaseDTO> testCases, Long questionId);
 }

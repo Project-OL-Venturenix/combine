@@ -1,6 +1,7 @@
 package com.vtxlab.projectol.backend_oscar.controllers.user.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.vtxlab.projectol.backend_oscar.controllers.user.UserScoreOperation;
 import com.vtxlab.projectol.backend_oscar.entity.user.UserScore;
+import com.vtxlab.projectol.backend_oscar.payload.Mapper;
 import com.vtxlab.projectol.backend_oscar.payload.request.question.SubmitTimeRunTimeDTO;
 import com.vtxlab.projectol.backend_oscar.payload.request.user.UserScoreRequest;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.MessageResponse;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.UserScoreDTO;
+import com.vtxlab.projectol.backend_oscar.payload.response.user.UserScoreResult;
 import com.vtxlab.projectol.backend_oscar.security.jwt.JwtUtils;
 import com.vtxlab.projectol.backend_oscar.service.user.UserScoreService;
 
@@ -43,9 +46,10 @@ public class UserScoreController implements UserScoreOperation {
 
   }
 
-  public ResponseEntity<List<UserScore>> getAllUserScores() {
+  public ResponseEntity<List<UserScoreDTO>> getAllUserScores() {
     try {
-      List<UserScore> userscores = userScoreService.getAllUserScores();
+      List<UserScoreDTO> userscores = userScoreService.getAllUserScores()
+          .stream().map(e -> Mapper.map(e)).collect(Collectors.toList());
       if (userscores.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
@@ -57,10 +61,10 @@ public class UserScoreController implements UserScoreOperation {
 
   }
 
-  public ResponseEntity<UserScore> getUserScoreById(String id) {
+  public ResponseEntity<UserScoreDTO> getUserScoreById(String id) {
     Long userId = Long.valueOf(id);
     UserScore userscoreData = userScoreService.getUserScoreById(userId);
-    return new ResponseEntity<>(userscoreData, HttpStatus.OK);
+    return new ResponseEntity<>(Mapper.map(userscoreData), HttpStatus.OK);
   }
 
 
@@ -89,9 +93,10 @@ public class UserScoreController implements UserScoreOperation {
   }
 
   @Override
-  public ResponseEntity<UserScoreDTO> getUserTestCaseByEventId(String eventid) {
+  public ResponseEntity<UserScoreResult> getUserTestCaseByEventId(
+      String eventid) {
     Long eventId = Long.valueOf(eventid);
-    UserScoreDTO userScoreDTO =
+    UserScoreResult userScoreDTO =
         userScoreService.getUserTestCaseByEventId(eventId);
     return ResponseEntity.ok(userScoreDTO);
   }

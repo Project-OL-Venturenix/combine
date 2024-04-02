@@ -3,6 +3,7 @@ package com.vtxlab.projectol.backend_oscar.controllers.user.impl;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.vtxlab.projectol.backend_oscar.controllers.user.UserOperation;
@@ -18,7 +18,9 @@ import com.vtxlab.projectol.backend_oscar.entity.event.Event;
 import com.vtxlab.projectol.backend_oscar.entity.user.User;
 import com.vtxlab.projectol.backend_oscar.exception.UserNotInEventException;
 import com.vtxlab.projectol.backend_oscar.exception.exceptionEnum.Syscode;
+import com.vtxlab.projectol.backend_oscar.payload.Mapper;
 import com.vtxlab.projectol.backend_oscar.payload.response.user.MessageResponse;
+import com.vtxlab.projectol.backend_oscar.payload.response.user.UserDTO;
 import com.vtxlab.projectol.backend_oscar.repository.event.EventRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.RoleRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.UserQuestionSubmissionRepository;
@@ -57,9 +59,10 @@ public class UserController implements UserOperation {
   @Autowired
   private UserService userService;
 
-  public ResponseEntity<List<User>> getAllUsers() {
+  public ResponseEntity<List<UserDTO>> getAllUsers() {
     try {
-      List<User> users = userRepository.findAll();
+      List<UserDTO> users = userRepository.findAll().stream()
+          .map(e -> Mapper.map(e)).collect(Collectors.toList());
       if (users.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
@@ -71,10 +74,10 @@ public class UserController implements UserOperation {
 
   }
 
-  public ResponseEntity<User> getUserById(long id) {
+  public ResponseEntity<UserDTO> getUserById(long id) {
     Optional<User> userData = userRepository.findById(id);
     if (userData.isPresent()) {
-      return new ResponseEntity<>(userData.get(), HttpStatus.OK);
+      return new ResponseEntity<>(Mapper.map(userData.get()), HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -151,74 +154,29 @@ public class UserController implements UserOperation {
   @Override
   // public ResponseEntity<User> getUserByEventId(String eventid,
   // String jwt)
-  public ResponseEntity<User> getUserByEventId(@PathVariable String eventid,
-      HttpServletRequest request) {
+  public UserDTO getUserByEventId(String eventid, HttpServletRequest request) {
     // Parse JWT token from request
     String jwt = parseJwt(request);
     Long eventId = Long.valueOf(eventid);
-
+    String targetName = ""; // Initialize targetName with a default value
     // Check if JWT token is valid and extract username
-    String userName = null;
     if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
-      userName = jwtUtils.getUserNameFromJwtToken(jwt);
+      targetName = jwtUtils.getUserNameFromJwtToken(jwt);
     }
+    Optional<User> optionalUser =
+        userRepository.findByEventsIdAndUserName(eventId, targetName); //
 
-    // Find the user by username
-    Optional<User> optionalUser = userRepository.findByUserName(userName);
+    Optional<Event> result = eventRepository.findById(eventId);
     if (optionalUser.isPresent()) {
-      User user = optionalUser.get();
+      UserDTO user = Mapper.map(optionalUser.get());
+      user.setEvents(Mapper.map(result.get()));
       log.info("user: " + user);
 
       // Check if the user is associated with the given event ID
-      boolean userAssociatedWithEvent = user.getEvents().stream()
-          .anyMatch(event -> event.getId().equals(eventId));
-
-      // If user is associated with the event, return the user
-      if (userAssociatedWithEvent) {
-        return new ResponseEntity<>(user, HttpStatus.OK);
-      } else {
-        // If user is not associated with the event, throw UserNotInEventException
-        throw new UserNotInEventException(Syscode.USER_NOT_IN_EVENT);
-      }
-    } else {
-      // If user is not found, return HTTP status 404
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      return user;
     }
+    // If the user is not associated with the given event ID, throw an exception
+    return Optional.of(Mapper.map(optionalUser.get())).orElseThrow(
+        () -> new UserNotInEventException(Syscode.USER_NOT_IN_EVENT));
   }
-
-  // @Override
-  // public ResponseEntity<UserScoreDTO> getUserTestCaseByEventId(String eventid) {
-  // Long eventId = Long.valueOf(eventid);
-  // List<UserScore> target = userscoreRepository.findByEventId(eventId);
-
-  // Map<Long, UserScoreDTO.UserResult> userResultMap = new HashMap<>();
-
-  // for (UserScore userScore : target) {
-  // Optional<User> userOptional =
-  // userRepository.findById(userScore.getUser().getId());
-  // if (!userResultMap.containsKey(userScore.getUser().getId())) {
-  // UserScoreDTO.UserResult userResult = new UserScoreDTO.UserResult();
-  // userResult.setName(userOptional.get().getUserName()); // Assuming user id as name
-  // userResult.setScore(new HashMap<>());
-  // userResultMap.put(userScore.getUser().getId(), userResult);
-  // }
-
-  // String questionKey = "Q" + userScore.getQuestion().getQuestionId();
-  // int score = userScore.getResultOfPassingTestecase();
-
-  // UserScoreDTO.UserResult userResult =
-  // userResultMap.get(userScore.getUser().getId());
-  // userResult.getScore().put(questionKey, score);
-  // }
-
-  // List<UserScoreDTO.UserResult> userResults =
-  // new ArrayList<>(userResultMap.values());
-
-  // UserScoreDTO userScoreDTO = new UserScoreDTO();
-  // userScoreDTO.setEventId(eventId.intValue());
-  // userScoreDTO.setResult(userResults);
-
-  // return ResponseEntity.ok(userScoreDTO);
-  // }
 }
-

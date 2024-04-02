@@ -16,7 +16,7 @@ import com.vtxlab.projectol.backend_oscar.entity.user.User;
 import com.vtxlab.projectol.backend_oscar.entity.user.UserScore;
 import com.vtxlab.projectol.backend_oscar.payload.request.question.SubmitTimeRunTimeDTO;
 import com.vtxlab.projectol.backend_oscar.payload.request.user.UserScoreRequest;
-import com.vtxlab.projectol.backend_oscar.payload.response.user.UserScoreDTO;
+import com.vtxlab.projectol.backend_oscar.payload.response.user.UserScoreResult;
 import com.vtxlab.projectol.backend_oscar.repository.event.EventRepository;
 import com.vtxlab.projectol.backend_oscar.repository.questionBank.QuestionBankRepository;
 import com.vtxlab.projectol.backend_oscar.repository.user.RoleRepository;
@@ -127,16 +127,16 @@ public class UserScoreServiceImpl implements UserScoreService {
   }
 
   @Override
-  public UserScoreDTO getUserTestCaseByEventId(Long eventId) {
+  public UserScoreResult getUserTestCaseByEventId(Long eventId) {
     List<UserScore> target = userscoreRepository.findByEventId(eventId);
 
-    Map<Long, UserScoreDTO.UserResult> userResultMap = new HashMap<>();
+    Map<Long, UserScoreResult.UserResult> userResultMap = new HashMap<>();
 
     for (UserScore userScore : target) {
       Optional<User> userOptional =
           userRepository.findById(userScore.getUser().getId());
       if (!userResultMap.containsKey(userScore.getUser().getId())) {
-        UserScoreDTO.UserResult userResult = new UserScoreDTO.UserResult();
+        UserScoreResult.UserResult userResult = new UserScoreResult.UserResult();
         userResult.setName(userOptional.get().getUserName()); // Assuming user id as name
         // passingTestCaseNumber
         userResult.setPassingTestCaseNumber(new HashMap<>());
@@ -161,7 +161,7 @@ public class UserScoreServiceImpl implements UserScoreService {
       int total = score + bonus30Mins + runTimeBonus;
       userResultMap.get(userScore.getUser().getId()).getPassingTestCaseNumber()
           .put(questionKey, userScore.getResultOfPassingTestecase());
-      UserScoreDTO.UserResult userResult =
+      UserScoreResult.UserResult userResult =
           userResultMap.get(userScore.getUser().getId());
       userResult.getScore().put(questionKey, total);
       // submit time
@@ -173,10 +173,10 @@ public class UserScoreServiceImpl implements UserScoreService {
 
     }
 
-    List<UserScoreDTO.UserResult> userResults =
+    List<UserScoreResult.UserResult> userResults =
         new ArrayList<>(userResultMap.values());
 
-    UserScoreDTO userScoreDTO = new UserScoreDTO();
+    UserScoreResult userScoreDTO = new UserScoreResult();
     userScoreDTO.setEventId(eventId.intValue());
     userScoreDTO.setResult(userResults);
 

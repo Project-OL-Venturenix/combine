@@ -1,7 +1,7 @@
 import { DataProvider, fetchUtils } from "react-admin";
 import { stringify } from "query-string";
 
-const apiUrl = 'http://localhost:8082/api';
+const apiUrl = 'http://ec2-52-77-246-227.ap-southeast-1.compute.amazonaws.com:8082/api';
 const httpClient = fetchUtils.fetchJson;
 
 const getAccessToken = () => {

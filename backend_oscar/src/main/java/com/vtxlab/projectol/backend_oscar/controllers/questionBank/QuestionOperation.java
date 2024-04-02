@@ -2,7 +2,6 @@ package com.vtxlab.projectol.backend_oscar.controllers.questionBank;
 
 import java.util.List;
 import java.util.Set;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import com.vtxlab.projectol.backend_oscar.entity.questionBank.QuestionBank;
 import com.vtxlab.projectol.backend_oscar.payload.request.question.QuestionRequest;
 import com.vtxlab.projectol.backend_oscar.payload.response.question.QuestionBankDTO;
@@ -26,11 +23,11 @@ public interface QuestionOperation {
                         @Valid @RequestBody QuestionRequest questionRequest);
 
         @GetMapping("/questions")
-        public ResponseEntity<List<QuestionBank>> getAllQuestions();
+        public ResponseEntity<List<QuestionBankDTO>> getAllQuestions();
 
 
         @GetMapping("/questions/{id}")
-        public ResponseEntity<QuestionBank> getQuestionById(
+        public ResponseEntity<QuestionResponse> generateQuestionById(
                         @PathVariable String id);
 
         @GetMapping("/questions/event/{eventid}")

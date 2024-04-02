@@ -4,7 +4,7 @@ import { AuthProvider, HttpError } from "react-admin";
 export const signInUser = async (userName:any, password:any) => {
   try {
     const response = await axios.post(
-        `http://localhost:8082/api/auth/signin`,
+        `http://ec2-52-77-246-227.ap-southeast-1.compute.amazonaws.com:8082/api/auth/signin`,
         { userName, password }
     );
     return response.data; // Assuming the user data is returned from the API
